@@ -10,7 +10,9 @@ import { compareLibraryEntries, listLibrary } from "../history";
 import {
   launchCommandCentreHref,
   listStoredExecutiveSnapshots,
+  persistActivatedExecutiveSnapshot,
   resolveAndActivateExecutiveSnapshot,
+  revokeFailedExecutiveSnapshotActivation,
 } from "../launch";
 import { usePortfolioStore } from "@/store/portfolio-store";
 
@@ -60,12 +62,21 @@ export function SnapshotLibrary({
     });
   }, [compareA, compareB, organisationId]);
 
-  function openCommandCentre(studioId: string) {
+  async function openCommandCentre(studioId: string) {
     setError(null);
     const ctx = resolveAndActivateExecutiveSnapshot(studioId);
     if (!ctx) {
       setError(
         "Executive Snapshot unavailable. Re-run Intelligence for this snapshot before opening Command Centre.",
+      );
+      return;
+    }
+    const durable = await persistActivatedExecutiveSnapshot(ctx);
+    if (!durable.ok) {
+      revokeFailedExecutiveSnapshotActivation(ctx.studioId);
+      setError(
+        durable.error ||
+          "Unable to persist Executive Snapshot to Production. Command Centre was not opened.",
       );
       return;
     }

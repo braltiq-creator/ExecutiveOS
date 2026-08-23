@@ -13,6 +13,14 @@ function seed(): OutcomePortfolio {
   return structuredClone(MOCK_OUTCOME_PORTFOLIO);
 }
 
+function canUseLocalStorage(): boolean {
+  return (
+    typeof window !== "undefined" &&
+    typeof window.localStorage !== "undefined" &&
+    window.localStorage !== null
+  );
+}
+
 /**
  * Transient UI cache — localStorage is NOT the authoritative pilot SoT.
  * Durable state: src/pilot-persistence (Supabase / memory contract).
@@ -20,7 +28,7 @@ function seed(): OutcomePortfolio {
 export function createMockPortfolioRepository(): PortfolioRepository {
   return {
     load() {
-      if (typeof window === "undefined") {
+      if (!canUseLocalStorage()) {
         return seed();
       }
       try {
@@ -32,11 +40,11 @@ export function createMockPortfolioRepository(): PortfolioRepository {
       }
     },
     save(portfolio) {
-      if (typeof window === "undefined") return;
+      if (!canUseLocalStorage()) return;
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(portfolio));
     },
     reset() {
-      if (typeof window === "undefined") return;
+      if (!canUseLocalStorage()) return;
       window.localStorage.removeItem(STORAGE_KEY);
     },
   };

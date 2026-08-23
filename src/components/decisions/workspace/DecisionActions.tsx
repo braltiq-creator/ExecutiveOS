@@ -55,11 +55,13 @@ export function DecisionActions({
   const [consequence, setConsequence] = useState<DecisionConsequence | null>(
     null,
   );
+  const [persistError, setPersistError] = useState<string | null>(null);
   const [signing, setSigning] = useState(false);
   const impact = getImpactForDecision(decisionId);
 
   function requestAct(act: DecisionAct) {
     setConsequence(null);
+    setPersistError(null);
     setPending(act);
   }
 
@@ -71,22 +73,37 @@ export function DecisionActions({
   function confirm() {
     if (!pending) return;
     setSigning(true);
+    setPersistError(null);
+    const act = pending;
     window.setTimeout(() => {
-      const result = recordDecisionAct({
-        decisionId,
-        act: pending,
-        actor: ACTOR,
-      });
-      if (pending === "approve") {
-        recordLoopApproval({
-          decisionId,
-          decisionTitle,
-          actor: ACTOR,
-        });
-      }
-      setConsequence(result);
-      setPending(null);
-      setSigning(false);
+      void (async () => {
+        try {
+          const result = await recordDecisionAct({
+            decisionId,
+            act,
+            actor: ACTOR,
+          });
+          if (act === "approve") {
+            recordLoopApproval({
+              decisionId,
+              decisionTitle,
+              actor: ACTOR,
+            });
+          }
+          setConsequence(result);
+          setPending(null);
+        } catch (error) {
+          setConsequence(null);
+          setPending(null);
+          setPersistError(
+            error instanceof Error
+              ? error.message
+              : "Unable to persist to Production. Your change was not saved.",
+          );
+        } finally {
+          setSigning(false);
+        }
+      })();
     }, 650);
   }
 
@@ -112,6 +129,16 @@ export function DecisionActions({
         These acts create organisational memory. Choose deliberately. Soft taps
         are for drafts — this is the record.
       </ExecutiveSummary>
+
+      {persistError ? (
+        <p
+          role="alert"
+          className="mt-[var(--eos-space-lg)] text-[length:0.95rem]"
+          style={{ color: "var(--exds-attention)" }}
+        >
+          {persistError}
+        </p>
+      ) : null}
 
       {consequence ? (
         <div

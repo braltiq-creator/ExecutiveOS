@@ -29,6 +29,8 @@ import {
 } from "../client/api";
 import {
   activateExecutiveSnapshotContext,
+  persistActivatedExecutiveSnapshot,
+  revokeFailedExecutiveSnapshotActivation,
   launchCommandCentreHref,
 } from "../launch";
 import { usePortfolioStore } from "@/store/portfolio-store";
@@ -309,7 +311,7 @@ export function SnapshotStudio({
       }
 
       if (result.handoff) {
-        activateExecutiveSnapshotContext({
+        const activated = activateExecutiveSnapshotContext({
           kind: "executive_snapshot",
           studioId: session.studioId,
           snapshotId: result.handoff.snapshotId,
@@ -334,6 +336,17 @@ export function SnapshotStudio({
           activatedAt: new Date().toISOString(),
           demoIsolation: true,
         });
+
+        const durable = await persistActivatedExecutiveSnapshot(activated);
+        if (!durable.ok) {
+          revokeFailedExecutiveSnapshotActivation(activated.studioId);
+          setError(
+            durable.error ||
+              "Unable to persist Executive Snapshot to Production. Activation was not saved.",
+          );
+          return;
+        }
+
         usePortfolioStore.getState().loadExternalPortfolio(result.handoff.portfolio, {
           snapshotId: result.handoff.snapshotId,
           persist: true,

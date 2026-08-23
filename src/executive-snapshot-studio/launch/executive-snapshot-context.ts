@@ -119,15 +119,48 @@ export function activateExecutiveSnapshotContext(
     library[next.studioId] = next;
     writeLibrary(library);
     setExperienceIntent("executive_snapshot");
-    // Durable SoT — sessionStorage is transient UX only.
-    void import("@/pilot-persistence/actions")
-      .then((m) => m.persistPilotSnapshotAction({ context: next }))
-      .catch(() => {
-        /* non-blocking; server will reject unauthenticated */
-      });
   }
 
   return next;
+}
+
+/**
+ * Durable Production write for an activated snapshot.
+ * Callers must await this and surface failures — sessionStorage is not SoT.
+ */
+export async function persistActivatedExecutiveSnapshot(
+  context: ActiveExecutiveSnapshotContext,
+): Promise<
+  import("@/pilot-persistence/actions").PersistResult
+> {
+  const { persistPilotSnapshotAction } = await import(
+    "@/pilot-persistence/actions"
+  );
+  return persistPilotSnapshotAction({ context });
+}
+
+/**
+ * Roll back session activation when durable persist fails.
+ * Does not delete Production rows (none were written).
+ */
+export function revokeFailedExecutiveSnapshotActivation(
+  studioId: string,
+): void {
+  if (!canUseStorage()) return;
+  const library = readLibrary();
+  delete library[studioId];
+  writeLibrary(library);
+  try {
+    const raw = sessionStorage.getItem(ACTIVE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw) as ActiveExecutiveSnapshotContext;
+      if (parsed?.studioId === studioId) {
+        sessionStorage.removeItem(ACTIVE_KEY);
+      }
+    }
+  } catch {
+    sessionStorage.removeItem(ACTIVE_KEY);
+  }
 }
 
 /** Resolve the currently active Executive Snapshot (if any). */

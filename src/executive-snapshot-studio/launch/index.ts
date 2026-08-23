@@ -10,6 +10,8 @@ export {
 } from "./active-context";
 export {
   activateExecutiveSnapshotContext,
+  persistActivatedExecutiveSnapshot,
+  revokeFailedExecutiveSnapshotActivation,
   getActiveExecutiveSnapshot,
   getActiveExecutiveSnapshotContext,
   resolveAndActivateExecutiveSnapshot,
@@ -20,6 +22,7 @@ export {
   snapshotCommandCentreTitle,
   type ActiveExecutiveSnapshotContext,
 } from "./executive-snapshot-context";
+export { clearPilotClientState } from "./clear-pilot-client-state";
 export {
   setExperienceIntent,
   getExperienceIntent,

@@ -3,6 +3,7 @@
 import { useFormStatus } from "react-dom";
 import { signOut } from "@/lib/auth/actions";
 import { AuthButton } from "@/components/auth/auth-button";
+import { clearPilotClientState } from "@/executive-snapshot-studio/launch";
 
 type SignOutButtonProps = {
   variant?: "primary" | "secondary";
@@ -23,9 +24,14 @@ function SignOutSubmit({ variant }: { variant: "primary" | "secondary" }) {
   );
 }
 
+async function signOutAndClearPilotSession(): Promise<void> {
+  clearPilotClientState();
+  await signOut();
+}
+
 export function SignOutButton({ variant = "secondary" }: SignOutButtonProps) {
   return (
-    <form action={signOut}>
+    <form action={signOutAndClearPilotSession}>
       <SignOutSubmit variant={variant} />
     </form>
   );

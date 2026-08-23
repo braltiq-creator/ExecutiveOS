@@ -28,6 +28,8 @@ type PortfolioStore = {
   lastConsequence: DecisionConsequence | null;
   lastSelection: SelectDecisionOptionResult | null;
   lastActionFromDecision: CreateActionFromDecisionResult | null;
+  /** Last durable persist failure message (cleared on success). */
+  lastPersistError: string | null;
   hydrate: () => void;
   /** Load an authoritative snapshot portfolio — replaces demo seed. */
   loadExternalPortfolio: (
@@ -36,26 +38,27 @@ type PortfolioStore = {
   ) => void;
   resetPortfolio: () => void;
   clearConsequence: () => void;
+  clearPersistError: () => void;
   recordDecisionAct: (
     input: ApplyDecisionActInput,
-  ) => DecisionConsequence;
+  ) => Promise<DecisionConsequence>;
   /** Phase 61 — explicit option selection (≠ approval). */
   selectDecisionOption: (
     input: Omit<SelectDecisionOptionInput, "snapshotId"> & {
       snapshotId?: string | null;
     },
-  ) => SelectDecisionOptionResult;
+  ) => Promise<SelectDecisionOptionResult>;
   /** Phase 61 — action only after selection. */
   createActionFromSelectedDecision: (
     input: CreateActionFromDecisionInput,
-  ) => CreateActionFromDecisionResult;
+  ) => Promise<CreateActionFromDecisionResult>;
   /** Phase 65 — assign owner / due without inventing values. */
   assignActionAccountability: (input: {
     actionId: string;
     owner?: string | null;
     dueDate?: string | null;
     actor?: string;
-  }) => ReturnType<typeof assignActionAccountability>;
+  }) => Promise<ReturnType<typeof assignActionAccountability>>;
 };
 
 function looksLikeOrphanSnapshotPortfolio(portfolio: OutcomePortfolio): boolean {
@@ -67,26 +70,31 @@ function looksLikeOrphanSnapshotPortfolio(portfolio: OutcomePortfolio): boolean 
 
 /**
  * Push portfolio mutations to durable org-scoped persistence.
+ * Throws when the durable write fails — callers must surface the error.
  * localStorage remains a UI cache only — not authoritative.
  */
-function persistDurablePortfolio(
+async function persistDurablePortfolio(
   portfolio: OutcomePortfolio,
   snapshotId: string | null,
-): void {
+): Promise<void> {
   if (!snapshotId || typeof window === "undefined") return;
   const active = getActiveExecutiveSnapshot();
   if (!active?.organisationId) return;
-  void import("@/pilot-persistence/actions")
-    .then((m) =>
-      m.persistPilotPortfolioAction({
-        organisationId: active.organisationId,
-        originSnapshotId: snapshotId,
-        portfolio,
-      }),
-    )
-    .catch(() => {
-      /* non-blocking */
-    });
+
+  const { persistPilotPortfolioAction } = await import(
+    "@/pilot-persistence/actions"
+  );
+  const result = await persistPilotPortfolioAction({
+    organisationId: active.organisationId,
+    originSnapshotId: snapshotId,
+    portfolio,
+  });
+  if (!result.ok) {
+    throw new Error(
+      result.error ||
+        "Unable to persist to Production. Your change was not saved.",
+    );
+  }
 }
 
 /**
@@ -101,6 +109,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
   lastConsequence: null,
   lastSelection: null,
   lastActionFromDecision: null,
+  lastPersistError: null,
 
   hydrate() {
     if (get().hydrated) return;
@@ -114,6 +123,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
         lastConsequence: null,
         lastSelection: null,
         lastActionFromDecision: null,
+        lastPersistError: null,
       });
       // Refresh from durable SoT when available.
       void import("@/pilot-persistence/actions")
@@ -128,11 +138,12 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
             set({
               portfolio: structuredClone(res.portfolio),
               activeSnapshotId: res.context.snapshotId,
+              lastPersistError: null,
             });
           }
         })
         .catch(() => {
-          /* keep session cache */
+          /* keep session cache for read; writes still require durable success */
         });
       return;
     }
@@ -149,6 +160,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
         lastConsequence: null,
         lastSelection: null,
         lastActionFromDecision: null,
+        lastPersistError: null,
       });
       return;
     }
@@ -159,6 +171,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
       activeSnapshotId: null,
       lastSelection: null,
       lastActionFromDecision: null,
+      lastPersistError: null,
     });
   },
 
@@ -175,6 +188,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
       lastConsequence: null,
       lastSelection: null,
       lastActionFromDecision: null,
+      lastPersistError: null,
     });
   },
 
@@ -187,6 +201,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
       lastActionFromDecision: null,
       hydrated: true,
       activeSnapshotId: null,
+      lastPersistError: null,
     });
   },
 
@@ -194,15 +209,33 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
     set({ lastConsequence: null });
   },
 
-  recordDecisionAct(input) {
+  clearPersistError() {
+    set({ lastPersistError: null });
+  },
+
+  async recordDecisionAct(input) {
     const { portfolio, consequence } = applyDecisionAct(get().portfolio, input);
+    try {
+      await persistDurablePortfolio(portfolio, get().activeSnapshotId);
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to persist to Production. Your change was not saved.";
+      set({ lastPersistError: message });
+      throw error;
+    }
     mockPortfolioRepository.save(portfolio);
-    set({ portfolio, lastConsequence: consequence, hydrated: true });
-    persistDurablePortfolio(portfolio, get().activeSnapshotId);
+    set({
+      portfolio,
+      lastConsequence: consequence,
+      hydrated: true,
+      lastPersistError: null,
+    });
     return consequence;
   },
 
-  selectDecisionOption(input) {
+  async selectDecisionOption(input) {
     const snapshotId =
       input.snapshotId !== undefined
         ? input.snapshotId
@@ -211,38 +244,71 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
       ...input,
       snapshotId,
     });
+    try {
+      await persistDurablePortfolio(result.portfolio, snapshotId ?? null);
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to persist to Production. Your change was not saved.";
+      set({ lastPersistError: message });
+      throw error;
+    }
     mockPortfolioRepository.save(result.portfolio);
     set({
       portfolio: result.portfolio,
       lastSelection: result,
       hydrated: true,
+      lastPersistError: null,
     });
-    persistDurablePortfolio(result.portfolio, snapshotId ?? null);
     return result;
   },
 
-  createActionFromSelectedDecision(input) {
+  async createActionFromSelectedDecision(input) {
     const result = createActionFromSelectedDecision(get().portfolio, input);
+    try {
+      await persistDurablePortfolio(result.portfolio, get().activeSnapshotId);
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to persist to Production. Your change was not saved.";
+      set({ lastPersistError: message });
+      throw error;
+    }
     mockPortfolioRepository.save(result.portfolio);
     set({
       portfolio: result.portfolio,
       lastActionFromDecision: result,
       hydrated: true,
+      lastPersistError: null,
     });
-    persistDurablePortfolio(result.portfolio, get().activeSnapshotId);
     return result;
   },
 
-  assignActionAccountability(input) {
+  async assignActionAccountability(input) {
     const result = assignActionAccountability(get().portfolio, {
       actionId: input.actionId,
       owner: input.owner,
       dueDate: input.dueDate,
       actor: input.actor ?? "Executive",
     });
+    try {
+      await persistDurablePortfolio(result.portfolio, get().activeSnapshotId);
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to persist to Production. Your change was not saved.";
+      set({ lastPersistError: message });
+      throw error;
+    }
     mockPortfolioRepository.save(result.portfolio);
-    set({ portfolio: result.portfolio, hydrated: true });
-    persistDurablePortfolio(result.portfolio, get().activeSnapshotId);
+    set({
+      portfolio: result.portfolio,
+      hydrated: true,
+      lastPersistError: null,
+    });
     return result;
   },
 }));

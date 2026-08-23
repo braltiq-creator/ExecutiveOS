@@ -74,42 +74,50 @@ export function ExecutiveDecisionPaperView({
 
   const headerLabel = commandCentreStatusLabel(executionStatus);
 
-  function onSelect(alternativeId: string) {
+  async function onSelect(alternativeId: string) {
     if (!paper.decisionId || !interactive) return;
     setError(null);
     setBusy(true);
     try {
-      selectOption({
+      await selectOption({
         decisionId: paper.decisionId,
         alternativeId,
         actor,
       });
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Selection failed");
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Selection was not saved to Production.",
+      );
     } finally {
       setBusy(false);
     }
   }
 
-  function onCreateAction() {
+  async function onCreateAction() {
     if (!paper.decisionId || !interactive) return;
     setError(null);
     setBusy(true);
     try {
-      createAction({ decisionId: paper.decisionId, actor });
+      await createAction({ decisionId: paper.decisionId, actor });
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Action creation failed");
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Action was not saved to Production.",
+      );
     } finally {
       setBusy(false);
     }
   }
 
-  function onAssignAccountability() {
+  async function onAssignAccountability() {
     if (!linkedAction || !interactive) return;
     setError(null);
     setBusy(true);
     try {
-      assignAccountability({
+      await assignAccountability({
         actionId: linkedAction.id,
         owner: ownerDraft.trim() || null,
         dueDate: dueDraft.trim() || null,
@@ -118,7 +126,11 @@ export function ExecutiveDecisionPaperView({
       setOwnerDraft("");
       setDueDraft("");
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Accountability update failed");
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Accountability update was not saved to Production.",
+      );
     } finally {
       setBusy(false);
     }
@@ -309,7 +321,7 @@ export function ExecutiveDecisionPaperView({
           </p>
           <p className="mt-2 text-[length:0.95rem] text-[var(--eos-color-text)]">
             {selectedId
-              ? "Your selection is recorded. Creating an action is a separate executive step."
+              ? "Your selection is saved to Production. Creating an action is a separate executive step."
               : "Select an option above. Viewing this page does not record a decision."}
           </p>
           {canCreateAction ? (

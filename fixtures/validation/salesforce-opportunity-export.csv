@@ -1,0 +1,477 @@
+Opportunity Name,Opportunity Owner,Product Family,Stage,Transaction Type,Net SaaS (converted) Currency,Net SaaS (converted),Net Maintenance (converted) Currency,Net Maintenance (converted),Net Software License (converted) Currency,Net Software License (converted),Net One Time Services (converted) Currency,Net One Time Services (converted),Net Recurring Services (converted) Currency,Net Recurring Services (converted),Last Stage Change Date,Stage Duration,Next Step,Industry,Close Date
+Stanmore SMC Pty Ltd : Redeye (SW),David Beckett,RedEye,Closed Won,Cross-Sell,USD,96480,USD,0,USD,0,USD,83919.51,USD,0,3/29/2024,866,,Metals and Mining,3/28/2024
+Rio Tinto International Holdings Limited : RedEye,David Beckett,RedEye,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,48575,USD,0,3/13/2024,882,,Corporate,3/13/2024
+Snowy Hydro Ltd : Snowy Hydro : RedEye,David Beckett,RedEye,Closed Won,New Logo,USD,0,USD,0,USD,0,USD,93180,USD,0,8/27/2024,715,,Utilities,3/13/2024
+Paladin Energy - RedEye,David Beckett,RedEye,Closed Won,New Logo,USD,67300,USD,0,USD,0,USD,56695,USD,0,4/23/2024,841,,Metals and Mining,4/22/2024
+APA Group : RedEye,David Beckett,RedEye,Closed Won,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,8/28/2024,714,,Oil and Gas,2024-09-05
+BlueScope Steel : RedEye,David Beckett,RedEye,Closed Lost,New Logo,USD,357465.21,USD,0,USD,0,USD,330986.31,USD,0,5/20/2024,814,,Metals and Mining,5/20/2024
+AUSTRALIAN GAS INFRASTRUCTURE HOLDINGS PTY LIMITED : RedEye DMS Advanced,Reyne McLellan,,Closed Lost,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,5/27/2024,807,,Oil and Gas,5/28/2024
+BMA Peak Downs : BHP Billiton Metcoal Pty Ltd Srvc : BHP Peak Downs Redeye Workflow Reconfig,David Beckett,RedEye,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,35439.21,USD,0,5/16/2024,818,,Metals and Mining,5/14/2024
+SOUTHERN SEAWATER JOINT VENTURE : RedEye DMS Advanced,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,31256.1,USD,0,USD,0,USD,39200.36,USD,0,2024-06-05,828,,Utilities,2024-07-05
+TIANQI LITHIUM AUSTRALIA PTY LTD : RedEye DMS Advanced,Reyne McLellan,,Closed Lost,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,6/24/2024,779,,Metals and Mining,6/25/2024
+Melbourne Water - Redeye Onsite Back Up,David Beckett,RedEye,Closed Won,Upsell,USD,16969.45,USD,0,USD,0,USD,0,USD,0,6/28/2024,775,,Utilities,6/28/2024
+HAGGIE REID PTY LTD : Haggie Reid Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,12620,USD,0,USD,0,USD,0,USD,0,6/26/2024,777,,Metals and Mining,6/26/2024
+MULTICOM RESOURCES PTY LTD : MCRES Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,46295,USD,0,USD,0,USD,27000,USD,0,6/13/2024,790,,Metals and Mining,6/13/2024
+Mercury Energy : Mercury Variation 2,David Beckett,RedEye,Closed Lost,Upsell,USD,0,USD,0,USD,0,USD,6400,USD,0,6/17/2024,786,,Utilities,6/17/2024
+STANMORE RESOURCES LIMITED : RedEye Migration (Services),David Beckett,RedEye,Closed Won,Migration,USD,0,USD,0,USD,0,USD,66546.88,USD,0,6/18/2024,785,,Metals and Mining,6/14/2024
+STANMORE RESOURCES LIMITED : RedEye Migration (Services) Water Level,David Beckett,RedEye,Closed Won,Migration,USD,0,USD,0,USD,0,USD,-66546.88,USD,0,6/18/2024,785,,Metals and Mining,6/14/2024
+Viva Energy Australia : RedEye,David Beckett,RedEye,Closed Lost,Migration,USD,198932.28,USD,0,USD,0,USD,116043.83,USD,0,7/14/2024,759,,Oil and Gas,7/14/2024
+STANMORE RESOURCES LIMITED : Meridian Extraction Variation,David Beckett,RedEye,Closed Won,,USD,0,USD,0,USD,0,USD,3001.8,USD,0,7/19/2024,754,,Metals and Mining,7/18/2024
+DAIKIN AUSTRALIA PTY LTD : Daikin MC Deal,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,13125,USD,0,USD,0,USD,0,USD,0,7/27/2024,746,,Discrete Manufacturing,7/27/2024
+Gladstone Area Waterboard (GAWB) : GAWB - Gladstone Area Water Board : GAWB Tier Uplift,David Beckett,RedEye,Closed Lost,Upsell,USD,24000,USD,0,USD,0,USD,0,USD,0,8/18/2024,724,,Utilities,8/18/2024
+COVALENT LITHIUM PTY LTD : Covalent Lithium - Redeye,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,84000,USD,0,USD,0,USD,85000,USD,0,8/28/2024,715,,Metals and Mining,8/28/2024
+GROSVENOR AIR CONDITIONING PTY LIMITED : GROSVENOR ENGINEERING: EMS Room Management,David Beckett,EMS,Closed Lost,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,8/18/2024,724,,Corporate,8/18/2024
+BUDDLE FINDLAY LIMITED : Buddle Findlay- EMS,David Beckett,EMS,Closed Lost,New Logo,USD,21000,USD,0,USD,0,USD,0,USD,0,8/28/2024,714,,Corporate,8/28/2024
+BMA Peak Downs : Peak Downs Cheat Sheet Scope,David Beckett,RedEye,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,17697.31,USD,0,9/20/2024,691,,Metals and Mining,9/17/2024
+BMA Peak Downs : Workflow Amendment Variation,David Beckett,RedEye,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,14551.13,USD,0,9/20/2024,691,,Metals and Mining,9/17/2024
+BMA Peak Downs : Reconfiguration Training (PS),David Beckett,RedEye;Meridian,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,25061.03,USD,0,9/20/2024,691,,Metals and Mining,9/17/2024
+SSR Mining - Corporate : SSR Mining - RedEye MS Contract Migration,David Beckett,RedEye,Closed Won,Renewal,USD,0,USD,0,USD,0,USD,0,USD,26460,9/26/2024,685,,Metals and Mining,9/25/2024
+SSR Mining - Corporate : SSR Mining - RedEye MS Contract Migration Water Level,David Beckett,RedEye,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,-26460,USD,0,9/26/2024,685,,Metals and Mining,9/25/2024
+BRIDGEPORT (SURAT BASIN) PTY LTD : Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,36000,USD,0,USD,0,USD,48000,USD,0,10/22/2024,660,,Metals and Mining,10/22/2024
+STAWELL GOLD MINES PTY. LTD. : Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,48000,USD,0,USD,0,USD,0,USD,0,10/22/2024,659,,Metals and Mining,10/22/2024
+ENERGYSEA PTY LTD : RedEyeDMS Basic,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,16619.35,USD,0,USD,0,USD,20185.58,USD,0,10/16/2024,665,,Utilities,10/17/2024
+K92 MINING (AUSTRALIA) PTY LTD : Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,33238.7,USD,0,USD,0,USD,0,USD,0,10/20/2024,661,,Metals and Mining,10/20/2024
+Global Process Management-red eye,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,16000,USD,0,USD,0,USD,23500,USD,0,11/17/2024,633,,Construction,11/18/2024
+The Royal Melbourne Hospital : Western Health EMS - Room Sign,Reyne McLellan,EMS,Closed Lost,Upsell,USD,0,USD,0,USD,0,USD,3480,USD,0,2024-06-11,644,,Healthcare,2024-06-11
+THE MALAGHAN INSTITUTE OF MEDICAL RESEARCH : Famis 360,David Beckett,FAMIS 360,Closed Lost,New Logo,USD,9197.82,USD,0,USD,0,USD,0,USD,0,2024-04-11,646,,Pharmaceutical,2024-04-11
+Paladin Energy : Redeye Deployment Water Level,David Beckett,RedEye,Closed Won,New Logo,USD,0,USD,0,USD,0,USD,-44675.12,USD,0,11/19/2024,631,,Metals and Mining,11/19/2024
+Grit Engineering,Reyne McLellan,FAMIS 360,Closed Lost,New Logo,USD,10000,USD,0,USD,0,USD,0,USD,0,2024-10-11,640,,,2024-11-11
+MGC Solutions- RedEye Basic,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,16000,USD,0,USD,0,USD,12000,USD,0,11/17/2024,633,,Construction,11/18/2024
+Paladin Energy : Redeye Deployment,David Beckett,RedEye,Closed Won,,USD,0,USD,0,USD,0,USD,44675.12,USD,0,11/19/2024,631,,Metals and Mining,11/14/2024
+DEPARTMENT OF AGRICULTURE AND FISHERIES : Maintenance Connection,Reyne McLellan,Maintenance Connection,Closed Lost,New Logo,USD,116792.02,USD,0,USD,0,USD,0,USD,0,11/19/2024,631,,Public Sector,11/20/2024
+City of Gold Coast : GOLD COAST CITY COUNCIL : Gold Coast Council Redeye Tier Uplift,David Beckett,RedEye,Closed Won,Upsell,USD,6110.08,USD,0,USD,0,USD,0,USD,0,2024-05-12,615,,,2024-05-12
+OJI FIBRE SOLUTIONS (NZ) LIMITED : OJIF Solutions Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,16000,USD,0,USD,0,USD,0,USD,0,1/29/2025,560,,Manufacturing,1/29/2025
+Alpine Energy : Redeye or Meridian,David Beckett,RedEye,Closed Lost,New Logo,USD,48000,USD,0,USD,0,USD,0,USD,0,1/19/2025,570,,Utilities,1/19/2025
+WESTPOWER LIMITED : Westpower/Electronet Redeye,David Beckett,,Closed Lost,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,2/16/2025,542,,Utilities,2/16/2025
+Nissan Casting : MC Deal,David Beckett,Maintenance Connection,Closed Lost,Cross-Sell,USD,0,USD,0,USD,18200,USD,19140,USD,0,2/26/2025,532,,Metals and Mining,2/26/2025
+RIO TINTO LIMITED : Rio Tinto Tom Price Redeye_AUD,David Beckett,RedEye,Closed Lost,New Logo,USD,18618.51,USD,0,USD,0,USD,88065.54,USD,0,2025-10-02,548,,Metals and Mining,2025-10-02
+Snowy Hydro Ltd : Platinum Managed Services,David Beckett,RedEye,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,93092.53,2/21/2025,537,,Utilities,2/17/2025
+RATP DEV AUSTRALIA PTY LTD : EDMS,David Beckett,RedEye,Closed Lost,New Logo,USD,14894.81,USD,0,USD,0,USD,0,USD,0,2025-05-02,553,,Construction,2025-05-02
+KAPITOL GROUP PTY LTD : Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,16000,USD,0,USD,0,USD,0,USD,0,2025-05-02,553,,Construction,2025-05-02
+Vector Limited : APW for 20 users or Term migration - (SW) Matrix,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-24736.58,USD,149385.43,USD,0,USD,0,3/26/2025,504,,Utilities,3/26/2025
+PORT WARATAH COAL SERVICES LTD : Port Waratah Coal Services : Port Waratah Coal Redeye,David Beckett,RedEye,Closed Lost,Migration,USD,111336.4,USD,-9954.6,USD,0,USD,116835.37,USD,0,2025-04-03,526,,,2025-04-03
+CENTURY DRILLING & ENERGY SERVICES (NZ) LIMITED : MB Century Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,73402.47,USD,0,USD,0,USD,0,USD,0,2025-03-03,527,,Utilities,2025-03-03
+G James Redeye,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,29808.11,USD,0,USD,0,USD,0,USD,0,3/23/2025,507,,Manufacturing,3/24/2025
+PACIFIC NATIONAL RAIL HOLDINGS PTY LTD : Redeye or Meridian,David Beckett,RedEye,Closed Lost,New Logo,USD,44712.17,USD,0,USD,0,USD,0,USD,0,3/19/2025,511,,Metals and Mining,3/19/2025
+"Ravensdown : Ravens Down, RedEye SW (Matrix)",David Beckett,,Closed Lost,New Logo,USD,0,USD,0,USD,35000,USD,0,USD,0,3/18/2025,512,,Utilities,3/18/2025
+ARK ENERGY OPERATIONS PTY LTD : Ark Energy - 8/2026 Renewal,Coba Hoban,RedEye,Closed Lost,Renewal,USD,-45747.21,USD,0,USD,0,USD,0,USD,0,3/13/2025,517,,"Electricity, Oil & Gas",3/13/2025
+DEPARTMENT OF HOUSING : QBuild MC and Redeye,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,952668.47,USD,0,USD,0,USD,0,USD,0,2025-03-03,527,,Public Sector,2025-03-03
+ELGAS LIMITED : Meridian,David Beckett,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,13825,USD,0,USD,0,3/31/2025,499,,Oil and Gas,3/31/2025
+City of Gold Coast : Amendment for contract #00074842 - New Tier,David Beckett,RedEye,Closed Won,Upsell,USD,18196.46,USD,0,USD,0,USD,0,USD,0,3/18/2025,512,,,3/15/2025
+FMS GROUP PTY LTD-,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,14715,USD,0,USD,0,USD,21750,USD,0,3/20/2025,510,,,3/20/2025
+OBERON COUNCIL : Maintenance Connection: RFQ,Reyne McLellan,Maintenance Connection,Closed Lost,New Logo,USD,19504.99,USD,0,USD,0,USD,0,USD,0,3/17/2025,513,,Public Sector,3/18/2025
+VISCOFAN S.A. : VISCOFAN - MC,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,15000,USD,0,USD,0,USD,17400,USD,0,3/20/2025,510,,,3/20/2025
+Stanwell Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,126791.41,USD,0,USD,0,USD,81669.69,USD,0,2025-11-04,488,,Utilities,2025-11-04
+The University of Queensland : University of QLD MC Deal,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,35550,USD,0,USD,0,USD,0,USD,0,4/14/2025,485,,Higher Education,4/14/2025
+Powerco Meridian to Redeye Services,David Beckett,Meridian,Closed Lost,Migration,USD,0,USD,0,USD,171130,USD,0,USD,0,4/29/2025,470,,Utilities,4/29/2025
+Department of Transport and Main Roads : RedEye DMS,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,1941141.5,USD,0,USD,0,USD,472864.38,USD,0,2025-06-04,493,,Public Sector,2025-07-04
+TAMBORAN RESOURCES PTY LTD : Redeye Advanced,David Beckett,RedEye,Closed Lost,New Logo,USD,30039.43,USD,0,USD,0,USD,30289.76,USD,0,4/21/2025,478,,Oil and Gas,4/21/2025
+Ravensdown : MS Package,David Beckett,,Closed Lost,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,4/14/2025,485,,Utilities,4/14/2025
+VERBREC LIMITED : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,20000,USD,0,USD,0,USD,21750,USD,0,4/13/2025,486,,Utilities,4/13/2025
+Paladin Energy : New Site,David Beckett,RedEye,Closed Won,Upsell,USD,45121.72,USD,0,USD,0,USD,24031.54,USD,15645.53,4/18/2025,481,,Metals and Mining,4/15/2025
+Simcoa Operations : Meridian Enterprise,Reyne McLellan,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,15645.53,USD,0,USD,34420.18,2025-09-04,490,,Metals and Mining,2025-10-04
+Chandigarh University- Meridian,Reyne McLellan,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,11750,USD,0,USD,0,2025-09-04,490,,,2025-10-04
+Tenaga Nasional : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,115750,USD,0,USD,0,USD,0,USD,0,2025-11-04,488,,Utilities,2025-11-04
+University of the Sunshine Coast : EMS RFI,Reyne McLellan,EMS,Closed Lost,New Logo,USD,0,USD,0,USD,18250,USD,20000,USD,0,4/13/2025,486,,Higher Education,4/14/2025
+AICA - RedEye,David Beckett,RedEye,Closed Lost,New Logo,USD,33600,USD,0,USD,0,USD,58000,USD,0,2025-05-05,464,,Process Manufacturing,2025-05-05
+Queensland Law Society Inc. - 7/2025 Renewal,Renewal Order Operations,EMS,Closed Lost,Renewal,USD,0,USD,5532.97,USD,0,USD,0,USD,0,3/19/2026,146,,Corporate,5/20/2025
+LMS Energy Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,48000,USD,0,USD,0,USD,40000,USD,0,2025-09-05,460,,Oil and Gas,2025-09-05
+AMPOL AUSTRALIA ENERGY PTY LTD : Ampol - Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,48000,USD,0,USD,0,USD,55000,USD,0,2025-09-05,460,,Oil and Gas,2025-09-05
+HAIL CREEK COAL PTY LTD : Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,46123.34,USD,0,USD,0,USD,0,USD,0,2025-09-05,461,,Metals and Mining,2025-09-05
+Department of Transport and Main Roads : EMS Room Booking,David Beckett,EMS,Closed Lost,New Logo,USD,65698.57,USD,0,USD,4350.05,USD,0,USD,0,2025-09-05,460,,Public Sector,2025-09-05
+Sutherland Global Services Inc. : Sutherland Global Services Pvt Ltd : Sutherland - Observe Implementation Training,David Beckett,vx Observe,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,3000,USD,0,5/23/2025,446,,Corporate,5/23/2025
+Seamech Fiji- Maintenance Connection,Reyne McLellan,Maintenance Connection,Closed Lost,New Logo,USD,19325,USD,0,USD,0,USD,15500,USD,0,5/20/2025,449,,,5/21/2025
+TiMOTION Technology-Lucernex,David Beckett,Lucernex,Closed Won,New Logo,USD,17072.25,USD,0,USD,0,USD,20000,USD,10000,2025-12-05,457,,Corporate,2025-12-05
+Greatland Gold-edms,David Beckett,RedEye,Closed Lost,New Logo,USD,57000,USD,0,USD,0,USD,34800,USD,0,2025-09-05,461,,,2025-09-05
+Gland Pharma- RedEye,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,16000,USD,0,USD,0,USD,24000,USD,0,2025-08-05,461,,,2025-09-05
+Trans World Trading Company- Meridian,Reyne McLellan,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,16800,USD,24940,USD,0,2025-09-05,460,,,2025-09-05
+DATAMATICS GLOBAL SERVICES LIMITED- Meridian,Reyne McLellan,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,15992.84,USD,0,USD,35184.24,5/20/2025,449,,,5/21/2025
+LAE Biscuit- Maintenance Connection,Reyne McLellan,Maintenance Connection,Closed Lost,New Logo,USD,17246.51,USD,0,USD,0,USD,24948.82,USD,0,5/19/2025,451,,"Food & Beverage, Manufacturing",5/19/2025
+BAIADA POULTRY PTY LIMITED : RedEye DMS Basic,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,15438.05,USD,0,USD,0,USD,18750.8,USD,0,6/18/2025,420,,Manufacturing,6/18/2025
+BYRON SHIRE COUNCIL : RedEyeDMS Advanced,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,46314.16,USD,0,USD,0,USD,45027.66,USD,0,6/18/2025,420,,Public Sector,6/18/2025
+DEPARTMENT OF TRANSPORT PLANNING AND LOCAL INFRASTRUCTURE : RedEyeDMS Enterprise,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,46378.49,USD,0,USD,0,USD,0,USD,0,6/18/2025,420,,Public Sector,6/18/2025
+Water Corporation : RedEye DMS Enterprise,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,83182.02,USD,0,USD,0,USD,0,USD,0,6/18/2025,420,,Utilities,6/18/2025
+ORANGE CITY COUNCIL : RedEyeDMS Basic,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,15438.05,USD,0,USD,0,USD,15438.05,USD,0,6/18/2025,420,,Public Sector,6/18/2025
+North Queensland Bulk Ports : RedEyeDMS Enterprise,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,16000,USD,0,USD,0,USD,0,USD,0,6/18/2025,420,,Corporate,6/18/2025
+Transpower NZ : Redeye Onsite Back Up,David Beckett,RedEye,Closed Won,Upsell,USD,11457.66,USD,0,USD,0,USD,3216.26,USD,0,6/26/2025,412,,Utilities,6/24/2025
+Yarra Valley Water : Onsite Back up,Reyne McLellan,RedEye,Closed Lost,Upsell,USD,15276.88,USD,0,USD,0,USD,3216.26,USD,0,6/18/2025,420,,Utilities,6/18/2025
+"Ballance Agri Nutrients (Kapuni) Ltd. : (Matrix) Ballance, migration to term (SW)",David Beckett,Meridian,Closed Won,Migration,USD,0,USD,1254,USD,74974.72,USD,0,USD,0,2025-04-06,434,,Chemicals,2025-04-06
+Senex Energy Limited - 9/2026 Renewal,Coba Hoban,RedEye,Closed Lost,Renewal,USD,50131.96,USD,0,USD,0,USD,0,USD,0,6/25/2025,413,,Oil and Gas,6/25/2025
+Northern Star Resources LTD : Northern Star Resources : RedEyeDMS Advanced,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,46378.49,USD,0,USD,0,USD,24700.89,USD,0,6/18/2025,420,,Metals and Mining,6/18/2025
+UNITY WATER : RedEyeDMS Advanced,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,46378.49,USD,0,USD,0,USD,24700.89,USD,0,6/18/2025,420,,Utilities,6/18/2025
+NORSTA Maritime : RedEyeDMS Basic,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,16000,USD,0,USD,0,USD,24000,USD,0,6/18/2025,420,,Discrete Manufacturing,6/18/2025
+L3Harris Space and Airborne Systems Australia PTY LTD : Maintenance Connection,Reyne McLellan,Maintenance Connection,Closed Won,New Logo,USD,0,USD,1989,USD,8775,USD,3500,USD,0,6/26/2025,412,,Manufacturing,6/26/2025
+ATHENA Labs LLC : EMS,David Beckett,EMS,Closed Lost,New Logo,USD,19500,USD,0,USD,0,USD,20000,USD,5000,6/24/2025,414,,,6/24/2025
+The Royal Melbourne Hospital : EMS Additional Room Licenses,Reyne McLellan,EMS,Closed Won,Upsell,USD,0,USD,270,USD,1350,USD,0,USD,0,2025-12-06,426,,Healthcare,2025-12-06
+HITACHI SYSTEMS INDIA PRIVATE LIMITED- EMS,Reyne McLellan,EMS,Closed Lost,New Logo,USD,12867.62,USD,0,USD,0,USD,18654.32,USD,0,2025-08-06,430,,,2025-09-06
+SHOALHAVEN CITY COUNCIL : RedEyeDMS Advanced,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,46378.49,USD,0,USD,0,USD,37565.93,USD,0,6/18/2025,420,,Public Sector,6/18/2025
+Hong Kong International School : EMS Outlook Integration and Room Signs,Reyne McLellan,EMS,Closed Won,Upsell,USD,0,USD,-8379.02,USD,40115.58,USD,0,USD,0,6/13/2025,425,,Commercial Property Management,6/13/2025
+Hastings District Council - 7/2026 Renewal,Renewal Order Operations,EMS,Closed Lost,Renewal,USD,0,USD,13193.73,USD,0,USD,0,USD,0,6/23/2025,415,,Public Sector,6/23/2025
+"UNSW LIVERPOOL HOSPITAL : UNSW, Liverpool Hospital - 7/2026 Renewal",Renewal Order Operations,EMS,Closed Lost,Renewal,USD,0,USD,24760.42,USD,0,USD,0,USD,0,2025-05-06,433,,Higher Education,2025-05-06
+Paladin Energy : Additional PS Work,David Beckett,RedEye,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,33577.77,USD,0,6/17/2025,421,,Metals and Mining,6/16/2025
+REFRIGERANT RECOVERY OPERATING COMPANY NZ LIMITED : Cool Safe Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,35378.88,USD,0,USD,0,USD,37308.63,USD,0,6/29/2025,409,,Manufacturing,6/29/2025
+Woolworths Group Limited : vxO (SW) GoLIVE Phase 1,David Beckett,vx Observe,Closed Won,New Logo,USD,105000,USD,0,USD,0,USD,0,USD,0,7/25/2025,383,,Retail,7/25/2025
+Woolworths Group Limited : vxO Services,David Beckett,Accruent,Closed Won,New Logo,USD,0,USD,0,USD,0,USD,16800,USD,0,7/25/2025,383,,Retail,7/25/2025
+First Gas Limited : Matrix Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-8261.15,USD,29663.75,USD,0,USD,0,2025-03-07,405,,Oil and Gas,2025-02-07
+Valeo - 3/2026 Renewal,Amy Dolby,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,3013.29,USD,0,USD,0,USD,0,2025-03-07,405,,Corporate,2025-03-07
+Stansefabrikken - 1/2026 Renewal,Amy Dolby,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,1638.2,USD,0,USD,0,USD,0,2025-03-07,405,,Corporate,2025-03-07
+Sydney Water Additional Server,David Beckett,Meridian,Closed Won,Upsell,USD,0,USD,9884,USD,35336,USD,0,USD,0,2025-09-07,399,,Utilities,2025-08-07
+Australian Hearing : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,97378.3,USD,0,USD,0,USD,19654.09,USD,0,2025-02-07,406,,,2025-02-07
+Children's Health QLD (CHQ) : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,Cross-Sell,USD,38318.72,USD,0,USD,0,USD,10154.61,USD,0,2025-02-07,407,,Healthcare,2025-02-07
+APT SEA GAS HOLDINGS PTY LIMITED : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,Migration,USD,9171.91,USD,-1770.74,USD,0,USD,0,USD,0,7/22/2025,386,,"Electricity, Oil & Gas",7/16/2025
+APT SEA GAS HOLDINGS PTY LIMITED : Maintenance Connection_PS,David Beckett,Maintenance Connection,Closed Won,Migration,USD,-6105.87,USD,0,USD,0,USD,6105.87,USD,0,7/31/2025,377,,"Electricity, Oil & Gas",7/31/2025
+APT SEA GAS HOLDINGS PTY LIMITED - 7/2030 Renewal VOID,Global Renewals Team,Maintenance Connection,Closed Lost,Renewal,USD,-9171.9,USD,0,USD,0,USD,0,USD,0,7/24/2025,384,,"Electricity, Oil & Gas",7/24/2025
+TINTERN GRAMMAR : RedEyeDMS Basic,Reyne McLellan,RedEye,Closed Lost,New Logo,USD,15462.92,USD,0,USD,0,USD,15462.92,USD,0,2025-07-08,370,,Higher Education,2025-07-08
+TINTERN GRAMMAR : Famis360,Reyne McLellan,FAMIS 360,Closed Lost,New Logo,USD,9020.04,USD,0,USD,0,USD,0,USD,0,2025-07-08,370,,Higher Education,2025-07-08
+STRATUM CONSULTANTS LIMITED : Matrix Meridian,David Beckett,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,22250,USD,0,USD,0,2025-05-08,372,,Construction,2025-05-08
+St Synthesis - 1/2026 Renewal,Thomas Burchill,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,6720.65,USD,0,USD,0,USD,0,2025-11-08,366,,Corporate,2025-11-08
+Turner & Townsend : EMS,David Beckett,EMS,Closed Lost,New Logo,USD,15000,USD,0,USD,0,USD,18850,USD,0,2025-07-08,370,,Construction,2025-07-08
+UNIVERSITY OF CANBERRA : EMS Campus,David Beckett,EMS,Closed Lost,New Logo,USD,53778.75,USD,0,USD,0,USD,28026.54,USD,0,2025-07-08,370,,Higher Education,2025-07-08
+Jacobi Carbons : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,7684.2,USD,0,USD,0,USD,15500,USD,5000,2025-07-08,370,,,2025-07-08
+KTC CIVIL ENGINEERING & CONSTRUCTION PTE LTD : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,28000,USD,0,USD,0,USD,29000,USD,0,8/24/2025,353,,Construction,8/24/2025
+TAFE NSW - NORTHERN SYDNEY INSTITUTE : EMS,David Beckett,EMS,Closed Lost,New Logo,USD,31908.38,USD,0,USD,0,USD,37368.73,USD,0,2025-05-08,372,,Higher Education,2025-05-08
+ALLTRUCK BODIES PTY. LTD. : Meridian,David Beckett,Meridian,Closed Lost,New Logo,USD,10000,USD,0,USD,0,USD,23200,USD,0,2025-04-08,374,,Manufacturing,2025-04-08
+Specialised Management Group-,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,25000,USD,0,USD,0,USD,23200,USD,0,8/28/2025,349,,,8/28/2025
+Melbourne Water : Redeye Tier Uplift,David Beckett,RedEye,Closed Won,Overage,USD,22757.93,USD,0,USD,0,USD,0,USD,0,2025-07-08,370,,Utilities,2025-06-08
+Snowy Hydro Ltd : Bulk Drawing Upload,David Beckett,RedEye,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,42669.37,USD,0,9/25/2025,321,,Utilities,9/24/2025
+Pembroke Resources-,David Beckett,RedEye,Closed Lost,New Logo,USD,31454.36,USD,0,USD,0,USD,37928.33,USD,0,2025-11-09,335,,Metals and Mining,2025-10-09
+WorleyParsons New Zealand Limited : Meridian Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-12207.5,USD,49359.8,USD,0,USD,0,2025-02-10,314,,Construction,9/30/2025
+UNSW RURAL CLINICAL SCHOOL : EMS,David Beckett,EMS,Closed Lost,New Logo,USD,21116.55,USD,0,USD,0,USD,9922.04,USD,0,2025-01-09,345,,Higher Education,2025-01-09
+QUEENSLAND RAIL : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-20847.49,USD,346792.24,USD,0,USD,0,9/23/2025,323,,Corporate,9/22/2025
+Sutherland Global Services Private Limited : Replacement for project #PR-016773,David Beckett,,Closed Won,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,2025-11-09,335,,,2025-11-09
+VANDERLANDE INDUSTRIES BV : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,0,USD,0,USD,11600,USD,0,2025-03-10,313,,Construction,9/29/2025
+HAILEYBURY: EMS,David Beckett,EMS,Closed Lost,New Logo,USD,14000,USD,0,USD,0,USD,290,USD,0,2025-08-10,308,,Higher Education,2025-08-10
+Plant & Platform Consultants Ltd New Zealand - 1/2026 Renewal,Thomas Burchill,Meridian,Closed Lost,Renewal,USD,0,USD,17610.49,USD,0,USD,0,USD,0,2025-01-10,315,,Construction,2025-01-10
+Sutherland Global Services Private Limited : Sutherland Global Services Inc. : Change order for project PR-019487,David Beckett,,Closed Abandoned,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,10/28/2025,288,,,10/28/2025
+ACTEWAGL DISTRIBUTION INVESTMENTS PTY LTD : ActewAGL : Evo Energy Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-17074.06,USD,85734.91,USD,0,USD,7610.49,2025-03-10,313,,,2025-03-10
+Unison Networks Limited : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-12797.8,USD,14364.88,USD,0,USD,0,10/21/2025,295,,Utilities,10/20/2025
+Zelestra Perú S.A.C. : Meridian,David Beckett,Meridian,Closed Lost,New Logo,USD,17176.46,USD,0,USD,0,USD,0,USD,0,10/22/2025,295,,Utilities,10/22/2025
+JMI-EDISON : JMI-Edison- MC Guam Airport,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,8991.5,USD,0,USD,0,USD,18912,USD,10000,10/29/2025,287,,Corporate,10/29/2025
+ICON WATER LIMITED : Actew AGL Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-14093.48,USD,151064.03,USD,0,USD,0,10/24/2025,292,,Utilities,10/23/2025
+TRONOX PIGMENT BUNBURY LTD : TRONOX LIMITED : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-8789.95,USD,30739.8,USD,0,USD,0,2025-03-10,313,,Process Manufacturing,2025-02-10
+Plant & Platform Consultants Ltd New Zealand : Enterprise Term,David Beckett,Meridian,Closed Lost,Migration,USD,0,USD,0,USD,13825,USD,0,USD,0,2025-08-10,308,,Construction,2025-08-10
+PECENG : RedEyeDMS Advanced,David Beckett,RedEye,Closed Lost,New Logo,USD,48000,USD,0,USD,0,USD,38400,USD,0,11/19/2025,266,,Oil and Gas,11/19/2025
+DELOITTE SEA SERVICES SDN. BHD. : Deloitte Consulting (SEA) Sdn. Bhd. : Deloitte SEA Services Sdn. Bhd. - 1/2026 Renewal,Luiza Ghita,EMS,Closed Lost,Renewal,USD,0,USD,67.86,USD,344.21,USD,0,USD,0,11/27/2025,258,,Corporate,11/27/2025
+Deloitte Consulting Pte Ltd - 1/2026 Renewal,Luiza Ghita,EMS,Closed Lost,Renewal,USD,0,USD,233.93,USD,1167.57,USD,0,USD,0,11/21/2025,264,,Corporate,11/21/2025
+AAH PTY LTD - 1/2026 Renewal,Amy Dolby,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,8735.07,USD,0,USD,0,USD,0,11/18/2025,267,,Pharmaceutical,11/18/2025
+Siemens Locomotive - 1/2026 Renewal,Amy Dolby,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,5148.62,USD,0,USD,0,USD,0,11/18/2025,267,,Corporate,11/18/2025
+Eiul : Enterprise Term,David Beckett,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,8025,USD,29000,USD,0,11/19/2025,266,,,11/19/2025
+PT. ENERGI MEGA PERSADA TBK : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,15000,USD,0,USD,0,USD,21750,USD,0,11/25/2025,260,,Oil and Gas,11/25/2025
+CUSHMAN & WAKEFIELD (S) PTE LTD : EMS,David Beckett,EMS,Closed Lost,Upsell,USD,115000,USD,0,USD,0,USD,108750,USD,0,11/27/2025,258,,Commercial Property Management,11/27/2025
+NIRMAL INDUSTRIAL CONTROLS PRIVATE LIMITED : Meridian,David Beckett,Meridian,Closed Lost,New Logo,USD,21439.14,USD,0,USD,0,USD,0,USD,0,11/25/2025,260,,Discrete Manufacturing,11/25/2025
+Athulya Senior Care - MC [SW],David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,19600,USD,0,USD,0,USD,23200,USD,0,11/25/2025,260,,,11/25/2025
+UNIVERSITY OF MELBOURNE : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-2929.09,USD,39305.33,USD,0,USD,0,11/28/2025,257,,Higher Education,11/28/2025
+Sunstate Cement : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,13089.01,USD,0,USD,0,USD,7853.4,USD,0,11/25/2025,260,,Metals and Mining,11/25/2025
+Hindustan Copper - Redeye [SW],David Beckett,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,55500,USD,0,USD,0,11/25/2025,260,,,11/25/2025
+SUNSHINE COAST AIRPORT : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,13535.73,USD,0,USD,0,USD,8577.09,USD,0,11/18/2025,267,,Commercial Property Management,11/18/2025
+BOYNE SMELTERS LIMITED : Enterprise Term,David Beckett,Meridian,Closed Won,New Logo,USD,0,USD,-4786.77,USD,32862.87,USD,0,USD,6544.5,2025-12-11,273,,Minerals & Mining,2025-09-11
+Port Taranaki Limited : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-1462.14,USD,1827.21,USD,0,USD,0,11/18/2025,267,,Corporate,11/18/2025
+Port Taranaki Limited - 10/2026 Renewal VOID,Thomas Burchill,Meridian,Closed Lost,Renewal,USD,0,USD,0,USD,-2192.65,USD,0,USD,0,11/24/2025,261,,Corporate,11/24/2025
+Counties Energy Ltd. : Counties Power - 4/2026 Renewal,Amy Dolby,Meridian,Closed Won,Renewal,USD,0,USD,8570.73,USD,47024.42,USD,0,USD,0,12/18/2025,237,,Utilities,12/18/2025
+KESTREL COAL RESOURCES PTY LTD : Kestrel Coal Resources - 1/2026 Renewal,Coba Hoban,RedEye,Closed Won,Renewal,USD,139386.53,USD,0,USD,0,USD,0,USD,0,2025-04-12,251,,Metals and Mining,2025-04-12
+Collins Aerospace Singapore MC OnPrem (SW),David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,1716,USD,8580,USD,0,USD,0,2025-12-12,243,,Process Manufacturing,2025-12-12
+Solaire Resort & Casino - 1/2026 Renewal,Thomas Burchill,Maintenance Connection,Closed Won,Renewal,USD,0,USD,5733,USD,0,USD,0,USD,0,12/29/2025,226,,Commercial Property Management,12/29/2025
+Deloitte & Touche LLP - 1/2026 Renewal,Luiza Ghita,EMS,Closed Won,Renewal,USD,0,USD,1974.12,USD,9870.58,USD,0,USD,0,12/30/2025,225,,Corporate,12/30/2025
+DELOITTE SEA SERVICES SDN. BHD. : Deloitte SEA Services Sdn. Bhd. - 1/2026 Renewal,Luiza Ghita,EMS,Closed Won,Renewal,USD,0,USD,11022.48,USD,55112.4,USD,0,USD,0,12/19/2025,236,,Corporate,12/19/2025
+Hong Kong International School - 1/2026 Renewal,Thomas Burchill,Maintenance Connection,Closed Won,Renewal,USD,0,USD,5722.75,USD,0,USD,0,USD,0,12/29/2025,226,,Primary and Secondary Education,12/29/2025
+The Royal Melbourne Hospital - 2/2026 Renewal,Cesar Alfredo,EMS,Closed Won,Renewal,USD,0,USD,29282.31,USD,0,USD,0,USD,0,12/30/2025,225,,Healthcare,12/30/2025
+Contact Energy : Contact TermLicense,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-14662.35,USD,83975.76,USD,0,USD,0,2025-11-12,244,,Utilities,2025-11-12
+ASIA PACIFIC AIRCRAFT COMPONENT SERVICES SDN. BHD. : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,37220,USD,0,USD,0,USD,29000,USD,30000,2025-07-12,248,,Manufacturing,2025-07-12
+Snowy Hydro Ltd - 2/2026 RedEye Managed Services Renewal,Coba Hoban,RedEye,Closed Won,Renewal,USD,0,USD,0,USD,0,USD,0,USD,98238.26,2025-04-12,251,,Utilities,2025-04-12
+WEL Networks : Matrix Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-3592.46,USD,39970.37,USD,0,USD,0,2025-08-12,247,,Telecommunications,2025-08-12
+Energy Infrastructure Management (EIM) - 2/2026 Renewal,Amy Dolby,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,1607.58,USD,0,USD,0,USD,0,2025-03-12,252,,Corporate,2025-03-12
+Envision AESC (Nissan Battery Plant UK) - 2/2026 Renewal,Amy Dolby,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,6963.67,USD,0,USD,0,USD,0,2025-03-12,252,,Discrete Manufacturing,2025-03-12
+First Gas Limited - 7/2028 Renewal VOID,Thomas Burchill,Meridian,Closed Lost,Renewal,USD,0,USD,-980,USD,-44311.38,USD,0,USD,0,12/23/2025,232,,Oil and Gas,12/23/2025
+SOUTH AUSTRALIAN WATER CORPORATION : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-28102.34,USD,161902.08,USD,18992.73,USD,24232.1,12/23/2025,232,,Utilities,12/23/2025
+GEELONGPORT PTY LIMITED : Redeye,David Beckett,RedEye,Closed Won,New Logo,USD,28568.01,USD,0,USD,0,USD,50592.7,USD,6287.25,12/18/2025,237,,Public Sector,12/18/2025
+SORBENT PAPER COMPANY PTY LTD : SORBENT : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-1789.7,USD,11768.94,USD,0,USD,0,2025-01-12,254,,Manufacturing,2025-01-12
+THE TRUSTEE FOR PORT OF MELBOURNE UNIT TRUST : PORT OF MELBOURNE OPERATIONS PTY LTD : Redeye,David Beckett,RedEye,Closed Won,Upsell,USD,51684.13,USD,0,USD,0,USD,54201.32,USD,11631.41,12/22/2025,233,,Metals and Mining,12/22/2025
+AUSTRALIAN HEALTH & NUTRITION ASSOCIATION LIMITED (Sanitarium) : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,14107.01,USD,0,USD,7455.17,USD,0,2025-08-12,247,,Manufacturing,2025-08-12
+WorleyParsons New Zealand Limited - 12/2028 Renewal VOID,Thomas Burchill,Meridian,Closed Lost,Renewal,USD,0,USD,0,USD,-49359.81,USD,0,USD,0,12/23/2025,232,,Construction,12/23/2025
+ACTEWAGL DISTRIBUTION INVESTMENTS PTY LTD - 9/2028 Renewal VOID,Global Renewals Team,Meridian,Closed Lost,Renewal,USD,0,USD,-23529.37,USD,-61813.63,USD,0,USD,-7544.7,12/17/2025,238,,,12/17/2025
+TRONOX PIGMENT BUNBURY LTD : TRONOX LIMITED - 11/2026 Renewal VOID,Global Renewals Team,,Closed Lost,Renewal,USD,0,USD,-6094.81,USD,-30474.05,USD,0,USD,0,12/18/2025,237,,Process Manufacturing,12/18/2025
+WHITEHAVEN COAL MINING LIMITED : Meridian,David Beckett,Meridian,Closed Won,New Logo,USD,0,USD,11820.77,USD,34333.95,USD,0,USD,13085.34,2025-01-12,254,,Metals and Mining,2025-01-12
+Unison Networks Limited - 11/2026 Renewal VOID,Thomas Burchill,Meridian,Closed Lost,Renewal,USD,0,USD,-2872.98,USD,-14364.88,USD,0,USD,0,12/23/2025,232,,Utilities,12/23/2025
+HUNTER WATER CORPORATION : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-5516.05,USD,26427.89,USD,0,USD,0,12/23/2025,232,,Utilities,12/23/2025
+BOYNE SMELTERS LIMITED - 10/2028 Renewal VOID,Global Renewals Team,Meridian,Closed Lost,Renewal,USD,0,USD,-5104.58,USD,-36526.28,USD,0,USD,-6549.22,12/18/2025,237,,Minerals & Mining,12/18/2025
+SA Power Networks : RDE Markup Tools & Static Overlay - December 2025,David Beckett,RedEye,Closed Lost,Upsell,USD,0,USD,0,USD,0,USD,403.77,USD,0,2025-02-12,253,,Utilities,2025-02-12
+BAPTIST CARE AUSTRALIA : MC Solution Design Review,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,0,USD,0,USD,3798.55,USD,0,12/17/2025,238,,Healthcare,12/17/2025
+Lochard Energy : User Passes,David Beckett,Meridian,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,2025-09-12,246,,Oil and Gas,2025-09-12
+Accenture Pte Ltd : NLT Replace email Address for COLO Escorts,Leigh Woodwards,vx Field,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,773.62,USD,0,2025-12-12,243,,Corporate,2025-12-12
+SP Services Limited - 3/2026 Renewal - Field Service Hub (Support and Maintenance),David Beckett,vx Field,Closed Won,Renewal,USD,0,USD,224940.46,USD,0,USD,0,USD,0,1/30/2026,194,,Utilities,1/30/2026
+SP Services Limited - 3/2026 Renewal - ViryaNet Wireless Workforce Management Mnt,David Beckett,vx Field,Closed Won,Renewal,USD,0,USD,11238.69,USD,0,USD,0,USD,0,1/30/2026,194,,Utilities,1/30/2026
+SP Services Limited - 3/2026 Renewal,David Beckett,vx Field,Closed Won,Renewal,USD,33365.65,USD,0,USD,0,USD,0,USD,0,1/30/2026,194,,Utilities,1/30/2026
+Sumitomo Bakelite Singapore - 1/2026 Renewal,Thomas Burchill,Maintenance Connection,Closed Won,Renewal,USD,0,USD,1816.81,USD,0,USD,0,USD,0,2026-07-01,217,,Chemicals,2026-07-01
+Viking EKB - 3/2026 Renewal,Amy Dolby,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,4018.95,USD,0,USD,0,USD,0,2026-02-01,222,,Corporate,2026-02-01
+Envision AESC (Nissan Battery Plant UK) - 3/2026 Renewal,Amy Dolby,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,8840,USD,0,USD,0,USD,0,2026-02-01,222,,Discrete Manufacturing,2026-02-01
+Alpine Resorts Victoria (ARV) - 4/2026 Renewal,Manesh Magan,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,6879.6,USD,0,USD,0,USD,0,2026-05-01,219,,Commercial Property Management,2026-05-01
+TRANSURBAN LIMITED : Transurban : Westgate Tunnel RedEye Data Upload,Andy Foster,RedEye,Closed Lost,Upsell,USD,0,USD,0,USD,0,USD,35268.96,USD,0,2026-06-01,218,,Corporate,2026-06-01
+Knit Technologies-,David Beckett,EMS,Closed Lost,New Logo,USD,20000,USD,0,USD,0,USD,23200,USD,0,2026-12-01,212,,,2026-12-01
+CRANE PROCESS FLOW TECHNOLOGIES (INDIA) PRIVATE LIMITED : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-2112.22,USD,9345.11,USD,0,USD,0,1/30/2026,194,,Pharmaceutical,1/30/2026
+Global Nonwovens - Meridian [SW],David Beckett,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,13625,USD,0,USD,0,2026-12-01,212,,Manufacturing,2026-12-01
+Ok Tedi Mining Limited (OTML) : RedEye Artefact Tier Expansion 2025,Andy Foster,RedEye,Closed Won,Upsell,USD,9889.74,USD,0,USD,0,USD,0,USD,0,1/23/2026,201,,Metals and Mining,1/23/2026
+MULTINET GAS DISTRIBUTION PARTNERSHIP : Meridian,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,6863.35,USD,7470.51,USD,0,USD,6414.97,1/30/2026,194,,Oil and Gas,1/30/2026
+TRANSURBAN LIMITED : Westconnex Data Migration,David Beckett,RedEye,Closed Lost,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,2026-06-01,218,,Corporate,2026-06-01
+Powerco Limited : Powerco NZ Holdings Limited - 7/2026 Renewal,David Beckett,Meridian,Closed Lost,Renewal,USD,0,USD,-62280.84,USD,0,USD,0,USD,0,1/13/2026,211,,Utilities,1/13/2026
+BYCA & ESSA JV : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,11388.19,USD,0,USD,0,USD,10507.85,USD,0,1/26/2026,198,,Utilities,1/26/2026
+Corio- EDMS,David Beckett,RedEye,Closed Lost,New Logo,USD,24000,USD,0,USD,0,USD,20000,USD,0,2026-11-01,213,,"Energy, Utilities & Waste",2026-11-01
+SP Services Limited : Lift and Shift,David Beckett,VX Field,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,24650,USD,0,1/29/2026,195,,Utilities,1/29/2026
+MANAWA ENERGY LIMITED : RedEye,David Beckett,RedEye,Closed Abandoned,New Logo,USD,84000,USD,0,USD,0,USD,84000,USD,0,2/26/2026,167,,Utilities,2/26/2026
+ARCHITECTURAL GLASS PRODUCTS LIMITED : AGPL Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,124470,USD,0,USD,0,USD,27000,USD,0,2026-10-02,183,,Manufacturing,2026-10-02
+Mondelez International - 1/2026 Renewal,Luiza Ghita,Meridian,Closed Lost,Renewal,USD,0,USD,2610.86,USD,0,USD,0,USD,0,2/24/2026,169,,Process Manufacturing,2/24/2026
+Sutherland Global Services Inc. : Sutherland Global Services Pvt Ltd : DFI - Observe Services,David Beckett,vx Observe,Closed Lost,Upsell,USD,0,USD,0,USD,0,USD,3000,USD,0,2026-02-02,191,,Corporate,2026-02-02
+Turbine Overhaul Services Pte Ltd - 2/2026 Renewal,David Beckett,Maintenance Connection,Closed Won,Renewal,USD,0,USD,2403.5,USD,0,USD,0,USD,0,2026-03-02,190,,Corporate,2026-03-02
+CAPRAL LIMITED : Enterprise Term,David Beckett,Meridian,Closed Lost,Migration,USD,0,USD,-1924.89,USD,9769.77,USD,0,USD,0,2/25/2026,168,,Manufacturing,2/25/2026
+RLX OPERATING COMPANY PTY LIMITED : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,20000,USD,0,USD,0,USD,12000,USD,0,2/26/2026,167,,Retail,2/26/2026
+UNIVERSITY OF MELBOURNE : MS365 Outlook Integration Professional Services,Andy Foster,EMS,Closed Abandoned,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,2026-12-02,181,,Higher Education,2/13/2026
+Nufarm : Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-542.17,USD,4619.89,USD,0,USD,0,2/27/2026,166,,Chemicals,2/27/2026
+MONDELEZ INTERNATIONAL AMEA PTE. LTD. : Enterprise Term,David Beckett,Meridian,Closed Lost,Migration,USD,0,USD,-1813.65,USD,3264.26,USD,0,USD,0,2/18/2026,175,,Manufacturing,2/18/2026
+Melbourne Water : Contracts Consolidation #00078974 & #00074914,Manesh Magan,RedEye,Closed Won,Renewal,USD,237383.93,USD,0,USD,0,USD,0,USD,0,2026-09-02,184,,Utilities,2026-09-02
+Counties Energy Ltd. - 4/2029 Renewal VOID,David Beckett,Meridian,Closed Lost,Renewal,USD,0,USD,-3528.4,USD,-63381.23,USD,0,USD,0,2/24/2026,169,,Utilities,2/24/2026
+THE TRUSTEE FOR PORT OF MELBOURNE UNIT TRUST - 12/2030 Renewal VOID,David Beckett,RedEye,Closed Lost,Renewal,USD,-54948.13,USD,0,USD,0,USD,0,USD,-12365.97,2026-06-02,187,,Metals and Mining,2026-06-02
+Melbourne Water : Onsite Back Up,Manesh Magan,RedEye,Closed Won,Upsell,USD,12533.07,USD,0,USD,0,USD,0,USD,0,2026-10-02,183,,Utilities,2026-10-02
+UNIVERSITY OF MELBOURNE : The University of Melbourne : EMS HRTK Bulk Data Upload Support - T&M w/Min CR1,Andy Foster,EMS,Closed Won,,USD,0,USD,0,USD,0,USD,725,USD,0,2/26/2026,167,,Higher Education,2/26/2026
+THE TRUSTEE FOR PORT OF MELBOURNE UNIT TRUST : Replacement for contract #00080511 (Services Split 2/2),David Beckett,,Closed Won,Renewal,USD,0,USD,0,USD,0,USD,0,USD,12365.97,2026-06-02,187,,Metals and Mining,2026-06-02
+Hong Kong International School : Managed Services,David Beckett,EMS,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,11500,2026-12-02,181,,Commercial Property Management,2026-12-02
+SP Services Limited : Contract Replacement Q310317 to Q323855 Field Google Map (Subscription),David Beckett,vx Field,Closed Won,Renewal,USD,32730.11,USD,0,USD,0,USD,0,USD,0,2/26/2026,167,,Utilities,2/26/2026
+VIASAT AUSTRALIA PTY LIMITED - 3/2026 Renewal,Manesh Magan,Maintenance Connection,Closed Won,Renewal,USD,5464.61,USD,0,USD,0,USD,0,USD,0,3/24/2026,141,,Corporate,3/24/2026
+Nesher Israel Cement Enterprises LTD - 3/2026 Renewal,Manesh Magan,Meridian,Closed Lost,Renewal,USD,0,USD,2126.34,USD,50251.62,USD,0,USD,0,2026-09-03,156,,Construction,2026-09-03
+City of Gold Coast - 3/2026 RedEye Renewal,Manesh Magan,RedEye,Closed Won,Renewal,USD,67118.69,USD,0,USD,0,USD,0,USD,0,3/16/2026,149,,,3/16/2026
+Stanmore SMC Pty Ltd - 4/2026 Renewal,Andy Foster,Meridian,Closed Lost,Renewal,USD,0,USD,4954.95,USD,24776.56,USD,0,USD,0,3/27/2026,138,,Metals and Mining,3/27/2026
+Queensland Law Society Inc. - 7/2026 Renewal - VOID,Andy Foster,EMS,Closed Lost,Renewal,USD,0,USD,-5532.97,USD,0,USD,0,USD,0,3/19/2026,146,,Corporate,3/19/2026
+DBCT COAL TERMINAL : Enterprise Term,David Beckett,Meridian;RedEye,Closed Won,Migration,USD,17078.2,USD,11074.01,USD,103661.98,USD,6190.85,USD,0,3/24/2026,141,,Metals and Mining,3/24/2026
+Collins Aerospace Philippines,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,37923.68,USD,0,USD,0,USD,0,USD,0,2026-01-03,164,,Aviation & Aerospace,2026-01-03
+BMA Goonyella Riverside : Artefact Tier Uplift,Andy Foster,RedEye,Closed Lost,Upsell,USD,10531.56,USD,0,USD,0,USD,0,USD,0,3/22/2026,143,,Metals and Mining,3/23/2026
+PORT AUTHORITY OF NSW : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,Migration,USD,37405.93,USD,-1325.33,USD,0,USD,6907.58,USD,0,3/30/2026,135,,Metals and Mining,3/30/2026
+STANMORE RESOURCES LIMITED : Tier uplift and Renewal,David Beckett,Redeye,Closed Lost,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,3/18/2026,147,,Metals and Mining,3/19/2026
+Accenture Pte Ltd : NLT vxField Project extension,David Beckett,vx Field,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,53524.46,USD,0,2026-09-03,156,,Corporate,2026-09-03
+FISHER & PAYKEL HEALTHCARE LIMITED : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,37689.46,USD,0,USD,0,USD,0,3/25/2026,140,,Discrete Manufacturing,3/25/2026
+THE LEGISLATIVE ASSEMBLY OF QUEENSLAND : Lucernex and MC,David Beckett,Lucernex;Maintenance Connection,Closed Lost,New Logo,USD,49811.43,USD,0,USD,0,USD,26215.04,USD,0,2026-02-03,163,,,2026-02-03
+TRANSURBAN LIMITED : RedEye Unsolicited Proposal,Andy Foster,RedEye,Closed Lost,New Logo,USD,254892.19,USD,0,USD,0,USD,0,USD,0,3/30/2026,135,,Corporate,3/31/2026
+FISHER & PAYKEL HEALTHCARE LIMITED : FISHER & PAYKEL APPLIANCES HOLDINGS LIMITED : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,4708.18,USD,21386.89,USD,0,USD,0,3/25/2026,140,,Discrete Manufacturing,3/25/2026
+FISHER & PAYKEL HEALTHCARE LIMITED : FISHER & PAYKEL APPLIANCES HOLDINGS LIMITED : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,9126.17,USD,0,USD,0,USD,0,3/25/2026,140,,Discrete Manufacturing,3/25/2026
+JJ-Lurgi Engineering: Migration from Cloud to Enterprise,Manesh Magan,Meridian,Closed Won,Migration,USD,-31083.33,USD,13951.77,USD,32582.69,USD,0,USD,0,3/27/2026,138,,Industrial Machinery Manufacturing,3/27/2026
+Snowy Hydro Ltd : Bulk Drawing Upload,David Beckett,,Closed Won,,USD,0,USD,0,USD,0,USD,0,USD,0,2026-12-03,153,,Utilities,2026-12-03
+PowerNet - 4/2027 Renewal VOID,Manesh Magan,RedEye,Closed Lost,Renewal,USD,-108925.82,USD,0,USD,0,USD,0,USD,0,2026-03-03,162,,Utilities,2026-03-03
+"Qatar Foundation for Education, Science and Community Dev - Hamad Bin Khalifa Univ : $0 Contract Extension",Leigh Woodwards,,Closed Won,,USD,0,USD,0,USD,0,USD,0,USD,0,3/17/2026,148,,Higher Education,3/17/2026
+PowerNet : RedEye Onsite Data Backup,Manesh Magan,RedEye,Closed Won,Upsell,USD,4401.91,USD,0,USD,0,USD,0,USD,0,2026-06-03,159,,Utilities,2026-06-03
+"PowerNet : Renewal 04/2026 (3-year term, replacement)",Manesh Magan,RedEye,Closed Won,Renewal,USD,102470.45,USD,0,USD,0,USD,0,USD,0,2026-03-03,162,,Utilities,2026-03-03
+Sparke Helmore Lawyers : EMS Additional 100 Everyday User Licences,Andy Foster,EMS,Closed Won,Upsell,USD,0,USD,0,USD,775,USD,0,USD,0,3/19/2026,146,,Corporate,3/19/2026
+STANMORE RESOURCES LIMITED : Managed Services,Andy Foster,RedEye,Closed Abandoned,Upsell,USD,0,USD,0,USD,0,USD,0,USD,9620.01,4/15/2026,119,,Metals and Mining,4/16/2026
+Urban Utilities (UU) - New Bucket,Manesh Magan,RedEye,Closed Lost,Upsell,USD,24737.17,USD,0,USD,0,USD,30921.46,USD,0,2026-08-04,126,,Utilities,2026-08-04
+Cell Therapies Pty Ltd : Maintenance Connection,David Beckett,Maintenance Connection,Closed Lost,New Logo,USD,25950,USD,0,USD,0,USD,23200,USD,0,4/14/2026,120,,,4/14/2026
+GALLAGHER AUSTRALIA INVESTMENT PTY LTD : Matrix Enterprise Term,David Beckett,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,21000,USD,0,USD,0,4/14/2026,120,,Construction,4/14/2026
+Kiwirail : Portal,David Beckett,Meridian,Closed Lost,Upsell,USD,5201,USD,0,USD,0,USD,0,USD,0,4/29/2026,105,,Corporate,4/29/2026
+Queensland Law Society Inc. : EMS Cloud Migration,Andy Foster,EMS,Closed Abandoned,Migration,USD,11000,USD,0,USD,0,USD,0,USD,0,2026-06-04,128,,Corporate,2026-07-04
+"CEEC Zhejiang Thermal Power Construction Co., Ltd. : ZTPC - MC [SW]",David Beckett,Maintenance Connection,Closed Won,New Logo,USD,21262.25,USD,0,USD,0,USD,30500,USD,0,4/29/2026,105,,Construction,4/29/2026
+BEGA FOOD GROUP : Enterprise Term,Manesh Magan,Meridian,Closed Won,Migration,USD,0,USD,-373.85,USD,6163.78,USD,0,USD,0,4/15/2026,119,,Manufacturing,4/15/2026
+BEGA FOOD GROUP (Cheese) : Enterprise Term Cheese,Manesh Magan,Meridian,Closed Won,Migration,USD,0,USD,-1180.46,USD,2606.95,USD,0,USD,0,4/27/2026,107,,Manufacturing,4/27/2026
+BMA Peak Downs : RedEye Artefact Tier Uplift,Andy Foster,RedEye,Closed Won,Upsell,USD,10169.72,USD,0,USD,0,USD,0,USD,0,2026-01-04,133,,Metals and Mining,2026-01-04
+ELECTRA LIMITED : Matrix Redeye,David Beckett,RedEye,Closed Won,New Logo,USD,15666.87,USD,0,USD,0,USD,19927.16,USD,0,2026-01-04,133,,Utilities,2026-01-04
+Queensland Law Society Inc. : EMS Upgrade Expansion Contract Replacement,Andy Foster,EMS,Closed Lost,Upsell,USD,0,USD,-653.28,USD,24805.07,USD,0,USD,0,2026-06-04,128,,Corporate,2026-07-04
+LOCHARD ENERGY (IONA OPERATIONS) TRUST : LOCHARD ENERGY (IONA OPERATIONS):LOCHARD ENERGY:Managed Serv/New Contract,David Beckett,Meridian,Closed Won,Migration,USD,6542.98,USD,15901.86,USD,20655.96,USD,0,USD,6596.58,4/24/2026,110,,Utilities,4/24/2026
+HAMILTON CITY COUNCIL : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,18937.68,USD,0,USD,0,USD,0,2026-02-04,132,,Public Sector,2026-02-04
+Shakambhari Group - EDMS (Meridian),David Beckett,Meridian,Closed Lost,New Logo,USD,0,USD,0,USD,59840.31,USD,0,USD,0,4/14/2026,120,,,4/14/2026
+Suraksha Diagnostic Pvt- Maintenance Connection,David Beckett,TMS,Closed Lost,New Logo,USD,325000,USD,0,USD,0,USD,250000,USD,0,4/27/2026,107,,Hospitals & Physicians Clinics,4/27/2026
+VERBREC INFRASTRUCTURE SERVICES PTY LTD : VERBREC LIMITED : EIM MC,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,6477.36,USD,0,USD,0,USD,0,4/29/2026,105,,Utilities,4/29/2026
+CENTRAL COAST COUNCIL : Redeye,David Beckett,RedEye,Closed Lost,New Logo,USD,30221.26,USD,0,USD,0,USD,24749.88,USD,0,4/27/2026,107,,Public Sector,4/27/2026
+BYCA & ESSA JV: Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,Upsell,USD,8417.87,USD,0,USD,0,USD,0,USD,6596.58,4/30/2026,104,,Utilities,4/30/2026
+SUNSHINE COAST AIRPORT PTY LTD : SUNSHINE COAST AIRPORT : Maintenance Connection,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,14211.91,USD,0,USD,0,USD,9005.57,USD,6871.44,4/20/2026,114,,Commercial Property Management,4/20/2026
+STANMORE RESOURCES LIMITED : RedEye Renewal with Managed Services,Andy Foster,RedEye,Closed Lost,Upsell,USD,98954.66,USD,0,USD,0,USD,0,USD,21988.59,2026-07-04,127,,Metals and Mining,2026-07-04
+AESC (US) LLC : Maintenance Connection - Blythewood SC Plant,Manesh Magan,Maintenance Connection,Closed Lost,New Logo,USD,42000,USD,0,USD,0,USD,0,USD,0,4/20/2026,114,,Corporate,4/20/2026
+Accenture Pte Ltd : SPG Managed Services,David Beckett,vx Field,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,17067.49,4/17/2026,117,,Corporate,4/17/2026
+AUSTRALIAN HEALTH & NUTRITION ASSOCIATION LIMITED (Sanitarium) : Contract End Date Extension,David Beckett,,Closed Won,,USD,0,USD,0,USD,0,USD,0,USD,0,2026-12-04,122,,Manufacturing,2026-12-04
+MSD Animal Health - 10/2026 Renewal,Manesh Magan,Meridian,Closed Lost,Renewal,USD,59817.93,USD,0,USD,0,USD,0,USD,0,5/20/2026,84,,Pharmaceutical,5/20/2026
+Powerco Limited : Powerco NZ Holdings Limited : Powerco Enterprise Term,David Beckett,Meridian,Closed Won,Migration,USD,0,USD,-35612.07,USD,163429.03,USD,0,USD,0,5/20/2026,84,,Utilities,5/20/2026
+STANMORE RESOURCES LIMITED - 3/2026 RedEye Renewal,Andy Foster,RedEye,Closed Won,Renewal,USD,103078.03,USD,0,USD,0,USD,0,USD,10307.8,2026-01-05,103,,Metals and Mining,2026-01-05
+Collins Aerospace : MC Implementation (PS),David Beckett,Maintenance Connection,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,2900,USD,0,2026-06-05,98,,Process Manufacturing,2026-06-05
+Ok Tedi Mining Limited (OTML) : Maintenance Connection,Andy Foster,Maintenance Connection,Closed Lost,Cross-Sell,USD,13098.8,USD,0,USD,0,USD,18060.13,USD,7158.2,5/13/2026,91,,Metals and Mining,5/14/2026
+Alpine Resorts Victoria (ARV) - 5/2026 Renewal,Manesh Magan,Maintenance Connection,Closed Lost,Renewal,USD,0,USD,1929.73,USD,0,USD,0,USD,0,5/14/2026,90,,Commercial Property Management,5/14/2026
+Allens Operations Pty Ltd - 6/2026 Renewal,Andy Foster,EMS,Closed Won,Renewal,USD,0,USD,40690.8,USD,0,USD,0,USD,0,5/27/2026,77,,Corporate,5/27/2026
+Maddocks Lawyers : Additional Site EMS,Andy Foster,EMS,Closed Lost,Upsell,USD,16235,USD,0,USD,0,USD,0,USD,0,5/25/2026,79,,Corporate,5/26/2026
+NEW ZEALAND ALUMINIUM SMELTERS LIMITED : ENTERPRISE TERM,Manesh Magan,Meridian,Closed Won,Migration,USD,0,USD,-4129.66,USD,19233.92,USD,0,USD,0,2026-01-05,103,,Metals and Mining,2026-01-05
+UNIVERSITY OF MELBOURNE : RedEye Migration - Uni Melbourne,Andy Foster,,Closed Abandoned,Migration,USD,0,USD,0,USD,0,USD,0,USD,0,2026-04-05,100,,Higher Education,2026-04-05
+Accenture Pte Ltd : Singapore Power Migration Support,David Beckett,vx Field,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,199718.05,USD,0,2026-01-05,103,,Corporate,2026-01-05
+Curtin University : EDMS Support Package,Manesh Magan,Meridian,Closed Won,Migration,USD,17578.53,USD,-10149.56,USD,0,USD,0,USD,0,5/18/2026,86,,Higher Education,5/18/2026
+SIMBERI GOLD COMPANY LIMITED : ST BARBARA LIMITED : St Barbara Mining Limited- Redeye,David Beckett,RedEye,Closed Won,New Logo,USD,38707.95,USD,0,USD,0,USD,48246.24,USD,5726.56,5/29/2026,75,,Metals and Mining,5/29/2026
+AUSTRALIAN HEALTH & NUTRITION ASSOCIATION LIMITED (Sanitarium) : Rules Manager,David Beckett,Maintenance Connection,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,2075.88,USD,0,5/26/2026,78,,Manufacturing,5/26/2026
+ELECTRA LIMITED : Change to Billing Terms,David Beckett,,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,5/29/2026,75,,Utilities,5/29/2026
+Urban Utilities (UU) : Onsite Back up,Manesh Magan,RedEye,Closed Lost,Upsell,USD,0,USD,0,USD,0,USD,7183.39,USD,0,6/25/2026,48,,Utilities,6/25/2026
+TRANSURBAN LIMITED : Transurban - 7/2026 Renewal,Andy Foster,RedEye,Closed Lost,Renewal,USD,389041.85,USD,0,USD,0,USD,0,USD,0,6/15/2026,58,,Corporate,6/15/2026
+Perilya Broken Hill Limited : Enterprise Term,Manesh Magan,Meridian,Closed Abandoned,Upsell,USD,0,USD,0,USD,29000,USD,0,USD,0,2026-08-06,65,,Metals and Mining,2026-08-06
+IOR PTY LTD : Maintenance Connection Services,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,0,USD,0,USD,69634.94,USD,6896.06,2026-03-06,70,,Oil and Gas,2026-03-06
+Urban Utilities (UU) : Urban Utilities - Reconfiguration,Manesh Magan,RedEye,Closed Abandoned,Upsell,USD,0,USD,0,USD,0,USD,4166.37,USD,0,6/25/2026,48,,Utilities,6/25/2026
+Navarro Amper & Co. - 7/2026 Renewal,Andy Foster,EMS,Closed Lost,Renewal,USD,0,USD,87.04,USD,434.56,USD,0,USD,0,6/17/2026,56,,Corporate,6/17/2026
+Navarro Amper & Co - 7/2026 Renewal,Andy Foster,EMS,Closed Lost,Renewal,USD,0,USD,490.91,USD,2482.44,USD,0,USD,0,6/17/2026,56,,Corporate,6/17/2026
+Kinsmen Group : Air Liquide RedEye Pilot [Kinsmen],David Shaw,RedEye,Closed Lost,Migration,USD,0,USD,0,USD,0,USD,0,USD,0,6/25/2026,48,,Corporate,6/25/2026
+JMI-EDISON : MI-EDISON Guam Airport : Contract End Date Extension,David Beckett,,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,2026-08-06,65,,Corporate,2026-08-06
+IOR PTY LTD : Maintenance Connection Software,David Beckett,Maintenance Connection,Closed Won,New Logo,USD,69642.22,USD,0,USD,0,USD,0,USD,0,2026-03-06,70,,Oil and Gas,2026-03-06
+Deloitte PLT : Additional EMS Workplace Term Licences,Andy Foster,EMS,Closed Lost,Upsell,USD,0,USD,3.74,USD,18.72,USD,0,USD,0,2026-08-06,65,,Corporate,2026-09-06
+PERILYA BROKEN HILL LIMITED : EDMS Support SKU,Manesh Magan,Meridian,Closed Lost,Migration,USD,13841.87,USD,-9921.63,USD,0,USD,0,USD,0,6/30/2026,43,,Metals and Mining,6/30/2026
+BYCA & ESSA JV : MC Contract Replacement,David Beckett,Maintenance Connection,Closed Won,Renewal,USD,12562.89,USD,0,USD,0,USD,0,USD,0,2026-09-06,64,,Utilities,2026-09-06
+FRANCIS-JONES CARPENTER PTY LTD : EMS,David Beckett,EMS,Closed Lost,New Logo,USD,8739.72,USD,0,USD,0,USD,14061.49,USD,0,6/18/2026,55,,Corporate,6/18/2026
+SUNSHINE COAST AIRPORT PTY LTD : Change to Billing Terms,David Beckett,,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,2026-03-06,70,,Commercial Property Management,2026-03-06
+TRONOX PIGMENT BUNBURY LTD : Meridian Services,David Beckett,Meridian,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,2083.18,USD,0,2026-09-06,64,,Process Manufacturing,2026-09-06
+GEELONGPORT PTY LIMITED : Geelong Port CR1 Extend Timeline,David Beckett,,Closed Won,,USD,0,USD,0,USD,0,USD,0,USD,0,6/17/2026,56,,Public Sector,6/17/2026
+APA Group : Managed Services,Manesh Magan,RedEye,Closed Abandoned,Upsell,USD,0,USD,0,USD,0,USD,10415.92,USD,0,6/25/2026,48,,Oil and Gas,6/25/2026
+Budage Pty Ltd : $0 Temporary EMS ERI Licence,Andy Foster,EMS,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,6/16/2026,57,,Corporate,6/16/2026
+APT SEA GAS HOLDINGS PTY LIMITED : MC Training,David Beckett,Maintenance Connection,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,3124.78,USD,0,6/26/2026,47,,"Electricity, Oil & Gas",6/26/2026
+Westside Corporation - 10/2026 Renewal,Andy Foster,RedEye,Closed Won,Renewal,USD,111406.41,USD,0,USD,0,USD,0,USD,0,7/20/2026,23,,Oil and Gas,7/20/2026
+University of Utah - Asia - 7/2026 Renewal,Andy Foster,EMS,Closed Won,Renewal,USD,25467.75,USD,0,USD,0,USD,0,USD,0,2026-01-07,42,,Higher Education,2026-01-07
+Deloitte Malaysia PLT - 7/2026 Renewal,Andy Foster,EMS,Closed Won,Renewal,USD,0,USD,1003.16,USD,4012.64,USD,0,USD,0,2026-01-07,42,,Corporate,2026-01-07
+Deloitte Consulting Limited - 7/2026 Renewal,Andy Foster,EMS,Closed Won,Renewal,USD,0,USD,169.39,USD,846.96,USD,0,USD,0,7/20/2026,23,,Corporate,7/20/2026
+"DCPDC, Inc. - 7/2026 Renewal",Andy Foster,EMS,Closed Won,Renewal,USD,0,USD,742.88,USD,3714.33,USD,0,USD,0,2026-01-07,42,,Corporate,2026-01-07
+DELOITTE REGIONAL SERVICES CENTRE Sdn Bhd - 7/2026 Renewal,Andy Foster,EMS,Closed Won,Renewal,USD,0,USD,411.35,USD,2056.76,USD,0,USD,0,2026-02-07,41,,Commercial Property Management,2026-02-07
+SA Power Networks : One-off Training Services (Online),Manesh Magan,RedEye,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,3198.9,USD,0,7/20/2026,23,,Utilities,7/20/2026
+Queensland Law Society Inc. : EMS Cloud Migration - 5 yr contract,Andy Foster,EMS,Closed Lost,New Logo,USD,9367,USD,0,USD,0,USD,0,USD,0,6/30/2026,43,,Corporate,2026-01-07
+"VANDERLANDE LOGISTICS, UNIPESSOAL, LDA : Vanderlande Logistics: MC (Malaysia Airport)",David Beckett,Maintenance Connection,Closed Won,Upsell,USD,0,USD,1820,USD,9100,USD,0,USD,0,7/29/2026,14,,Construction,7/29/2026
+Norton Rose Fulbright Australia : EMS On-prem upgrade,Manesh Magan,EMS,Closed Abandoned,Upsell,USD,0,USD,0,USD,0,USD,6380,USD,0,2026-02-07,41,,Corporate,2026-02-07
+Norton Rose Fulbright Australia : EMS,Manesh Magan,EMS,Closed Won,Migration,USD,25504.59,USD,-22483.28,USD,0,USD,10820,USD,0,7/15/2026,28,,Corporate,7/15/2026
+"VANDERLANDE LOGISTICS, UNIPESSOAL, LDA : Vanderlande Logistics, Unipessoal Lda : Maintenance",David Beckett,Maintenance Connection,Closed Won,New Logo,USD,0,USD,1040,USD,0,USD,0,USD,0,7/29/2026,14,,Construction,7/29/2026
+CleanCo : Onsite Backup (RedEye),Manesh Magan,RedEye,Closed Lost,Upsell,USD,16546.02,USD,0,USD,0,USD,0,USD,0,2026-01-07,42,,Utilities,2026-01-07
+QUEENSLAND LAW SOCIETY INCORPORATED : EMS Cloud Migration - 5 Year Contract,Andy Foster,EMS,Closed Won,New Logo,USD,10594.7,USD,0,USD,0,USD,0,USD,0,2026-03-07,40,,,2026-03-07
+Children's Health QLD (CHQ) : CHQ087 2026 - Digital Signage & Room Booking Solutions,Andy Foster,EMS,Closed Lost,New Logo,USD,27512,USD,0,USD,0,USD,39537.88,USD,0,7/26/2026,17,,Healthcare,7/27/2026
+Powerco Limited : Additional Licenses,David Beckett,Meridian,Closed Won,Upsell,USD,0,USD,12672.33,USD,66582.5,USD,0,USD,0,7/22/2026,21,,Utilities,7/22/2026
+Powerco Limited : ETM Trial Licenses,David Beckett,Meridian,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,2026-01-07,42,,Utilities,2026-01-07
+"Deloitte T&T (Thailand) Co., Ltd : Deloitte Thailand EMS Contract Replacement",Andy Foster,EMS,Closed Lost,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,7/28/2026,16,,Corporate,7/28/2026
+Snowy Hydro Ltd : Bulk Drawing Upload : Contract End Date Extension,Manesh Magan,Accruent,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,7/28/2026,15,,Utilities,7/28/2026
+FRANCIS GILLMAN PTY. LTD. : H. & W. NOMINEES PTY. LTD. : Hall and Wilcox EMS,David Beckett,EMS,Stage 7 - Procurement,New Logo,USD,20736.52,USD,0,USD,0,USD,27760.21,USD,0,6/30/2026,43,,Corporate,8/13/2026
+Ashurst Australia Services Pty Limited - 11/2026 Renewal,Andy Foster,EMS,Closed Won,Renewal,USD,0,USD,23232.99,USD,0,USD,6380,USD,0,2026-11-08,1,,Corporate,2026-11-08
+BAPTIST CARE AUSTRALIA : Maintenance Connection,David Beckett,Maintenance Connection,Stage 6 - Favored,New Logo,USD,39717.8,USD,0,USD,0,USD,13043.78,USD,13156.23,7/23/2026,20,,Healthcare,8/20/2026
+APT MANAGEMENT SERVICES PTY LIMITED : APA Group - 11/2026 Renewal,Manesh Magan,RedEye,Closed Won,Renewal,USD,60373.43,USD,0,USD,0,USD,0,USD,0,2026-10-08,2,,Oil and Gas,2026-10-08
+Ashurst Australia Services Pty Limited : EMS Upgrade Professional Services Reporting Only,Andy Foster,EMS,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,6380,USD,0,2026-11-08,1,,Corporate,2026-11-08
+CRANE PROCESS FLOW TECHNOLOGIES (INDIA) PRIVATE LIMITED : Additional ETM Licenses,David Beckett,Meridian,Stage 7 - Procurement,Upsell,USD,0,USD,1519.27,USD,5973.21,USD,0,USD,0,2026-07-06,66,,Pharmaceutical,8/18/2026
+SYDNEY WATER CORPORATION : New SKU,David Beckett,Meridian,Stage 7 - Procurement,Migration,USD,173102.78,USD,-109702.59,USD,0,USD,0,USD,0,6/29/2026,44,,Utilities,8/27/2026
+BM ALLIANCE COAL OPERATIONS PTY LIMITED : Redeye and Meridian BMA Contract Consolidation,David Beckett,RedEye;Meridian,Deal Review,Migration,USD,12364.94,USD,0,USD,0,USD,0,USD,0,2026-12-08,0,,Metals and Mining,2026-12-08
+MULTINET GAS DISTRIBUTION PARTNERSHIP : Vault Services Migration,David Beckett,Meridian,Stage 6 - Favored,Upsell,USD,0,USD,0,USD,0,USD,47895.14,USD,0,2026-10-08,2,,Oil and Gas,8/25/2026
+Urban Utilities (UU) : Data Uplift,David Beckett,RedEye,Stage 7 - Procurement,Upsell,USD,0,USD,0,USD,0,USD,0,USD,12104.93,2026-08-07,35,,Utilities,2026-12-08
+Accenture Pte Ltd : Singapore Power Investigation action,Leigh Woodwards,,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,,22,,Corporate,8/31/2026
+Ashurst Australia Services Pty Limited : Additional Building Licence,Andy Foster,EMS,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,2026-06-08,6,,Corporate,2026-06-08
+Contact Energy : Meridian,David Beckett,Meridian,Stage 7 - Procurement,Upsell,USD,0,USD,1662.5,USD,13237.37,USD,0,USD,0,2026-10-08,2,,Utilities,8/19/2026
+"Deloitte T&T (Thailand) Co., Ltd - EMS Contract Replacement",Andy Foster,EMS,Closed Won,Renewal,USD,0,USD,169.39,USD,846.96,USD,0,USD,0,2026-05-08,7,,Corporate,2026-05-08
+BAPTIST CARE AUSTRALIA : Services,David Beckett,Maintenance Connection,Closed Won,Upsell,USD,0,USD,0,USD,0,USD,2038.09,USD,0,2026-04-08,8,,Healthcare,2026-04-08
+BOYNE SMELTERS LIMITED : Render Module,David Beckett,Meridian,Deal Review,Upsell,USD,0,USD,0,USD,3022,USD,0,USD,0,2026-10-08,2,,Minerals & Mining,2026-10-08
+Sparke Helmore Lawyers : EMS Cloud Migration,Andy Foster,EMS,Stage 5 - Developing,Migration,USD,82059.5,USD,-64856.33,USD,0,USD,12180,USD,0,7/26/2026,17,,Corporate,9/30/2026
+MINISTRY FOR PRIMARY INDUSTRIES : Maintenance Connection,David Beckett,Maintenance Connection,Stage 5 - Developing,New Logo,USD,10687.55,USD,0,USD,0,USD,7730.69,USD,0,12/21/2025,234,,Manufacturing,9/24/2026
+PITCHER PARTNERS MELBOURNE PRIVATE WEALTH PTY LIMITED : PITCHER PARTNERS SYDNEY PRIVATE WEALTH PTY LIMITED : EMS,David Beckett,EMS,Stage 5 - Developing,New Logo,USD,35043.08,USD,0,USD,0,USD,42237.68,USD,7027.9,2/19/2026,174,,Corporate,9/29/2026
+Woolworths Group Limited : Additional Sites (1100),David Beckett,vx Observe,Stage 5 - Developing,Upsell,USD,390228.8,USD,0,USD,0,USD,0,USD,0,2026-04-08,8,,Retail,9/24/2026
+Amneal Pharmaceuticals - Meridian [SW],David Beckett,Meridian,Stage 6 - Favored,New Logo,USD,0,USD,33377.5,USD,184432.04,USD,162400,USD,0,7/17/2026,26,,Pharmaceuticals,9/16/2026
+Powerco Limited : Meridian Upgrade,David Beckett,Meridian,Stage 5 - Developing,Upsell,USD,0,USD,0,USD,0,USD,6114.27,USD,0,2026-07-07,36,,Utilities,9/16/2026
+Melbourne Water : Managed Services,Manesh Magan,RedEye,Stage 7 - Procurement,Upsell,USD,0,USD,0,USD,0,USD,0,USD,9796.89,6/29/2026,44,,Utilities,9/30/2026
+Pembroke Resources : Redeye,David Beckett,RedEye,Stage 6 - Favored,New Logo,USD,27869.14,USD,0,USD,0,USD,40262.84,USD,0,7/27/2026,16,,Metals and Mining,9/25/2026
+NEW ZEALAND ALUMINIUM SMELTERS LIMITED : MANAGED SERVICES,Manesh Magan,Meridian,Stage 5 - Developing,Upsell,USD,0,USD,0,USD,0,USD,0,USD,5622.32,4/20/2026,114,,Metals and Mining,9/30/2026
+Yarra Valley Water : Business Process Review (BPR),Manesh Magan,RedEye,Stage 6 - Favored,Upsell,USD,0,USD,0,USD,0,USD,7027.9,USD,0,6/24/2026,49,,Utilities,9/30/2026
+SUNSHINE COAST AIRPORT PTY LTD : Redeye,David Beckett,RedEye,Stage 4 - Evaluation,Cross-Sell,USD,50671.16,USD,0,USD,0,USD,45681.35,USD,0,2026-08-06,65,,Commercial Property Management,9/24/2026
+CENTRAL HIGHLANDS REGIONAL COUNCIL : Maintenance Connection,David Beckett,Maintenance Connection,Stage 5 - Developing,New Logo,USD,63919.41,USD,0,USD,0,USD,0,USD,0,7/14/2026,29,,Public Sector,9/17/2026
+ELECTRA LIMITED : Change to Project Phase Ownership,David Beckett,,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,,51,,Utilities,9/24/2026
+NEW ZEALAND ALUMINIUM SMELTERS LIMITED : Meridian Upgrade,Manesh Magan,Meridian,Stage 5 - Developing,Upsell,USD,0,USD,0,USD,0,USD,22011.39,USD,0,2026-10-08,2,,Metals and Mining,9/30/2026
+VERBREC INFRASTRUCTURE SERVICES PTY LTD : MC Training,David Beckett,Maintenance Connection,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,3057.14,USD,0,2026-10-08,2,,Utilities,9/16/2026
+PORT AUTHORITY OF NSW : MC Training,David Beckett,Maintenance Connection,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,3057.14,USD,0,7/23/2026,20,,Metals and Mining,9/16/2026
+INCICO INDIA ENGINEERING PRIVATE LIMITED : Redeye,David Beckett,RedEye,Stage 5 - Developing,New Logo,USD,16000,USD,0,USD,0,USD,29000,USD,0,7/27/2026,16,,Construction,9/22/2026
+Accenture Pte Ltd : SP Services (Singapore Power) Concurrent Sessions,David Beckett,vx Field,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,41812.73,USD,0,7/27/2026,16,,Corporate,9/16/2026
+Accenture Pte Ltd : NLT Services Pause Publish Events,David Beckett,vx Field,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,11408.98,USD,0,,14,,Corporate,9/23/2026
+GKN ENGINE SYSTEMS COMPONENT REPAIR SDN. BHD. : Training MC Milaysia,David Beckett,Maintenance Connection,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,2900,USD,0,2026-10-08,2,,Manufacturing,9/17/2026
+TRONOX PIGMENT BUNBURY LTD : Data Extraction,David Beckett,Meridian,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,,6,,Process Manufacturing,2026-09-09
+Accenture Pte Ltd : Singapore Power SFTP Security Enhancement,David Beckett,,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,6655.24,USD,0,2026-10-08,2,,Corporate,9/30/2026
+DARWIN PORT OPERATIONS PTY LIMITED : RedEyeDMS Basic,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,16866.96,USD,0,USD,0,USD,22840.68,USD,0,5/13/2026,91,,Public Sector,10/20/2026
+GPA ENGINEERING PTY LTD : GPA Engineering-RedEye,David Beckett,RedEye,Stage 4 - Evaluation,New Logo,USD,17325.18,USD,0,USD,0,USD,0,USD,0,4/27/2026,107,,Construction,10/14/2026
+Hong Kong International School : EMS,David Beckett,EMS,Stage 3 - Discovery,Migration,USD,68660,USD,-20360,USD,0,USD,37700,USD,13800,2/25/2026,168,,Commercial Property Management,10/14/2026
+Vector Limited : Smallworld Integration support,David Beckett,Meridian,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,0,USD,10000,2026-11-02,182,,Utilities,10/14/2026
+BAPTIST CARE AUSTRALIA : CR1 extension - solution design review,David Beckett,,Stage 5 - Developing,Upsell,USD,0,USD,0,USD,0,USD,0,USD,0,5/13/2026,91,,Healthcare,10/13/2026
+MURDOCH UNIVERSITY : Meridian,David Beckett,Meridian,Stage 4 - Evaluation,New Logo,USD,26767.87,USD,13822.87,USD,72627.81,USD,97828.38,USD,6746.78,5/27/2026,77,,Higher Education,10/28/2026
+IMI - EMS [SW],David Beckett,EMS,Stage 4 - Evaluation,New Logo,USD,16614,USD,0,USD,0,USD,20000,USD,9600,2026-12-05,92,,Manufacturing,10/15/2026
+AIRTRUNK OPERATING PTY LTD : MC,David Beckett,Maintenance Connection;RedEye,Stage 4 - Evaluation,New Logo,USD,779850.81,USD,0,USD,0,USD,815236.49,USD,97459.34,6/26/2026,47,,Commercial Property Management,10/22/2026
+WEL Networks : Redeye Portal,David Beckett,RedEye,Stage 4 - Evaluation,Upsell,USD,11200,USD,0,USD,0,USD,0,USD,0,6/17/2026,56,,Telecommunications,10/21/2026
+Kiwirail : Redeye Portal,David Beckett,RedEye,Stage 3 - Discovery,Cross-Sell,USD,6.5,USD,0,USD,0,USD,0,USD,0,6/17/2026,56,,Corporate,10/21/2026
+Vector Limited : Redeye Portal,David Beckett,RedEye,Stage 3 - Discovery,Cross-Sell,USD,6.5,USD,0,USD,0,USD,0,USD,0,6/17/2026,56,,Utilities,10/21/2026
+SUNSHINE COAST AIRPORT PTY LTD : MC Training,David Beckett,Maintenance Connection,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,3057.14,USD,0,,44,,Commercial Property Management,10/21/2026
+SIEMENS INDUSTRIAL LIMITED : Maintenance Connection,David Beckett,Maintenance Connection,Stage 5 - Developing,New Logo,USD,0,USD,10469.7,USD,52348.5,USD,56025,USD,0,7/14/2026,29,,Discrete Manufacturing,10/21/2026
+RISDA HOLDINGS SDN. BHD. : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,New Logo,USD,44142.4,USD,0,USD,0,USD,49540,USD,0,2026-12-07,31,,Commercial Property Management,10/22/2026
+MEGAWIDE CONSTRUCTION CORPORATION : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,New Logo,USD,38000,USD,0,USD,0,USD,37500,USD,10000,,29,,Construction,10/21/2026
+INDIRA GANDHI MEMORIAL HOSPITAL : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,New Logo,USD,55000,USD,0,USD,0,USD,0,USD,0,,14,,Healthcare,10/28/2026
+MULTINET GAS DISTRIBUTION PARTNERSHIP : Plant 3D Phase 2,David Beckett,Meridian,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,20380.91,USD,0,,8,,Oil and Gas,10/21/2026
+MARUBENI-ITOCHU STEEL OCEANIA PTY LTD : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,New Logo,USD,49647.26,USD,0,USD,0,USD,0,USD,0,,2,,Manufacturing,10/15/2026
+"PHONESACK GROUP CO.,LTD : Meridian",David Beckett,Meridian,Stage 3 - Discovery,New Logo,USD,0,USD,0,USD,25000,USD,0,USD,0,,2,,Metals and Mining,10/14/2026
+Transpower NZ : RedEye Tier Uplift,Manesh Magan,RedEye,Stage 5 - Developing,Upsell,USD,28000,USD,0,USD,0,USD,0,USD,0,6/28/2026,45,,Utilities,11/30/2026
+CSL : RedEye DMS Advanced_AUD,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,50671.16,USD,0,USD,0,USD,51444.23,USD,0,2/26/2026,167,,Pharmaceutical,11/18/2026
+Paladin Energy : Reconfiguration,Andy Foster,RedEye,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,40761.82,USD,0,6/19/2025,419,,Metals and Mining,11/30/2026
+VOYAGES INDIGENOUS TOURISM AUSTRALIA PTY LTD : Maintenance Connection,David Beckett,Maintenance Connection,Stage 4 - Evaluation,New Logo,USD,27686.74,USD,0,USD,0,USD,4891.42,USD,6746.78,2026-10-05,94,,Corporate,11/25/2026
+TOP ENERGY LIMITED : Redeye,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,35976.53,USD,0,USD,0,USD,41042.94,USD,0,2026-08-06,65,,Utilities,11/17/2026
+WOOLWORTHS (INTERNATIONAL) PTY LIMITED : Woolworths-,David Beckett,Lucernex;Accruent Suite,Stage 3 - Discovery,New Logo,USD,329169.57,USD,0,USD,0,USD,244711.5,USD,0,2026-03-03,162,,Retail,2026-11-11
+PERTH AIRPORT PTY LTD : MC + Redeye,David Beckett,Maintenance Connection;RedEye,Stage 3 - Discovery,New Logo,USD,45916.64,USD,0,USD,0,USD,0,USD,0,,147,,Public Sector,11/18/2026
+ICON WATER LIMITED : RedEye Portal (replacing Meridian Portal),Manesh Magan,RedEye,Stage 3 - Discovery,Upsell,USD,16866.96,USD,0,USD,0,USD,0,USD,0,,126,,Utilities,2026-02-11
+Yarra Valley Water : RedEye Managed Services,Manesh Magan,RedEye,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,0,USD,1571.17,,125,,Utilities,2026-02-11
+VERBREC INFRASTRUCTURE SERVICES PTY LTD : Managed Services,David Beckett,Maintenance Connection,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,0,USD,3373.39,4/23/2026,111,,Utilities,11/18/2026
+Wagners : Maintenance Connection,David Beckett,Maintenance Connection,Stage 5 - Developing,New Logo,USD,51374.5,USD,0,USD,0,USD,30082.23,USD,6746.78,2026-12-05,92,,Civil Engineering Construction,11/19/2026
+WorleyParsons New Zealand Limited : Redeye Portal,David Beckett,RedEye,Stage 3 - Discovery,Upsell,USD,1.6,USD,0,USD,0,USD,0,USD,0,4/24/2026,110,,Construction,11/23/2026
+Petroliam Nasional Berhad (petronas) : Meridian,David Beckett,Meridian,Stage 3 - Discovery,New Logo,USD,0,USD,0,USD,34000,USD,29000,USD,0,2026-11-05,93,,Oil and Gas,2026-04-11
+MULTINET GAS DISTRIBUTION PARTNERSHIP : Meridian Additional Licenses,David Beckett,Meridian,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,18619.72,USD,0,USD,0,2026-09-06,64,,Oil and Gas,11/17/2026
+Ravensdown : Redeye,Ivan Polach,RedEye,Stage 3 - Discovery,New Logo,USD,16000,USD,0,USD,0,USD,0,USD,0,2026-09-07,34,,Utilities,11/19/2026
+Ravensdown : Matrix Redeye,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,,27,,Utilities,11/25/2026
+APT SEA GAS HOLDINGS PTY LIMITED : MC Asset Based + Connector + Redeye,David Beckett,Maintenance Connection;Accruent Suite;RedEye,Stage 3 - Discovery,Cross-Sell,USD,43139.23,USD,0,USD,0,USD,12228.55,USD,0,7/19/2026,24,,"Electricity, Oil & Gas",11/19/2026
+NSW Government: Ministry of Health : EMS M365 Outlook & Teams Expansion,Andy Foster,EMS,Stage 3 - Discovery,Upsell,USD,7928.07,USD,0,USD,0,USD,6929.51,USD,0,,15,,Healthcare,11/27/2026
+IOR PTY LTD : Data Connect,David Beckett,Accruent Suite;Maintenance Connection,Stage 4 - Evaluation,Upsell,USD,6319.69,USD,0,USD,0,USD,2108.37,USD,0,7/29/2026,14,,Oil and Gas,11/18/2026
+SA Power Networks : Managed Services,Manesh Magan,RedEye,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,0,USD,23192.07,11/25/2025,260,,Utilities,2026-01-12
+APT SEA GAS HOLDINGS PTY LIMITED : Integration Support,David Beckett,Maintenance Connection,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,25120.53,USD,0,11/17/2025,268,,"Electricity, Oil & Gas",12/23/2026
+Gladstone Area Waterboard (GAWB) : Gladstone Area Water Board - Tier Increase (>20k artefacts),Manesh Magan,RedEye,Stage 6 - Favored,Upsell,USD,27937.65,USD,0,USD,0,USD,0,USD,0,2026-05-07,38,,Utilities,2026-01-12
+Yarra Valley Water : New RedEye Bucket,Manesh Magan,RedEye,Stage 3 - Discovery,Upsell,USD,16866.96,USD,0,USD,0,USD,16866.96,USD,0,,150,,Utilities,12/31/2026
+CORONADO CURRAGH PTY LTD : RedEye Managed Services,Andy Foster,RedEye,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,0,USD,12650.22,,93,,Metals and Mining,12/31/2026
+"DEPARTMENT OF CLIMATE CHANGE, ENERGY, THE ENVIRONMENT AND WATER : Meridian",David Beckett,Meridian,Stage 4 - Evaluation,New Logo,USD,0,USD,0,USD,26558.44,USD,0,USD,0,2026-05-07,38,,Public Sector,12/15/2026
+KRISHNA INSTITUTE OF MEDICAL SCIENCES LIMITED : TMS,David Beckett,TMS,Stage 3 - Discovery,New Logo,USD,100000,USD,0,USD,0,USD,0,USD,0,2026-12-07,31,,Healthcare,12/16/2026
+NEW ZEALAND DEFENCE FORCE : EIM Meridian,David Beckett,Meridian,Stage 3 - Discovery,New Logo,USD,0,USD,0,USD,43049.41,USD,61142.74,USD,0,,29,,Public Sector,2026-09-12
+LOGAN CITY COUNCIL : RedEyeDMS Advanced,David Beckett,RedEye,Stage 4 - Evaluation,New Logo,USD,50671.16,USD,0,USD,0,USD,26987.14,USD,0,6/18/2025,420,,Public Sector,1/20/2027
+Hong Kong International School : EMS Floor Plans,David Beckett,EMS,Stage 4 - Evaluation,Upsell,USD,2000,USD,0,USD,0,USD,2900,USD,0,2026-07-06,66,,Commercial Property Management,1/13/2027
+QUEENSLAND BULK WATER SUPPLY AUTHORITY : RedEyeDMS Enterprise,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,140698.57,USD,0,USD,0,USD,0,USD,0,7/28/2025,381,,Utilities,2027-09-02
+NORTHCONNEX COMPANY PTY LTD : RedEyeDMS Advanced,David Beckett,RedEye,Stage 4 - Evaluation,New Logo,USD,82226.44,USD,0,USD,0,USD,26987.14,USD,0,6/18/2025,420,,Construction,2/17/2027
+Bank Negara Malaysia (Central Bank of Malaysia) - EMS,David Beckett,EMS,Stage 3 - Discovery,New Logo,USD,57000,USD,0,USD,0,USD,0,USD,0,2025-04-09,342,,Corporate,2027-09-02
+JJ-Lurgi Engineering : Migration [HYBRID],Manesh Magan,RedEye,Stage 6 - Favored,Cross-Sell,USD,10591.76,USD,0,USD,0,USD,2302.56,USD,0,12/22/2025,233,,Industrial Machinery Manufacturing,2027-01-02
+QUEENSLAND RAIL : Meridian Managed Services,Andy Foster,Meridian,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,0,USD,8433.48,9/24/2025,322,,Corporate,2/23/2027
+SPECIALIZED HEALTHCARE AND MEDICAL EDUCATION DEPARTMENT PAKISTAN: TMS,David Beckett,TMS,Stage 3 - Discovery,New Logo,USD,150000,USD,0,USD,0,USD,116000,USD,0,10/21/2025,295,,Healthcare,2/17/2027
+D2 PROCESS (SEA) PTE. LTD. : Meridian,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,35976.53,USD,0,USD,0,USD,41042.94,USD,0,10/29/2025,287,,Pharmaceutical,2027-09-02
+IOR PTY LTD : Redeye,David Beckett,RedEye,Stage 3 - Discovery,Cross-Sell,USD,15931.77,USD,0,USD,0,USD,20380.91,USD,0,7/19/2026,24,,Oil and Gas,2/17/2027
+Bluestone Mines Tasmania : Redeye,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,47795.3,USD,0,USD,0,USD,41042.94,USD,0,,10,,Metals and Mining,2027-10-02
+MERIDIAN ENERGY LIMITED : RedEye,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,144720,USD,0,USD,0,USD,119260,USD,0,4/27/2026,107,,,3/24/2027
+Orion New Zealand Redeye,David Beckett,RedEye,Stage 4 - Evaluation,New Logo,USD,110522.68,USD,0,USD,0,USD,109371.4,USD,0,6/19/2025,419,,Utilities,2027-03-03
+GRAINCORP LIMITED : Redeye,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,101342.33,USD,0,USD,0,USD,53974.28,USD,0,2025-04-11,281,,Process Manufacturing,2027-09-03
+Kiwirail : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,Cross-Sell,USD,64195,USD,0,USD,0,USD,0,USD,0,2026-11-02,182,,Corporate,2027-10-03
+Paladin Energy : PLS - Additional Managed Services,Andy Foster,RedEye,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,0,USD,14055.8,2026-12-02,181,,Metals and Mining,3/29/2027
+POWERCOR AUSTRALIA LTD : CitiPower and Powercor Australia-,David Beckett,EMS,Stage 3 - Discovery,New Logo,USD,17569.75,USD,0,USD,0,USD,36685.64,USD,0,2026-05-03,160,,Utilities,3/16/2027
+ARMIDALE REGIONAL COUNCIL : Redeye,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,16000,USD,0,USD,0,USD,0,USD,0,2026-09-07,34,,Corporate,3/17/2027
+Transpower NZ : EMS,Manesh Magan,EMS,Stage 3 - Discovery,Cross-Sell,USD,16765.76,USD,0,USD,0,USD,0,USD,0,,72,,Utilities,2027-01-03
+"Acrobiosystems Co., Ltd. : MC + Meridian",David Beckett,Maintenance Connection;Meridian,Stage 3 - Discovery,New Logo,USD,38000,USD,0,USD,31000,USD,75000,USD,0,2026-08-06,65,,Pharmaceutical,2027-10-03
+Power & Water Corporation : Power and Water Corp Redeye,David Beckett,RedEye,Stage 4 - Evaluation,New Logo,USD,33909.62,USD,0,USD,0,USD,32714.88,USD,0,9/26/2025,320,,Utilities,4/14/2027
+MAMMOTH UNDERGROUND MINE MANAGEMENT PTY LTD : Redeye,David Beckett,RedEye,Stage 4 - Evaluation,New Logo,USD,36483.24,USD,0,USD,0,USD,40761.82,USD,11244.64,2025-09-06,430,,Metals and Mining,2027-06-04
+Singapore Telecommunications Limited : Data migration for Singtel,David Beckett,,Stage 4 - Evaluation,Upsell,USD,0,USD,0,USD,0,USD,62344.14,USD,0,2025-12-06,426,,Telecommunications,2027-07-04
+University of Sydney : EMS,David Beckett,EMS,Stage 3 - Discovery,New Logo,USD,25000,USD,0,USD,0,USD,14500,USD,10000,,441,,Higher Education,4/14/2027
+AGL SOUTHERN HYDRO (NSW) PTY LIMITED : Meridian + Redeye,David Beckett,Meridian;RedEye,Stage 3 - Discovery,New Logo,USD,50600.89,USD,0,USD,0,USD,0,USD,7027.9,,376,,Utilities,4/13/2027
+"ENERGYAUSTRALIA HOLDINGS LIMITED : Accruent Suite MC, IOT and Meridian",David Beckett,Maintenance Connection;RedEye,Stage 3 - Discovery,New Logo,USD,137184.62,USD,0,USD,0,USD,81523.65,USD,0,8/25/2025,352,,Utilities,4/13/2027
+PARK FUELS : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,New Logo,USD,7227.85,USD,0,USD,0,USD,3790.08,USD,0,10/27/2025,289,,Oil and Gas,4/13/2027
+Tirupati Lifesciences - India-,David Beckett,Meridian,Stage 3 - Discovery,New Logo,USD,0,USD,0,USD,51232.5,USD,0,USD,0,10/30/2025,286,,,4/13/2027
+Pyramid Infratech Pvt - Redeye [SW],David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,26400,USD,0,USD,0,USD,58400,USD,0,11/18/2025,267,,Real Estate,4/13/2027
+ESSA- EDMS Redeye,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,38880,USD,0,USD,0,USD,38904,USD,0,6/24/2026,49,,Oil and Gas,2027-07-04
+Filmtec - MC [SW],David Beckett,Maintenance Connection,Stage 3 - Discovery,New Logo,USD,15460,USD,0,USD,0,USD,0,USD,0,1/22/2026,202,,Business Services,2027-07-04
+TWINZA OIL LIMITED : Meridian,David Beckett,Meridian,Stage 3 - Discovery,New Logo,USD,0,USD,24782.18,USD,130209.69,USD,0,USD,0,2026-05-02,188,,Oil and Gas,4/14/2027
+NATIONAL UNIVERSITY OF SINGAPORE : National University of Singapore-,David Beckett,FAMIS 360,Stage 3 - Discovery,New Logo,USD,45000,USD,0,USD,0,USD,43500,USD,0,2026-01-03,164,,Higher Education,4/14/2027
+Crescent Petroleum Company International Limited : RedEye,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,211050,USD,0,USD,0,USD,175875,USD,0,6/19/2025,419,,,2027-05-05
+Silver Fern Farms : Maintenance Connection,David Beckett,Maintenance Connection,Stage 4 - Evaluation,New Logo,USD,22000,USD,0,USD,0,USD,29000,USD,0,6/19/2025,419,,Corporate,2027-12-05
+Nam Theun 2 Power MC CMMS for FM,David Beckett,Maintenance Connection,Stage 4 - Evaluation,New Logo,USD,0,USD,0,USD,0,USD,0,USD,0,6/19/2025,419,,,2027-04-05
+CHRISTCHURCH CITY COUNCIL : Matrix Meridian,David Beckett,Meridian,Stage 3 - Discovery,New Logo,USD,0,USD,0,USD,49500,USD,0,USD,0,,460,,Corporate,5/19/2027
+EGO PHARMACEUTICALS HOLDINGS PTY LTD : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,New Logo,USD,12650.22,USD,0,USD,0,USD,0,USD,0,,376,,Manufacturing,2027-05-05
+United Petroleum : Maintenance Connection,David Beckett,Maintenance Connection,Stage 4 - Evaluation,New Logo,USD,0,USD,3379.58,USD,12673.41,USD,0,USD,0,2025-07-12,248,,Oil and Gas,2027-12-05
+Future Pipe Industries - Redeye [SW],David Beckett,Maintenance Connection,Stage 3 - Discovery,New Logo,USD,15460,USD,0,USD,0,USD,0,USD,0,1/22/2026,202,,Manufacturing,2027-12-05
+Budage Pty Ltd : Clayton Utz CMT EMS Cloud Migration,Andy Foster,EMS,Stage 3 - Discovery,Migration,USD,98482.58,USD,0,USD,0,USD,14696.84,USD,0,,204,,Corporate,5/28/2027
+Nufarm : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,Cross-Sell,USD,19678.12,USD,0,USD,0,USD,0,USD,0,5/17/2026,87,,Chemicals,2027-12-05
+Urban Utilities (UU) : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,Cross-Sell,USD,1649222.07,USD,0,USD,0,USD,0,USD,0,5/17/2026,87,,Utilities,2027-12-05
+Minter Ellison Services Pty Limited : EMS Cloud Migration,Andy Foster,EMS,Stage 5 - Developing,Migration,USD,43620,USD,-28727.12,USD,0,USD,22620,USD,10000,7/26/2026,17,,Corporate,5/19/2027
+MAINPOWER NEW ZEALAND LIMITED : Redeye Basic,David Beckett,RedEye,Stage 4 - Evaluation,New Logo,USD,16867.17,USD,0,USD,0,USD,16866.96,USD,0,6/19/2025,419,,Utilities,6/16/2027
+Green Distillation Technologies- Maintenance Connection,David Beckett,Maintenance Connection,Stage 4 - Evaluation,New Logo,USD,19325,USD,0,USD,0,USD,0,USD,0,2025-02-04,497,,,6/30/2027
+VeriSpring : RedEyeDMS Basic,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,16000,USD,0,USD,0,USD,24000,USD,0,2/26/2026,167,,,6/17/2027
+Gravronex Technology : Redeye [SW],David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,40536.93,USD,0,USD,0,USD,41042.94,USD,0,2025-03-10,313,,Construction,2027-09-06
+Powerco Limited : Redeye,David Beckett,RedEye,Stage 3 - Discovery,Migration,USD,137909.36,USD,0,USD,0,USD,71333.19,USD,0,2026-04-06,69,,Utilities,6/16/2027
+Ok Tedi Mining Limited (OTML) : RedEye Artefact Expansion,Andy Foster,RedEye,Stage 3 - Discovery,Upsell,USD,10401.29,USD,0,USD,0,USD,0,USD,0,,45,,Metals and Mining,6/30/2027
+FUTURE FORGEWORKS PTY LTD : Redeye,David Beckett,RedEye,Stage 3 - Discovery,New Logo,USD,15931.77,USD,0,USD,0,USD,20380.91,USD,0,,20,,Manufacturing,6/16/2027
+Western Power Australia - Redeye (SW),David Beckett,RedEye,Stage 4 - Evaluation,New Logo,USD,245220,USD,0,USD,0,USD,188940,USD,0,2025-09-05,460,,Utilities,2027-06-07
+Matrix Applied Computing :Redeye MS,David Beckett,RedEye,Stage 3 - Discovery,Upsell,USD,0,USD,0,USD,0,USD,0,USD,10000,2025-08-05,461,,Corporate,7/13/2027
+TASSAL GROUP : Maintenance Connection,David Beckett,Maintenance Connection,Stage 3 - Discovery,New Logo,USD,14055.8,USD,0,USD,0,USD,6114.27,USD,0,9/14/2025,332,,Manufacturing,7/14/2027
+"APA Group : MC, Field (RedEye in-place)",Manesh Magan,Maintenance Connection,Stage 3 - Discovery,Upsell,USD,32804.89,USD,0,USD,0,USD,30571.37,USD,0,,31,,Oil and Gas,2027-01-07
+HARMONY GOLD (AUSTRALIA) PTY LIMITED : Metals Acquisition Corp : Cobar Redeye,David Beckett,RedEye,Stage 4 - Evaluation,New Logo,USD,65758.06,USD,0,USD,0,USD,85037.6,USD,11244.64,5/13/2026,91,,Metals and Mining,2027-10-08

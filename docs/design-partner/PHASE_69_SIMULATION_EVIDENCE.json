@@ -1,0 +1,161 @@
+{
+  "phase": 69,
+  "overallVerdict": "READY_WITH_P1_FIXES",
+  "leadJudgement": "Model H demand has moved above plan",
+  "decisionQuestion": "Should protect strategic Model H demand by reallocating capacity or should management accept deferral risk elsewhere?",
+  "selectedOptionLabel": "Protect Model H demand through capacity reallocation",
+  "tasks": [
+    {
+      "id": "TASK_01",
+      "name": "ORIENT",
+      "verdict": "PASS"
+    },
+    {
+      "id": "TASK_02",
+      "name": "INVESTIGATE",
+      "verdict": "PASS"
+    },
+    {
+      "id": "TASK_03",
+      "name": "DECIDE",
+      "verdict": "PASS"
+    },
+    {
+      "id": "TASK_04",
+      "name": "SELECT",
+      "verdict": "PASS"
+    },
+    {
+      "id": "TASK_05",
+      "name": "EXECUTE",
+      "verdict": "PASS"
+    },
+    {
+      "id": "TASK_06",
+      "name": "RETURN",
+      "verdict": "PASS"
+    }
+  ],
+  "scorecard": {
+    "ORIENTATION": "PASS",
+    "EVIDENCE": "PASS",
+    "JUDGEMENT": "PASS",
+    "DECISION": "PASS",
+    "SELECTION": "PASS",
+    "ACCOUNTABILITY": "PASS",
+    "CONTINUITY": "PASS",
+    "EXECUTIVE_VALUE": "PARTIAL"
+  },
+  "hypotheses": {
+    "H1_time_to_attention": "SUPPORTED",
+    "H2_evidence_to_judgement": "SUPPORTED",
+    "H3_decision_explicit": "SUPPORTED",
+    "H4_decision_to_execution": "SUPPORTED",
+    "H5_return_continuity": "SUPPORTED",
+    "H6_daily_habit": "NOT_ESTABLISHED"
+  },
+  "timeToValue": {
+    "t10s": "PASS",
+    "t30s": "PASS",
+    "t60s": "PASS",
+    "t2m": "PASS",
+    "t5m": "PASS",
+    "returnVisit": "PASS"
+  },
+  "frictions": [
+    {
+      "id": "F69-04",
+      "severity": "P2",
+      "area": "First viewport",
+      "observation": "Design Partner strip still consumes vertical space on short laptops (Phase 68 debt).",
+      "blocksWorkflow": false
+    },
+    {
+      "id": "F69-05",
+      "severity": "P2",
+      "area": "Evidence progressive disclosure",
+      "observation": "Full Region × Model requires expand — improves density but adds one click for complete matrix.",
+      "blocksWorkflow": false
+    },
+    {
+      "id": "F69-06",
+      "severity": "P1",
+      "area": "Live user timing",
+      "observation": "Time-to-value claims are structurally inferred from surfaces, not measured with live executives.",
+      "blocksWorkflow": false
+    },
+    {
+      "id": "F69-07",
+      "severity": "P3",
+      "area": "Commercial parity",
+      "observation": "Commercial CC still lacks Phase 60/61 decision-paper depth (pre-existing).",
+      "blocksWorkflow": false
+    }
+  ],
+  "honesty": {
+    "noFabricatedOwnerBeforeAssign": true,
+    "noFabricatedDueBeforeAssign": true,
+    "councilNotEstablished": true,
+    "valueNotQuantified": true
+  },
+  "lineage": {
+    "decisionOriginSnapshotId": "snap_udg_6dc98aa4_mt59amqf",
+    "actionSnapshotId": "snap_udg_6dc98aa4_mt59amqf",
+    "historyLength": 3,
+    "secondSnapshotDoesNotRewrite": true
+  },
+  "isolation": {
+    "manufacturingOnlyOnCc": true,
+    "commercialProbeOk": true
+  },
+  "day1": {
+    "executionStatus": "decision_required",
+    "confidence": 72,
+    "htmlSurfaces": [
+      "hasJudgementQuestion",
+      "hasLeadVisible",
+      "hasConfidence",
+      "hasDecisionCta",
+      "hasDecisionQuestion",
+      "hasHeatPreview",
+      "hasForecastChart",
+      "hasEvidenceLab",
+      "hasLeadSignal",
+      "hasCounterSignal",
+      "hasSelectionHonesty",
+      "hasCouncilHonesty",
+      "noHelix",
+      "noNorthline",
+      "noCommercialLeak"
+    ],
+    "modelEvidenceRoles": [
+      "PRIMARY_SUPPORT",
+      "PRIMARY_SUPPORT",
+      "COUNTER_SIGNAL",
+      "OPERATIONAL_IMPLICATION"
+    ],
+    "heatMapCells": 20,
+    "forecastPoints": 8,
+    "narrativeConsistent": true
+  },
+  "day2": {
+    "executionStatus": "execution_underway",
+    "selectionState": "OPTION_SELECTED",
+    "owner": "Operations Planning",
+    "due": "2026-08-28",
+    "continuityLabels": [
+      "Active snapshot established",
+      "Model L demand is softening in SA",
+      "Plant 2 capacity under pressure",
+      "Plant 1 capacity under pressure",
+      "H-XL inventory above comfortable policy band"
+    ],
+    "accountabilityStatus": "Execution underway"
+  },
+  "day3": {
+    "executionStatus": "execution_underway",
+    "sinceYouLastLookedCount": 5,
+    "accountabilityAction": "Review plant capacity allocation against Model H demand requirements.",
+    "isolationDisclosure": "Executive intelligence based on the active Manufacturing Forecast Snapshot."
+  }
+}

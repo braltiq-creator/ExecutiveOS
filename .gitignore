@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# storybook
+/storybook-static
+
 # next.js
 /.next/
 /out/
@@ -23,6 +26,7 @@
 # misc
 .DS_Store
 *.pem
+.venv-xls/
 
 # debug
 npm-debug.log*

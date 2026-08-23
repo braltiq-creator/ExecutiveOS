@@ -1,0 +1,1 @@
+export { ExecutiveDecisionPaperView } from "./ExecutiveDecisionPaper";

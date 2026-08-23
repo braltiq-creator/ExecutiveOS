@@ -1,0 +1,238 @@
+/*
+  Phase 58A–D / 66–68 — Command Centre composition.
+  Phase 68: Signature Experience — denser Brief + technical visuals.
+*/
+
+[data-command-centre-experience] {
+  --exds-card-bg: #ffffff;
+  --exds-card-border: rgba(47, 122, 229, 0.16);
+  --exds-heat-cell-min-h: 4.25rem;
+  --cc-section-gap: clamp(0.85rem, 1.5vw, 1.25rem);
+  --cc-gutter: clamp(0.75rem, 1.25vw, 1.25rem);
+  --cc-rail-gap: clamp(0.85rem, 1.5vw, 1.25rem);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--cc-section-gap);
+  isolation: isolate;
+  position: relative;
+  z-index: 0;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: var(--eos-space-2xl, 2.5rem);
+  background: var(--exds-canvas-cool, #eef2f7);
+  border-radius: calc(var(--exds-card-radius, 12px) + 2px);
+  padding-inline: clamp(0.65rem, 1.25vw, 1.1rem);
+  padding-top: clamp(0.4rem, 1vw, 0.85rem);
+}
+
+[data-command-centre-experience] .cc-shell {
+  display: grid;
+  gap: var(--cc-rail-gap);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  min-width: 0;
+}
+
+@media (min-width: 1280px) {
+  [data-command-centre-experience] .cc-shell {
+    grid-template-columns: var(--exds-rail-width, 12.5rem) minmax(0, 1fr);
+  }
+
+  [data-command-centre-experience] .cc-rail {
+    position: sticky;
+    top: 0.5rem;
+    align-self: start;
+    max-height: calc(100vh - 2rem);
+  }
+
+  [data-command-centre-experience] .cc-rail > * {
+    max-height: calc(100vh - 2rem);
+  }
+}
+
+@media (max-width: 1279px) {
+  [data-command-centre-experience] .cc-rail {
+    display: none;
+  }
+}
+
+[data-command-centre-experience] .cc-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cc-section-gap);
+  min-width: 0;
+}
+
+[data-command-centre-experience] .cc-section {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  min-width: 0;
+  width: 100%;
+}
+
+[data-command-centre-experience] .cc-layer-brief,
+[data-command-centre-experience] .cc-first-viewport {
+  scroll-margin-top: 0.25rem;
+}
+
+[data-command-centre-experience] .cc-dp-slim {
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(47, 122, 229, 0.14);
+}
+
+[data-command-centre-experience] .cc-dp-slim [data-design-partner-status="true"] {
+  padding-block: 0.2rem;
+}
+
+[data-command-centre-experience] .cc-hero-narrative {
+  min-width: 0;
+  padding: 0.85rem 1rem;
+  background: var(--exds-surface-cool, #f7f9fc);
+  border: 1px solid var(--exds-electric-border, rgba(61, 139, 253, 0.28));
+  border-radius: calc(var(--exds-card-radius) + 2px);
+}
+
+[data-command-centre-experience] .cc-brief-decision {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--exds-decision, #e87722) 35%, transparent);
+}
+
+[data-command-centre-experience] .cc-layer-investigate {
+  padding-top: 0.15rem;
+}
+
+[data-command-centre-experience] .cc-continuity-compact {
+  padding: 0.55rem 0.85rem;
+  background: var(--exds-surface-cool, #f7f9fc);
+  border: 1px solid rgba(47, 122, 229, 0.14);
+  border-radius: calc(var(--exds-card-radius));
+}
+
+[data-command-centre-experience] .cc-layer-operate {
+  padding: 0.85rem 1rem;
+  background: var(--exds-surface-cool, #f7f9fc);
+  border: 1px solid rgba(47, 122, 229, 0.16);
+  border-radius: calc(var(--exds-card-radius) + 2px);
+}
+
+[data-command-centre-experience] .cc-operate-decision {
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid rgba(47, 122, 229, 0.12);
+}
+
+[data-command-centre-experience] .cc-accountability-compact {
+  padding: 0.4rem 0;
+}
+
+[data-command-centre-experience] .cc-supporting-details {
+  padding: 0.5rem 0.75rem;
+  background: transparent;
+  border: 1px solid rgba(47, 122, 229, 0.12);
+  border-radius: calc(var(--exds-card-radius));
+}
+
+[data-command-centre-experience] .cc-supporting-details > summary {
+  list-style: none;
+}
+
+[data-command-centre-experience] .cc-supporting-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+[data-command-centre-experience] [data-evidence-lab="true"] {
+  padding: 0.85rem 1rem;
+  background: var(--exds-surface-cool, #f7f9fc);
+  border: 1px solid var(--exds-electric-border, rgba(61, 139, 253, 0.28));
+  border-radius: calc(var(--exds-card-radius) + 2px);
+}
+
+[data-command-centre-experience] .cc-instrument-heat {
+  min-height: auto;
+}
+
+[data-command-centre-experience] .cc-heat-preview {
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(47, 122, 229, 0.18);
+  border-radius: calc(var(--exds-card-radius));
+  background: #fff;
+}
+
+[data-command-centre-experience] .cc-heat-preview [data-exds-heatmap="true"] {
+  --exds-heat-cell-min-h: 3.75rem;
+}
+
+[data-command-centre-experience] [data-forecast-visual="true"] {
+  padding: 0.35rem 0;
+}
+
+[data-command-centre-experience] .cc-overnight-band {
+  padding: 0;
+  background: transparent;
+  border: 0;
+}
+
+[data-command-centre-experience] .cc-priority-light {
+  min-width: 0;
+  padding-block: 0.25rem;
+}
+
+[data-command-centre-experience] .cc-stream-compact .cc-stream-surface {
+  opacity: 0.85;
+  max-height: 10rem;
+  overflow: hidden;
+}
+
+[data-command-centre-experience] .cc-stream-surface {
+  min-width: 0;
+  border-left: 2px solid var(--exds-electric, var(--exds-intelligence));
+  padding-left: var(--eos-space-lg);
+}
+
+[data-command-centre-experience] .cc-stream-item {
+  padding-block: 0.55rem;
+  border-bottom: 1px solid rgba(47, 122, 229, 0.12);
+}
+
+[data-command-centre-experience] .cc-stream-item:last-child {
+  border-bottom: none;
+}
+
+[data-command-centre-experience] .cc-honesty-compact {
+  display: grid;
+  gap: var(--cc-gutter);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 768px) {
+  [data-command-centre-experience] .cc-honesty-compact {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+  }
+}
+
+[data-command-centre-experience] [data-exds-evidence-surface="true"] {
+  border-color: var(--exds-electric-border, rgba(61, 139, 253, 0.35));
+  background: var(--exds-surface-cool, #f7f9fc);
+  box-shadow: none;
+}
+
+[data-command-centre-experience] [data-exds-heatmap="true"] {
+  --exds-heat-cell-min-h: 4.25rem;
+}
+
+[data-command-centre-experience] [data-heat-quiet="true"] {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-command-centre-experience] .exds-reveal-up,
+  [data-command-centre-experience] .exds-fade-in,
+  [data-command-centre-experience] .exds-heat-cell-enter {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,45 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="UI/Introduction" />
+
+# ExecutiveOS UI primitives
+
+Storybook documents the shared components in `src/components/ui/`. These primitives support the product shell, briefing, outcomes, and decisions surfaces.
+
+## How to use
+
+1. Run `npm run storybook` from the repo root.
+2. Browse the **UI** section.
+3. Prefer EOS design tokens (`globals.css`) for new work — several legacy primitives still use zinc/emerald palettes (tracked in Constitution inconsistencies).
+
+## Catalogue
+
+| Component | Purpose |
+|-----------|---------|
+| Button | Primary actions |
+| Badge / StatusBadge | Status chips |
+| Input / Textarea | Form fields |
+| Card | Surface container |
+| Avatar | Person mark |
+| Spinner / Skeleton / LoadingState | Loading affordances |
+| EmptyState / ErrorState | Non-happy paths |
+| PageHeader / SectionHeader | Page & section titles |
+| MetricCard | Metric presentation |
+| Tabs / TabPanel | Section switching |
+| Tooltip | Hover/focus hint |
+| Breadcrumb | Nested location |
+| Dropdown | Compact menus |
+| Modal / Drawer | Overlays |
+| Table | Tabular data |
+| Timeline | Chronology list |
+| ResponsiveGrid | Responsive layout grid |
+| Toast | Transient feedback |
+| CommandPalette | ⌘K navigation |
+
+## Governance
+
+- Constitution: `docs/architecture/EXECUTIVEOS_CONSTITUTION_v1.md`
+- Storybook guide: `docs/design/STORYBOOK.md`
+- Design tokens: `src/app/globals.css`
+
+Stories are documentation only. They do not change application routes or runtime behaviour.

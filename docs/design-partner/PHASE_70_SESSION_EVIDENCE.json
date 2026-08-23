@@ -1,0 +1,169 @@
+{
+  "phase": 70,
+  "status": "PROTOCOL_READY_AWAITING_PARTICIPANT",
+  "f6906": {
+    "id": "F69-06",
+    "status": "OPEN",
+    "reason": "Live executive timings have not been recorded. Structural Phase 69 simulation is insufficient to close F69-06."
+  },
+  "session": {
+    "sessionId": "phase70-awaiting-participant-2026-08-23",
+    "conductedAt": null,
+    "facilitator": null,
+    "participantRole": null,
+    "organisationId": null,
+    "environment": null,
+    "productSurface": "/today",
+    "openingInstruction": "You are looking at ExecutiveOS for the first time today. Tell me what you think requires your attention."
+  },
+  "tasks": [
+    {
+      "taskId": "T10S",
+      "prompt": "What requires your attention?",
+      "elapsedSeconds": null,
+      "response": null,
+      "coachingLevel": null,
+      "promptingRequired": null,
+      "passCriteria": "Executive identifies the correct lead issue within 10 seconds without coaching.",
+      "verdict": "NOT_ESTABLISHED",
+      "observations": []
+    },
+    {
+      "taskId": "T30S",
+      "prompt": "What do you think is happening and how confident are you?",
+      "elapsedSeconds": null,
+      "response": null,
+      "coachingLevel": null,
+      "promptingRequired": null,
+      "passCriteria": "Executive independently identifies demand movement, judgement confidence, and that a decision is required.",
+      "verdict": "NOT_ESTABLISHED",
+      "observations": []
+    },
+    {
+      "taskId": "T60S",
+      "prompt": "Why do you think this is happening?",
+      "elapsedSeconds": null,
+      "response": null,
+      "coachingLevel": null,
+      "promptingRequired": null,
+      "passCriteria": "Executive discovers Region × Model / forecast evidence and counter-signal / capacity implication without being told where to look.",
+      "verdict": "NOT_ESTABLISHED",
+      "observations": []
+    },
+    {
+      "taskId": "T2M",
+      "prompt": "What decision do you think management needs to make?",
+      "elapsedSeconds": null,
+      "response": null,
+      "coachingLevel": null,
+      "promptingRequired": null,
+      "passCriteria": "Executive reaches the decision paper independently and distinguishes evidence from decision options.",
+      "verdict": "NOT_ESTABLISHED",
+      "observations": []
+    },
+    {
+      "taskId": "T5M",
+      "prompt": "If you were responsible for this decision, what would you do next?",
+      "elapsedSeconds": null,
+      "response": null,
+      "coachingLevel": null,
+      "promptingRequired": null,
+      "passCriteria": "Executive selects an option, assigns owner and due date, and creates accountable action without coaching on which option to choose.",
+      "verdict": "NOT_ESTABLISHED",
+      "observations": []
+    },
+    {
+      "taskId": "RETURN",
+      "prompt": "You haven't looked at ExecutiveOS since your previous review. What has changed?",
+      "elapsedSeconds": null,
+      "response": null,
+      "coachingLevel": null,
+      "promptingRequired": null,
+      "passCriteria": "Executive reconstructs decision status, action/accountability, and remaining attention from Continuity without prior-session replay.",
+      "verdict": "NOT_ESTABLISHED",
+      "observations": []
+    }
+  ],
+  "behavioural": {
+    "lookedAtFirst": null,
+    "ignored": null,
+    "questioned": null,
+    "trusted": null,
+    "challenged": null,
+    "usedTechnicalVisuals": null,
+    "readNarrative": null,
+    "understoodDecisionQuestion": null,
+    "askedForMoreInfo": null,
+    "returnedToEvidence": null,
+    "attemptedDecision": null,
+    "thoughtAboutAccountability": null,
+    "notes": []
+  },
+  "trust": {
+    "dataConfidence": null,
+    "explanation": null,
+    "missingEvidence": null,
+    "recommendationVsJudgement": null,
+    "financialValue": null,
+    "ownership": null,
+    "freshness": null,
+    "sourceData": null,
+    "verbatimHesitation": null
+  },
+  "visualUsefulness": {
+    "heatMap": "NOT_ESTABLISHED",
+    "forecastVsActual": "NOT_ESTABLISHED",
+    "facilitatorNotes": null
+  },
+  "executiveValue": {
+    "wouldUseInsteadOfCurrent": null,
+    "wouldReturnDailyOrWeekly": null,
+    "expectTomorrow": null,
+    "missingBeforeTrust": null,
+    "wouldStartReviewHere": null
+  },
+  "scorecard": {
+    "orientation": "NOT_ESTABLISHED",
+    "evidenceDiscovery": "NOT_ESTABLISHED",
+    "judgementComprehension": "NOT_ESTABLISHED",
+    "decisionComprehension": "NOT_ESTABLISHED",
+    "decisionNavigation": "NOT_ESTABLISHED",
+    "optionSelection": "NOT_ESTABLISHED",
+    "accountability": "NOT_ESTABLISHED",
+    "execution": "NOT_ESTABLISHED",
+    "returnContinuity": "NOT_ESTABLISHED",
+    "technicalVisualUsefulness": "NOT_ESTABLISHED",
+    "trust": "NOT_ESTABLISHED",
+    "habitPotential": "NOT_ESTABLISHED",
+    "perceivedExecutiveValue": "NOT_ESTABLISHED"
+  },
+  "frictions": [
+    {
+      "id": "F69-06",
+      "severity": "P1",
+      "area": "Live user timing",
+      "observation": "Carried from Phase 69 — awaiting live executive session measurement.",
+      "blocksWorkflow": false
+    },
+    {
+      "id": "F70-01",
+      "severity": "P1",
+      "area": "Live session execution",
+      "observation": "Phase 70 protocol and evidence shell delivered; real executive participant session not conducted in this run.",
+      "blocksWorkflow": false
+    }
+  ],
+  "overallVerdict": "NOT_ESTABLISHED",
+  "mustChange": [
+    "Conduct a live executive / Design Partner session and record actual elapsed times for 10s / 30s / 60s / 2m / 5m / return."
+  ],
+  "mustNotChange": [
+    "Signature /today Brief → Investigate → Decide → Execute composition",
+    "Decision Engine selection semantics",
+    "Action / accountability honesty rules",
+    "Snapshot immutability and originSnapshotId lineage",
+    "Manufacturing / commercial isolation",
+    "Heat map and Actual vs Forecast formulas",
+    "No Inventory / ERP / new intelligence engines"
+  ]
+}

@@ -1,0 +1,657 @@
+{
+  "latestPeriod": "2026-06",
+  "leadJudgement": "Model H demand has moved above plan",
+  "headline": "Model H demand has moved above plan",
+  "evidenceStrip": [
+    {
+      "id": "heat-QLD-Model H",
+      "label": "QLD · Model H",
+      "value": "+22.9%",
+      "tone": "attention",
+      "caption": "Supports lead judgement",
+      "detail": "6-period actual vs forecast",
+      "role": "PRIMARY_SUPPORT"
+    },
+    {
+      "id": "heat-NSW-Model H",
+      "label": "NSW · Model H",
+      "value": "+16.8%",
+      "tone": "attention",
+      "caption": "Supports lead judgement",
+      "detail": "6-period actual vs forecast",
+      "role": "PRIMARY_SUPPORT"
+    },
+    {
+      "id": "heat-SA-Model L",
+      "label": "SA · Model L",
+      "value": "-31.5%",
+      "tone": "watching",
+      "caption": "Material counter-signal",
+      "detail": "6-period actual vs forecast",
+      "role": "COUNTER_SIGNAL"
+    },
+    {
+      "id": "cap-Plant 1",
+      "label": "Plant 1",
+      "value": "536.2%",
+      "tone": "attention",
+      "caption": "Operational capacity implication",
+      "detail": "of plant capacity · 2788 units demand vs 520 capacity (5.36×)",
+      "role": "OPERATIONAL_IMPLICATION"
+    }
+  ],
+  "capacity": [
+    {
+      "factory": "Plant 2",
+      "capacity": 420,
+      "demonstratedDemand": 1540,
+      "loadPct": 366.7,
+      "availableSlots": 5,
+      "tone": "attention"
+    },
+    {
+      "factory": "Plant 1",
+      "capacity": 520,
+      "demonstratedDemand": 2788,
+      "loadPct": 536.2,
+      "availableSlots": 59,
+      "tone": "attention"
+    },
+    {
+      "factory": "Plant 3",
+      "capacity": 480,
+      "demonstratedDemand": 1480,
+      "loadPct": 308.3,
+      "availableSlots": 59,
+      "tone": "attention"
+    }
+  ],
+  "heatTop": [
+    {
+      "id": "heat-QLD-Model H",
+      "region": "QLD",
+      "model": "Model H",
+      "variancePct": 22.9,
+      "forecast": 1512,
+      "actual": 1858,
+      "tone": "attention",
+      "movement": "up",
+      "label": "QLD · Model H +22.9%"
+    },
+    {
+      "id": "heat-NSW-Model H",
+      "region": "NSW",
+      "model": "Model H",
+      "variancePct": 16.8,
+      "forecast": 1584,
+      "actual": 1850,
+      "tone": "attention",
+      "movement": "up",
+      "label": "NSW · Model H +16.8%"
+    },
+    {
+      "id": "heat-QLD-Model J",
+      "region": "QLD",
+      "model": "Model J",
+      "variancePct": 0,
+      "forecast": 1464,
+      "actual": 1464,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "QLD · Model J 0%"
+    },
+    {
+      "id": "heat-QLD-Model K",
+      "region": "QLD",
+      "model": "Model K",
+      "variancePct": 0,
+      "forecast": 1440,
+      "actual": 1440,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "QLD · Model K 0%"
+    },
+    {
+      "id": "heat-QLD-Model L",
+      "region": "QLD",
+      "model": "Model L",
+      "variancePct": 0,
+      "forecast": 1416,
+      "actual": 1416,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "QLD · Model L 0%"
+    },
+    {
+      "id": "heat-NSW-Model J",
+      "region": "NSW",
+      "model": "Model J",
+      "variancePct": 0,
+      "forecast": 1632,
+      "actual": 1632,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "NSW · Model J 0%"
+    },
+    {
+      "id": "heat-NSW-Model K",
+      "region": "NSW",
+      "model": "Model K",
+      "variancePct": 0,
+      "forecast": 1656,
+      "actual": 1656,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "NSW · Model K 0%"
+    },
+    {
+      "id": "heat-NSW-Model L",
+      "region": "NSW",
+      "model": "Model L",
+      "variancePct": 0,
+      "forecast": 1680,
+      "actual": 1680,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "NSW · Model L 0%"
+    }
+  ],
+  "heatBottom": [
+    {
+      "id": "heat-SA-Model L",
+      "region": "SA",
+      "model": "Model L",
+      "variancePct": -31.5,
+      "forecast": 1920,
+      "actual": 1316,
+      "tone": "watching",
+      "movement": "down",
+      "label": "SA · Model L -31.5%"
+    },
+    {
+      "id": "heat-WA-Model J",
+      "region": "WA",
+      "model": "Model J",
+      "variancePct": -26.5,
+      "forecast": 1632,
+      "actual": 1200,
+      "tone": "watching",
+      "movement": "down",
+      "label": "WA · Model J -26.5%"
+    },
+    {
+      "id": "heat-WA-Model H",
+      "region": "WA",
+      "model": "Model H",
+      "variancePct": -6.7,
+      "forecast": 1584,
+      "actual": 1478,
+      "tone": "watching",
+      "movement": "down",
+      "label": "WA · Model H -6.7%"
+    },
+    {
+      "id": "heat-VIC-Model H",
+      "region": "VIC",
+      "model": "Model H",
+      "variancePct": -6.4,
+      "forecast": 1680,
+      "actual": 1572,
+      "tone": "watching",
+      "movement": "down",
+      "label": "VIC · Model H -6.4%"
+    }
+  ],
+  "modelH": [
+    {
+      "id": "heat-QLD-Model H",
+      "region": "QLD",
+      "model": "Model H",
+      "variancePct": 22.9,
+      "forecast": 1512,
+      "actual": 1858,
+      "tone": "attention",
+      "movement": "up",
+      "label": "QLD · Model H +22.9%"
+    },
+    {
+      "id": "heat-NSW-Model H",
+      "region": "NSW",
+      "model": "Model H",
+      "variancePct": 16.8,
+      "forecast": 1584,
+      "actual": 1850,
+      "tone": "attention",
+      "movement": "up",
+      "label": "NSW · Model H +16.8%"
+    },
+    {
+      "id": "heat-VIC-Model H",
+      "region": "VIC",
+      "model": "Model H",
+      "variancePct": -6.4,
+      "forecast": 1680,
+      "actual": 1572,
+      "tone": "watching",
+      "movement": "down",
+      "label": "VIC · Model H -6.4%"
+    },
+    {
+      "id": "heat-WA-Model H",
+      "region": "WA",
+      "model": "Model H",
+      "variancePct": -6.7,
+      "forecast": 1584,
+      "actual": 1478,
+      "tone": "watching",
+      "movement": "down",
+      "label": "WA · Model H -6.7%"
+    },
+    {
+      "id": "heat-SA-Model H",
+      "region": "SA",
+      "model": "Model H",
+      "variancePct": -6.2,
+      "forecast": 1824,
+      "actual": 1710,
+      "tone": "watching",
+      "movement": "down",
+      "label": "SA · Model H -6.2%"
+    }
+  ],
+  "modelL": [
+    {
+      "id": "heat-QLD-Model L",
+      "region": "QLD",
+      "model": "Model L",
+      "variancePct": 0,
+      "forecast": 1416,
+      "actual": 1416,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "QLD · Model L 0%"
+    },
+    {
+      "id": "heat-NSW-Model L",
+      "region": "NSW",
+      "model": "Model L",
+      "variancePct": 0,
+      "forecast": 1680,
+      "actual": 1680,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "NSW · Model L 0%"
+    },
+    {
+      "id": "heat-VIC-Model L",
+      "region": "VIC",
+      "model": "Model L",
+      "variancePct": 0,
+      "forecast": 1776,
+      "actual": 1776,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "VIC · Model L 0%"
+    },
+    {
+      "id": "heat-WA-Model L",
+      "region": "WA",
+      "model": "Model L",
+      "variancePct": 0,
+      "forecast": 1680,
+      "actual": 1680,
+      "tone": "intelligence",
+      "movement": "flat",
+      "label": "WA · Model L 0%"
+    },
+    {
+      "id": "heat-SA-Model L",
+      "region": "SA",
+      "model": "Model L",
+      "variancePct": -31.5,
+      "forecast": 1920,
+      "actual": 1316,
+      "tone": "watching",
+      "movement": "down",
+      "label": "SA · Model L -31.5%"
+    }
+  ],
+  "nationalTail": [
+    {
+      "period": "2026-04",
+      "forecast": 5644,
+      "actual": 5502,
+      "variance": -142,
+      "variancePct": -2.5
+    },
+    {
+      "period": "2026-05",
+      "forecast": 5804,
+      "actual": 5650,
+      "variance": -154,
+      "variancePct": -2.7
+    },
+    {
+      "period": "2026-06",
+      "forecast": 5964,
+      "actual": 5808,
+      "variance": -156,
+      "variancePct": -2.6
+    }
+  ],
+  "confidence": [
+    {
+      "id": "national",
+      "scope": "National",
+      "level": "high",
+      "score": 94,
+      "why": [
+        "Mean absolute forecast error ≈ 2.5%",
+        "12 periods in view"
+      ]
+    },
+    {
+      "id": "region-NSW",
+      "scope": "Region NSW",
+      "level": "high",
+      "score": 90,
+      "why": [
+        "Regional MAE ≈ 4.2%"
+      ]
+    },
+    {
+      "id": "region-QLD",
+      "scope": "Region QLD",
+      "level": "high",
+      "score": 86,
+      "why": [
+        "Regional MAE ≈ 5.7%"
+      ]
+    },
+    {
+      "id": "region-SA",
+      "scope": "Region SA",
+      "level": "high",
+      "score": 77,
+      "why": [
+        "Regional MAE ≈ 9.4%"
+      ]
+    },
+    {
+      "id": "region-VIC",
+      "scope": "Region VIC",
+      "level": "high",
+      "score": 93,
+      "why": [
+        "Regional MAE ≈ 3.1%"
+      ]
+    },
+    {
+      "id": "region-WA",
+      "scope": "Region WA",
+      "level": "high",
+      "score": 80,
+      "why": [
+        "Regional MAE ≈ 8.3%"
+      ]
+    },
+    {
+      "id": "model-Model H",
+      "scope": "Model H",
+      "level": "medium",
+      "score": 72,
+      "why": [
+        "Model MAE ≈ 11.8%"
+      ]
+    },
+    {
+      "id": "model-Model J",
+      "scope": "Model J",
+      "level": "high",
+      "score": 87,
+      "why": [
+        "Model MAE ≈ 5.3%"
+      ]
+    },
+    {
+      "id": "model-Model K",
+      "scope": "Model K",
+      "level": "high",
+      "score": 97,
+      "why": [
+        "Model MAE ≈ 1.2%"
+      ]
+    },
+    {
+      "id": "model-Model L",
+      "scope": "Model L",
+      "level": "high",
+      "score": 85,
+      "why": [
+        "Model MAE ≈ 6.3%"
+      ]
+    },
+    {
+      "id": "variant-H-XL",
+      "scope": "Variant H-XL",
+      "level": "low",
+      "score": 42,
+      "why": [
+        "Inventory days ≈ 81",
+        "Variant volatility / ageing pressure"
+      ]
+    }
+  ],
+  "inventoryAttention": [
+    {
+      "variant": "H-XL",
+      "model": "Model H",
+      "inventoryDays": 81,
+      "finishedGoods": 158,
+      "tone": "attention"
+    }
+  ],
+  "insights": [
+    {
+      "id": "demand-acceleration",
+      "cat": "demand_movement",
+      "title": "Model H demand has moved above plan",
+      "conf": 82,
+      "posture": "investigate",
+      "evidence": [
+        "QLD · Model H +22.9%",
+        "NSW · Model H +16.8%"
+      ],
+      "detail": "QLD +22.9%; NSW +16.8%",
+      "implication": "Regional uplift may challenge capacity and allocation priorities."
+    },
+    {
+      "id": "demand-decline",
+      "cat": "demand_movement",
+      "title": "Model L demand is softening in SA",
+      "conf": 78,
+      "posture": "investigate",
+      "evidence": [
+        "SA · Model L -31.5%"
+      ],
+      "detail": "SA actual vs forecast -31.5%",
+      "implication": "Softening may free capacity or create inventory exposure."
+    },
+    {
+      "id": "capacity-Plant 2",
+      "cat": "capacity_implication",
+      "title": "Plant 2 capacity under pressure",
+      "conf": 80,
+      "posture": "act",
+      "evidence": [
+        "Plant 2 Σ line actuals 1540 units",
+        "plant capacity 420 units (denominator)"
+      ],
+      "detail": "Demonstrated load 366.7% of plant capacity (1540 units demand vs 420 capacity · 3.67×) · available slots 5",
+      "implication": "Protecting accelerating demand may require reallocation or accepting deferral risk."
+    },
+    {
+      "id": "capacity-Plant 1",
+      "cat": "capacity_implication",
+      "title": "Plant 1 capacity under pressure",
+      "conf": 80,
+      "posture": "act",
+      "evidence": [
+        "Plant 1 Σ line actuals 2788 units",
+        "plant capacity 520 units (denominator)"
+      ],
+      "detail": "Demonstrated load 536.2% of plant capacity (2788 units demand vs 520 capacity · 5.36×) · available slots 59",
+      "implication": "Protecting accelerating demand may require reallocation or accepting deferral risk."
+    },
+    {
+      "id": "inventory-H-XL",
+      "cat": "inventory_implication",
+      "title": "H-XL inventory above comfortable policy band",
+      "conf": 76,
+      "posture": "investigate",
+      "evidence": [
+        "H-XL 81 inventory days"
+      ],
+      "detail": "Inventory days ≈ 81",
+      "implication": "Ageing stock creates capital and service-risk exposure."
+    },
+    {
+      "id": "exec-judgement-forecast",
+      "cat": "executive_judgement",
+      "title": "Manufacturing forecast requires executive judgement",
+      "conf": 80,
+      "posture": "investigate",
+      "evidence": [
+        "QLD · Model H +22.9%",
+        "NSW · Model H +16.8%",
+        "SA · Model L -31.5%",
+        "Plant 2 Σ line actuals 1540 units"
+      ],
+      "detail": "Model H uplift is material in QLD; capacity and inventory implications need ranking.",
+      "implication": "Whether to protect strategic Model H demand by reallocating capacity or accepting deferral risk elsewhere."
+    }
+  ],
+  "brief": {
+    "executiveJudgement": "Model H demand has moved above plan",
+    "whatChanged": [
+      "Model H demand has moved above plan",
+      "Model L demand is softening in SA"
+    ],
+    "why": "Whether to protect strategic Model H demand by reallocating capacity or accepting deferral risk elsewhere.",
+    "requires": [
+      "Whether to protect strategic Model H demand by reallocating capacity or accepting deferral risk elsewhere."
+    ],
+    "confidence": 88
+  },
+  "readiness": {
+    "dataset": 99,
+    "executive": 99,
+    "recommendations": [
+      {
+        "id": "ready",
+        "title": "Ready for executive judgement",
+        "detail": "Dataset quality and evidence coverage support opening the Command Centre with calibrated confidence.",
+        "priority": "later"
+      }
+    ],
+    "judgementNarrative": [
+      "Dataset Readiness: high.",
+      "Manufacturing forecast dataset detected. Dataset readiness is separate from executive judgement readiness."
+    ]
+  },
+  "focusDomains": [
+    {
+      "id": "demand",
+      "label": "Demand"
+    },
+    {
+      "id": "factory",
+      "label": "Factory"
+    },
+    {
+      "id": "inventory",
+      "label": "Inventory"
+    },
+    {
+      "id": "capacity",
+      "label": "Capacity"
+    }
+  ],
+  "metrics": [
+    {
+      "id": "demand-movement",
+      "title": "Demand Movement",
+      "value": "+22.9%",
+      "meaning": "Where is demand accelerating or declining?",
+      "trend": "up",
+      "trendLabel": "Model H demand has moved above plan",
+      "confidence": 82,
+      "tone": "attention",
+      "href": "/today"
+    },
+    {
+      "id": "forecast-confidence",
+      "title": "Forecast Confidence",
+      "value": "HIGH",
+      "meaning": "National forecast health (dataset) — not the same as judgement confidence.",
+      "trend": "flat",
+      "trendLabel": "Mean absolute forecast error ≈ 2.5%",
+      "confidence": 94,
+      "tone": "improving",
+      "href": "/today"
+    },
+    {
+      "id": "judgement-confidence",
+      "title": "Judgement Confidence",
+      "value": "72%",
+      "meaning": "Confidence associated with the lead manufacturing judgement.",
+      "trend": "flat",
+      "trendLabel": "Model / demand scoped — not national rollup",
+      "confidence": 72,
+      "tone": "watching",
+      "href": "/today"
+    },
+    {
+      "id": "capacity-load",
+      "title": "Capacity Implication",
+      "value": "536.2% of plant capacity",
+      "meaning": "2788 units demand vs 520 plant capacity (5.36×) at Plant 1",
+      "trend": "up",
+      "trendLabel": "Plant 1 · 5.36× demonstrated load",
+      "confidence": 78,
+      "tone": "attention",
+      "href": "/today"
+    },
+    {
+      "id": "inventory-exposure",
+      "title": "Inventory Implication",
+      "value": "81d",
+      "meaning": "Where does the forecast create excess inventory risk?",
+      "trend": "down",
+      "trendLabel": "H-XL",
+      "confidence": 72,
+      "tone": "attention",
+      "href": "/today"
+    }
+  ],
+  "forecastVsActualTail": [
+    {
+      "period": "2026-04",
+      "forecast": 5644,
+      "actual": 5502,
+      "variancePct": -2.5
+    },
+    {
+      "period": "2026-05",
+      "forecast": 5804,
+      "actual": 5650,
+      "variancePct": -2.7
+    },
+    {
+      "period": "2026-06",
+      "forecast": 5964,
+      "actual": 5808,
+      "variancePct": -2.6
+    }
+  ]
+}

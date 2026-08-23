@@ -1,0 +1,204 @@
+/*
+  Executive Experience Design System (EXDS) — Phase 54
+  Presentation-layer semantic tokens. Extends Design System 1.0.
+  Confidence Through Clarity.
+*/
+
+:root {
+  /* ——— Formal colour language (semantic, not decorative) ——— */
+  --exds-intelligence: var(--eos-blue);
+  --exds-intelligence-soft: var(--eos-blue-soft);
+
+  --exds-improving: var(--eos-emerald);
+  --exds-improving-soft: var(--eos-emerald-soft);
+
+  --exds-watching: var(--eos-amber);
+  --exds-watching-soft: var(--eos-amber-soft);
+
+  --exds-attention: var(--eos-crimson);
+  --exds-attention-soft: var(--eos-crimson-soft);
+
+  --exds-historical: var(--eos-text-muted);
+  --exds-historical-soft: rgba(107, 115, 133, 0.14);
+
+  --exds-strategy: var(--eos-strategy);
+  --exds-strategy-soft: var(--eos-strategy-soft);
+
+  /* Orange — executive attention / decision (semantic, not decorative) */
+  --exds-decision: #d77a3a;
+  --exds-decision-soft: rgba(215, 122, 58, 0.16);
+
+  /* Dark judgement panel — selective high-value surface */
+  --exds-judgement-bg: #070a10;
+  --exds-judgement-fg: #f5f7fa;
+  --exds-judgement-muted: rgba(245, 247, 250, 0.58);
+  --exds-judgement-border: rgba(255, 255, 255, 0.08);
+  --exds-judgement-accent: var(--exds-decision);
+
+  /* Phase 58B — Hitachi DNA surfaces */
+  --exds-hero-label-tracking: 0.16em;
+  --exds-hero-display-size: clamp(1.65rem, 2.4vw, 2.35rem);
+  --exds-hero-display-leading: 1.08;
+  --exds-dark-band-bg: #0a0e16;
+  --exds-dark-band-fg: #f5f7fa;
+  --exds-dark-band-muted: rgba(245, 247, 250, 0.55);
+  --exds-evidence-surface-bg: #ffffff;
+  --exds-evidence-surface-border: rgba(15, 23, 42, 0.06);
+  --exds-instrument-min-h: 18rem;
+  --exds-heat-cell-min-h: 4.25rem;
+
+  /* Phase 58C — Reference-led Command Centre language */
+  --exds-electric: #3d8bfd;
+  --exds-electric-soft: rgba(61, 139, 253, 0.14);
+  --exds-electric-border: rgba(61, 139, 253, 0.45);
+  --exds-electric-glow: 0 0 0 1px rgba(61, 139, 253, 0.35),
+    0 0 28px rgba(61, 139, 253, 0.12);
+  --exds-navy: #0b1220;
+  --exds-navy-elevated: #121a2b;
+  --exds-navy-muted: rgba(226, 232, 240, 0.58);
+  --exds-navy-fg: #f1f5f9;
+  --exds-canvas-cool: #eef2f7;
+  --exds-surface-cool: #f7f9fc;
+  --exds-rail-width: 15.5rem;
+
+  /* Align judgement / dark bands to navy + electric blue */
+  --exds-judgement-bg: var(--exds-navy);
+  --exds-judgement-fg: var(--exds-navy-fg);
+  --exds-judgement-muted: var(--exds-navy-muted);
+  --exds-judgement-border: var(--exds-electric-border);
+  --exds-dark-band-bg: var(--exds-navy);
+  --exds-dark-band-fg: var(--exds-navy-fg);
+  --exds-dark-band-muted: var(--exds-navy-muted);
+
+  /* Shell */
+  --exds-sidebar-bg: #0a0c11;
+  --exds-sidebar-elevated: rgba(22, 26, 36, 0.88);
+  --exds-sidebar-border: rgba(255, 255, 255, 0.06);
+  --exds-sidebar-width: 16.5rem;
+
+  /* Surfaces */
+  --exds-card-bg: var(--eos-elevation-floating-bg);
+  --exds-card-border: var(--eos-elevation-floating-border);
+  --exds-card-radius: var(--eos-radius-lg);
+
+  /* Motion — restrained executive quality */
+  --exds-duration-micro: var(--eos-duration-fast);
+  --exds-duration: var(--eos-duration-normal);
+  --exds-ease: var(--eos-ease-out);
+}
+
+[data-theme="light"] {
+  --exds-sidebar-bg: #f4f6f9;
+  --exds-sidebar-elevated: rgba(255, 255, 255, 0.92);
+  --exds-sidebar-border: rgba(15, 20, 30, 0.08);
+  --exds-historical-soft: rgba(107, 115, 133, 0.1);
+  --exds-intelligence: #3b6ea5;
+  --exds-electric: #2f7ae5;
+  --exds-electric-soft: rgba(47, 122, 229, 0.12);
+  --exds-electric-border: rgba(47, 122, 229, 0.38);
+  --exds-canvas-cool: #eef2f7;
+  --exds-surface-cool: #f8fafc;
+  --exds-evidence-surface-border: rgba(47, 122, 229, 0.18);
+}
+
+/* ——— Utility classes ——— */
+
+.exds-fade-in {
+  animation: exds-fade-in var(--exds-duration) var(--exds-ease) both;
+}
+
+.exds-soft-counter {
+  font-variant-numeric: tabular-nums;
+  transition: color var(--exds-duration-micro) var(--exds-ease);
+}
+
+.exds-interactive {
+  transition:
+    transform var(--exds-duration-micro) var(--exds-ease),
+    background-color var(--exds-duration) var(--exds-ease),
+    border-color var(--exds-duration) var(--exds-ease),
+    opacity var(--exds-duration-micro) var(--exds-ease);
+}
+
+.exds-interactive:hover {
+  transform: translateY(-1px);
+}
+
+.exds-focus-ring {
+  outline: none;
+}
+
+.exds-focus-ring:focus-visible {
+  outline: 2px solid var(--exds-intelligence);
+  outline-offset: 2px;
+}
+
+@keyframes exds-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes exds-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes exds-heat-cell {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.exds-reveal-up {
+  animation: exds-reveal-up var(--exds-duration) var(--exds-ease) both;
+}
+
+.exds-heat-cell-enter {
+  animation: exds-heat-cell calc(var(--exds-duration) + 80ms) var(--exds-ease) both;
+}
+
+.exds-editorial-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: var(--exds-hero-label-tracking);
+  text-transform: uppercase;
+  color: var(--eos-color-text-muted);
+}
+
+.exds-editorial-question {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--eos-color-text);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exds-fade-in,
+  .exds-reveal-up,
+  .exds-heat-cell-enter {
+    animation: none;
+  }
+
+  .exds-interactive,
+  .exds-interactive:hover {
+    transition: none;
+    transform: none;
+  }
+}

@@ -1,26 +1,946 @@
 @import "tailwindcss";
+@import "../design-system/tokens.css";
+@import "../design-system/executive-experience/tokens.css";
+@import "../experience/themes/experience-2.css";
+@import "../experience/exs/tokens.css";
+@import "../experience/mission-control/command-centre.css";
+
+/*
+  ExecutiveOS Design Language 2.0 + Design System 1.0
+  Iconic. Calm. Premium. Tokens first — components never invent colour.
+*/
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  /* ——— Signature colour language ——— */
+  --eos-blue: #5b8fce;
+  --eos-blue-soft: rgba(91, 143, 206, 0.16);
+  --eos-blue-glow: rgba(91, 143, 206, 0.22);
+  --eos-emerald: #3fa87a;
+  --eos-emerald-soft: rgba(63, 168, 122, 0.14);
+  --eos-amber: #c9a06c;
+  --eos-amber-soft: rgba(201, 160, 108, 0.14);
+  --eos-crimson: #c45c5c;
+  --eos-crimson-soft: rgba(196, 92, 92, 0.14);
+  --eos-strategy: #8b7bb8;
+  --eos-strategy-soft: rgba(139, 123, 184, 0.16);
+
+  /* Neutrals — depth without decoration */
+  --eos-institutional: #141824;
+  --eos-canvas: #0b0d12;
+  --eos-surface: rgba(22, 26, 36, 0.72);
+  --eos-surface-solid: #161a24;
+  --eos-surface-raised: rgba(30, 36, 50, 0.78);
+  --eos-surface-inset: rgba(8, 10, 14, 0.55);
+  --eos-border: rgba(255, 255, 255, 0.07);
+  --eos-border-strong: rgba(255, 255, 255, 0.14);
+  --eos-text: #eceef2;
+  --eos-text-secondary: #9aa3b5;
+  --eos-text-muted: #6b7385;
+
+  /* Mapped roles */
+  --eos-accent: var(--eos-blue);
+  --eos-accent-muted: var(--eos-blue-soft);
+  --eos-success: var(--eos-emerald);
+  --eos-success-surface: var(--eos-emerald-soft);
+  --eos-warning: var(--eos-amber);
+  --eos-warning-surface: var(--eos-amber-soft);
+  --eos-critical: var(--eos-crimson);
+  --eos-critical-surface: var(--eos-crimson-soft);
+
+  --eos-briefing: #fff1e5;
+  --eos-briefing-text: #231f20;
+  --eos-briefing-border: #e8dcd0;
+
+  /* Interactive — Executive Blue leads */
+  --eos-primary: var(--eos-blue);
+  --eos-primary-fg: #f4f7fb;
+  --eos-ring: var(--eos-blue);
+  --eos-overlay: rgba(5, 7, 12, 0.62);
+
+  --eos-health-track: rgba(255, 255, 255, 0.08);
+  --eos-health-fill: var(--eos-emerald);
+
+  /* Spacing */
+  --eos-space-1: 0.25rem;
+  --eos-space-2: 0.5rem;
+  --eos-space-3: 0.75rem;
+  --eos-space-4: 1rem;
+  --eos-space-5: 1.25rem;
+  --eos-space-6: 1.5rem;
+  --eos-space-8: 2rem;
+  --eos-space-10: 2.5rem;
+  --eos-space-12: 3rem;
+
+  /* Radius — soft, not bubbly */
+  --eos-radius-sm: 0.5rem;
+  --eos-radius-md: 0.625rem;
+  --eos-radius-lg: 0.875rem;
+  --eos-radius-xl: 1.125rem;
+
+  /* Elevation — soft depth, no heavy cards */
+  --eos-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  --eos-shadow-2: 0 8px 28px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  --eos-shadow-3: 0 18px 48px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
+  --eos-glass: blur(18px) saturate(1.15);
+  --eos-glass-bg: rgba(18, 22, 32, 0.55);
+  --eos-glass-border: rgba(255, 255, 255, 0.08);
+
+  /* Motion — alive, never decorative */
+  --eos-duration-fast: 140ms;
+  --eos-duration-normal: 280ms;
+  --eos-duration-slow: 520ms;
+  --eos-ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --eos-ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --font-ui: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-geist-sans), var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --background: var(--eos-canvas);
+  --foreground: var(--eos-text);
+  --muted: var(--eos-text-muted);
+  --border: var(--eos-border);
+  --ring: var(--eos-ring);
+  --surface: var(--eos-surface-solid);
+  --danger: var(--eos-critical);
+  --success: var(--eos-success);
+  --warning: var(--eos-warning);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  /* Premium executive light — Apple / Stripe / Linear calm */
+  --eos-blue: #3b6ea5;
+  --eos-blue-soft: rgba(59, 110, 165, 0.1);
+  --eos-blue-glow: rgba(59, 110, 165, 0.14);
+  --eos-emerald: #2f8f68;
+  --eos-emerald-soft: rgba(47, 143, 104, 0.1);
+  --eos-amber: #c08a3e;
+  --eos-amber-soft: rgba(192, 138, 62, 0.12);
+  --eos-crimson: #c04545;
+  --eos-crimson-soft: rgba(192, 69, 69, 0.1);
+  --eos-strategy: #6b5b95;
+  --eos-strategy-soft: rgba(107, 91, 149, 0.12);
+
+  --eos-canvas: #f7f8fa;
+  --eos-surface: #ffffff;
+  --eos-surface-solid: #ffffff;
+  --eos-surface-raised: #ffffff;
+  --eos-surface-inset: #f0f2f5;
+  --eos-border: rgba(15, 23, 42, 0.08);
+  --eos-border-strong: rgba(15, 23, 42, 0.14);
+  --eos-text: #0f172a;
+  --eos-text-secondary: #475569;
+  --eos-text-muted: #94a3b8;
+
+  --eos-accent: var(--eos-blue);
+  --eos-accent-muted: var(--eos-blue-soft);
+  --eos-success: var(--eos-emerald);
+  --eos-success-surface: var(--eos-emerald-soft);
+  --eos-warning: var(--eos-amber);
+  --eos-warning-surface: var(--eos-amber-soft);
+  --eos-critical: var(--eos-crimson);
+  --eos-critical-surface: var(--eos-crimson-soft);
+
+  --eos-primary: var(--eos-blue);
+  --eos-primary-fg: #ffffff;
+  --eos-ring: var(--eos-blue);
+  --eos-overlay: rgba(15, 23, 42, 0.35);
+
+  --eos-health-track: rgba(15, 23, 42, 0.08);
+  --eos-health-fill: var(--eos-emerald);
+
+  --eos-shadow-1: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --eos-shadow-2: 0 4px 16px rgba(15, 23, 42, 0.06);
+  --eos-shadow-3: 0 12px 32px rgba(15, 23, 42, 0.08);
+  --eos-glass-bg: #ffffff;
+  --eos-glass-border: rgba(15, 23, 42, 0.08);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--eos-canvas);
+  --color-foreground: var(--eos-text);
+  --color-canvas: var(--eos-canvas);
+  --color-surface: var(--eos-surface-solid);
+  --color-surface-raised: var(--eos-surface-raised);
+  --color-surface-inset: var(--eos-surface-inset);
+  --color-border: var(--eos-border);
+  --color-border-strong: var(--eos-border-strong);
+  --color-muted: var(--eos-text-muted);
+  --color-secondary: var(--eos-text-secondary);
+  --color-accent: var(--eos-accent);
+  --color-accent-muted: var(--eos-accent-muted);
+  --color-primary: var(--eos-primary);
+  --color-primary-fg: var(--eos-primary-fg);
+  --color-ring: var(--eos-ring);
+  --color-success: var(--eos-success);
+  --color-success-surface: var(--eos-success-surface);
+  --color-warning: var(--eos-warning);
+  --color-warning-surface: var(--eos-warning-surface);
+  --color-critical: var(--eos-critical);
+  --color-critical-surface: var(--eos-critical-surface);
+  --color-institutional: var(--eos-institutional);
+  --color-briefing: var(--eos-briefing);
+  --color-blue: var(--eos-blue);
+  --color-emerald: var(--eos-emerald);
+  --color-amber: var(--eos-amber);
+  --color-crimson: var(--eos-crimson);
+  --font-sans: var(--font-ui);
+  --font-mono: var(--font-mono);
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-contrast: more) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --eos-text: #ffffff;
+    --eos-border: #ffffff;
+    --eos-ring: #ffffff;
+  }
+
+  [data-theme="light"] {
+    --eos-text: #000000;
+    --eos-border: #000000;
+    --eos-ring: #000000;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--eos-canvas);
+  color: var(--eos-text);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+:focus-visible {
+  outline: 2px solid var(--eos-ring);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ——— Living Canvas — ambient light across the workspace ——— */
+.eos-ambient {
+  position: relative;
+  isolation: isolate;
+  background: var(--eos-canvas);
+}
+
+.eos-ambient::before,
+.eos-ambient::after {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: -12%;
+  z-index: 0;
+}
+
+.eos-ambient::before {
+  background:
+    radial-gradient(
+      46% 38% at 16% 10%,
+      rgba(91, 143, 206, 0.34),
+      transparent 64%
+    ),
+    radial-gradient(
+      36% 32% at 90% 6%,
+      rgba(63, 168, 122, 0.13),
+      transparent 58%
+    ),
+    radial-gradient(
+      40% 34% at 70% 92%,
+      rgba(196, 92, 92, 0.09),
+      transparent 56%
+    ),
+    linear-gradient(
+      165deg,
+      rgba(255, 255, 255, 0.03) 0%,
+      transparent 34%,
+      transparent 100%
+    );
+  animation: eos-living-canvas 48s var(--eos-ease-soft) infinite alternate;
+  will-change: transform, opacity;
+}
+
+.eos-ambient::after {
+  background:
+    radial-gradient(
+      32% 28% at 58% 26%,
+      rgba(91, 143, 206, 0.14),
+      transparent 72%
+    ),
+    radial-gradient(
+      24% 22% at 28% 72%,
+      rgba(201, 160, 108, 0.06),
+      transparent 70%
+    );
+  animation: eos-living-canvas-drift 64s var(--eos-ease-soft) infinite alternate;
+  opacity: 0.9;
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+
+.eos-ambient > * {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes eos-living-canvas {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.92;
+  }
+  50% {
+    transform: translate3d(1.6%, -1.2%, 0) scale(1.03);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-1.2%, 1.4%, 0) scale(1.02);
+    opacity: 0.94;
+  }
+}
+
+@keyframes eos-living-canvas-drift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-2%, 1.5%, 0) rotate(2deg);
+  }
+}
+
+[data-theme="light"] .eos-ambient::before {
+  opacity: 0.1;
+}
+
+[data-theme="light"] .eos-ambient::after {
+  opacity: 0.06;
+  mix-blend-mode: normal;
+}
+
+/* Glass surfaces */
+.eos-glass {
+  background: rgba(16, 20, 30, 0.62);
+  backdrop-filter: blur(22px) saturate(1.2);
+  -webkit-backdrop-filter: blur(22px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    var(--eos-shadow-1);
+}
+
+.eos-glass-soft {
+  background: rgba(14, 17, 26, 0.48);
+  backdrop-filter: blur(16px) saturate(1.12);
+  -webkit-backdrop-filter: blur(16px) saturate(1.12);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="light"] .eos-glass {
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: var(--eos-shadow-1);
+}
+
+[data-theme="light"] .eos-glass-soft {
+  background: #ffffff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@keyframes eos-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eos-reveal {
+  animation: eos-fade-up var(--eos-duration-normal) var(--eos-ease-out) both;
+}
+
+.eos-reveal-delay-0 {
+  animation-delay: 0ms;
+}
+.eos-reveal-delay-1 {
+  animation-delay: 50ms;
+}
+.eos-reveal-delay-2 {
+  animation-delay: 100ms;
+}
+.eos-reveal-delay-3 {
+  animation-delay: 150ms;
+}
+.eos-reveal-delay-4 {
+  animation-delay: 200ms;
+}
+
+/* Command Centre layout — Brand Experience rhythm */
+.eos-snapshot,
+.eos-command {
+  --eos-command-gap: 1.05rem;
+  gap: var(--eos-command-gap);
+}
+
+.eos-brand-greeting {
+  opacity: 0.72;
+}
+
+.eos-brand-anchor {
+  margin-block: 0.15rem 0.35rem;
+}
+
+.eos-brand-pause {
+  padding-top: 0.15rem;
+  opacity: 0.92;
+}
+
+.eos-brand-metrics {
+  padding-block: 0.2rem 0.1rem;
+  border-block: 1px solid
+    color-mix(in srgb, var(--eos-color-divider) 55%, transparent);
+}
+
+.eos-signature-mid {
+  display: grid;
+  gap: 1.35rem;
+  align-items: start;
+  padding-top: 0.15rem;
+}
+
+.eos-signature-bottom {
+  display: grid;
+  gap: 1.25rem 1.75rem;
+  grid-template-columns: 1fr;
+  align-items: start;
+  padding-top: 0.25rem;
+}
+
+@media (min-width: 1024px) {
+  .eos-snapshot,
+  .eos-command {
+    max-height: calc(100dvh - 3.75rem);
+    overflow: hidden;
+    gap: 0.85rem;
+  }
+
+  .eos-signature-mid {
+    grid-template-columns: minmax(0, 1.7fr) minmax(12rem, 0.8fr);
+    gap: 1.65rem;
+  }
+
+  .eos-signature-bottom {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1.1fr) minmax(11rem, 0.85fr);
+    gap: 1.2rem 1.85rem;
+  }
+}
+
+/* ——— Business Pulse — visual anchor ——— */
+.eos-pulse {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--eos-radius-xl);
+  overflow: hidden;
+  padding: var(--eos-space-xl) var(--eos-space-xl) var(--eos-space-lg);
+  transition:
+    transform var(--eos-duration-normal) var(--eos-ease-out),
+    box-shadow var(--eos-duration-normal) var(--eos-ease-out);
+}
+
+.eos-pulse:hover {
+  transform: translateY(-1px);
+}
+
+.eos-pulse-surface {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.045) 0%,
+      rgba(22, 26, 36, 0.55) 42%,
+      rgba(14, 17, 26, 0.72) 100%
+    );
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 18px 48px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(91, 143, 206, 0.06);
+  backdrop-filter: blur(18px) saturate(1.12);
+  -webkit-backdrop-filter: blur(18px) saturate(1.12);
+}
+
+.eos-pulse-glow {
+  position: absolute;
+  inset: auto auto -35% -12%;
+  width: 72%;
+  height: 90%;
+  border-radius: 50%;
+  filter: blur(42px);
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.eos-pulse-glow[data-level="critical"] {
+  background: rgba(196, 92, 92, 0.35);
+}
+.eos-pulse-glow[data-level="attention"] {
+  background: rgba(201, 160, 108, 0.32);
+}
+.eos-pulse-glow[data-level="improving"] {
+  background: rgba(63, 168, 122, 0.3);
+}
+.eos-pulse-glow[data-level="stable"] {
+  background: rgba(91, 143, 206, 0.38);
+}
+
+/*
+  The Meridian — ExecutiveOS signature.
+  A soft judgement arc behind Pulse state.
+  Not a badge, not a glow blob, not a sidebar rail.
+*/
+.eos-meridian {
+  position: absolute;
+  left: 4%;
+  top: 14%;
+  width: min(26rem, 64%);
+  height: 5.4rem;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 0 solid transparent;
+  border-top-width: 2px;
+  border-right-width: 1px;
+  border-top-color: color-mix(
+    in srgb,
+    var(--eos-color-primary) 72%,
+    transparent
+  );
+  border-right-color: color-mix(
+    in srgb,
+    var(--eos-color-primary) 28%,
+    transparent
+  );
+  transform: rotate(-14deg) scaleX(1.2);
+  opacity: 0.88;
+  animation: eos-meridian-breathe 7.5s var(--eos-ease-soft) infinite;
+  box-shadow:
+    0 -8px 28px color-mix(in srgb, var(--eos-color-primary) 28%, transparent),
+    0 0 40px color-mix(in srgb, var(--eos-color-primary) 14%, transparent);
+}
+
+.eos-meridian::after {
+  content: "";
+  position: absolute;
+  inset: 18% 8% auto;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--eos-color-primary) 45%, transparent) 35%,
+    color-mix(in srgb, var(--eos-color-primary) 55%, transparent) 55%,
+    transparent 100%
+  );
+  filter: blur(0.4px);
+  opacity: 0.65;
+}
+
+.eos-meridian[data-level="critical"] {
+  border-top-color: color-mix(in srgb, var(--eos-crimson) 78%, transparent);
+  border-right-color: color-mix(in srgb, var(--eos-crimson) 24%, transparent);
+  box-shadow:
+    0 -8px 30px color-mix(in srgb, var(--eos-crimson) 30%, transparent),
+    0 0 42px color-mix(in srgb, var(--eos-crimson) 16%, transparent);
+}
+
+.eos-meridian[data-level="critical"]::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--eos-crimson) 50%, transparent) 40%,
+    transparent 100%
+  );
+}
+
+.eos-meridian[data-level="attention"] {
+  border-top-color: color-mix(in srgb, var(--eos-amber) 74%, transparent);
+  border-right-color: color-mix(in srgb, var(--eos-amber) 22%, transparent);
+  box-shadow:
+    0 -8px 28px color-mix(in srgb, var(--eos-amber) 26%, transparent),
+    0 0 40px color-mix(in srgb, var(--eos-amber) 14%, transparent);
+}
+
+.eos-meridian[data-level="improving"] {
+  border-top-color: color-mix(in srgb, var(--eos-emerald) 74%, transparent);
+  border-right-color: color-mix(in srgb, var(--eos-emerald) 22%, transparent);
+  box-shadow:
+    0 -8px 28px color-mix(in srgb, var(--eos-emerald) 26%, transparent),
+    0 0 40px color-mix(in srgb, var(--eos-emerald) 14%, transparent);
+}
+
+@keyframes eos-meridian-breathe {
+  0%,
+  100% {
+    opacity: 0.62;
+    transform: rotate(-14deg) scaleX(1.16) translateY(0);
+  }
+  50% {
+    opacity: 0.95;
+    transform: rotate(-12.5deg) scaleX(1.24) translateY(-1.5px);
+  }
+}
+
+.eos-pulse-content {
+  z-index: 1;
+}
+
+.eos-pulse-label {
+  font-size: clamp(2.1rem, 3.4vw, 2.85rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  animation: eos-pulse-soft var(--eos-duration-slow) var(--eos-ease-soft) both;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.eos-pulse-why {
+  font-size: var(--eos-type-body-size);
+  line-height: 1.55;
+  color: var(--eos-color-text-secondary);
+  max-width: 36rem;
+}
+
+.eos-pulse-meta {
+  opacity: 0.78;
+}
+
+.eos-pulse[data-level="critical"] .eos-pulse-label {
+  color: var(--eos-crimson);
+}
+.eos-pulse[data-level="attention"] .eos-pulse-label {
+  color: var(--eos-amber);
+}
+.eos-pulse[data-level="improving"] .eos-pulse-label {
+  color: var(--eos-emerald);
+}
+.eos-pulse[data-level="stable"] .eos-pulse-label {
+  color: var(--eos-blue);
+}
+
+@keyframes eos-pulse-soft {
+  from {
+    opacity: 0.4;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-theme="light"] .eos-pulse-surface {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(243, 245, 248, 0.88) 100%
+    );
+  border-color: rgba(15, 20, 30, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 16px 40px rgba(20, 24, 36, 0.08);
+}
+
+/* Compass — quieter secondary plane */
+.eos-compass {
+  opacity: 0.94;
+}
+
+@keyframes eos-compass-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.eos-compass-fill {
+  transform-origin: left center;
+  animation: eos-compass-grow var(--eos-duration-slow) var(--eos-ease-soft) both;
+}
+
+.eos-compass-dim[data-dim="focus"] .eos-compass-fill {
+  background: var(--eos-blue);
+}
+.eos-compass-dim[data-dim="risk"] .eos-compass-fill {
+  background: var(--eos-crimson);
+}
+.eos-compass-dim[data-dim="opportunity"] .eos-compass-fill {
+  background: var(--eos-emerald);
+}
+.eos-compass-dim[data-dim="capacity"] .eos-compass-fill {
+  background: var(--eos-amber);
+}
+
+/* ——— Outcome portfolio tiles ——— */
+@keyframes eos-card-breathe {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+.eos-outcome-card {
+  position: relative;
+  isolation: isolate;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--eos-radius-lg);
+  background: color-mix(in srgb, var(--eos-elevation-floating-bg) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 10px 28px rgba(0, 0, 0, 0.22);
+  transition:
+    transform var(--eos-duration-normal) var(--eos-ease-out),
+    border-color var(--eos-duration-normal) var(--eos-ease-out),
+    box-shadow var(--eos-duration-normal) var(--eos-ease-out),
+    background-color var(--eos-duration-normal) var(--eos-ease-out);
+}
+
+.eos-outcome-body {
+  position: relative;
+  z-index: 1;
+  padding: var(--eos-space-lg) var(--eos-space-md) var(--eos-space-md);
+}
+
+.eos-outcome-filament {
+  position: absolute;
+  left: 0;
+  top: 14%;
+  bottom: 14%;
+  width: 2.5px;
+  border-radius: 999px;
+  background: var(--eos-color-momentum-stable);
+  opacity: 0.6;
+  transition:
+    opacity var(--eos-duration-normal) var(--eos-ease-out),
+    box-shadow var(--eos-duration-normal) var(--eos-ease-out),
+    width var(--eos-duration-normal) var(--eos-ease-out);
+}
+
+.eos-outcome-card[data-momentum="building"] .eos-outcome-filament {
+  background: var(--eos-color-momentum-positive);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--eos-emerald) 45%, transparent);
+  opacity: 0.9;
+}
+
+.eos-outcome-card[data-momentum="drifting"] .eos-outcome-filament {
+  background: var(--eos-color-momentum-negative);
+  box-shadow: 0 0 12px color-mix(in srgb, var(--eos-crimson) 40%, transparent);
+  opacity: 0.9;
+}
+
+.eos-outcome-card[data-momentum="steady"] .eos-outcome-filament {
+  background: var(--eos-color-primary);
+  opacity: 0.35;
+}
+
+.eos-outcome-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(91, 143, 206, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 16px 36px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(91, 143, 206, 0.08);
+  background: color-mix(in srgb, var(--eos-blue-soft) 55%, rgba(18, 22, 32, 0.7));
+}
+
+.eos-outcome-card:hover .eos-outcome-filament {
+  opacity: 1;
+}
+
+.eos-outcome-card[data-momentum="building"] {
+  animation: eos-card-breathe 6s var(--eos-ease-soft) infinite;
+}
+
+.eos-outcome-card[data-momentum="building"] .eos-momentum {
+  color: var(--eos-emerald);
+}
+.eos-outcome-card[data-momentum="drifting"] .eos-momentum {
+  color: var(--eos-crimson);
+}
+.eos-outcome-card[data-momentum="steady"] .eos-momentum {
+  color: var(--eos-text-muted);
+}
+
+.eos-outcome-spark {
+  opacity: 0.85;
+  transition: opacity var(--eos-duration-fast) var(--eos-ease-out);
+}
+
+.eos-outcome-card:hover .eos-outcome-spark {
+  opacity: 1;
+}
+
+[data-theme="light"] .eos-outcome-card {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(15, 20, 30, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 8px 24px rgba(20, 24, 36, 0.06);
+}
+
+/* Sparklines */
+@keyframes eos-spark-draw {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.eos-sparkline-path {
+  stroke-dasharray: 120;
+  stroke-dashoffset: 0;
+  animation: eos-spark-draw var(--eos-duration-slow) var(--eos-ease-soft) both;
+}
+
+.eos-sparkline[data-trend="up"] {
+  color: var(--eos-emerald);
+}
+.eos-sparkline[data-trend="down"] {
+  color: var(--eos-crimson);
+}
+.eos-sparkline[data-trend="flat"] {
+  color: var(--eos-text-muted);
+}
+
+/* Metrics */
+.eos-metric-block {
+  transition: transform var(--eos-duration-fast) var(--eos-ease-out);
+}
+
+.eos-metric-block:hover {
+  transform: translateY(-1px);
+}
+
+.eos-metric-block[data-emphasis="true"] .eos-metric-value {
+  color: var(--eos-blue);
+}
+
+.eos-metric-value {
+  transition: color var(--eos-duration-normal) var(--eos-ease-out);
+}
+
+/* Nav active — Executive Blue signature */
+.eos-nav-link {
+  transition:
+    background-color var(--eos-duration-normal) var(--eos-ease-out),
+    color var(--eos-duration-normal) var(--eos-ease-out),
+    transform var(--eos-duration-fast) var(--eos-ease-out);
+}
+
+.eos-nav-link[data-active="true"] {
+  background: var(--eos-blue-soft);
+  color: var(--eos-text);
+  box-shadow: inset 2px 0 0 0 var(--eos-blue);
+}
+
+.eos-nav-link:hover:not([data-active="true"]) {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--eos-text);
+}
+
+/* Decision workspace */
+@keyframes eos-sign-settle {
+  from {
+    opacity: 0.55;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.eos-decision-sign,
+.eos-decision-signed {
+  animation: eos-sign-settle var(--eos-duration-normal) var(--eos-ease-out) both;
+}
+
+.eos-sign-approve {
+  letter-spacing: 0.02em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eos-ambient::before,
+  .eos-ambient::after,
+  .eos-meridian,
+  .eos-reveal,
+  .eos-sparkline-path,
+  .eos-pulse-label,
+  .eos-compass-fill,
+  .eos-outcome-card[data-momentum="building"] {
+    animation: none;
+  }
+
+  .eos-ambient::before,
+  .eos-ambient::after {
+    transform: none;
+  }
+
+  .eos-outcome-card:hover,
+  .eos-metric-block:hover,
+  .eos-pulse:hover {
+    transform: none;
+  }
 }

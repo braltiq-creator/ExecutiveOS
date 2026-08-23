@@ -1,0 +1,127 @@
+import type { PackMeetingPackTemplate } from "@/intelligence-packs/contract";
+
+/** Phase 48 doc 07 — Meeting packs A–F */
+export const MANUFACTURING_MEETING_PACKS: PackMeetingPackTemplate[] = [
+  {
+    id: "mfg-meet-weekly-elt",
+    name: "Weekly ELT",
+    cadence: "weekly",
+    purpose:
+      "Align capacity, demand, cash, and strategy on one judgement surface",
+    discussionSequence: [
+      "Pulse & Organisation Health",
+      "Council observations",
+      "Scarcity / allocation",
+      "Inventory & cash",
+      "Priority decisions",
+      "Actions & owners",
+    ],
+    requiredOutcomeIds: [
+      "mfg-outcome-forecast",
+      "mfg-outcome-utilisation",
+      "mfg-outcome-inventory",
+      "mfg-outcome-dealer",
+      "mfg-outcome-working-capital",
+    ],
+    prepMinutes: 25,
+  },
+  {
+    id: "mfg-meet-weekly-ops",
+    name: "Weekly Ops",
+    cadence: "weekly",
+    purpose: "Stabilize factories and supply for the frozen window",
+    discussionSequence: [
+      "Constraints",
+      "Schedule commit",
+      "Overtime exceptions",
+      "Supplier risks",
+      "Recovery actions",
+    ],
+    requiredOutcomeIds: [
+      "mfg-outcome-utilisation",
+      "mfg-outcome-lead-time",
+      "mfg-outcome-supply-resilience",
+      "mfg-outcome-margin",
+    ],
+    prepMinutes: 20,
+  },
+  {
+    id: "mfg-meet-demand",
+    name: "Weekly Demand Consensus",
+    cadence: "weekly",
+    purpose: "Agree a single demand truth before schedule and inventory move",
+    discussionSequence: [
+      "Sell-out vs sell-in",
+      "Regional bias",
+      "Construction/commodity signals",
+      "Reset decision",
+      "Allocation implications",
+    ],
+    requiredOutcomeIds: [
+      "mfg-outcome-forecast",
+      "mfg-outcome-dealer",
+      "mfg-outcome-share",
+    ],
+    prepMinutes: 20,
+  },
+  {
+    id: "mfg-meet-margin-mix",
+    name: "Monthly Margin & Mix",
+    cadence: "monthly",
+    purpose: "Protect contribution while advancing strategy mix",
+    discussionSequence: [
+      "Margin bridge",
+      "Discount/clearance",
+      "Strategy mix gap",
+      "Capex implications",
+      "Decisions",
+    ],
+    requiredOutcomeIds: [
+      "mfg-outcome-margin",
+      "mfg-outcome-share",
+      "mfg-outcome-future-fit",
+      "mfg-outcome-inventory",
+    ],
+    prepMinutes: 30,
+  },
+  {
+    id: "mfg-meet-board",
+    name: "Board pack — inventory & supply narrative",
+    cadence: "quarterly",
+    purpose: "Honest disclosure on working capital, supply risk, and capital",
+    discussionSequence: [
+      "Exposure range (not point)",
+      "Remediation owners",
+      "CCC path",
+      "Supply resilience materiality",
+      "Outlook",
+    ],
+    requiredOutcomeIds: [
+      "mfg-outcome-working-capital",
+      "mfg-outcome-inventory",
+      "mfg-outcome-supply-resilience",
+      "mfg-outcome-future-fit",
+    ],
+    prepMinutes: 40,
+  },
+  {
+    id: "mfg-meet-disruption",
+    name: "Disruption huddle",
+    cadence: "event",
+    purpose: "Contain supplier/line/safety/logistics shocks with Council clarity",
+    discussionSequence: [
+      "What stopped",
+      "Promise triage",
+      "Cash & channel impact",
+      "Restart criteria",
+      "Board materiality",
+    ],
+    requiredOutcomeIds: [
+      "mfg-outcome-utilisation",
+      "mfg-outcome-lead-time",
+      "mfg-outcome-supply-resilience",
+      "mfg-outcome-dealer",
+    ],
+    prepMinutes: 15,
+  },
+];

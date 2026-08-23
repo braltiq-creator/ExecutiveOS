@@ -1,0 +1,352 @@
+/*
+  Executive Experience 2.0 — presentation tokens.
+  Warm light, calm elevation, premium hierarchy.
+  Extends Design System 1.0 without inventing a second palette.
+*/
+
+[data-theme="light"] {
+  /* Experience 2.0 explicit contract */
+  --ex-canvas: #f7f8fa;
+  --ex-surface: #ffffff;
+  --ex-text: #1a1f2e;
+  --ex-text-secondary: #4a5568;
+  --ex-text-muted: #8b95a8;
+  --ex-accent: #3b6ea5;
+  --ex-success: #2f8f68;
+  --ex-attention: #c08a3e;
+  --ex-critical: #b84545;
+}
+
+[data-theme="light"] {
+  --eos-canvas: var(--ex-canvas);
+  --eos-surface-solid: var(--ex-surface);
+  --eos-surface: var(--ex-surface);
+  --eos-text: var(--ex-text);
+  --eos-text-secondary: var(--ex-text-secondary);
+  --eos-text-muted: var(--ex-text-muted);
+  --eos-blue: var(--ex-accent);
+  --eos-emerald: var(--ex-success);
+  --eos-amber: var(--ex-attention);
+  --eos-crimson: var(--ex-critical);
+
+  /* Calmer elevation — subtle, not glassy clutter */
+  --eos-shadow-1: 0 1px 2px rgba(26, 31, 46, 0.04),
+    0 0 0 1px rgba(26, 31, 46, 0.04);
+  --eos-shadow-2: 0 8px 24px rgba(26, 31, 46, 0.06),
+    0 0 0 1px rgba(26, 31, 46, 0.05);
+  --eos-shadow-3: 0 16px 40px rgba(26, 31, 46, 0.08),
+    0 0 0 1px rgba(26, 31, 46, 0.06);
+
+  /* Experience type scale — scanning over density */
+  --ex-display-size: clamp(1.75rem, 2.4vw, 2.25rem);
+  --ex-display-hero-size: clamp(1.9rem, 2.8vw, 2.55rem);
+  --ex-value-figure-size: clamp(2.25rem, 3.5vw, 3rem);
+  --ex-heading-size: 1.125rem;
+  --ex-body-size: 0.9375rem;
+  --ex-caption-size: 0.75rem;
+  --ex-section-gap: clamp(0.85rem, 1.6vw, 1.25rem);
+  --ex-card-padding: 1rem;
+  --ex-snapshot-gap: 0.85rem;
+  --ex-radius: 0.75rem;
+  --ex-brief-focus-ring: color-mix(in srgb, var(--ex-accent) 22%, transparent);
+}
+
+[data-contrast="high"] {
+  --eos-text: #000000;
+  --eos-text-secondary: #1a1a1a;
+  --eos-border: #000000;
+  --eos-border-strong: #000000;
+  --eos-ring: #000000;
+  --ex-text: #000000;
+  --ex-text-secondary: #1a1a1a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ex-motion,
+  .ex-reveal,
+  .ex-expand {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+@keyframes ex-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ex-confidence {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--ex-confidence, 0%);
+  }
+}
+
+.ex-reveal {
+  animation: ex-fade-up 280ms var(--eos-ease-out) both;
+}
+
+/* ~80–120ms editorial stagger — complete page ~1s */
+.ex-reveal-1 {
+  animation-delay: 80ms;
+}
+.ex-reveal-2 {
+  animation-delay: 160ms;
+}
+.ex-reveal-3 {
+  animation-delay: 240ms;
+}
+.ex-reveal-4 {
+  animation-delay: 320ms;
+}
+.ex-reveal-5 {
+  animation-delay: 400ms;
+}
+.ex-reveal-6 {
+  animation-delay: 480ms;
+}
+.ex-reveal-7 {
+  animation-delay: 560ms;
+}
+.ex-reveal-8 {
+  animation-delay: 640ms;
+}
+
+.ex-canvas {
+  background: var(--ex-canvas, var(--eos-canvas));
+  color: var(--ex-text, var(--eos-text));
+}
+
+.ex-surface {
+  background: var(--ex-surface, var(--eos-surface-solid));
+  border: 1px solid var(--eos-border);
+  border-radius: var(--ex-radius, var(--eos-radius-lg));
+  box-shadow: var(--eos-shadow-1);
+}
+
+.ex-display {
+  font-family: var(--font-display);
+  font-size: var(--ex-display-size);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: var(--ex-text, var(--eos-text));
+}
+
+.ex-display-hero {
+  font-size: var(--ex-display-hero-size);
+  max-width: 18ch;
+}
+
+.ex-value-figure {
+  font-family: var(--font-display);
+  font-size: var(--ex-value-figure-size);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--ex-text, var(--eos-text));
+}
+
+.ex-lead-judgement {
+  box-shadow: var(--eos-shadow-2);
+}
+
+[data-brief-focus] .ex-lead-judgement {
+  box-shadow: var(--eos-shadow-2), 0 0 0 1px var(--ex-brief-focus-ring);
+}
+
+/* Executive Snapshot v2.2 — dense front page, not a tall workspace */
+.ex-snapshot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ex-snapshot-gap);
+}
+
+.ex-snapshot-block {
+  margin: 0;
+}
+
+.ex-snapshot .ex-lead-judgement {
+  order: 0;
+}
+
+@media (min-height: 820px) and (min-width: 960px) {
+  .ex-snapshot {
+    gap: 0.7rem;
+  }
+
+  .ex-snapshot .ex-body {
+    line-height: 1.45;
+  }
+}
+
+/* Mission Control v3.1 — fixed page; feed scrolls alone */
+.mc-root {
+  min-height: 0;
+}
+
+.mc-feed-scroll,
+.mc-column-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--ex-text-muted) 45%, transparent)
+    transparent;
+}
+
+.mc-feed-scroll::-webkit-scrollbar,
+.mc-column-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mc-feed-scroll::-webkit-scrollbar-thumb,
+.mc-column-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--ex-text-muted) 35%, transparent);
+  border-radius: 999px;
+}
+
+.mc-kpi-card:focus-visible {
+  z-index: 1;
+}
+
+/* Live KPI feedback — value change only, never card colour wash */
+@keyframes mc-kpi-flash {
+  0% {
+    color: var(--ex-accent);
+  }
+  100% {
+    color: var(--ex-text);
+  }
+}
+
+@keyframes mc-kpi-ring {
+  0% {
+    box-shadow: var(--eos-shadow-1), 0 0 0 1px color-mix(in srgb, var(--ex-accent) 28%, transparent);
+  }
+  100% {
+    box-shadow: var(--eos-shadow-1);
+  }
+}
+
+.mc-kpi-value-flash {
+  animation: mc-kpi-flash 720ms var(--eos-ease-out) both;
+}
+
+.mc-kpi-live {
+  animation: mc-kpi-ring 720ms var(--eos-ease-out) both;
+}
+
+.mc-live-dot::before {
+  content: "";
+  display: inline-block;
+  width: 0.35rem;
+  height: 0.35rem;
+  margin-right: 0.35rem;
+  border-radius: 999px;
+  background: var(--ex-success);
+  vertical-align: middle;
+  animation: mc-live-pulse 2.4s var(--eos-ease-soft) infinite;
+}
+
+@keyframes mc-live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mc-kpi-value-flash,
+  .mc-kpi-live,
+  .mc-live-dot::before {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .mc-root {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .mc-main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mc-feed-scroll {
+    max-height: 22rem;
+  }
+
+  .mc-column-scroll {
+    max-height: min(50vh, 28rem);
+  }
+}
+
+.ex-heading {
+  font-family: var(--font-display);
+  font-size: var(--ex-heading-size);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  color: var(--ex-text, var(--eos-text));
+}
+
+.ex-body {
+  font-size: var(--ex-body-size);
+  line-height: 1.6;
+  color: var(--ex-text-secondary, var(--eos-text-secondary));
+}
+
+.ex-caption {
+  font-size: var(--ex-caption-size);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: var(--ex-text-muted, var(--eos-text-muted));
+}
+
+.ex-confidence-bar {
+  height: 3px;
+  border-radius: 999px;
+  background: var(--eos-surface-inset);
+  overflow: hidden;
+}
+
+.ex-confidence-bar > span {
+  display: block;
+  height: 100%;
+  background: var(--ex-accent, var(--eos-blue));
+  animation: ex-confidence 600ms var(--eos-ease-soft) both;
+}
+
+.ex-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--eos-surface-inset) 0%,
+    rgba(255, 255, 255, 0.7) 50%,
+    var(--eos-surface-inset) 100%
+  );
+  background-size: 200% 100%;
+  animation: ex-skeleton 1.2s ease-in-out infinite;
+  border-radius: var(--eos-radius-md);
+}
+
+@keyframes ex-skeleton {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}

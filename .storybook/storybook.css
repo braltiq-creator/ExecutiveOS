@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* Storybook font fallbacks — Next font variables are not injected here */
+:root {
+  --font-inter: "Inter", system-ui, sans-serif;
+  --font-geist-sans: "Inter", system-ui, sans-serif;
+  --font-geist-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas,
+    monospace;
+}

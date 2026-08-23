@@ -1,0 +1,555 @@
+/*
+  Website Experience V3 — choreography, glass, depth, premium motion.
+  Messaging / pricing / IA unchanged.
+*/
+
+/* —— Hero —— */
+.mk-v3-hero {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(3.2rem, 7vw, 5.2rem);
+  padding-bottom: clamp(2.8rem, 6vw, 4.5rem);
+}
+
+.mk-v3-hero-glow {
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 70%;
+  background:
+    radial-gradient(
+      50% 60% at 20% 30%,
+      color-mix(in srgb, var(--mk-accent) 18%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      45% 55% at 80% 20%,
+      color-mix(in srgb, #c08a3e 12%, transparent),
+      transparent 65%
+    );
+  pointer-events: none;
+  animation: mk-v3-parallax 8s var(--mk-ease) both;
+}
+
+.mk-v3-hero-split {
+  position: relative;
+  z-index: 1;
+}
+
+.mk-v3-hero .mk-display {
+  font-size: clamp(2.7rem, 6vw, 4.6rem);
+}
+
+.mk-v3-hero-item {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.mk-v3-hero[data-hero-phase="play"] .mk-v3-hero-item,
+.mk-v3-hero[data-hero-phase="done"] .mk-v3-hero-item {
+  animation: mk-v3-rise 700ms var(--mk-ease) both;
+}
+
+.mk-v3-hero-item[data-delay="0"] { animation-delay: 80ms; }
+.mk-v3-hero-item[data-delay="1"] { animation-delay: 180ms; }
+.mk-v3-hero-item[data-delay="2"] { animation-delay: 300ms; }
+.mk-v3-hero-item[data-delay="3"] { animation-delay: 420ms; }
+.mk-v3-hero-item[data-delay="4"] { animation-delay: 540ms; }
+.mk-v3-hero-item[data-delay="5"] { animation-delay: 660ms; }
+
+.mk-v3-hero[data-hero-phase="done"] .mk-v3-hero-item {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+.mk-v3-hero-visual {
+  position: relative;
+  transform: perspective(1400px) rotateY(-4deg) rotateX(2deg);
+  transform-style: preserve-3d;
+}
+
+@media (max-width: 919px) {
+  .mk-v3-hero-visual {
+    transform: none;
+  }
+}
+
+/* —— Render depth / glass / choreography —— */
+.mk-v3-render {
+  position: relative;
+  box-shadow:
+    0 40px 100px rgba(15, 20, 25, 0.12),
+    0 0 0 1px rgba(15, 20, 25, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.mk-v3-render-aura {
+  position: absolute;
+  inset: -12%;
+  z-index: -1;
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      color-mix(in srgb, var(--mk-accent) 22%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      color-mix(in srgb, #c08a3e 16%, transparent),
+      transparent 50%
+    );
+  filter: blur(18px);
+  opacity: 0.85;
+}
+
+.mk-v3-glass {
+  background:
+    linear-gradient(
+      165deg,
+      color-mix(in srgb, var(--mk-surface) 88%, transparent),
+      color-mix(in srgb, var(--mk-canvas) 70%, var(--mk-surface))
+    ) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.mk-v3-render.is-choreographed .mk-v3-stage {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.mk-v3-render.is-choreographed.is-ready .mk-v3-stage {
+  animation: mk-v3-rise 650ms var(--mk-ease) both;
+}
+
+.mk-v3-render.is-choreographed.is-ready .mk-v3-stage[data-stage="1"] {
+  animation-delay: 200ms;
+}
+.mk-v3-render.is-choreographed.is-ready .mk-v3-stage[data-stage="2"] {
+  animation-delay: 500ms;
+}
+.mk-v3-render.is-choreographed.is-ready .mk-v3-stage[data-stage="3"] {
+  animation-delay: 800ms;
+}
+.mk-v3-render.is-choreographed.is-ready .mk-v3-stage[data-stage="4"] {
+  animation-delay: 1100ms;
+}
+.mk-v3-render.is-choreographed.is-ready .mk-v3-stage[data-stage="5"] {
+  animation-delay: 1500ms;
+}
+.mk-v3-render.is-choreographed.is-ready .mk-v3-stage[data-stage="6"] {
+  animation-delay: 2000ms;
+}
+.mk-v3-render.is-choreographed.is-ready .mk-v3-stage[data-stage="7"] {
+  animation-delay: 2800ms;
+}
+
+.mk-v3-avatars .mk-v3-avatar {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+.mk-v3-render.is-choreographed.is-ready .mk-v3-avatar {
+  animation: mk-v3-pop 500ms var(--mk-ease) both;
+  animation-delay: calc(1200ms + var(--i) * 90ms);
+}
+
+.mk-v3-insight-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.mk-v3-insight-item {
+  border-left: 2px solid color-mix(in srgb, var(--mk-accent) 50%, transparent);
+  padding-left: 0.65rem;
+  color: var(--mk-muted);
+  font-size: 0.84rem;
+  line-height: 1.4;
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.mk-v3-render.is-choreographed.is-ready .mk-v3-insight-item {
+  animation: mk-v3-slide 550ms var(--mk-ease) both;
+  animation-delay: calc(2100ms + var(--i) * 220ms);
+}
+
+.mk-v3-render:not(.is-choreographed) .mk-v3-avatar,
+.mk-v3-render:not(.is-choreographed) .mk-v3-insight-item,
+.mk-v3-render:not(.is-choreographed) .mk-v3-stage {
+  opacity: 1;
+  transform: none;
+}
+
+/* —— Architecture flow V3 —— */
+.mk-v3-flow {
+  padding: 2rem;
+}
+
+.mk-v3-flow-connector {
+  position: relative;
+  height: 2.75rem;
+  margin: 0.35rem auto 0.85rem;
+  width: 2px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--mk-ink) 8%, transparent);
+}
+
+.mk-v3-flow-connector i {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    transparent,
+    var(--mk-accent),
+    color-mix(in srgb, #2f8f68 70%, var(--mk-accent)),
+    transparent
+  );
+  transform: translateY(-100%);
+}
+
+.mk-v3-flow.is-drawn .mk-v3-flow-connector i {
+  animation: mk-v3-draw-once 1.6s var(--mk-ease) both;
+}
+
+.mk-v3-flow-stages {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+  .mk-v3-flow-stages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .mk-v3-flow-stages {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mk-v3-flow-stage {
+  min-height: 10.5rem;
+  transition: transform 220ms var(--mk-ease), box-shadow 220ms var(--mk-ease);
+}
+
+.mk-v3-flow.is-drawn .mk-v3-flow-stage {
+  animation: mk-v3-rise 700ms var(--mk-ease) both;
+  animation-delay: calc(200ms + var(--i) * 120ms);
+}
+
+.mk-v3-flow-stage:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(15, 20, 25, 0.06);
+}
+
+/* —— Pricing V3 —— */
+.mk-v3-pricing {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 900px) {
+  .mk-v3-pricing {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+  }
+}
+
+.mk-v3-price-card {
+  position: relative;
+  height: 100%;
+  border: 1px solid var(--mk-line);
+  border-radius: 1.4rem;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--mk-surface) 96%, #f3efe8),
+      var(--mk-surface)
+    );
+  padding: 1.6rem 1.45rem 1.45rem;
+  box-shadow: 0 14px 40px rgba(15, 20, 25, 0.04);
+  transition: transform 220ms var(--mk-ease), box-shadow 220ms var(--mk-ease);
+}
+
+.mk-v3-price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 50px rgba(15, 20, 25, 0.08);
+}
+
+.mk-v3-price-card.is-featured {
+  border-color: color-mix(in srgb, var(--mk-accent) 45%, var(--mk-line));
+  box-shadow:
+    0 22px 55px rgba(59, 110, 165, 0.12),
+    0 0 0 1px color-mix(in srgb, var(--mk-accent) 18%, transparent);
+}
+
+.mk-v3-price-badge {
+  display: inline-flex;
+  margin: 0 0 0.75rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--mk-accent) 12%, var(--mk-surface));
+  padding: 0.3rem 0.7rem;
+  color: var(--mk-accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mk-v3-price-list {
+  margin: 1.1rem 0 1.35rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.mk-v3-price-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  color: var(--mk-muted);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+/* —— ROI V3 —— */
+.mk-v3-roi-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 900px) {
+  .mk-v3-roi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.mk-v3-roi-card {
+  display: grid;
+  gap: 0.45rem;
+  justify-items: start;
+  width: 100%;
+  border: 1px solid var(--mk-line);
+  border-radius: 1.1rem;
+  background: var(--mk-surface);
+  padding: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 180ms var(--mk-ease),
+    border-color 180ms var(--mk-ease),
+    box-shadow 180ms var(--mk-ease);
+}
+
+.mk-v3-roi-card strong {
+  color: var(--mk-ink);
+  font-size: 0.95rem;
+}
+
+.mk-v3-roi-card:hover,
+.mk-v3-roi-card.is-active {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--mk-accent) 40%, var(--mk-line));
+  box-shadow: 0 12px 28px rgba(15, 20, 25, 0.06);
+}
+
+/* —— Trial stepper —— */
+.mk-v3-wizard {
+  max-width: 44rem;
+}
+
+.mk-v3-stepper {
+  margin: 1.75rem 0 0.85rem;
+}
+
+.mk-v3-stepper-bar {
+  height: 0.3rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--mk-ink) 8%, transparent);
+  margin-bottom: 1rem;
+}
+
+.mk-v3-stepper-bar i {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--mk-accent), #2f8f68);
+  transition: width 400ms var(--mk-ease);
+}
+
+.mk-v3-stepper-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mk-v3-stepper-list li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--mk-line);
+  border-radius: 999px;
+  background: var(--mk-surface);
+  padding: 0.35rem 0.65rem;
+  color: var(--mk-faint);
+  font-size: 0.75rem;
+}
+
+.mk-v3-stepper-list li[data-done="true"] {
+  color: var(--mk-accent);
+  border-color: color-mix(in srgb, var(--mk-accent) 30%, var(--mk-line));
+}
+
+.mk-v3-stepper-list li[data-active="true"] {
+  color: var(--mk-ink);
+  border-color: color-mix(in srgb, var(--mk-ink) 25%, var(--mk-line));
+  background: color-mix(in srgb, var(--mk-accent) 8%, var(--mk-surface));
+}
+
+.mk-v3-stepper-index {
+  display: grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--mk-ink) 8%, transparent);
+  font-weight: 700;
+  font-size: 0.68rem;
+}
+
+.mk-v3-stepper-list li[data-active="true"] .mk-v3-stepper-index,
+.mk-v3-stepper-list li[data-done="true"] .mk-v3-stepper-index {
+  background: var(--mk-ink);
+  color: #f8fafc;
+}
+
+.mk-v3-stepper-label {
+  display: none;
+}
+
+@media (min-width: 720px) {
+  .mk-v3-stepper-label {
+    display: inline;
+  }
+}
+
+.mk-v3-stepper-status {
+  margin-top: 0.35rem !important;
+  font-weight: 560;
+  color: var(--mk-ink) !important;
+}
+
+.mk-v3-pin-btn {
+  width: 100%;
+  border: 1px solid var(--mk-line);
+  background: color-mix(in srgb, var(--mk-surface) 92%, transparent);
+  cursor: pointer;
+  text-align: left;
+  font: inherit;
+  transition:
+    transform 180ms var(--mk-ease),
+    border-color 180ms var(--mk-ease),
+    box-shadow 180ms var(--mk-ease);
+}
+
+.mk-v3-pin-btn.is-active,
+.mk-v3-pin-btn:hover {
+  border-color: color-mix(in srgb, var(--mk-accent) 45%, var(--mk-line));
+  box-shadow: 0 14px 32px rgba(15, 20, 25, 0.1);
+  transform: translateY(-2px);
+}
+
+/* —— Band polish —— */
+.mk-band {
+  position: relative;
+}
+
+.mk-v3-section-soft {
+  background:
+    radial-gradient(
+      70% 80% at 50% 0%,
+      color-mix(in srgb, var(--mk-accent) 7%, transparent),
+      transparent 70%
+    );
+}
+
+@keyframes mk-v3-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes mk-v3-slide {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mk-v3-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mk-v3-draw-once {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(120%);
+  }
+}
+
+@keyframes mk-v3-parallax {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(1.02);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mk-v3-hero-item,
+  .mk-v3-hero-glow,
+  .mk-v3-render.is-choreographed .mk-v3-stage,
+  .mk-v3-avatar,
+  .mk-v3-insight-item,
+  .mk-v3-flow-connector i,
+  .mk-v3-flow-stage,
+  .mk-v3-price-card:hover,
+  .mk-v3-roi-card:hover,
+  .mk-v3-flow-stage:hover {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

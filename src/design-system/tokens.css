@@ -1,0 +1,307 @@
+/*
+  ExecutiveOS Design System 1.0
+  Semantic tokens only. Components never invent colour, type, or space.
+*/
+
+:root {
+  /* ——— Semantic colour ——— */
+  --eos-color-primary: var(--eos-blue);
+  --eos-color-primary-fg: var(--eos-primary-fg);
+  --eos-color-secondary: var(--eos-text-secondary);
+  --eos-color-canvas: var(--eos-canvas);
+  --eos-color-surface: var(--eos-surface-solid);
+  --eos-color-text: var(--eos-text);
+  --eos-color-text-secondary: var(--eos-text-secondary);
+  --eos-color-text-muted: var(--eos-text-muted);
+  --eos-color-divider: var(--eos-border);
+  --eos-color-momentum-positive: var(--eos-emerald);
+  --eos-color-momentum-stable: var(--eos-text-muted);
+  --eos-color-momentum-negative: var(--eos-crimson);
+  --eos-color-attention-watch: var(--eos-amber);
+  --eos-color-attention-critical: var(--eos-crimson);
+  --eos-color-ai: var(--eos-blue);
+  --eos-color-navigation: var(--eos-blue);
+  --eos-color-focus: var(--eos-blue);
+  --eos-color-strategy: var(--eos-strategy);
+  --eos-color-strategy-soft: var(--eos-strategy-soft);
+  --eos-color-ring: var(--eos-ring);
+  --eos-color-momentum-positive-soft: var(--eos-emerald-soft);
+  --eos-color-attention-watch-soft: var(--eos-amber-soft);
+  --eos-color-attention-critical-soft: var(--eos-crimson-soft);
+  --eos-color-ai-soft: var(--eos-blue-soft);
+  --eos-color-surface-inset: var(--eos-surface-inset);
+
+  /* ——— Spacing scale (XS → 3XL) ——— */
+  --eos-space-xs: var(--eos-space-1);
+  --eos-space-sm: var(--eos-space-2);
+  --eos-space-md: var(--eos-space-3);
+  --eos-space-lg: var(--eos-space-4);
+  --eos-space-xl: var(--eos-space-6);
+  --eos-space-2xl: var(--eos-space-8);
+  --eos-space-3xl: var(--eos-space-12);
+
+  /* ——— Surface elevations ——— */
+  --eos-elevation-canvas-bg: var(--eos-canvas);
+  --eos-elevation-canvas-blur: 0;
+  --eos-elevation-canvas-border: transparent;
+  --eos-elevation-canvas-shadow: none;
+
+  --eos-elevation-surface-bg: var(--eos-surface-solid);
+  --eos-elevation-surface-blur: 0;
+  --eos-elevation-surface-border: var(--eos-border);
+  --eos-elevation-surface-shadow: var(--eos-shadow-1);
+
+  --eos-elevation-floating-bg: rgba(18, 22, 32, 0.72);
+  --eos-elevation-floating-blur: 18px;
+  --eos-elevation-floating-border: rgba(255, 255, 255, 0.08);
+  --eos-elevation-floating-shadow: var(--eos-shadow-2);
+
+  --eos-elevation-focus-bg: var(--eos-blue-soft);
+  --eos-elevation-focus-blur: 0;
+  --eos-elevation-focus-border: transparent;
+  --eos-elevation-focus-shadow: none;
+
+  --eos-elevation-modal-bg: rgba(14, 17, 26, 0.88);
+  --eos-elevation-modal-blur: 28px;
+  --eos-elevation-modal-border: rgba(255, 255, 255, 0.1);
+  --eos-elevation-modal-shadow: var(--eos-shadow-3);
+
+  /* ——— Typography ——— */
+  --eos-type-display-xl-size: 2.55rem;
+  --eos-type-display-xl-weight: 600;
+  --eos-type-display-xl-leading: 1.02;
+  --eos-type-display-xl-tracking: -0.035em;
+
+  --eos-type-display-l-size: 1.75rem;
+  --eos-type-display-l-weight: 600;
+  --eos-type-display-l-leading: 1.1;
+  --eos-type-display-l-tracking: -0.025em;
+
+  --eos-type-heading-size: 1.25rem;
+  --eos-type-heading-weight: 600;
+  --eos-type-heading-leading: 1.25;
+  --eos-type-heading-tracking: -0.02em;
+
+  --eos-type-subheading-size: 0.9375rem;
+  --eos-type-subheading-weight: 500;
+  --eos-type-subheading-leading: 1.4;
+  --eos-type-subheading-tracking: -0.01em;
+
+  --eos-type-body-size: 0.875rem;
+  --eos-type-body-weight: 400;
+  --eos-type-body-leading: 1.55;
+  --eos-type-body-tracking: 0;
+
+  --eos-type-supporting-size: 0.75rem;
+  --eos-type-supporting-weight: 400;
+  --eos-type-supporting-leading: 1.45;
+  --eos-type-supporting-tracking: 0.005em;
+
+  --eos-type-caption-size: 0.625rem;
+  --eos-type-caption-weight: 400;
+  --eos-type-caption-leading: 1.4;
+  --eos-type-caption-tracking: 0.01em;
+
+  --eos-type-metric-size: 1.25rem;
+  --eos-type-metric-weight: 600;
+  --eos-type-metric-leading: 1.1;
+  --eos-type-metric-tracking: -0.02em;
+
+  --eos-type-label-size: 0.625rem;
+  --eos-type-label-weight: 500;
+  --eos-type-label-leading: 1.3;
+  --eos-type-label-tracking: 0.18em;
+
+  /* ——— Motion ——— */
+  --eos-motion-hover: var(--eos-duration-fast) var(--eos-ease-out);
+  --eos-motion-focus: var(--eos-duration-normal) var(--eos-ease-out);
+  --eos-motion-navigation: var(--eos-duration-normal) var(--eos-ease-soft);
+  --eos-motion-cards: var(--eos-duration-normal) var(--eos-ease-out);
+  --eos-motion-numbers: var(--eos-duration-slow) var(--eos-ease-soft);
+  --eos-motion-transition: var(--eos-duration-normal) var(--eos-ease-out);
+
+  /* ——— Iconography ——— */
+  --eos-icon-sm: 0.875rem;
+  --eos-icon-md: 1rem;
+  --eos-icon-lg: 1.25rem;
+  --eos-icon-stroke: 1.75;
+  --eos-icon-pad: var(--eos-space-xs);
+}
+
+[data-theme="light"] {
+  --eos-elevation-floating-bg: rgba(255, 255, 255, 0.78);
+  --eos-elevation-floating-border: rgba(15, 20, 30, 0.08);
+  --eos-elevation-modal-bg: rgba(255, 255, 255, 0.92);
+  --eos-elevation-modal-border: rgba(15, 20, 30, 0.1);
+}
+
+/* Typography utilities — consume tokens only */
+.eos-type-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--eos-type-display-xl-size);
+  font-weight: var(--eos-type-display-xl-weight);
+  line-height: var(--eos-type-display-xl-leading);
+  letter-spacing: var(--eos-type-display-xl-tracking);
+  color: var(--eos-color-text);
+}
+
+.eos-type-display-l {
+  font-family: var(--font-display);
+  font-size: var(--eos-type-display-l-size);
+  font-weight: var(--eos-type-display-l-weight);
+  line-height: var(--eos-type-display-l-leading);
+  letter-spacing: var(--eos-type-display-l-tracking);
+  color: var(--eos-color-text);
+}
+
+.eos-type-heading {
+  font-family: var(--font-display);
+  font-size: var(--eos-type-heading-size);
+  font-weight: var(--eos-type-heading-weight);
+  line-height: var(--eos-type-heading-leading);
+  letter-spacing: var(--eos-type-heading-tracking);
+  color: var(--eos-color-text);
+}
+
+.eos-type-subheading {
+  font-family: var(--font-ui);
+  font-size: var(--eos-type-subheading-size);
+  font-weight: var(--eos-type-subheading-weight);
+  line-height: var(--eos-type-subheading-leading);
+  letter-spacing: var(--eos-type-subheading-tracking);
+  color: var(--eos-color-text);
+}
+
+.eos-type-body {
+  font-family: var(--font-ui);
+  font-size: var(--eos-type-body-size);
+  font-weight: var(--eos-type-body-weight);
+  line-height: var(--eos-type-body-leading);
+  letter-spacing: var(--eos-type-body-tracking);
+  color: var(--eos-color-text-secondary);
+}
+
+.eos-type-supporting {
+  font-family: var(--font-ui);
+  font-size: var(--eos-type-supporting-size);
+  font-weight: var(--eos-type-supporting-weight);
+  line-height: var(--eos-type-supporting-leading);
+  color: var(--eos-color-text-muted);
+}
+
+.eos-type-caption {
+  font-family: var(--font-ui);
+  font-size: var(--eos-type-caption-size);
+  font-weight: var(--eos-type-caption-weight);
+  line-height: var(--eos-type-caption-leading);
+  color: var(--eos-color-text-muted);
+}
+
+.eos-type-metric {
+  font-family: var(--font-display);
+  font-size: var(--eos-type-metric-size);
+  font-weight: var(--eos-type-metric-weight);
+  line-height: var(--eos-type-metric-leading);
+  letter-spacing: var(--eos-type-metric-tracking);
+  font-variant-numeric: tabular-nums;
+  color: var(--eos-color-text);
+}
+
+.eos-type-label {
+  font-family: var(--font-ui);
+  font-size: var(--eos-type-label-size);
+  font-weight: var(--eos-type-label-weight);
+  line-height: var(--eos-type-label-leading);
+  letter-spacing: var(--eos-type-label-tracking);
+  text-transform: uppercase;
+  color: var(--eos-color-text-muted);
+}
+
+/* Surface elevation utilities */
+.eos-elevation-canvas {
+  background: var(--eos-elevation-canvas-bg);
+  border: 1px solid var(--eos-elevation-canvas-border);
+  box-shadow: var(--eos-elevation-canvas-shadow);
+}
+
+.eos-elevation-surface {
+  background: var(--eos-elevation-surface-bg);
+  border: 1px solid var(--eos-elevation-surface-border);
+  box-shadow: var(--eos-elevation-surface-shadow);
+  border-radius: var(--eos-radius-lg);
+}
+
+.eos-elevation-floating {
+  background: var(--eos-elevation-floating-bg);
+  backdrop-filter: blur(var(--eos-elevation-floating-blur)) saturate(1.15);
+  -webkit-backdrop-filter: blur(var(--eos-elevation-floating-blur))
+    saturate(1.15);
+  border: 1px solid var(--eos-elevation-floating-border);
+  box-shadow: var(--eos-elevation-floating-shadow);
+  border-radius: var(--eos-radius-lg);
+}
+
+.eos-elevation-focus {
+  background: var(--eos-elevation-focus-bg);
+  border: 1px solid var(--eos-elevation-focus-border);
+  box-shadow: var(--eos-elevation-focus-shadow);
+  border-radius: var(--eos-radius-md);
+}
+
+.eos-elevation-modal {
+  background: var(--eos-elevation-modal-bg);
+  backdrop-filter: blur(var(--eos-elevation-modal-blur)) saturate(1.2);
+  -webkit-backdrop-filter: blur(var(--eos-elevation-modal-blur)) saturate(1.2);
+  border: 1px solid var(--eos-elevation-modal-border);
+  box-shadow: var(--eos-elevation-modal-shadow);
+  border-radius: var(--eos-radius-xl);
+}
+
+/* Icon box */
+.eos-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--eos-color-text-muted);
+  padding: var(--eos-icon-pad);
+}
+
+.eos-icon[data-size="sm"] {
+  width: calc(var(--eos-icon-sm) + var(--eos-icon-pad) * 2);
+  height: calc(var(--eos-icon-sm) + var(--eos-icon-pad) * 2);
+}
+.eos-icon[data-size="sm"] > svg {
+  width: var(--eos-icon-sm);
+  height: var(--eos-icon-sm);
+  stroke-width: var(--eos-icon-stroke);
+}
+
+.eos-icon[data-size="md"] {
+  width: calc(var(--eos-icon-md) + var(--eos-icon-pad) * 2);
+  height: calc(var(--eos-icon-md) + var(--eos-icon-pad) * 2);
+}
+.eos-icon[data-size="md"] > svg {
+  width: var(--eos-icon-md);
+  height: var(--eos-icon-md);
+  stroke-width: var(--eos-icon-stroke);
+}
+
+.eos-icon[data-size="lg"] {
+  width: calc(var(--eos-icon-lg) + var(--eos-icon-pad) * 2);
+  height: calc(var(--eos-icon-lg) + var(--eos-icon-pad) * 2);
+}
+.eos-icon[data-size="lg"] > svg {
+  width: var(--eos-icon-lg);
+  height: var(--eos-icon-lg);
+  stroke-width: var(--eos-icon-stroke);
+}
+
+/* Motion — honour reduced preference */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --eos-duration-fast: 1ms;
+    --eos-duration-normal: 1ms;
+    --eos-duration-slow: 1ms;
+  }
+}

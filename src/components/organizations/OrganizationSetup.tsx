@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   createOrganizationAction,
@@ -32,7 +32,7 @@ export function OrganizationSetup({
     pendingInvitations.length > 0 ? "join" : "create",
   );
   const [error, setError] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
+  const [isCreating, setIsCreating] = useState(false);
 
   const [createForm, setCreateForm] = useState({
     name: "",
@@ -44,11 +44,12 @@ export function OrganizationSetup({
   });
   const [invitationCode, setInvitationCode] = useState("");
 
-  function handleCreate(event: React.FormEvent<HTMLFormElement>) {
+  async function handleCreate(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
+    setIsCreating(true);
 
-    startTransition(async () => {
+    try {
       const result = await createOrganizationAction(createForm);
 
       if (result.error || !result.data) {
@@ -57,15 +58,23 @@ export function OrganizationSetup({
       }
 
       router.push("/onboarding");
-      router.refresh();
-    });
+    } catch (caught) {
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "Unable to create organization.",
+      );
+    } finally {
+      setIsCreating(false);
+    }
   }
 
-  function handleJoinByCode(event: React.FormEvent<HTMLFormElement>) {
+  async function handleJoinByCode(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
+    setIsCreating(true);
 
-    startTransition(async () => {
+    try {
       const result = await joinByInvitationCodeAction({ invitationCode });
 
       if (result.error || !result.data) {
@@ -74,14 +83,22 @@ export function OrganizationSetup({
       }
 
       router.push("/onboarding");
-      router.refresh();
-    });
+    } catch (caught) {
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "Unable to join organization.",
+      );
+    } finally {
+      setIsCreating(false);
+    }
   }
 
-  function handleJoinByInvitation(invitationId: string) {
+  async function handleJoinByInvitation(invitationId: string) {
     setError(null);
+    setIsCreating(true);
 
-    startTransition(async () => {
+    try {
       const result = await joinByInvitationIdAction(invitationId);
 
       if (result.error || !result.data) {
@@ -90,8 +107,15 @@ export function OrganizationSetup({
       }
 
       router.push("/onboarding");
-      router.refresh();
-    });
+    } catch (caught) {
+      setError(
+        caught instanceof Error
+          ? caught.message
+          : "Unable to accept invitation.",
+      );
+    } finally {
+      setIsCreating(false);
+    }
   }
 
   return (
@@ -280,10 +304,10 @@ export function OrganizationSetup({
           </div>
           <button
             type="submit"
-            disabled={isPending}
+            disabled={isCreating}
             className="mt-8 inline-flex h-11 items-center justify-center rounded-lg bg-zinc-900 px-5 text-sm font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-60"
           >
-            {isPending ? "Creating..." : "Create Organization"}
+            {isCreating ? "Creating..." : "Create Organization"}
           </button>
         </form>
       ) : (
@@ -312,7 +336,7 @@ export function OrganizationSetup({
                     </div>
                     <button
                       type="button"
-                      disabled={isPending}
+                      disabled={isCreating}
                       onClick={() => handleJoinByInvitation(invitation.id)}
                       className="inline-flex h-10 items-center justify-center rounded-lg bg-zinc-900 px-4 text-sm font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-60"
                     >
@@ -348,10 +372,10 @@ export function OrganizationSetup({
             </div>
             <button
               type="submit"
-              disabled={isPending}
+              disabled={isCreating}
               className="mt-8 inline-flex h-11 items-center justify-center rounded-lg bg-zinc-900 px-5 text-sm font-medium text-white transition-colors hover:bg-zinc-800 disabled:opacity-60"
             >
-              {isPending ? "Joining..." : "Join Organization"}
+              {isCreating ? "Joining..." : "Join Organization"}
             </button>
           </form>
         </div>

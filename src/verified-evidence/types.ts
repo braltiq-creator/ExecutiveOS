@@ -74,7 +74,10 @@ export type EvidenceProvider =
 export type OrganizationEvidence = {
   id: string;
   organizationId: string;
+  /** Null for USER_PROVIDED manual uploads — Connection is not required. */
   connectionId: string | null;
+  /** Logical data source when evidence came from a weekly/source ingest. */
+  dataSourceId?: string | null;
   provider: EvidenceProvider;
   sourceSystem: string;
   sourceObjectType: string;

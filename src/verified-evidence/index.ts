@@ -36,3 +36,34 @@ export {
 } from "@/verified-evidence/graph-prep";
 export { buildConnectionTruthViews } from "@/verified-evidence/ui-labels";
 export type { ConnectionTruthView } from "@/verified-evidence/ui-labels";
+export {
+  resetDataSourceMemory,
+  createDataSource,
+  getDataSource,
+  findDataSourceByName,
+  listDataSources,
+  setDataSourceCadence,
+  persistDataSourceMapping,
+  inspectUploadSchema,
+  resolveMappingForUpload,
+  receiveWeeklyUpload,
+  attachImmutableSnapshot,
+  getDataSourceFreshness,
+  getSnapshotSummary,
+  fingerprintHeaders,
+  detectSchemaChange,
+  computeFreshness,
+  freshnessInfluencesConfidence,
+  freshnessExecutiveCopy,
+  compareSnapshotEvidence,
+} from "@/verified-evidence/data-sources";
+export type {
+  OrganizationDataSource,
+  DataSourceCadence,
+  DataSourceFreshness,
+  DataSourceIngestionMethod,
+  SchemaChangeReport,
+  EvidenceCompareResult,
+  SnapshotLineage,
+  SnapshotEvidenceSummary,
+} from "@/verified-evidence/data-sources";

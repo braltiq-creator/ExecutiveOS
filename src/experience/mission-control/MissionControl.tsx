@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
   computeExecutiveValueScore,
@@ -69,7 +70,6 @@ export function MissionControl() {
     headerTitle,
     useGreeting,
     executiveValueQuantified,
-    unavailableReason,
   } = useExperienceData();
   const decisionsCtx = useDecisionsOptional();
   const loop = useExecutiveLoop();
@@ -109,25 +109,7 @@ export function MissionControl() {
   }
 
   if (mode === "unavailable" || !experience || !snapshot) {
-    return (
-      <div
-        className="mc-root flex h-full min-h-0 flex-col gap-2"
-        data-mission-control="true"
-        data-snapshot-context="unavailable"
-        aria-label="Executive Command Centre"
-      >
-        <header className="mc-header border-b border-[var(--exs-divider)] pb-2.5">
-          <p className="exs-label">Executive Command Centre</p>
-          <h1 className="exs-title text-[length:1.3rem] tracking-tight">
-            Executive Snapshot unavailable
-          </h1>
-          <p className="exs-body mt-2 text-[length:0.85rem]">
-            {unavailableReason ??
-              "Re-open the snapshot from Snapshot Studio to restore executive context."}
-          </p>
-        </header>
-      </div>
-    );
+    return <MissionControlFirstRun />;
   }
 
   if (mode === "executive_snapshot" && activeSnapshot) {
@@ -147,6 +129,48 @@ export function MissionControl() {
       monitorStamp={monitorStamp}
       searchParams={searchParams}
     />
+  );
+}
+
+/**
+ * Phase 35A — first-run empty state when no Executive Snapshot is active.
+ * Guides new organisations to Snapshot Studio; never invents demo context.
+ */
+function MissionControlFirstRun() {
+  return (
+    <div
+      className="mc-root flex h-full min-h-0 flex-col gap-2"
+      data-mission-control="true"
+      data-snapshot-context="first-run"
+      aria-label="Executive Command Centre"
+    >
+      <header className="mc-header border-b border-[var(--exs-divider)] pb-2.5">
+        <p className="exs-label">Executive Command Centre</p>
+        <h1 className="exs-title text-[length:1.3rem] tracking-tight">
+          Your Executive Command Centre is ready to be created.
+        </h1>
+        <p className="exs-body mt-2 max-w-2xl text-[length:0.85rem]">
+          ExecutiveOS needs your business context before it can generate your
+          first Executive Snapshot.
+        </p>
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <Link
+            href="/onboarding/snapshot"
+            className="inline-flex h-10 items-center justify-center rounded-[var(--eos-radius-sm)] bg-[var(--eos-color-text)] px-4 text-[length:0.8rem] font-semibold text-[var(--eos-color-surface)] transition-opacity hover:opacity-90"
+            data-first-run-cta="create-snapshot"
+          >
+            Create Your Executive Snapshot
+          </Link>
+          <Link
+            href="/onboarding"
+            className="inline-flex h-10 items-center justify-center rounded-[var(--eos-radius-sm)] border border-[var(--exs-divider)] px-4 text-[length:0.8rem] font-medium text-[var(--eos-color-text)] transition-colors hover:bg-[var(--eos-color-surface-muted)]"
+            data-first-run-cta="return-onboarding"
+          >
+            Return to Onboarding
+          </Link>
+        </div>
+      </header>
+    </div>
   );
 }
 

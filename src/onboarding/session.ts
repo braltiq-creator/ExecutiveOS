@@ -3,7 +3,14 @@
  */
 
 import { KnowledgeGraph } from "@/knowledge-graph";
-import { discoverOrganisation, averageDiscoveryConfidence } from "@/onboarding/discovery";
+import {
+  assertNoRealityLabFixtures,
+  averageDiscoveryConfidence,
+  discoverOrganisation,
+  shouldUseRealityLabDiscovery,
+  type DiscoveryAccountOrganisation,
+  type DiscoveryConnectedSystem,
+} from "@/onboarding/discovery";
 import { inferOrganisation } from "@/onboarding/organisation";
 import { learnExecutiveProfile } from "@/onboarding/executive-profile";
 import { bootstrapKnowledgeGraph } from "@/onboarding/knowledge-bootstrap";
@@ -126,17 +133,48 @@ export function submitMinimumQuestions(
 export function runDiscovery(
   session: DiscoverySession,
   input?: {
-    connectedSystems?: Array<"microsoft365" | "simpro" | "salesforce">;
+    connectedSystems?: DiscoveryConnectedSystem[];
     asOf?: string;
+    allowRealityLabFixtures?: boolean;
+    demoIntent?: boolean;
+    /** Only when connections have been verified — never invent. */
+    verifiedConnections?: boolean;
+    accountOrganisation?: DiscoveryAccountOrganisation;
   },
 ): DiscoverySession {
   const asOf = input?.asOf ?? new Date().toISOString();
-  const systems = input?.connectedSystems ?? ["microsoft365", "simpro"];
+  const useLab = shouldUseRealityLabDiscovery({
+    allowRealityLabFixtures: input?.allowRealityLabFixtures,
+    demoIntent: input?.demoIntent,
+  });
+  // Production: empty unless caller verified connections. Reality Lab defaults apply inside catalogue.
+  const claimedSystems = input?.connectedSystems ?? [];
+  const systems: DiscoveryConnectedSystem[] = useLab
+    ? claimedSystems.length > 0
+      ? claimedSystems
+      : ["microsoft365", "simpro"]
+    : input?.verifiedConnections
+      ? claimedSystems
+      : [];
+
   const discoveries = discoverOrganisation({
     tenantId: session.tenantId,
     asOf,
     connectedSystems: systems,
+    allowRealityLabFixtures: input?.allowRealityLabFixtures,
+    demoIntent: input?.demoIntent,
+    accountOrganisation: input?.accountOrganisation,
   });
+
+  const fixtureGate = assertNoRealityLabFixtures(discoveries, {
+    allowRealityLabFixtures: input?.allowRealityLabFixtures,
+    demoIntent: input?.demoIntent,
+  });
+  if (!fixtureGate.ok) {
+    throw new Error(
+      `Production Truth Boundary: Reality Lab fixtures blocked (${fixtureGate.violations.join(", ")}).`,
+    );
+  }
 
   const isolation = assertDiscoveryTenantIsolation({
     tenantId: session.tenantId,
@@ -149,6 +187,7 @@ export function runDiscovery(
   const organisation = inferOrganisation({
     tenantId: session.tenantId,
     discoveries,
+    knownOrganisationName: input?.accountOrganisation?.name,
   });
 
   const industry = inferIndustry(discoveries);
@@ -192,12 +231,16 @@ export function runDiscovery(
     graphCompleteness: bootstrap.completeness,
   });
 
-  const profileRecommendation = recommendIntelligenceProfile({
-    role: questions.role,
-    primaryObjective: questions.primaryObjective,
-    industry: questions.industry,
-    connectedProviders: systems,
-  });
+  const profileRecommendation =
+    systems.length === 0 && !useLab
+      ? null
+      : recommendIntelligenceProfile({
+          role: questions.role,
+          primaryObjective: questions.primaryObjective,
+          industry: questions.industry,
+          // Never pass unverified connector claims into scoring.
+          connectedProviders: systems,
+        });
 
   return {
     ...session,
@@ -209,11 +252,16 @@ export function runDiscovery(
     confidence,
     profileRecommendation,
     intelligenceProfileId:
-      session.intelligenceProfileId ?? profileRecommendation.profileId,
+      session.intelligenceProfileId ??
+      profileRecommendation?.profileId ??
+      null,
     progress: advanceProgress(session.progress, {
       phase: "discovering",
-      percent: 60,
-      message: `Discovered ${discoveries.length} organisational signals.`,
+      percent: discoveries.length > 0 ? 60 : 40,
+      message:
+        discoveries.length > 0
+          ? `Discovered ${discoveries.length} organisational signals.`
+          : "No verified connected-system evidence yet — establish executive context next.",
       discoveriesFound: discoveries.length,
       systemsConnected: systems,
     }),
@@ -285,6 +333,23 @@ export function completeDiscovery(
     throw new Error("Discovery incomplete — questions and inference required");
   }
 
+  const fixtureGate = assertNoRealityLabFixtures(session.discoveries);
+  if (!fixtureGate.ok) {
+    throw new Error(
+      `Production Truth Boundary: Reality Lab fixtures blocked (${fixtureGate.violations.join(", ")}).`,
+    );
+  }
+
+  // Production with no verified evidence must not invent a connected-systems briefing.
+  if (
+    !shouldUseRealityLabDiscovery() &&
+    session.discoveries.length === 0
+  ) {
+    throw new Error(
+      "Production Truth Boundary: no verified discovery evidence — create an Executive Snapshot instead.",
+    );
+  }
+
   const confidence =
     session.confidence ??
     scoreConfidence({
@@ -303,29 +368,28 @@ export function completeDiscovery(
     confidence,
   });
 
-  const profileRecommendation =
-    session.profileRecommendation ??
-    recommendIntelligenceProfile({
-      role: session.questions.role,
-      primaryObjective: session.questions.primaryObjective,
-      industry: session.questions.industry,
-      connectedProviders: session.progress.systemsConnected as Array<
-        "microsoft365" | "simpro" | "salesforce"
-      >,
-    });
-
+  // Never re-derive a recommendation from unverified connector claims at completion.
+  const profileRecommendation = session.profileRecommendation;
   const intelligenceProfileId =
-    session.intelligenceProfileId ?? profileRecommendation.profileId;
+    session.intelligenceProfileId ?? profileRecommendation?.profileId ?? null;
+
+  if (!intelligenceProfileId) {
+    throw new Error(
+      "Select an Intelligence Profile before completing discovery.",
+    );
+  }
 
   selectTenantIntelligenceProfile({
     tenantId: session.tenantId,
     profileId: intelligenceProfileId,
     source:
+      profileRecommendation &&
       intelligenceProfileId === profileRecommendation.profileId
         ? "recommended"
         : "manual",
-    recommendedProfileId: profileRecommendation.profileId,
-    explanation: profileRecommendation.explanation,
+    recommendedProfileId:
+      profileRecommendation?.profileId ?? intelligenceProfileId,
+    explanation: profileRecommendation?.explanation,
     asOf: completedAt,
   });
 

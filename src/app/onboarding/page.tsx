@@ -6,10 +6,11 @@ import {
 } from "@/lib/onboarding/queries";
 import { userHasActiveOrganization } from "@/lib/organizations/queries";
 import { DiscoveryExperience } from "@/components/onboarding/discovery/DiscoveryExperience";
+import { requireAppSession } from "@/services/session";
 
 /**
  * Executive Discovery — replaces traditional multi-step configuration.
- * Target: first Executive Briefing in under 15 minutes.
+ * Production uses real AppSession organisation (Phase 35B / 36 Truth Boundary).
  */
 export default async function OnboardingPage() {
   const user = await requireAuth();
@@ -22,16 +23,18 @@ export default async function OnboardingPage() {
     redirect("/today");
   }
 
+  const appSession = await requireAppSession();
   const executiveProfile = await getExecutiveProfile(user.id);
 
   return (
     <DiscoveryExperience
-      tenantId="tenant-northline"
-      userId={user.id}
+      tenantId={appSession.company.id}
+      organisationName={appSession.company.name}
+      userId={appSession.userId}
       preferredName={
         executiveProfile?.preferred_name ??
         executiveProfile?.full_name?.split(" ")[0] ??
-        undefined
+        appSession.profile.preferredName
       }
     />
   );

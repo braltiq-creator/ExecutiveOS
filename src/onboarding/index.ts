@@ -18,7 +18,19 @@ export {
   WELCOME_PROMISE,
 } from "@/onboarding/welcome";
 
-export { discoverOrganisation, averageDiscoveryConfidence } from "@/onboarding/discovery";
+export {
+  discoverOrganisation,
+  discoverOrganisationProduction,
+  discoverOrganisationRealityLab,
+  shouldUseRealityLabDiscovery,
+  assertNoRealityLabFixtures,
+  averageDiscoveryConfidence,
+} from "@/onboarding/discovery";
+export type {
+  DiscoveryRunInput,
+  DiscoveryAccountOrganisation,
+  DiscoveryConnectedSystem,
+} from "@/onboarding/discovery";
 export { inferOrganisation } from "@/onboarding/organisation";
 export { extractPeople } from "@/onboarding/people";
 export {

@@ -7,10 +7,14 @@ import type { DiscoveryItem, OrganisationInference } from "@/onboarding/types";
 export function inferOrganisation(input: {
   tenantId: string;
   discoveries: DiscoveryItem[];
+  /** ExecutiveOS account organisation name — not external-system evidence. */
+  knownOrganisationName?: string;
 }): OrganisationInference {
-  const name =
-    input.discoveries.find((d) => d.kind === "organisation_name")?.label ??
-    "Your organisation";
+  const discoveredName = input.discoveries.find(
+    (d) => d.kind === "organisation_name",
+  )?.label;
+  const knownName = input.knownOrganisationName?.trim();
+  const name = discoveredName ?? (knownName || "Your organisation");
 
   const leaders = input.discoveries
     .filter((d) => d.kind === "executive_team_member")

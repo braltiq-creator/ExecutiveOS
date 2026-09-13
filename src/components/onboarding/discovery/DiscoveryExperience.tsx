@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   WELCOME_BODY,
@@ -25,6 +26,7 @@ import {
   type IntelligenceProfileId,
 } from "@/profiles";
 import { completeExecutiveOnboarding } from "@/lib/onboarding/actions";
+import { isMockMode } from "@/lib/mock/mode";
 
 const ROLES: ExecutiveRoleOption[] = [
   "CEO",
@@ -55,17 +57,26 @@ const STRATEGIC_OUTCOME_EXAMPLES = [
   "Build scalable capacity",
 ];
 
-type Phase = "welcome" | "questions" | "discovering" | "validating" | "brief";
+type Phase =
+  | "welcome"
+  | "questions"
+  | "discovering"
+  | "validating"
+  | "empty"
+  | "brief";
 
 type DiscoveryExperienceProps = {
-  tenantId?: string;
-  userId?: string;
+  /** Real organisation UUID in Production (never tenant-northline). */
+  tenantId: string;
+  organisationName: string;
+  userId: string;
   preferredName?: string;
 };
 
 export function DiscoveryExperience({
-  tenantId = "tenant-northline",
-  userId = "user-executive",
+  tenantId,
+  organisationName,
+  userId,
   preferredName,
 }: DiscoveryExperienceProps) {
   const router = useRouter();
@@ -90,14 +101,26 @@ export function DiscoveryExperience({
   function startDiscovery() {
     setError(null);
     startTransition(() => {
+      const lab = isMockMode();
       let next = submitMinimumQuestions(session, questions);
       next = runDiscovery(next, {
-        connectedSystems: ["microsoft365", "simpro"],
+        // Production: never claim unverified connectors.
+        connectedSystems: lab ? ["microsoft365", "simpro"] : [],
+        verifiedConnections: false,
+        allowRealityLabFixtures: lab,
+        accountOrganisation: {
+          id: tenantId,
+          name: organisationName,
+        },
         asOf: new Date().toISOString(),
       });
       setSession(next);
       saveDiscoverySession(next);
-      setPhase("validating");
+      if (next.discoveries.length === 0) {
+        setPhase("empty");
+      } else {
+        setPhase("validating");
+      }
     });
   }
 
@@ -121,7 +144,6 @@ export function DiscoveryExperience({
 
       const result = await completeExecutiveOnboarding();
       if (result.error) {
-        // Discovery brief still shown; persistence may fail in mock
         setError(result.error);
       }
     });
@@ -195,8 +217,17 @@ export function DiscoveryExperience({
                 A few things I can&apos;t infer yet
               </h1>
               <p className="mt-3 text-sm leading-6 text-[var(--eos-text-secondary)]">
-                Everything else I&apos;ll learn from Microsoft 365 and your
-                operational systems.
+                {organisationName ? (
+                  <>
+                    Working in <strong>{organisationName}</strong>. Answer what
+                    only you know — we will not invent connected-system evidence.
+                  </>
+                ) : (
+                  <>
+                    Answer what only you know. Connected systems will enrich
+                    discovery once verified.
+                  </>
+                )}
               </p>
             </div>
 
@@ -205,7 +236,10 @@ export function DiscoveryExperience({
                 options={ROLES}
                 value={questions.role}
                 onChange={(role) =>
-                  setQuestions((q) => ({ ...q, role: role as ExecutiveRoleOption }))
+                  setQuestions((q) => ({
+                    ...q,
+                    role: role as ExecutiveRoleOption,
+                  }))
                 }
               />
             </Field>
@@ -281,7 +315,92 @@ export function DiscoveryExperience({
                 className="rounded-lg bg-[var(--eos-accent)] px-5 py-2.5 text-sm font-medium text-white disabled:opacity-50"
                 onClick={startDiscovery}
               >
-                {pending ? "Discovering…" : "Connect & discover"}
+                {pending ? "Discovering…" : "Continue"}
+              </button>
+            </div>
+          </section>
+        ) : null}
+
+        {phase === "empty" ? (
+          <section
+            className="space-y-8"
+            data-discovery-state="production-empty"
+          >
+            <div>
+              <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--eos-text-muted)]">
+                Executive Context
+              </p>
+              <h1 className="mt-2 font-display text-3xl font-semibold tracking-tight">
+                Let&apos;s establish your executive context.
+              </h1>
+              <p className="mt-3 text-sm leading-6 text-[var(--eos-text-secondary)]">
+                No verified organisational evidence has been discovered yet.
+                ExecutiveOS needs verified business context before it can
+                generate your first Executive Snapshot.
+                {organisationName ? (
+                  <>
+                    {" "}
+                    Your organisation account is{" "}
+                    <strong>{organisationName}</strong> — that is ExecutiveOS
+                    account context, not evidence from connected systems.
+                  </>
+                ) : null}
+              </p>
+            </div>
+
+            <div className="rounded-xl border border-[var(--eos-border)] bg-[var(--eos-surface-solid)] p-5 shadow-[var(--eos-shadow-1)]">
+              <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-[var(--eos-text-muted)]">
+                Choose your executive experience
+              </p>
+              <p className="mt-2 text-sm leading-6 text-[var(--eos-text-secondary)]">
+                No verified connected-system evidence is available, so we will
+                not invent an Operations or Commercial recommendation. Pick the
+                experience that fits your role.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {listIntelligenceProfiles().map((profile) => {
+                  const selected =
+                    session.intelligenceProfileId === profile.id;
+                  return (
+                    <button
+                      key={profile.id}
+                      type="button"
+                      className={
+                        selected
+                          ? "rounded-lg bg-[var(--eos-accent)] px-3 py-1.5 text-xs font-medium text-white"
+                          : "rounded-lg border border-[var(--eos-border)] px-3 py-1.5 text-xs text-[var(--eos-text-secondary)]"
+                      }
+                      onClick={() => {
+                        const next = selectDiscoveryIntelligenceProfile(
+                          session,
+                          profile.id as IntelligenceProfileId,
+                        );
+                        setSession(next);
+                        saveDiscoverySession(next);
+                      }}
+                    >
+                      {profile.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/onboarding/snapshot"
+                className="inline-flex h-10 items-center justify-center rounded-lg bg-[var(--eos-accent)] px-5 text-sm font-medium text-white"
+                data-discovery-cta="create-snapshot"
+              >
+                Create Executive Snapshot
+              </Link>
+              <button
+                type="button"
+                className="inline-flex h-10 items-center justify-center rounded-lg border border-[var(--eos-border)] px-5 text-sm font-medium text-[var(--eos-text)]"
+                data-discovery-cta="return-onboarding"
+                onClick={() => setPhase("welcome")}
+              >
+                Return to Onboarding
               </button>
             </div>
           </section>

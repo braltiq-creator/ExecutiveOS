@@ -1,19 +1,57 @@
 /**
  * Progressive discovery from connected systems.
- * Never asks what Microsoft 365 or Simpro can answer.
+ *
+ * Phase 36 — Production Truth Boundary:
+ * Reality Lab fixtures only when mock/demo is explicit.
+ * Production fails closed: no verified evidence → no discovery claim.
  */
 
+import { isMockMode } from "@/lib/mock/mode";
 import type {
   DiscoveryItem,
   DiscoveryKind,
   DiscoverySource,
 } from "@/onboarding/types";
 
+export type DiscoveryConnectedSystem = "microsoft365" | "simpro" | "salesforce";
+
+export type DiscoveryAccountOrganisation = {
+  id: string;
+  name: string;
+  industry?: string | null;
+  country?: string | null;
+};
+
 export type DiscoveryRunInput = {
   tenantId: string;
   asOf?: string;
-  connectedSystems?: Array<"microsoft365" | "simpro" | "salesforce">;
+  connectedSystems?: DiscoveryConnectedSystem[];
+  /**
+   * Explicit Reality Lab / demo catalogue.
+   * Production must never set this unless intentional demo tooling.
+   */
+  allowRealityLabFixtures?: boolean;
+  /** Explicit demo intent (same family as ?demo=1 / intent=demo). */
+  demoIntent?: boolean;
+  /**
+   * ExecutiveOS account context — never labelled as external-system discovery.
+   * Used only for Production organisation naming when no live connectors exist.
+   */
+  accountOrganisation?: DiscoveryAccountOrganisation;
 };
+
+const REALITY_LAB_MARKERS = [
+  "Northline Operations",
+  "Acme Facilities",
+  "Sarah Jones",
+  "Monday 8:00am",
+  "Executive Leadership Team",
+  "Harbour Tower",
+  "Jordan Lee",
+  "CoolParts Co",
+  "Campus MEP upgrade",
+  "Chiller Plant A",
+] as const;
 
 function item(input: {
   tenantId: string;
@@ -41,11 +79,54 @@ function item(input: {
   };
 }
 
+/** Reality Lab / mock only — never Production default. */
+export function shouldUseRealityLabDiscovery(
+  input?: Pick<DiscoveryRunInput, "allowRealityLabFixtures" | "demoIntent">,
+): boolean {
+  if (input?.allowRealityLabFixtures === true) return true;
+  if (input?.demoIntent === true) return true;
+  return isMockMode();
+}
+
 /**
- * Deterministic discovery catalogue for Reality Lab / first login.
- * Production path swaps evidence for live Graph / Simpro sync output.
+ * Fail closed: Production must not carry Reality Lab fixture identities.
  */
-export function discoverOrganisation(input: DiscoveryRunInput): DiscoveryItem[] {
+export function assertNoRealityLabFixtures(
+  discoveries: DiscoveryItem[],
+  gate?: Pick<DiscoveryRunInput, "allowRealityLabFixtures" | "demoIntent">,
+): { ok: true } | { ok: false; violations: string[] } {
+  if (shouldUseRealityLabDiscovery(gate)) {
+    return { ok: true };
+  }
+  const blob = discoveries
+    .map((d) => `${d.label}\n${d.summary}\n${d.editableValue ?? ""}`)
+    .join("\n");
+  const violations = REALITY_LAB_MARKERS.filter((marker) =>
+    blob.includes(marker),
+  );
+  if (violations.length > 0) {
+    return { ok: false, violations };
+  }
+  return { ok: true };
+}
+
+/**
+ * Production-safe discovery: verified external evidence only.
+ * No live Graph/Simpro integration yet → empty catalogue (fail closed).
+ * Account metadata is NOT emitted as “discovered from connected systems”.
+ */
+export function discoverOrganisationProduction(
+  _input: DiscoveryRunInput,
+): DiscoveryItem[] {
+  return [];
+}
+
+/**
+ * Deterministic Reality Lab catalogue (mock / explicit demo only).
+ */
+export function discoverOrganisationRealityLab(
+  input: DiscoveryRunInput,
+): DiscoveryItem[] {
   const tenantId = input.tenantId;
   const systems = input.connectedSystems ?? ["microsoft365", "simpro"];
   const items: DiscoveryItem[] = [];
@@ -279,6 +360,18 @@ export function discoverOrganisation(input: DiscoveryRunInput): DiscoveryItem[] 
   );
 
   return items;
+}
+
+/**
+ * Discover organisation signals.
+ * Mock/demo → Reality Lab catalogue.
+ * Production → empty until verified connector evidence exists (fail closed).
+ */
+export function discoverOrganisation(input: DiscoveryRunInput): DiscoveryItem[] {
+  if (shouldUseRealityLabDiscovery(input)) {
+    return discoverOrganisationRealityLab(input);
+  }
+  return discoverOrganisationProduction(input);
 }
 
 export function averageDiscoveryConfidence(items: DiscoveryItem[]): number {

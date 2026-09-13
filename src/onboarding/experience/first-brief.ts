@@ -43,21 +43,35 @@ export function generateFirstExecutiveBrief(input: {
     .slice(0, 3)
     .map((d) => d.label);
 
+  const hasExternalEvidence = confirmed.some(
+    (d) =>
+      d.source === "microsoft365" ||
+      d.source === "simpro" ||
+      d.source === "salesforce",
+  );
+
   return {
     tenantId: input.tenantId,
     asOf: input.asOf,
-    executiveSummary: [
-      `I've learned ${input.organisation.organisationName} by connecting to your existing systems.`,
-      `Your focus is ${input.profile.strategicFocus.join(", ").toLowerCase()}.`,
-      `Operating rhythm: ${input.organisation.primaryOperatingRhythm}.`,
-    ].join(" "),
-    businessHealth:
-      input.confidence.overall >= 70
+    executiveSummary: hasExternalEvidence
+      ? [
+          `I've learned ${input.organisation.organisationName} by connecting to your existing systems.`,
+          `Your focus is ${input.profile.strategicFocus.join(", ").toLowerCase()}.`,
+          `Operating rhythm: ${input.organisation.primaryOperatingRhythm}.`,
+        ].join(" ")
+      : [
+          `${input.organisation.organisationName} is ready for executive context.`,
+          `Your stated focus is ${input.profile.strategicFocus.join(", ").toLowerCase()}.`,
+          "No verified connected-system evidence is available yet — create an Executive Snapshot to continue.",
+        ].join(" "),
+    businessHealth: hasExternalEvidence
+      ? input.confidence.overall >= 70
         ? "Business signals are forming clearly from collaboration and operations."
-        : "Early signals are in place — confidence will rise as systems sync.",
+        : "Early signals are in place — confidence will rise as systems sync."
+      : "No verified business signals yet — Snapshot Studio establishes your first Executive Snapshot.",
     operationalHealth: confirmed.some((d) => d.source === "simpro")
       ? "Operational platform connected — capacity, delivery, and cash signals are active."
-      : "Connect your operational platform to enrich field intelligence.",
+      : "No verified operational platform connection yet.",
     strategicPriorities: input.profile.strategicFocus,
     executiveAgenda: [
       "Confirm today's priority decisions",

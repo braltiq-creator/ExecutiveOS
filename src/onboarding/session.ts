@@ -140,6 +140,9 @@ export function runDiscovery(
     /** Only when connections have been verified — never invent. */
     verifiedConnections?: boolean;
     accountOrganisation?: DiscoveryAccountOrganisation;
+    /** Phase 37 — verified evidence for Production Discovery. */
+    verifiedEvidence?: import("@/verified-evidence").OrganizationEvidence[];
+    verifiedProviders?: import("@/verified-evidence").VerifiedProviderId[];
   },
 ): DiscoverySession {
   const asOf = input?.asOf ?? new Date().toISOString();
@@ -164,6 +167,8 @@ export function runDiscovery(
     allowRealityLabFixtures: input?.allowRealityLabFixtures,
     demoIntent: input?.demoIntent,
     accountOrganisation: input?.accountOrganisation,
+    verifiedEvidence: useLab ? undefined : input?.verifiedEvidence,
+    verifiedProviders: useLab ? undefined : input?.verifiedProviders,
   });
 
   const fixtureGate = assertNoRealityLabFixtures(discoveries, {

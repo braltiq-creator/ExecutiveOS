@@ -12,6 +12,11 @@ import type {
   DiscoveryKind,
   DiscoverySource,
 } from "@/onboarding/types";
+import {
+  discoverFromVerifiedEvidence,
+  type OrganizationEvidence,
+  type VerifiedProviderId,
+} from "@/verified-evidence";
 
 export type DiscoveryConnectedSystem = "microsoft365" | "simpro" | "salesforce";
 
@@ -38,6 +43,12 @@ export type DiscoveryRunInput = {
    * Used only for Production organisation naming when no live connectors exist.
    */
   accountOrganisation?: DiscoveryAccountOrganisation;
+  /**
+   * Phase 37 — verified evidence items (DIRECT / USER_PROVIDED only).
+   * Connection state alone must never populate this list.
+   */
+  verifiedEvidence?: OrganizationEvidence[];
+  verifiedProviders?: VerifiedProviderId[];
 };
 
 const REALITY_LAB_MARKERS = [
@@ -111,14 +122,23 @@ export function assertNoRealityLabFixtures(
 }
 
 /**
- * Production-safe discovery: verified external evidence only.
- * No live Graph/Simpro integration yet → empty catalogue (fail closed).
- * Account metadata is NOT emitted as “discovered from connected systems”.
+ * Production-safe discovery: verified evidence only.
+ * Connection without evidence → empty (fail closed).
+ * Never returns Reality Lab fixtures.
  */
 export function discoverOrganisationProduction(
-  _input: DiscoveryRunInput,
+  input: DiscoveryRunInput,
 ): DiscoveryItem[] {
-  return [];
+  const evidence = input.verifiedEvidence ?? [];
+  if (evidence.length === 0) {
+    return [];
+  }
+
+  return discoverFromVerifiedEvidence({
+    organizationId: input.tenantId,
+    evidence,
+    verifiedProviders: input.verifiedProviders ?? [],
+  });
 }
 
 /**

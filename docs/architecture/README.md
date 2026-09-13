@@ -23,6 +23,7 @@
 | [ADR-004](./ADR-004-information-architecture-briefing.md) | Information architecture & Executive Briefing |
 | [ADR-005](./ADR-005-design-system-hybrid.md) | Design system hybrid (tokens, type, theme) |
 | [ADR-006](./ADR-006-executive-intent-engine.md) | Executive Intent Engine as focus context |
+| [ADR-008](./ADR-008-verified-connections-evidence.md) | Verified connections & evidence infrastructure (Phase 37) |
 
 ## Related product docs
 

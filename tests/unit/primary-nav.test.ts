@@ -5,13 +5,14 @@ import {
 } from "@/lib/navigation/primary-nav";
 
 describe("primary navigation", () => {
-  it("defines exactly six Experience 2.0 items", () => {
+  it("defines Experience 2.0 primary items including Data & Sources", () => {
     expect(PRIMARY_NAV.map((item) => item.label)).toEqual([
       "Today",
       "Strategy",
       "Decisions",
       "Knowledge",
       "Reports",
+      "Data & Sources",
       "Administration",
     ]);
   });

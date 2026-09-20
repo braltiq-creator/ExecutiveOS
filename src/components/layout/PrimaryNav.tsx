@@ -21,6 +21,7 @@ const NAV_ICONS = {
   decisions: EXECUTIVE_ICONS.decisions,
   knowledge: EXECUTIVE_ICONS.knowledge,
   reports: EXECUTIVE_ICONS.reports,
+  data: EXECUTIVE_ICONS.data,
   administration: EXECUTIVE_ICONS.administration,
 } as const;
 

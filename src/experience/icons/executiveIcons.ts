@@ -5,6 +5,7 @@ import {
   Building2,
   CalendarDays,
   Compass,
+  Database,
   FileText,
   Gem,
   Handshake,
@@ -40,6 +41,7 @@ export const EXECUTIVE_ICONS = {
   decisions: Brain,
   knowledge: BookOpen,
   reports: FileText,
+  data: Database,
   administration: Settings,
   value: Gem,
   team: Users,
@@ -77,6 +79,9 @@ export function moduleIconForPath(pathname: string): LucideIcon | null {
       ? EXECUTIVE_ICONS.value
       : EXECUTIVE_ICONS.reports;
   }
+  if (pathname === "/data" || pathname.startsWith("/data/")) {
+    return EXECUTIVE_ICONS.data;
+  }
   if (
     pathname.startsWith("/administration") ||
     pathname.startsWith("/settings") ||
@@ -106,6 +111,9 @@ export function openActionLabel(href: string): string {
   }
   if (href.startsWith("/reports") || href === "/value") {
     return "Open Reports →";
+  }
+  if (href.startsWith("/data")) {
+    return "Open Data & Sources →";
   }
   if (
     href.startsWith("/administration") ||

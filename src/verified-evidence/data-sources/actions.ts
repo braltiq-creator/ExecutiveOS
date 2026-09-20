@@ -17,22 +17,24 @@ import {
 import { resolveMappingForSource } from "./resolve";
 import { useMemoryWeeklyIngestion } from "./backend";
 import {
-  attachImmutableSnapshot,
-  createDataSource,
-  findDataSourceByName,
-  getDataSource,
-  persistDataSourceMapping,
-  receiveWeeklyUpload,
-  setDataSourceCadence,
-} from "./store";
-import {
   attachSnapshotLineageDurable,
   ensureDataSourceDurable,
   findDataSourceByNameDurable,
   getDataSourceByIdDurable,
+  listDataSourcesDurable,
   persistMappingDurable,
   recordUserProvidedEvidenceDurable,
 } from "./supabase-store";
+import {
+  attachImmutableSnapshot,
+  createDataSource,
+  findDataSourceByName,
+  getDataSource,
+  listDataSources,
+  persistDataSourceMapping,
+  receiveWeeklyUpload,
+  setDataSourceCadence,
+} from "./store";
 import type {
   EvidenceCompareResult,
   OrganizationDataSource,
@@ -74,11 +76,14 @@ export type WeeklyFinalizeResult =
 
 /**
  * Resolve or create the logical Data Source for this Studio profile + headers.
+ * When dataSourceId is provided (recurring upload), reuse that exact source.
  */
 export async function resolveStudioWeeklySourceAction(input: {
   organisationId?: string;
   profileId: StudioBusinessProfileId | string;
   headers: string[];
+  /** Recurring upload: pin to an existing Data Source (not filename). */
+  dataSourceId?: string;
 }): Promise<WeeklyResolveResult> {
   const actor = await requireStudioActor(input.organisationId);
   if (!actor.ok) {
@@ -86,36 +91,56 @@ export async function resolveStudioWeeklySourceAction(input: {
   }
 
   try {
-    const logicalName = logicalDataSourceNameForProfile(input.profileId);
-    const cadence = defaultCadenceForLogicalSource(logicalName);
     const memory = useMemoryWeeklyIngestion();
-
     let source: OrganizationDataSource;
-    let created: boolean;
+    let created = false;
 
-    if (memory) {
-      const existing = findDataSourceByName(actor.organisationId, logicalName);
-      source = createDataSource({
-        organizationId: actor.organisationId,
-        name: logicalName,
-        provider: null,
-        expectedCadence: cadence,
-        createdBy: actor.userId,
-        connectionId: null,
-      });
-      created = !existing;
-      if (cadence && !source.expectedCadence) {
-        source = setDataSourceCadence(source.id, cadence);
+    if (input.dataSourceId?.trim()) {
+      const pinnedId = input.dataSourceId.trim();
+      if (memory) {
+        const pinned = getDataSource(pinnedId);
+        if (!pinned || pinned.organizationId !== actor.organisationId) {
+          return { ok: false, error: "Data source not found." };
+        }
+        source = pinned;
+      } else {
+        const pinned = await getDataSourceByIdDurable(
+          actor.organisationId,
+          pinnedId,
+        );
+        if (!pinned) {
+          return { ok: false, error: "Data source not found." };
+        }
+        source = pinned;
       }
     } else {
-      const ensured = await ensureDataSourceDurable({
-        organizationId: actor.organisationId,
-        name: logicalName,
-        expectedCadence: cadence,
-        createdBy: actor.userId,
-      });
-      source = ensured.source;
-      created = ensured.created;
+      const logicalName = logicalDataSourceNameForProfile(input.profileId);
+      const cadence = defaultCadenceForLogicalSource(logicalName);
+
+      if (memory) {
+        const existing = findDataSourceByName(actor.organisationId, logicalName);
+        source = createDataSource({
+          organizationId: actor.organisationId,
+          name: logicalName,
+          provider: null,
+          expectedCadence: cadence,
+          createdBy: actor.userId,
+          connectionId: null,
+        });
+        created = !existing;
+        if (cadence && !source.expectedCadence) {
+          source = setDataSourceCadence(source.id, cadence);
+        }
+      } else {
+        const ensured = await ensureDataSourceDurable({
+          organizationId: actor.organisationId,
+          name: logicalName,
+          expectedCadence: cadence,
+          createdBy: actor.userId,
+        });
+        source = ensured.source;
+        created = ensured.created;
+      }
     }
 
     if (source.connectionId) {
@@ -131,7 +156,7 @@ export async function resolveStudioWeeklySourceAction(input: {
       ok: true,
       source,
       created,
-      logicalName,
+      logicalName: source.name,
       schema: resolved.schema,
       mapping: resolved.mapping,
       mappingReused: resolved.reuse,
@@ -143,6 +168,32 @@ export async function resolveStudioWeeklySourceAction(input: {
     return {
       ok: false,
       error: e instanceof Error ? e.message : "Unable to resolve data source.",
+    };
+  }
+}
+
+export type ListDataSourcesResult =
+  | { ok: true; sources: OrganizationDataSource[] }
+  | { ok: false; error: string; code?: "UNAUTHENTICATED" | "FORBIDDEN" };
+
+/** List durable Data Sources for the authenticated organisation. */
+export async function listOrganizationDataSourcesAction(input?: {
+  organisationId?: string;
+}): Promise<ListDataSourcesResult> {
+  const actor = await requireStudioActor(input?.organisationId);
+  if (!actor.ok) {
+    return { ok: false, error: actor.error, code: actor.code };
+  }
+
+  try {
+    const sources = useMemoryWeeklyIngestion()
+      ? listDataSources(actor.organisationId)
+      : await listDataSourcesDurable(actor.organisationId);
+    return { ok: true, sources };
+  } catch (e) {
+    return {
+      ok: false,
+      error: e instanceof Error ? e.message : "Unable to load data sources.",
     };
   }
 }

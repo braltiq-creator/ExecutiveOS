@@ -64,6 +64,10 @@ type SnapshotStudioProps = {
   productId?: string;
   actorId?: string;
   className?: string;
+  /** Phase 37C — pin recurring upload to an existing Data Source. */
+  recurringDataSourceId?: string;
+  recurringSourceName?: string;
+  recurringMode?: boolean;
 };
 
 function newStudioId(): string {
@@ -81,6 +85,9 @@ export function SnapshotStudio({
   productId = "executiveos",
   actorId,
   className,
+  recurringDataSourceId,
+  recurringSourceName,
+  recurringMode = false,
 }: SnapshotStudioProps) {
   const [session, setSession] = useState<StudioSession>(() => ({
     studioId: newStudioId(),
@@ -88,9 +95,11 @@ export function SnapshotStudio({
     profileId,
     productId,
     actorId,
-    step: "welcome",
+    step: recurringMode ? "upload" : "welcome",
     sourceKind: "csv",
     mappingConfirmed: false,
+    dataSourceId: recurringDataSourceId,
+    logicalSourceName: recurringSourceName,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
   }));
@@ -121,6 +130,7 @@ export function SnapshotStudio({
       organisationId,
       profileId: selectedProfileId,
       headers,
+      dataSourceId: recurringDataSourceId ?? session.dataSourceId,
     });
     if (!weekly.ok) {
       setError(weekly.error);
@@ -193,7 +203,7 @@ export function SnapshotStudio({
             binaryBase64: undefined,
             sourceKind: "csv",
             detection,
-            step: "profile",
+            step: recurringMode ? "mapping" : "profile",
           },
           parsed.headers,
           detection.profileId,
@@ -238,7 +248,7 @@ export function SnapshotStudio({
           binaryBase64: payload.binaryBase64,
           sourceKind,
           detection,
-          step: "profile",
+          step: recurringMode ? "mapping" : "profile",
         },
         workbook.headers,
         detection.profileId,
@@ -510,9 +520,22 @@ export function SnapshotStudio({
       {session.step === "upload" ? (
         <div className="space-y-[var(--eos-space-lg)]">
           <ExecutiveNarrative
-            judgement="Bring the business into ExecutiveOS — not a file into a spreadsheet tool."
-            supporting="Excel and CSV today. Dynamics, SAP, and streaming arrive through the same gateway without changing this experience."
+            judgement={
+              recurringMode
+                ? `Upload the latest ${recurringSourceName ?? session.logicalSourceName ?? "data"} export.`
+                : "Bring the business into ExecutiveOS — not a file into a spreadsheet tool."
+            }
+            supporting={
+              recurringMode
+                ? "ExecutiveOS will recognise this Data Source, reuse the saved mapping when the schema matches, and create a new immutable snapshot."
+                : "Excel and CSV today. Dynamics, SAP, and streaming arrive through the same gateway without changing this experience."
+            }
           />
+          {recurringMode && (recurringSourceName || session.logicalSourceName) ? (
+            <p className="eos-type-supporting">
+              Source · {recurringSourceName ?? session.logicalSourceName}
+            </p>
+          ) : null}
           <UploadDropzone
             onFile={handleUpload}
             onError={(message) => setError(message)}
@@ -558,7 +581,7 @@ export function SnapshotStudio({
             <p className="eos-type-supporting">
               Source · {session.logicalSourceName}
               {session.mappingReused
-                ? " · previous mapping reused"
+                ? " · Existing mapping found — ExecutiveOS will use the saved mapping for this upload."
                 : " · mapping established for this weekly source"}
               {session.freshnessCopy ? ` · ${session.freshnessCopy}` : null}
             </p>
@@ -598,7 +621,7 @@ export function SnapshotStudio({
             <MappingStructure mapping={session.mapping} />
           </div>
           <StepActions
-            back={() => go("profile")}
+            back={() => go(recurringMode ? "upload" : "profile")}
             nextLabel="Confirm mapping & validate"
             next={runSnapshotAndValidate}
             busy={busy}

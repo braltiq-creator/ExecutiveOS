@@ -6,7 +6,7 @@ export type PrimaryNavItem = {
   description: string;
 };
 
-/** Experience 2.0 — six-item primary navigation. */
+/** Experience 2.0 — primary navigation (Data & Sources added Phase 37C). */
 export const PRIMARY_NAV: PrimaryNavItem[] = [
   {
     id: "today",
@@ -42,6 +42,22 @@ export const PRIMARY_NAV: PrimaryNavItem[] = [
     href: "/reports",
     keywords: ["board", "export", "narrative"],
     description: "Reports and exports",
+  },
+  {
+    id: "data",
+    label: "Data & Sources",
+    href: "/data",
+    keywords: [
+      "data",
+      "sources",
+      "upload",
+      "csv",
+      "excel",
+      "pipeline",
+      "freshness",
+      "weekly",
+    ],
+    description: "Business data sources and weekly uploads",
   },
   {
     id: "administration",

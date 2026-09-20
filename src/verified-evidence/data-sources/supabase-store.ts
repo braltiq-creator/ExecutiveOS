@@ -27,6 +27,22 @@ function nowIso(): string {
   return new Date().toISOString();
 }
 
+export async function listDataSourcesDurable(
+  organizationId: string,
+): Promise<OrganizationDataSource[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("organization_data_sources")
+    .select(SELECT_COLS)
+    .eq("organization_id", organizationId)
+    .order("name", { ascending: true });
+
+  if (error) {
+    throw new Error("Unable to load data sources.");
+  }
+  return (data ?? []).map((row) => rowToDataSource(row as DataSourceRow));
+}
+
 export async function findDataSourceByNameDurable(
   organizationId: string,
   name: string,

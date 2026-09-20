@@ -24,7 +24,10 @@ import {
 } from "@/data-gateway";
 import {
   createSnapshotOnServer,
+  finalizeStudioWeeklyIngestionAction,
   parseWorkbookOnServer,
+  persistStudioWeeklyMappingAction,
+  resolveStudioWeeklySourceAction,
   runIntelligenceOnServer,
 } from "../client/api";
 import {
@@ -109,6 +112,55 @@ export function SnapshotStudio({
     persist({ ...session, step });
   }
 
+  async function applyWeeklySource(
+    base: StudioSession,
+    headers: string[],
+    selectedProfileId: StudioBusinessProfileId,
+  ): Promise<StudioSession | null> {
+    const weekly = await resolveStudioWeeklySourceAction({
+      organisationId,
+      profileId: selectedProfileId,
+      headers,
+    });
+    if (!weekly.ok) {
+      setError(weekly.error);
+      return null;
+    }
+
+    let mapping = weekly.mapping;
+    if (!mapping || weekly.requiresSchemaConfirmation) {
+      mapping = inferMappingFromHeaders(headers, {
+        organisationId,
+        profileId,
+        productId,
+        name: weekly.logicalName,
+      });
+    }
+
+    return {
+      ...base,
+      uploadHeaders: headers,
+      selectedProfileId,
+      dataSourceId: weekly.source.id,
+      logicalSourceName: weekly.logicalName,
+      mapping,
+      mappingPreview: buildMappingPreview(mapping, weekly.mappingReused),
+      mappingConfirmed: false,
+      mappingReused: weekly.mappingReused,
+      schemaReport: weekly.schema,
+      requiresSchemaConfirmation: weekly.requiresSchemaConfirmation,
+      schemaChangeConfirmed: false,
+      freshnessCopy: weekly.freshnessCopy,
+      weeklyCompare: undefined,
+      weeklyLineageAttached: false,
+      udgSnapshot: undefined,
+      readiness: undefined,
+      validation: undefined,
+      intelligence: undefined,
+      brief: undefined,
+    };
+  }
+
   async function handleUpload(payload: UploadDropzoneResult) {
     setError(null);
     setBusy(true);
@@ -133,30 +185,21 @@ export function SnapshotStudio({
           headers: parsed.headers,
           records: parsed.records,
         });
-        const mapping = inferMappingFromHeaders(parsed.headers, {
-          organisationId,
-          profileId,
-          productId,
-          name: `Studio · ${payload.filename}`,
-        });
-        persist({
-          ...session,
-          filename: payload.filename,
-          tabularText: payload.text,
-          binaryBase64: undefined,
-          sourceKind: "csv",
-          detection,
-          selectedProfileId: detection.profileId,
-          mapping,
-          mappingPreview: buildMappingPreview(mapping, false),
-          mappingConfirmed: false,
-          udgSnapshot: undefined,
-          readiness: undefined,
-          validation: undefined,
-          intelligence: undefined,
-          brief: undefined,
-          step: "profile",
-        });
+        const next = await applyWeeklySource(
+          {
+            ...session,
+            filename: payload.filename,
+            tabularText: payload.text,
+            binaryBase64: undefined,
+            sourceKind: "csv",
+            detection,
+            step: "profile",
+          },
+          parsed.headers,
+          detection.profileId,
+        );
+        if (!next) return;
+        persist(next);
         return;
       }
 
@@ -186,32 +229,22 @@ export function SnapshotStudio({
       const detection = detectBusinessProfile({
         headers: workbook.headers,
       });
-      const mapping = inferMappingFromHeaders(workbook.headers, {
-        organisationId,
-        profileId,
-        productId,
-        name: `Studio · ${payload.filename}`,
-      });
       const sourceKind: UdgSourceKind = "excel";
-
-      persist({
-        ...session,
-        filename: payload.filename,
-        tabularText: undefined,
-        binaryBase64: payload.binaryBase64,
-        sourceKind,
-        detection,
-        selectedProfileId: detection.profileId,
-        mapping,
-        mappingPreview: buildMappingPreview(mapping, false),
-        mappingConfirmed: false,
-        udgSnapshot: undefined,
-        readiness: undefined,
-        validation: undefined,
-        intelligence: undefined,
-        brief: undefined,
-        step: "profile",
-      });
+      const next = await applyWeeklySource(
+        {
+          ...session,
+          filename: payload.filename,
+          tabularText: undefined,
+          binaryBase64: payload.binaryBase64,
+          sourceKind,
+          detection,
+          step: "profile",
+        },
+        workbook.headers,
+        detection.profileId,
+      );
+      if (!next) return;
+      persist(next);
     } catch {
       setError(
         "ExecutiveOS could not read this Excel workbook. The file appears to be a legacy XLS workbook. Please verify the workbook or upload an XLSX/CSV version.",
@@ -230,9 +263,36 @@ export function SnapshotStudio({
       setError("Upload and confirm profile before creating the snapshot.");
       return;
     }
+    if (!session.dataSourceId || !session.uploadHeaders) {
+      setError("Weekly data source could not be resolved. Re-upload the file.");
+      return;
+    }
+    if (
+      session.requiresSchemaConfirmation &&
+      !session.schemaChangeConfirmed
+    ) {
+      setError(
+        session.schemaReport?.message ??
+          "Confirm the schema change before continuing.",
+      );
+      return;
+    }
+
     setBusy(true);
     setError(null);
     try {
+      const mapped = await persistStudioWeeklyMappingAction({
+        organisationId,
+        dataSourceId: session.dataSourceId,
+        mapping: session.mapping,
+        headers: session.uploadHeaders,
+        confirmSchemaChange: session.schemaChangeConfirmed,
+      });
+      if (!mapped.ok) {
+        setError(mapped.error);
+        return;
+      }
+
       const result = await createSnapshotOnServer({
         organisationId,
         organisationName,
@@ -273,6 +333,7 @@ export function SnapshotStudio({
         mappingPreview:
           result.mappingPreview ?? buildMappingPreview(session.mapping, true),
         mappingConfirmed: true,
+        dataSourceId: mapped.source.id,
         step: "validation",
       });
     } catch {
@@ -309,6 +370,9 @@ export function SnapshotStudio({
         );
         return;
       }
+
+      let weeklyCompare = session.weeklyCompare;
+      let weeklyLineageAttached = session.weeklyLineageAttached;
 
       if (result.handoff) {
         const activated = activateExecutiveSnapshotContext({
@@ -347,6 +411,33 @@ export function SnapshotStudio({
           return;
         }
 
+        if (
+          session.dataSourceId &&
+          session.uploadHeaders &&
+          session.mapping
+        ) {
+          const finalized = await finalizeStudioWeeklyIngestionAction({
+            organisationId,
+            dataSourceId: session.dataSourceId,
+            snapshotId: result.handoff.snapshotId,
+            recordCount: result.handoff.recordCount,
+            headers: session.uploadHeaders,
+            mapping: session.mapping,
+            fileName: session.filename,
+            confirmSchemaChange: session.schemaChangeConfirmed,
+          });
+          if (!finalized.ok) {
+            revokeFailedExecutiveSnapshotActivation(activated.studioId);
+            setError(
+              finalized.error ||
+                "Snapshot was saved but weekly data source lineage failed. Re-run Intelligence after resolving the data source.",
+            );
+            return;
+          }
+          weeklyCompare = finalized.compare;
+          weeklyLineageAttached = true;
+        }
+
         usePortfolioStore.getState().loadExternalPortfolio(result.handoff.portfolio, {
           snapshotId: result.handoff.snapshotId,
           persist: true,
@@ -358,6 +449,8 @@ export function SnapshotStudio({
         readiness: result.readiness ?? session.readiness,
         intelligence: result.intelligence,
         brief: result.brief,
+        weeklyCompare,
+        weeklyLineageAttached,
         step: "intelligence",
       });
     } catch {
@@ -433,7 +526,24 @@ export function SnapshotStudio({
           detection={session.detection}
           selected={session.selectedProfileId ?? session.detection.profileId}
           profiles={profiles}
-          onSelect={(id) => persist({ ...session, selectedProfileId: id })}
+          onSelect={async (id) => {
+            if (!session.uploadHeaders) {
+              persist({ ...session, selectedProfileId: id });
+              return;
+            }
+            setBusy(true);
+            setError(null);
+            try {
+              const next = await applyWeeklySource(
+                { ...session, selectedProfileId: id },
+                session.uploadHeaders,
+                id,
+              );
+              if (next) persist(next);
+            } finally {
+              setBusy(false);
+            }
+          }}
           onContinue={() => go("mapping")}
         />
       ) : null}
@@ -444,6 +554,45 @@ export function SnapshotStudio({
             judgement="Confirm the organisational model before judgement begins."
             supporting="Entities, relationships, measures, and hierarchy — mapped through the Universal Data Gateway."
           />
+          {session.logicalSourceName ? (
+            <p className="eos-type-supporting">
+              Source · {session.logicalSourceName}
+              {session.mappingReused
+                ? " · previous mapping reused"
+                : " · mapping established for this weekly source"}
+              {session.freshnessCopy ? ` · ${session.freshnessCopy}` : null}
+            </p>
+          ) : null}
+          {session.requiresSchemaConfirmation && session.schemaReport ? (
+            <div className="space-y-3 rounded-[var(--eos-radius-md)] border border-[var(--eos-color-border)] p-4">
+              <p className="eos-type-body text-[var(--eos-color-text)]">
+                {session.schemaReport.message}
+              </p>
+              {session.schemaReport.addedColumns.length ? (
+                <p className="eos-type-caption">
+                  Added: {session.schemaReport.addedColumns.join(", ")}
+                </p>
+              ) : null}
+              {session.schemaReport.removedColumns.length ? (
+                <p className="eos-type-caption">
+                  Removed: {session.schemaReport.removedColumns.join(", ")}
+                </p>
+              ) : null}
+              <label className="flex items-center gap-2 eos-type-supporting">
+                <input
+                  type="checkbox"
+                  checked={Boolean(session.schemaChangeConfirmed)}
+                  onChange={(e) =>
+                    persist({
+                      ...session,
+                      schemaChangeConfirmed: e.target.checked,
+                    })
+                  }
+                />
+                Confirm schema change and continue with the updated mapping
+              </label>
+            </div>
+          ) : null}
           <div className="grid gap-[var(--eos-space-lg)] lg:grid-cols-2">
             <UdgMappingPreview mapping={session.mapping} />
             <MappingStructure mapping={session.mapping} />
@@ -567,6 +716,35 @@ export function SnapshotStudio({
             judgement="Outcome Engine, Council, and Domain Advisors are preparing judgement — Snapshot Studio invents no new reasoning."
             supporting="Existing platform capabilities only."
           />
+          {session.weeklyCompare ? (
+            <div className="space-y-2 rounded-[var(--eos-radius-md)] border border-[var(--eos-color-border)] p-4">
+              <p className="eos-type-label">What changed since last snapshot</p>
+              {session.weeklyCompare.volumeDelta != null ? (
+                <p className="eos-type-supporting">
+                  Volume · {session.weeklyCompare.previousRecordCount ?? "—"} →{" "}
+                  {session.weeklyCompare.currentRecordCount} (
+                  {session.weeklyCompare.volumeDelta >= 0 ? "+" : ""}
+                  {session.weeklyCompare.volumeDelta})
+                </p>
+              ) : (
+                <p className="eos-type-supporting">
+                  First durable snapshot for this source (
+                  {session.weeklyCompare.currentRecordCount} records).
+                </p>
+              )}
+              {session.weeklyCompare.whatAppeared.length ? (
+                <p className="eos-type-caption">
+                  Appeared: {session.weeklyCompare.whatAppeared.slice(0, 8).join(", ")}
+                </p>
+              ) : null}
+              {session.weeklyCompare.whatDisappeared.length ? (
+                <p className="eos-type-caption">
+                  Disappeared:{" "}
+                  {session.weeklyCompare.whatDisappeared.slice(0, 8).join(", ")}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
           {session.intelligence ? (
             <>
               <div className="grid gap-[var(--eos-space-md)] sm:grid-cols-2 lg:grid-cols-4">

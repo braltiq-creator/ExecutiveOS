@@ -10,7 +10,11 @@ import { recordMemoryEvidence } from "@/verified-evidence/memory-store";
 import type { OrganizationEvidence } from "@/verified-evidence/types";
 import { compareSnapshotEvidence } from "./compare";
 import { computeFreshness, freshnessExecutiveCopy } from "./freshness";
-import { detectSchemaChange, fingerprintHeaders } from "./schema";
+import { fingerprintHeaders } from "./schema";
+import {
+  inspectSourceSchema,
+  resolveMappingForSource,
+} from "./resolve";
 import type {
   DataSourceCadence,
   DataSourceFreshness,
@@ -157,13 +161,7 @@ export function inspectUploadSchema(
   dataSourceId: string,
   headers: string[],
 ): SchemaChangeReport {
-  const source = requireSource(dataSourceId);
-  const previousHeaders = source.mapping?.fields.map((f) => f.sourceColumn);
-  return detectSchemaChange({
-    headers,
-    previousFingerprint: source.schemaFingerprint,
-    previousHeaders: previousHeaders ?? null,
-  });
+  return inspectSourceSchema(requireSource(dataSourceId), headers);
 }
 
 /**
@@ -178,15 +176,7 @@ export function resolveMappingForUpload(
   mapping: UdgMappingDefinition | null;
   reuse: boolean;
 } {
-  const source = requireSource(dataSourceId);
-  const schema = inspectUploadSchema(dataSourceId, headers);
-  if (!schema.changed && source.mapping) {
-    return { schema, mapping: source.mapping, reuse: true };
-  }
-  if (schema.changed && source.mapping) {
-    return { schema, mapping: source.mapping, reuse: false };
-  }
-  return { schema, mapping: null, reuse: false };
+  return resolveMappingForSource(requireSource(dataSourceId), headers);
 }
 
 /**

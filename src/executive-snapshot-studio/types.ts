@@ -10,6 +10,10 @@ import type {
   UdgSourceKind,
   UdgValidationResult,
 } from "@/data-gateway";
+import type {
+  EvidenceCompareResult,
+  SchemaChangeReport,
+} from "@/verified-evidence/data-sources/types";
 
 export type StudioBusinessProfileId =
   | "manufacturing"
@@ -141,11 +145,23 @@ export type StudioSession = {
   tabularText?: string;
   /** Base64 workbook bytes for .xls / .xlsx — never UTF-8-decoded text. */
   binaryBase64?: string;
+  /** Column headers from the current upload (for weekly schema/mapping). */
+  uploadHeaders?: string[];
   sourceKind: UdgSourceKind;
   detection?: StudioProfileDetection;
   selectedProfileId?: StudioBusinessProfileId;
   mapping?: UdgMappingDefinition;
   mappingConfirmed: boolean;
+  /** Phase 37B — durable weekly Data Source linkage */
+  dataSourceId?: string;
+  logicalSourceName?: string;
+  mappingReused?: boolean;
+  schemaReport?: SchemaChangeReport;
+  requiresSchemaConfirmation?: boolean;
+  schemaChangeConfirmed?: boolean;
+  freshnessCopy?: string;
+  weeklyCompare?: EvidenceCompareResult;
+  weeklyLineageAttached?: boolean;
   validation?: UdgValidationResult;
   udgConfidence?: UdgConfidenceScore;
   udgSnapshot?: UdgExecutiveSnapshot;

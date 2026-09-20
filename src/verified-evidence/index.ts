@@ -56,6 +56,13 @@ export {
   freshnessInfluencesConfidence,
   freshnessExecutiveCopy,
   compareSnapshotEvidence,
+  resolveMappingForSource,
+  inspectSourceSchema,
+  logicalDataSourceNameForProfile,
+  defaultCadenceForLogicalSource,
+  resolveStudioWeeklySourceAction,
+  persistStudioWeeklyMappingAction,
+  finalizeStudioWeeklyIngestionAction,
 } from "@/verified-evidence/data-sources";
 export type {
   OrganizationDataSource,
@@ -66,4 +73,7 @@ export type {
   EvidenceCompareResult,
   SnapshotLineage,
   SnapshotEvidenceSummary,
+  WeeklyResolveResult,
+  WeeklyPersistMappingResult,
+  WeeklyFinalizeResult,
 } from "@/verified-evidence/data-sources";

@@ -46,3 +46,10 @@ export async function runIntelligenceOnServer(
 ): Promise<StudioIntelligenceActionResult> {
   return runStudioIntelligenceAction(input);
 }
+
+export {
+  resolveStudioWeeklySourceAction,
+  persistStudioWeeklyMappingAction,
+  finalizeStudioWeeklyIngestionAction,
+} from "@/verified-evidence/data-sources/actions";
+

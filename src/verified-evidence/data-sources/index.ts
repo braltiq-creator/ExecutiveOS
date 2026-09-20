@@ -13,6 +13,14 @@ export {
   type SnapshotEvidenceSummary,
 } from "./compare";
 export {
+  inspectSourceSchema,
+  resolveMappingForSource,
+} from "./resolve";
+export {
+  logicalDataSourceNameForProfile,
+  defaultCadenceForLogicalSource,
+} from "./logical-source";
+export {
   resetDataSourceMemory,
   createDataSource,
   getDataSource,
@@ -27,3 +35,13 @@ export {
   getDataSourceFreshness,
   getSnapshotSummary,
 } from "./store";
+export {
+  resolveStudioWeeklySourceAction,
+  persistStudioWeeklyMappingAction,
+  finalizeStudioWeeklyIngestionAction,
+} from "./actions";
+export type {
+  WeeklyResolveResult,
+  WeeklyPersistMappingResult,
+  WeeklyFinalizeResult,
+} from "./actions";

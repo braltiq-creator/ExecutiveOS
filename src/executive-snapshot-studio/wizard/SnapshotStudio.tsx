@@ -51,7 +51,7 @@ import type {
   StudioWizardStepId,
 } from "../types";
 import { STUDIO_WIZARD_STEPS } from "../types";
-import { STUDIO_STEP_META } from "./steps";
+import { STUDIO_STEP_META, resolveStudioStepMeta } from "./steps";
 import { ReadinessDashboard } from "../preview/ReadinessDashboard";
 import { SnapshotSummaryCard } from "../preview/SnapshotSummary";
 import { BriefReadyPanel } from "../preview/BriefReady";
@@ -107,7 +107,10 @@ export function SnapshotStudio({
   const [error, setError] = useState<string | null>(null);
   const [showLibrary, setShowLibrary] = useState(false);
 
-  const stepMeta = STUDIO_STEP_META[session.step];
+  const stepMeta = resolveStudioStepMeta(
+    session.step,
+    session.selectedProfileId ?? session.detection?.profileId,
+  );
   const stepIndex = STUDIO_WIZARD_STEPS.indexOf(session.step);
   const profiles = useMemo(() => listStudioProfiles(), []);
 

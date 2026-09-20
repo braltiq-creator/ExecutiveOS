@@ -1,9 +1,20 @@
-import type { StudioWizardStepId } from "../types";
+import {
+  getStudioIntelligenceQuestion,
+  getStudioProfileQuestion,
+} from "../profile-detection";
+import type { StudioBusinessProfileId, StudioWizardStepId } from "../types";
 
-export const STUDIO_STEP_META: Record<
-  StudioWizardStepId,
-  { index: number; label: string; question: string }
-> = {
+export type StudioStepMeta = {
+  index: number;
+  label: string;
+  question: string;
+};
+
+/**
+ * Shared step chrome (index + label). Profile/intelligence questions are
+ * resolved via {@link resolveStudioStepMeta} from profile metadata SoT.
+ */
+export const STUDIO_STEP_META: Record<StudioWizardStepId, StudioStepMeta> = {
   welcome: {
     index: 1,
     label: "Welcome",
@@ -17,7 +28,7 @@ export const STUDIO_STEP_META: Record<
   profile: {
     index: 3,
     label: "Profile",
-    question: "Confirm Manufacturing · Forecasting.",
+    question: "Confirm your Executive Intelligence profile.",
   },
   mapping: {
     index: 4,
@@ -37,7 +48,7 @@ export const STUDIO_STEP_META: Record<
   intelligence: {
     index: 7,
     label: "Intelligence",
-    question: "Generate Manufacturing Forecast Intelligence.",
+    question: "Generate Executive Intelligence.",
   },
   brief: {
     index: 8,
@@ -45,3 +56,23 @@ export const STUDIO_STEP_META: Record<
     question: "What requires executive judgement today?",
   },
 };
+
+/**
+ * Resolve wizard step copy for the active business profile.
+ * Profile + Intelligence questions come from profile-detection metadata.
+ */
+export function resolveStudioStepMeta(
+  step: StudioWizardStepId,
+  profileId?: StudioBusinessProfileId | null,
+): StudioStepMeta {
+  const base = STUDIO_STEP_META[step];
+  if (!profileId) return base;
+
+  if (step === "profile") {
+    return { ...base, question: getStudioProfileQuestion(profileId) };
+  }
+  if (step === "intelligence") {
+    return { ...base, question: getStudioIntelligenceQuestion(profileId) };
+  }
+  return base;
+}

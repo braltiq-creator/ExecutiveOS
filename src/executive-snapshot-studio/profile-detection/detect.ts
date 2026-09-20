@@ -13,6 +13,10 @@ type ProfileRule = {
   id: StudioBusinessProfileId;
   label: string;
   industryLabel: string;
+  /** Studio wizard — Profile step question (profile-aware UI copy only). */
+  studioProfileQuestion: string;
+  /** Studio wizard — Intelligence step question (profile-aware UI copy only). */
+  studioIntelligenceQuestion: string;
   keywords: string[];
 };
 
@@ -21,6 +25,8 @@ const PROFILE_RULES: ProfileRule[] = [
     id: "commercial",
     label: "Commercial Executive Intelligence",
     industryLabel: "technology",
+    studioProfileQuestion: "Confirm Commercial · Executive Intelligence.",
+    studioIntelligenceQuestion: "Generate Commercial Executive Intelligence.",
     keywords: [
       "pipeline",
       "opportunity",
@@ -47,6 +53,8 @@ const PROFILE_RULES: ProfileRule[] = [
     id: "manufacturing",
     label: "Manufacturing Forecast Intelligence",
     industryLabel: "manufacturing",
+    studioProfileQuestion: "Confirm Manufacturing · Forecasting.",
+    studioIntelligenceQuestion: "Generate Manufacturing Forecast Intelligence.",
     keywords: [
       "dealer",
       "factory",
@@ -78,6 +86,8 @@ const PROFILE_RULES: ProfileRule[] = [
     id: "mining",
     label: "Mining Executive Intelligence",
     industryLabel: "mining",
+    studioProfileQuestion: "Confirm Mining · Executive Intelligence.",
+    studioIntelligenceQuestion: "Generate Mining Executive Intelligence.",
     keywords: [
       "mine",
       "ore",
@@ -93,6 +103,8 @@ const PROFILE_RULES: ProfileRule[] = [
     id: "utilities",
     label: "Utilities Executive Intelligence",
     industryLabel: "utilities",
+    studioProfileQuestion: "Confirm Utilities · Executive Intelligence.",
+    studioIntelligenceQuestion: "Generate Utilities Executive Intelligence.",
     keywords: [
       "grid",
       "outage",
@@ -107,6 +119,8 @@ const PROFILE_RULES: ProfileRule[] = [
     id: "field_services",
     label: "Field Services Executive Intelligence",
     industryLabel: "field_services",
+    studioProfileQuestion: "Confirm Field Services · Executive Intelligence.",
+    studioIntelligenceQuestion: "Generate Field Services Executive Intelligence.",
     keywords: [
       "job",
       "technician",
@@ -121,6 +135,8 @@ const PROFILE_RULES: ProfileRule[] = [
     id: "technology",
     label: "Technology Executive Intelligence",
     industryLabel: "technology",
+    studioProfileQuestion: "Confirm Technology · Executive Intelligence.",
+    studioIntelligenceQuestion: "Generate Technology Executive Intelligence.",
     keywords: [
       "sprint",
       "release",
@@ -208,4 +224,24 @@ export function getStudioProfileLabel(id: StudioBusinessProfileId): string {
 
 export function getStudioIndustryLabel(id: StudioBusinessProfileId): string {
   return PROFILE_RULES.find((r) => r.id === id)?.industryLabel ?? "technology";
+}
+
+/** Profile-aware Studio Profile-step question (UI copy only). */
+export function getStudioProfileQuestion(
+  id: StudioBusinessProfileId,
+): string {
+  return (
+    PROFILE_RULES.find((r) => r.id === id)?.studioProfileQuestion ??
+    `Confirm ${getStudioProfileLabel(id)}.`
+  );
+}
+
+/** Profile-aware Studio Intelligence-step question (UI copy only). */
+export function getStudioIntelligenceQuestion(
+  id: StudioBusinessProfileId,
+): string {
+  return (
+    PROFILE_RULES.find((r) => r.id === id)?.studioIntelligenceQuestion ??
+    `Generate ${getStudioProfileLabel(id)}.`
+  );
 }

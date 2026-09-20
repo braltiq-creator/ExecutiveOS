@@ -3,4 +3,6 @@ export {
   listStudioProfiles,
   getStudioProfileLabel,
   getStudioIndustryLabel,
+  getStudioProfileQuestion,
+  getStudioIntelligenceQuestion,
 } from "./detect";

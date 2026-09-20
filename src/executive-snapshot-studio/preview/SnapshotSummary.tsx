@@ -39,7 +39,7 @@ export function SnapshotSummaryCard({
     >
       <p className={ds.type.label}>Executive Snapshot</p>
       <p className="eos-type-subheading mt-1 text-[var(--eos-color-text)]">
-        Immutable · replayable · ready for Reality Lab
+        Immutable · replayable · ready for Executive Intelligence
       </p>
       <dl className="mt-[var(--eos-space-md)] grid gap-3 sm:grid-cols-2">
         {rows.map(([k, v]) => (

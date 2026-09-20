@@ -1,2 +1,2 @@
 export { SnapshotStudio } from "./SnapshotStudio";
-export { STUDIO_STEP_META } from "./steps";
+export { STUDIO_STEP_META, resolveStudioStepMeta } from "./steps";

@@ -6,9 +6,17 @@
 
 import type { UdgMappingDefinition } from "@/data-gateway/contracts/mapping";
 import { saveMapping } from "@/data-gateway/mapping/store";
-import { recordMemoryEvidence } from "@/verified-evidence/memory-store";
+import {
+  listMemoryEvidence,
+  recordMemoryEvidence,
+} from "@/verified-evidence/memory-store";
 import type { OrganizationEvidence } from "@/verified-evidence/types";
 import { compareSnapshotEvidence } from "./compare";
+import {
+  assertReusableWeeklyEvidence,
+  weeklyUploadSourceIdentifier,
+} from "./evidence-identity";
+import { previousSnapshotForAttach } from "./lineage";
 import { computeFreshness, freshnessExecutiveCopy } from "./freshness";
 import { fingerprintHeaders } from "./schema";
 import {
@@ -215,35 +223,62 @@ export function receiveWeeklyUpload(input: {
 
   const mappingReused = resolved.reuse;
   const receivedAt = nowIso();
+  const snapshotId =
+    typeof input.payload?.snapshotId === "string" &&
+    input.payload.snapshotId.trim().length > 0
+      ? input.payload.snapshotId.trim()
+      : null;
+  const sourceIdentifier = snapshotId
+    ? weeklyUploadSourceIdentifier(source.id, snapshotId)
+    : (input.fileName ?? `weekly-upload:${source.id}:${receivedAt}`);
 
-  const evidence = recordMemoryEvidence({
-    id: id("ev"),
-    organizationId: source.organizationId,
-    connectionId: null,
-    dataSourceId: source.id,
-    provider: "user_upload",
-    sourceSystem: source.provider ?? source.name,
-    sourceObjectType: source.sourceType,
-    sourceIdentifier:
-      input.fileName ?? `weekly-upload:${source.id}:${receivedAt}`,
-    observedAt: receivedAt,
-    retrievedAt: receivedAt,
-    provenance: "USER_PROVIDED",
-    evidenceStatus: "active",
-    confidence: 0.85,
-    contentPayload: {
+  const existing = snapshotId
+    ? listMemoryEvidence(source.organizationId).find(
+        (row) =>
+          row.evidenceStatus === "active" &&
+          row.provider === "user_upload" &&
+          row.sourceSystem === (source.provider ?? source.name) &&
+          row.sourceObjectType === source.sourceType &&
+          row.sourceIdentifier === sourceIdentifier,
+      )
+    : undefined;
+  if (existing && snapshotId) {
+    assertReusableWeeklyEvidence(existing, {
+      organizationId: source.organizationId,
       dataSourceId: source.id,
-      dataSourceName: source.name,
-      ingestionMethod: source.ingestionMethod,
-      recordCount: input.recordCount,
-      schemaFingerprint: resolved.schema.fingerprint,
-      mappingId: source.mapping?.id ?? resolved.mapping?.id ?? null,
-      mappingReused,
-      ...(input.payload ?? {}),
-    },
-    schemaVersion: source.schemaVersion ?? "v1",
-    createdBy: input.createdBy ?? null,
-  });
+      snapshotId,
+    });
+  }
+
+  const evidence =
+    existing ??
+    recordMemoryEvidence({
+      id: id("ev"),
+      organizationId: source.organizationId,
+      connectionId: null,
+      dataSourceId: source.id,
+      provider: "user_upload",
+      sourceSystem: source.provider ?? source.name,
+      sourceObjectType: source.sourceType,
+      sourceIdentifier,
+      observedAt: receivedAt,
+      retrievedAt: receivedAt,
+      provenance: "USER_PROVIDED",
+      evidenceStatus: "active",
+      confidence: 0.85,
+      contentPayload: {
+        dataSourceId: source.id,
+        dataSourceName: source.name,
+        ingestionMethod: source.ingestionMethod,
+        recordCount: input.recordCount,
+        schemaFingerprint: resolved.schema.fingerprint,
+        mappingId: source.mapping?.id ?? resolved.mapping?.id ?? null,
+        mappingReused,
+        ...(input.payload ?? {}),
+      },
+      schemaVersion: source.schemaVersion ?? "v1",
+      createdBy: input.createdBy ?? null,
+    });
 
   const next: OrganizationDataSource = {
     ...source,
@@ -278,7 +313,38 @@ export function attachImmutableSnapshot(input: {
   compare: EvidenceCompareResult;
 } {
   const source = requireSource(input.dataSourceId);
-  const previousId = source.lastSnapshotId;
+  const lineage = previousSnapshotForAttach(source, input.snapshotId);
+  if (lineage.alreadyAttached) {
+    const previousSummary = lineage.previousSnapshotId
+      ? (snapshotSummaries.get(lineage.previousSnapshotId) ?? null)
+      : null;
+    const currentSummary = snapshotSummaries.get(input.snapshotId);
+    const compare = compareSnapshotEvidence({
+      previous: previousSummary
+        ? {
+            snapshotId: previousSummary.snapshotId,
+            recordCount: previousSummary.recordCount,
+            keys: previousSummary.keys,
+          }
+        : null,
+      current: {
+        snapshotId: input.snapshotId,
+        recordCount: currentSummary?.recordCount ?? input.recordCount,
+        keys: currentSummary?.keys ?? input.keys,
+      },
+    });
+    return {
+      source,
+      lineage: {
+        dataSourceId: source.id,
+        previousSnapshotId: lineage.previousSnapshotId,
+        currentSnapshotId: input.snapshotId,
+      },
+      compare,
+    };
+  }
+
+  const previousId = lineage.previousSnapshotId;
   const previousSummary = previousId
     ? snapshotSummaries.get(previousId) ?? null
     : null;

@@ -12,6 +12,11 @@ export type StudioAuthOk = {
   ok: true;
   userId: string;
   organisationId: string;
+  /**
+   * Name from the authenticated membership.
+   * Null in mock mode so fixture organisation names are never attached.
+   */
+  organisationName: string | null;
 };
 
 export type StudioAuthErr = {
@@ -33,6 +38,7 @@ export async function requireStudioSession(): Promise<StudioAuthResult> {
       ok: true,
       userId: MOCK_AUTH_USER.id,
       organisationId: MOCK_ORG,
+      organisationName: null,
     };
   }
 
@@ -54,10 +60,12 @@ export async function requireStudioSession(): Promise<StudioAuthResult> {
     };
   }
 
+  const membershipName = membership.organization.name?.trim() ?? "";
   return {
     ok: true,
     userId: user.id,
     organisationId: membership.organization.id,
+    organisationName: membershipName.length > 0 ? membershipName : null,
   };
 }
 
@@ -77,6 +85,7 @@ export async function requireStudioActor(
       ok: true,
       userId: session.userId,
       organisationId: orgId,
+      organisationName: null,
     };
   }
 

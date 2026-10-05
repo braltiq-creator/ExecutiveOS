@@ -8,8 +8,10 @@
 import type { UdgMappingDefinition } from "@/data-gateway/contracts/mapping";
 import { requireStudioActor } from "@/executive-snapshot-studio/server/auth";
 import type { StudioBusinessProfileId } from "@/executive-snapshot-studio/types";
+import { materializeManufacturingEvidenceGraph } from "@/manufacturing-evidence-graph/store";
 import { getPilotPersistence } from "@/pilot-persistence";
 import { computeFreshness, freshnessExecutiveCopy } from "./freshness";
+import { previousSnapshotForAttach } from "./lineage";
 import {
   defaultCadenceForLogicalSource,
   logicalDataSourceNameForProfile,
@@ -306,10 +308,11 @@ export async function finalizeStudioWeeklyIngestionAction(input: {
       if (!source || source.organizationId !== actor.organisationId) {
         return { ok: false, error: "Data source not found." };
       }
-      if (source.lastSnapshotId) {
+      const memoryAnchor = previousSnapshotForAttach(source, input.snapshotId);
+      if (memoryAnchor.previousSnapshotId) {
         const prev = await pilot.getSnapshot(
           actor.organisationId,
-          source.lastSnapshotId,
+          memoryAnchor.previousSnapshotId,
         );
         previousRecordCount = prev?.recordCount ?? null;
       }
@@ -337,6 +340,15 @@ export async function finalizeStudioWeeklyIngestionAction(input: {
           input.recordCount - previousRecordCount;
       }
 
+      const graphError = await bindManufacturingEvidenceGraph({
+        organisationId: actor.organisationId,
+        snapshotId: input.snapshotId,
+        evidenceId: upload.evidence.id,
+        profileId: snap.profileId,
+        contextProfileId: snap.context.profileId,
+      });
+      if (graphError) return { ok: false, error: graphError };
+
       return {
         ok: true,
         source: attached.source,
@@ -357,10 +369,14 @@ export async function finalizeStudioWeeklyIngestionAction(input: {
     if (!sourceBefore) {
       return { ok: false, error: "Data source not found." };
     }
-    if (sourceBefore.lastSnapshotId) {
+    const durableAnchor = previousSnapshotForAttach(
+      sourceBefore,
+      input.snapshotId,
+    );
+    if (durableAnchor.previousSnapshotId) {
       const prev = await pilot.getSnapshot(
         actor.organisationId,
-        sourceBefore.lastSnapshotId,
+        durableAnchor.previousSnapshotId,
       );
       previousRecordCount = prev?.recordCount ?? null;
     }
@@ -386,6 +402,15 @@ export async function finalizeStudioWeeklyIngestionAction(input: {
       previousKeys,
     });
 
+    const graphError = await bindManufacturingEvidenceGraph({
+      organisationId: actor.organisationId,
+      snapshotId: input.snapshotId,
+      evidenceId: upload.evidence.id,
+      profileId: snap.profileId,
+      contextProfileId: snap.context.profileId,
+    });
+    if (graphError) return { ok: false, error: graphError };
+
     return {
       ok: true,
       source: attached.source,
@@ -406,6 +431,27 @@ export async function finalizeStudioWeeklyIngestionAction(input: {
           : "Unable to finalise weekly data source lineage.",
     };
   }
+}
+
+async function bindManufacturingEvidenceGraph(input: {
+  organisationId: string;
+  snapshotId: string;
+  evidenceId: string;
+  profileId: string;
+  contextProfileId?: string;
+}): Promise<string | null> {
+  const graph = await materializeManufacturingEvidenceGraph({
+    organisationId: input.organisationId,
+    snapshotId: input.snapshotId,
+    evidenceId: input.evidenceId,
+  });
+  const manufacturing =
+    input.profileId === "manufacturing" ||
+    input.contextProfileId === "manufacturing";
+  if (manufacturing && graph.missingGrain) {
+    return "Manufacturing evidence graph could not be saved for this snapshot.";
+  }
+  return null;
 }
 
 /** Test helper — resolve by name using durable or memory. */

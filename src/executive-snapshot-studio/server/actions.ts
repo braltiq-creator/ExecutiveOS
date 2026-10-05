@@ -39,6 +39,7 @@ import type {
   StudioIntelligenceActionResult,
   StudioSnapshotActionResult,
 } from "./dto";
+import { saveManufacturingFactGrain } from "@/manufacturing-evidence-graph/store";
 import { requireStudioActor, requireStudioSession } from "./auth";
 
 function userSafeError(error: unknown): string {
@@ -218,6 +219,15 @@ export async function createExecutiveSnapshotAction(
           "ExecutiveOS could not create a valid Executive Snapshot from this workbook. The parse result was marked obsolete.",
         ],
       };
+    }
+
+    if (input.selectedProfileId === "manufacturing") {
+      await saveManufacturingFactGrain({
+        organisationId: actor.organisationId,
+        snapshotId: bundle.ingestion.snapshot.meta.snapshotId,
+        organisationLabel: actor.organisationName,
+        records: bundle.ingestion.snapshot.records,
+      });
     }
 
     return toPlainJson({

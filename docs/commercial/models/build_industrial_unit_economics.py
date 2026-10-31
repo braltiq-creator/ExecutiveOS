@@ -8,9 +8,13 @@ Outputs are recommendations under editable assumptions, not approved prices.
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
 from openpyxl import Workbook
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from add_managed_services import add_managed_services  # noqa: E402
 from openpyxl.chart import LineChart, Reference
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
@@ -943,9 +947,11 @@ def build() -> dict[str, float]:
         src.row_dimensions[5 + i].height = 32
     autosize(src, {1: 42, 2: 88, 3: 78})
 
+    add_managed_services(wb)
+
     # ----- Cover -----
     cover = wb.create_sheet("Cover", 0)
-    cover["A1"] = "ExecutiveOS industrial unit economics"
+    cover["A1"] = "ExecutiveOS industrial unit economics and managed intelligence"
     cover["A1"].font = Font(name="Calibri", size=18, bold=True, color=NAVY)
     cover["A3"] = "Status"
     cover["B3"] = "Recommendation model. Not an approved price, forecast, or headcount plan."
@@ -954,9 +960,9 @@ def build() -> dict[str, float]:
     cover["A5"] = "Currency"
     cover["B5"] = "AUD outputs. USD vendor prices converted at Assumptions!fx_aud_per_usd."
     cover["A6"] = "Edit"
-    cover["B6"] = "Yellow cells on Assumptions, and the yellow new-logo columns on Forecast36."
+    cover["B6"] = "Yellow cells on Assumptions and ServiceAssumptions, and the yellow new-logo columns on Forecast36."
     cover["A7"] = "Do not edit"
-    cover["B7"] = "UnitEconomics, Scale, Acquisition, Sensitivity, Forecast36 formula cells."
+    cover["B7"] = "Formula cells. Platform sheets are unchanged by the managed-intelligence sheets, which only read them."
     cover["A9"] = "Sheets"
     sheets = [
         ("Assumptions", "Every input and every cited vendor price."),
@@ -965,7 +971,13 @@ def build() -> dict[str, float]:
         ("Acquisition", "CAC, payback, LTV arithmetic. The ratio is not evidence."),
         ("Forecast36", "Conservative, base, and aggressive logo paths for 36 months."),
         ("Sensitivity", "AI volume, wrong model, support hours, CSM cost, price, card fees, win rate, churn."),
-        ("Sources", "URLs and repository paths."),
+        ("Sources", "URLs and repository paths, including super and Queensland payroll tax."),
+        ("ServiceAssumptions", "Managed-intelligence inputs. Green cells are formulas."),
+        ("ServicePackages", "Essential, Advanced, Strategic. Specialist, founder, and contractor margins."),
+        ("ServiceScale", "1, 5, 10, 25, 50 customers. Forced hire versus the staffing policy."),
+        ("MarginMix", "SaaS margin, service margin, and combined margin. Double-count shown on its own row."),
+        ("ServiceForecast36", "36 months of service attach, capacity, and company cash profit on top of Forecast36."),
+        ("ServiceSensitivity", "Labour, hours, utilization, discussed prices, and combined-margin breaks."),
     ]
     cover["A10"] = "Sheet"
     cover["B10"] = "What it answers"
@@ -974,16 +986,16 @@ def build() -> dict[str, float]:
         cover.cell(11 + i, 1, name)
         cover.cell(11 + i, 2, desc).alignment = WRAP
         cover.row_dimensions[11 + i].height = 28
-    cover["A20"] = (
-        "Gross margin in this workbook is delivery margin: infrastructure, model inference, card fees, paid support, and CSM. "
-        "Founder time is shown beside it as opportunity cost, not as cash. "
-        "Sales time, marketing, engineering, and G&A are overhead on Forecast36, not COGS. "
-        "Partner commission is an acquisition cost and is zero unless you set commission_rate."
+    cover["A26"] = (
+        "Platform gross margin is delivery margin: infrastructure, model inference, card fees, paid support, and CSM. "
+        "Managed intelligence is a separate revenue line with its own labour cost. Do not bury it in the platform fee. "
+        "Founder time is opportunity cost on both lines. It is not free. "
+        "Sales, engineering, and G&A stay on Forecast36 as overhead."
     )
-    cover["A20"].alignment = WRAP
-    cover.merge_cells("A20:B22")
+    cover["A26"].alignment = WRAP
+    cover.merge_cells("A26:B28")
     autosize(cover, {1: 28, 2: 120})
-    cover.row_dimensions[20].height = 30
+    cover.row_dimensions[26].height = 36
     cover.sheet_properties.tabColor = NAVY
 
     # Print settings

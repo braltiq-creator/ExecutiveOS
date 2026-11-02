@@ -15,6 +15,7 @@ from openpyxl import Workbook
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from add_managed_services import add_managed_services  # noqa: E402
+from add_offer_architecture import add_offer_architecture  # noqa: E402
 from openpyxl.chart import LineChart, Reference
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
@@ -948,6 +949,7 @@ def build() -> dict[str, float]:
     autosize(src, {1: 42, 2: 88, 3: 78})
 
     add_managed_services(wb)
+    add_offer_architecture(wb)
 
     # ----- Cover -----
     cover = wb.create_sheet("Cover", 0)
@@ -978,6 +980,7 @@ def build() -> dict[str, float]:
         ("MarginMix", "SaaS margin, service margin, and combined margin. Double-count shown on its own row."),
         ("ServiceForecast36", "36 months of service attach, capacity, and company cash profit on top of Forecast36."),
         ("ServiceSensitivity", "Labour, hours, utilization, discussed prices, and combined-margin breaks."),
+        ("OfferArchitecture", "One order with separate lines: platform, service, activation, pilot, and the enterprise floor."),
     ]
     cover["A10"] = "Sheet"
     cover["B10"] = "What it answers"

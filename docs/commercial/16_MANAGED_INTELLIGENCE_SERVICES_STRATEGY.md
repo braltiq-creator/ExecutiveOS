@@ -1,6 +1,7 @@
 # 16 — Managed Intelligence Services
 
 **Status:** Recommendation. Not an approved price, package, or hiring plan.  
+**Later draft:** [`17_ENTERPRISE_COMMERCIAL_ARCHITECTURE.md`](./17_ENTERPRISE_COMMERCIAL_ARCHITECTURE.md) (2 November 2026) proposes Advanced as the preferred starting package. That conflicts with the Essential default in this paper. Neither is approved. The 36-month attach rates in the workbook are unchanged.  
 **Date:** 1 November 2026 (Australia/Brisbane)  
 **Depends on:** [`15_INDUSTRIAL_ICP_TARGET_ACCOUNTS_AND_UNIT_ECONOMICS_ANALYSIS.md`](./15_INDUSTRIAL_ICP_TARGET_ACCOUNTS_AND_UNIT_ECONOMICS_ANALYSIS.md). The platform list of AUD $9,500 a month remains a recommendation in that paper. It is not approved by this one.  
 **Does not change:** application code, checkout, billing, the website, or any document that currently claims to be the price list.  

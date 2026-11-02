@@ -16,6 +16,7 @@ from openpyxl import Workbook
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from add_managed_services import add_managed_services  # noqa: E402
 from add_offer_architecture import add_offer_architecture  # noqa: E402
+from add_reconciliation import add_reconciliation  # noqa: E402
 from openpyxl.chart import LineChart, Reference
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
@@ -323,7 +324,13 @@ def inputs() -> list[tuple[str, float | int | str, str, str, str]]:
         ("expand_cons", 0.0, "share of logos", "input", "No second-entity expansion in the conservative case."),
         ("expand_base", 0.10, "share of logos", "input", "Applied from month 13 only."),
         ("expand_agg", 0.15, "share of logos", "input", "Applied from month 13 only."),
-        ("pilot_fee", 12000, "AUD", "input", "Recommended paid pilot AFTER the first three design partners. Credited on conversion, so it is not extra ARR."),
+        (
+            "pilot_fee",
+            12000,
+            "AUD",
+            "input",
+            "1 November hypothesis. Not read by Forecast36. The 2 November reconciliation uses arch_pilot_fee of 15000 on the order sheets. This cell is left at 12000 so the earlier figure is not overwritten.",
+        ),
         ("free_partner_cap", 3, "accounts", "input", "Maximum zero-fee design partners."),
         ("free_partner_hours", 15, "hours", "input", "Cap per free design partner."),
     ]
@@ -950,6 +957,7 @@ def build() -> dict[str, float]:
 
     add_managed_services(wb)
     add_offer_architecture(wb)
+    add_reconciliation(wb)
 
     # ----- Cover -----
     cover = wb.create_sheet("Cover", 0)
@@ -958,7 +966,7 @@ def build() -> dict[str, float]:
     cover["A3"] = "Status"
     cover["B3"] = "Recommendation model. Not an approved price, forecast, or headcount plan."
     cover["A4"] = "Date"
-    cover["B4"] = "1 November 2026 (Australia/Brisbane)"
+    cover["B4"] = "1 November 2026 model. Reconciled 2 November 2026 (Australia/Brisbane). Prices still unapproved."
     cover["A5"] = "Currency"
     cover["B5"] = "AUD outputs. USD vendor prices converted at Assumptions!fx_aud_per_usd."
     cover["A6"] = "Edit"
@@ -980,7 +988,13 @@ def build() -> dict[str, float]:
         ("MarginMix", "SaaS margin, service margin, and combined margin. Double-count shown on its own row."),
         ("ServiceForecast36", "36 months of service attach, capacity, and company cash profit on top of Forecast36."),
         ("ServiceSensitivity", "Labour, hours, utilization, discussed prices, and combined-margin breaks."),
-        ("OfferArchitecture", "One order with separate lines: platform, service, activation, pilot, and the enterprise floor."),
+        ("OfferArchitecture", "One order with separate lines. Floor requires material governance. Essential is the founder-led default."),
+        ("PlatformCost", "Variable and fully loaded platform cost. The partial figure near $96 is not the commercial margin."),
+        ("CustomerMargins", "Combined margin by package, founder-led and specialist-led, with the 2 November partial-cost column kept."),
+        ("PilotEconomics", "Paid and design-partner pilots, converted and not converted. Credit touches the first entity only."),
+        ("RevenueReporting", "List value, net contracted ARR, invoiced revenue, cash, pilot, activation, expansion."),
+        ("CapacityTransition", "Ready hours hire. Pipeline does not. Founder time stays costed after a specialist is hired."),
+        ("DecisionRegister", "Direction adopted for this draft, proposed terms, unresolved items, assumptions to validate."),
     ]
     cover["A10"] = "Sheet"
     cover["B10"] = "What it answers"
@@ -989,14 +1003,14 @@ def build() -> dict[str, float]:
         cover.cell(11 + i, 1, name)
         cover.cell(11 + i, 2, desc).alignment = WRAP
         cover.row_dimensions[11 + i].height = 28
-    cover["A26"] = (
-        "Platform gross margin is delivery margin: infrastructure, model inference, card fees, paid support, and CSM. "
-        "Managed intelligence is a separate revenue line with its own labour cost. Do not bury it in the platform fee. "
-        "Founder time is opportunity cost on both lines. It is not free. "
-        "Sales, engineering, and G&A stay on Forecast36 as overhead."
+    cover["A32"] = (
+        "Platform gross margin is delivery margin: infrastructure, model inference, card fees, paid support, and the human who actually delivers the platform. "
+        "A margin that uses only the partial allocation near $96 a month is not the validated commercial margin. "
+        "Managed intelligence is a separate revenue line. Founder time stays costed after a specialist is hired. "
+        "Forecast36 and ServiceForecast36 are unchanged. Sales, engineering, and G&A stay overhead."
     )
-    cover["A26"].alignment = WRAP
-    cover.merge_cells("A26:B28")
+    cover["A32"].alignment = WRAP
+    cover.merge_cells("A32:B34")
     autosize(cover, {1: 28, 2: 120})
     cover.row_dimensions[26].height = 36
     cover.sheet_properties.tabColor = NAVY

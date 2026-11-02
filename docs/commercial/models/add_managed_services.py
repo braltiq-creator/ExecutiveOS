@@ -206,7 +206,7 @@ def _inputs() -> list[tuple[str, float | int | str, str, str, str]]:
             0.04,
             "fraction / year",
             "input",
-            "Hypothesis. Service price steps up each year from month 13. Lesser of a 5% cap and a CPI-like 4%. Not applied to Forecast36 platform prices.",
+            "UNAPPROVED. Working hypothesis only, subject to final contract wording and legal and accounting review. Steps service price from month 13. Not applied to Forecast36 platform prices. Not a renewal term in force.",
         ),
         (
             "svc_blend_ess",
@@ -217,6 +217,35 @@ def _inputs() -> list[tuple[str, float | int | str, str, str, str]]:
         ),
         ("svc_blend_adv", 0.30, "fraction", "input", "Standard mix."),
         ("svc_blend_str", 0.20, "fraction", "input", "Standard mix."),
+        ("section_svc_capacity", "CAPACITY TEST — DOES NOT DRIVE SERVICEFORECAST36", "", "section", ""),
+        (
+            "svc_founder_residual_hours",
+            8,
+            "hours / month",
+            "input",
+            "Working assumption for oversight that continues after a specialist is hired. Not observed. ServiceForecast36 still sets founder delivery hours to 0 at hire. This cell does not feed that sheet.",
+        ),
+        (
+            "svc_pipeline_hours",
+            0,
+            "hours / month",
+            "input",
+            "Forecast pipeline. Never a hire trigger.",
+        ),
+        (
+            "svc_verbal_hours",
+            0,
+            "hours / month",
+            "input",
+            "Verbal commitments. Never a hire trigger.",
+        ),
+        (
+            "svc_ready_hours",
+            0,
+            "hours / month",
+            "input",
+            "Contracted hours ready to start. The hire test reads this cell and ignores pipeline and verbal hours.",
+        ),
     ]
 
 

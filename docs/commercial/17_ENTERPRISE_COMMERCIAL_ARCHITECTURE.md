@@ -1,163 +1,158 @@
 # 17 — Enterprise Commercial Architecture
 
-**Braltiq · Commercial strategy · Working draft 1.0**  
-**Status:** Founder approval required. Nothing in this paper is a price in force.  
-**Date:** 2 November 2026 (Australia/Brisbane)  
-**Built from:** the founder draft of this architecture, [`15_INDUSTRIAL_ICP_TARGET_ACCOUNTS_AND_UNIT_ECONOMICS_ANALYSIS.md`](./15_INDUSTRIAL_ICP_TARGET_ACCOUNTS_AND_UNIT_ECONOMICS_ANALYSIS.md), and [`16_MANAGED_INTELLIGENCE_SERVICES_STRATEGY.md`](./16_MANAGED_INTELLIGENCE_SERVICES_STRATEGY.md).  
-**The source draft ended mid-sentence in the Advanced package.** Sections from that point are completed from those two papers. Where this draft changes an earlier recommendation, the change is marked and left unresolved.  
-**Does not change:** application code, checkout, billing, the website, or any document that currently claims to be the price list.  
-**Model:** [`models/industrial_unit_economics.xlsx`](./models/industrial_unit_economics.xlsx), sheet `OfferArchitecture`. Yellow cells are the order being tested. GST is not in the sheet.
+**Braltiq · Commercial strategy · Working draft 1.0, reconciled**  
+**Status:** Strategic direction below is adopted for this draft. Every price is still proposed. Nothing here is a price in force, and nothing may be quoted as approved.  
+**Date:** 2 November 2026 (Australia/Brisbane). Reconciled the same day after review of this paper and the workbook.  
+**Built from:** the founder draft, [`15_INDUSTRIAL_ICP_TARGET_ACCOUNTS_AND_UNIT_ECONOMICS_ANALYSIS.md`](./15_INDUSTRIAL_ICP_TARGET_ACCOUNTS_AND_UNIT_ECONOMICS_ANALYSIS.md), and [`16_MANAGED_INTELLIGENCE_SERVICES_STRATEGY.md`](./16_MANAGED_INTELLIGENCE_SERVICES_STRATEGY.md).  
+**Does not change:** application code, checkout, billing, the pricing catalogue, the website, production entitlements, or any document that currently claims to be the price list.  
+**Model:** [`models/industrial_unit_economics.xlsx`](./models/industrial_unit_economics.xlsx). `Forecast36` and `ServiceForecast36` are unchanged. This reconciliation adds `PlatformCost`, `CustomerMargins`, `PilotEconomics`, `RevenueReporting`, `CapacityTransition`, and `DecisionRegister`, and it rewrites the order logic on `OfferArchitecture`.  
+**GST:** every figure is exclusive of GST. GST is added on the invoice where registration and the customer’s place of supply require it. That status is not in the repository.
 
-Prices below are proposed **exclusive of GST**. Whether GST is added on the invoice depends on registration and the customer’s place of supply. That status is not in the repository. **Missing.** Do not print these numbers as GST-inclusive until finance confirms it.
+The decision register at the end separates direction, proposed terms, unresolved items, and assumptions that still need evidence.
 
 ---
 
 ## 1. Commercial philosophy
 
-ExecutiveOS is an Enterprise Executive Intelligence Platform.
+ExecutiveOS is an Enterprise Executive Intelligence Platform. It sits above existing business systems and converts organisational information into executive intelligence, evidence-backed decisions, and measurable business outcomes.
 
-It sits above existing business systems and converts organisational information into executive intelligence, evidence-backed decisions and measurable business outcomes.
-
-The commercial model is designed around five objectives:
+The commercial model has five objectives:
 
 1. Generate predictable, high-value recurring SaaS revenue.
 2. Acquire enterprise customers through a focused, repeatable industrial use case.
-3. Expand customer value through additional entities, capabilities and optional services.
+3. Expand customer value through additional entities, capabilities, and optional services.
 4. Maintain SaaS gross margins of 80–85% or higher.
 5. Avoid becoming a labour-intensive consulting or implementation business.
 
-**Core principle.** We sell the platform as software. We sell Managed Intelligence separately as a defined professional service.
+**Core principle.** The platform is sold as software. Managed Intelligence is sold separately as a defined professional service. The customer can see each line.
 
-The customer must always be able to distinguish what they are paying for in each line.
-
-The first use case remains manufacturing forecast intelligence from the customer’s own file. Capabilities that the design-partner documents mark as not active are not part of any line on the order.
+The first use case remains manufacturing forecast intelligence from the customer’s own file. Capabilities the design-partner documents mark as not active are not on the order.
 
 ---
 
 ## 2. The commercial architecture
 
-ExecutiveOS has five commercial components.
-
 | Component | Revenue type | Purpose |
 |---|---|---|
 | ExecutiveOS Platform | Recurring SaaS | Core software subscription |
-| Managed Intelligence | Recurring managed service | Structured intelligence oversight and executive support |
-| Pilot / Design Partner | Fixed-term engagement | Validate a defined use case and establish commercial value |
-| Onboarding / Activation | One-off fee, or an inclusion whose cost is shown | Standard customer setup and activation |
-| Enterprise Expansion | Recurring SaaS, and optional services only if bought again | Additional entities, and later capabilities once they exist |
+| Managed Intelligence | Recurring managed service | Structured intelligence oversight |
+| Pilot / Design Partner | Fixed-term engagement | Validate one forecasting use case |
+| Onboarding / Activation | Zero-price line, cost recognised internally | Standard setup, inside a hard cap |
+| Enterprise Expansion | Recurring SaaS, and a further service line only if it is bought | Another operating entity, or a later capability once it exists |
 
-These components are separately identifiable in proposals, order forms, contracts, invoices and the management accounts.
+These lines stay separate on the proposal, the order form, the contract, the invoice, and in the management accounts. A cover-page total is the sum of the lines. A blended SKU is outside this draft.
 
-No component is included in another fee unless its direct cost and its effect on margin have been modelled. Inclusion at a zero price is still a cost. It is shown as its own line with a fee of zero and a cap, not omitted.
+Inclusion at a zero price is still a cost. Activation is printed as its own line with a fee of zero and a cap of 12 hours. Its direct cost is recognised once. It is not folded into the monthly platform cost, and it is not added a second time in the year-1 margin.
 
-### How a proposal is laid out
-
-| Line | What the customer sees | What we record |
-|------|------------------------|----------------|
-| 1. Platform — initial operating entity | The monthly rate, the annual commitment, and the invoice amount | Platform SaaS |
-| 2. Platform — each additional entity | The incremental rate, and a statement that it does not include service hours | Platform SaaS |
-| 3. Enterprise floor, if it binds | The amount the rate card was lifted, and why | Platform SaaS. Not a service. |
-| 4. Managed Intelligence, or “not taken” | Package name, monthly fee, hour cap, or an explicit decline | Service revenue, or zero |
-| 5. Pilot or design partner, if this order starts there | Term, fee, hour cap, and whether the fee credits to line 1 | Its own revenue, unless credited |
-| 6. Activation | “Included, capped at 12 hours” or a stated fee | Cost either way. Revenue only if a fee is charged. |
-
-A single number on a cover page is allowed only as the sum of these lines, with the lines underneath it. A blended SKU is not.
-
-### Management accounts
-
-Until a chart of accounts is formally adopted, report at least:
+Management accounts, until a formal chart of accounts exists, report at least:
 
 - Platform subscription, initial entity
 - Platform subscription, additional entities
+- Platform floor premium, when the floor binds
 - Managed Intelligence, by package
-- Pilot and design-partner fees, with credits shown as a reduction of platform, not as a second sale
-- Activation fees, which will be zero on the standard order
+- Pilot fees, with a conversion credit shown as a reduction of the initial-entity platform invoice, not as a second sale and not as ARR
+- Activation fees, which are zero on the standard order, and activation cost, which is internal
 
-Do not post service labour against the platform account.
+Service labour is not posted against the platform account.
 
 ---
 
-## 3. ExecutiveOS Platform subscription
+## 3. Platform subscription
 
-### Proposed initial platform pricing
+### Proposed rate card
 
-| Item | Working commercial assumption |
+| Item | Proposed term |
 |---|---:|
 | Initial operating entity | AUD $9,500 / month |
 | Additional operating entity | AUD $3,000 / month |
-| Annual commitment | 12 months |
-| Annual platform payment | 11 months charged |
-| Annual platform invoice, first entity | AUD $104,500 |
-| Enterprise minimum | AUD $15,000 / month — unresolved. Interpretation below. |
+| Commitment | 12 months |
+| Platform concession | 11 months charged |
+| One-entity list value (rate × 12) | AUD $114,000 — not ARR |
+| One-entity net contracted platform ARR | AUD $104,500 |
+| Enterprise floor | AUD $15,000 / month, on the trigger below |
 
-All of these remain subject to founder approval. They are the working assumptions already tested in the industrial paper. They are not a published list.
+The concession applies to every platform line: the initial entity, each additional entity, and a floor-adjusted platform rate. Managed Intelligence does not receive a free month.
 
-The 11-month concession applies to the platform only, including additional entities and a floor-adjusted platform rate. Managed Intelligence does not receive a free month. The workbook applies `annual_months_paid` (11) to the invoiced platform monthly rate.
+### What one entity includes
 
-### What the platform subscription includes
-
-For **each** operating entity on the order:
-
-- The manufacturing forecasting workspace that the product can actually run, from the customer’s file, on the weekly upload path.
-- Up to **8** named executive users for that entity.
-- Up to **2,000** small-model completions a month for that entity. Unused completions do not roll over. A larger model is not included.
+- The manufacturing forecasting workspace the product can run, from the customer’s file, on the weekly upload path.
+- Up to 8 named executive users.
+- Up to 2,000 small-model completions a month. Unused completions do not roll over. A larger model is not included.
 - Weekly refresh when the customer uploads.
 - Standard hosting, product updates, and maintenance.
-- Standard platform support inside a **one-hour-a-month** cap for the account, not one hour per entity. The hour is for product use. It is not a meeting and not a written intelligence note.
+- One hour a month of platform support for the account, not one hour per entity. The hour is product use. It is not a meeting and not a written intelligence note.
 - Standard product documentation.
 
-These allowances are the entitlement model the earlier papers used as a hypothesis. They are the definition this draft adopts for testing. They are not enforced in billing yet.
+These allowances are the definition of the fee for this draft. Billing does not enforce them yet.
 
-### What the platform subscription does not include
+The platform fee does not include Managed Intelligence, a dedicated analyst, bespoke reports, custom development, bespoke integrations, ERP implementation, data cleansing, running the customer’s operation or S&OP, travel, or unlimited model use.
 
-- Managed Intelligence meetings, notes, or hours.
-- A dedicated analyst or consultant.
-- Bespoke reports outside what the product already produces.
-- Custom software development.
-- Bespoke integrations.
-- ERP implementation.
-- Data-cleansing projects.
-- Running the customer’s operation or their S&OP process.
-- Travel or on-site time.
-- Unlimited AI usage or processing.
-- A second entity’s service hours, user stories, or a private success manager.
+An additional entity is another software tenant of the same product: its own file, its own users, its own completion allowance. It does not include Managed Intelligence hours. Buying the service does not change the platform price.
 
-An additional operating entity is another software tenant of the same product: its own file, its own users, its own completion allowance. It does not automatically include Managed Intelligence.
+### The floor
 
-### The AUD $15,000 floor
+AUD $9,500 remains the initial single-entity rate. The floor does not lift a single-entity customer, including a customer who asks for a security questionnaire or for heavier contract terms.
 
-**Recommended interpretation, still to be approved.**
+AUD $3,000 remains the incremental platform rate for each further entity.
 
-- AUD $9,500 is the initial single-entity platform price. A first customer is not lifted to $15,000 for being a large company.
-- AUD $3,000 is the incremental platform price for each further entity.
-- AUD $15,000 a month is a minimum **only when** the customer requires the enterprise contractual set and the rate card for the entities they are buying is below that minimum.
+AUD $15,000 a month is a platform minimum only when all three of these are true:
 
-The enterprise contractual set means a multi-entity order that also asks for a security review, a named commercial term, or procurement paperwork beyond the standard annual invoice. A single entity never triggers the floor. Wanting Managed Intelligence does not trigger it either. The floor is platform revenue, not a bundle that hides service hours.
+1. The order contains two or more operating entities.
+2. The customer requires materially expanded enterprise governance, as defined below.
+3. The rate card for the entities on the order is below AUD $15,000.
 
-| Configuration | Rate card | Floor | Invoiced platform monthly | Annual platform invoice |
-|---|---:|---|---:|---:|
-| 1 entity, standard terms | $9,500 | Does not apply | $9,500 | $104,500 |
-| 2 entities, standard terms | $12,500 | Does not apply | $12,500 | $137,500 |
-| 2 entities, enterprise contractual set | $12,500 | Applies | $15,000 | $165,000 |
-| 3 entities, either way | $15,500 | Dormant. The card is already above the floor. | $15,500 | $170,500 |
+**Materially expanded enterprise governance** means at least one of the following, beyond the standard annual invoice and beyond a routine security questionnaire:
 
-The two-entity enterprise case is a platform premium of **AUD $2,500 a month** (AUD $27,500 on the annual invoice). It buys the contractual set. It does not buy Managed Intelligence, and it does not buy a fourth entity.
+- A negotiated security schedule, custom data-processing terms, or a right to audit or penetration-test.
+- A customer-paper contract, or liability, indemnity, or governing-law terms that have to be drafted.
+- A named data-residency, dedicated-environment, or segregation requirement beyond the standard hosted tenant.
+- Procurement that requires a security review meeting, a policy exception, or ongoing governance reporting.
 
-If a later capability is sold as platform — and none is ready to sell — it is a new line with its own cost, not a silent expansion of this floor.
+A routine security questionnaire does not qualify. That includes a standard SIG, CAIQ, or spreadsheet answered from the published security posture, with no negotiated schedule and no audit right. Asking for that questionnaire does not change the platform price, on one entity or on several.
+
+This draft does not invent a single-entity premium. A single-entity order that needs custom paper is accepted on the standard rate or declined. It is not moved from $9,500 to $15,000.
+
+Managed Intelligence does not trigger the floor. The floor premium is platform revenue. It does not buy service hours and it does not buy another entity.
+
+### Worked platform amounts
+
+Every row shows the rate card, the amount invoiced each month, and the annual contracted platform amount (invoiced monthly × 11). List value is the rate card × 12 and is not ARR.
+
+| Configuration | Rate card / month | List value × 12 | Invoiced / month | Annual contracted platform |
+|---|---:|---:|---:|---:|
+| 1 entity, standard terms | $9,500 | $114,000 | $9,500 | $104,500 |
+| 1 entity, routine questionnaire | $9,500 | $114,000 | $9,500 | $104,500 |
+| 1 entity, material governance | $9,500 | $114,000 | $9,500 | $104,500 |
+| 2 entities, standard terms | $12,500 | $150,000 | $12,500 | $137,500 |
+| 2 entities, routine questionnaire | $12,500 | $150,000 | $12,500 | $137,500 |
+| 2 entities, material governance | $12,500 | $150,000 | $15,000 | $165,000 |
+| 3 entities, standard terms | $15,500 | $186,000 | $15,500 | $170,500 |
+
+On the two-entity material order the floor premium is AUD $2,500 a month, AUD $27,500 on the annual contract. Of the AUD $165,000, AUD $104,500 is the initial entity, AUD $33,000 is the second entity, and AUD $27,500 is the premium.
+
+Three entities are already above the floor, so the floor is dormant.
+
+The first architecture draft would have applied the floor to a two-entity order on any “enterprise terms” flag, including a routine questionnaire. That row is preserved on `OfferArchitecture` and labelled superseded. It is not a quote.
 
 ---
 
 ## 4. Managed Intelligence
 
-### Positioning
+Braltiq Managed Intelligence is an optional recurring service. It is structured human oversight of intelligence the platform has already produced. The customer’s executives remain accountable for the decision and for running the business.
 
-**Braltiq Managed Intelligence** is an optional recurring service that helps an enterprise customer take more from ExecutiveOS.
+It is not consulting, not staff supplied into the planning team, not an outsourced S&OP, and not an implementation project.
 
-It is structured human oversight of intelligence the platform has already produced. It helps them see what changed, whether the evidence is fit to use, which forecast movements matter, what deserves an executive, whether a decision has been framed, and where adoption is slipping.
+### Which package is offered
 
-The customer’s executives remain accountable for the decision and for running the business.
+The package to recommend and the package the current delivery model can sustain are different.
 
-It is not consulting, not staff supplied into their planning team, not an outsourced S&OP, and not an implementation project. A request that a second customer could not receive from the same playbook next month is outside the service.
+| Moment | What is offered | Why |
+|---|---|---|
+| Founder-led delivery | **Essential is the default** | It is the package that fits the 24-hour founder bridge. Advanced and Strategic are available when the account has a real reason and the hours fit the bridge. They are not the default line. |
+| Specialist capacity is funded and the person is employed | **Advanced becomes the preferred enterprise offer** | The fuller monthly review is what an enterprise buyer should be offered once someone other than the founder can carry 12 hours. |
+| Either stage | **Strategic is reserved** | It is for a second executive forum, a renewal dossier, and a named specialist. It is not the starting line. |
+
+This resolves the earlier conflict. The 2 November draft of this paper named Advanced as the preferred starting package. The managed-intelligence paper named Essential. The rule now is the table above. `ServiceForecast36` attach rates were already an Essential-weighted book. They were not rewritten.
 
 ### Proposed packages
 
@@ -167,175 +162,266 @@ It is not consulting, not staff supplied into their planning team, not an outsou
 | Advanced | AUD $6,500 | 12 hours | about 73% |
 | Strategic | AUD $12,000 | 16 hours | about 80% |
 
-These are the working prices from the unit-economics paper. They are not operating results. AUD $2,500 and AUD $5,000 were tested and fall short of a 65% service margin at these caps. They are not on this rate card.
+AUD $2,500 and AUD $5,000 were tested and fall short of a 65% service margin at these caps. They are not on this rate card.
 
-Hours are a maximum. Unused hours expire at month end. They do not roll over. Travel and on-site days are never inside the fee. Further hours of the **same** work are sold only as a prepaid block of three at AUD $450 an hour, and only if the person has the month to give. An on-site day is AUD $2,500 plus travel at cost, ordered on its own line.
+Hours are a maximum. Unused hours expire. Travel and on-site days are outside the fee. Further hours of the same work are a prepaid block of three at AUD $450 an hour, and only if the person has the month. An on-site day is AUD $2,500 plus travel at cost, on its own line.
 
-The service is an annual commitment, invoiced in advance, **twelve months paid**. The platform’s free month does not apply.
+The service is an annual commitment, invoiced in advance, twelve months paid.
 
-### Essential
+**Essential**, inside 6 hours, is a monthly intelligence review, a data-quality and file-readiness review from the product’s own checks, a forecast-movement review, the exceptions that deserve a person, a one-page summary, and coordination of the service. Response is acknowledged in one business day, with a substantive reply inside the reserve in two business days.
 
-For a customer who wants a light oversight rhythm.
+**Advanced**, inside 12 hours, is everything in Essential, held as one structured monthly executive review with a written agenda, plus forecast performance (bias, repeated misses, and where the extract is too thin), up to two decisions framed from the evidence, a short written note, and the quarterly value review with the economic buyer spread across the year. Framed means the evidence, the choice, and the consequence of waiting are written down. The customer decides. Response inside the cap is one business day.
 
-Includes, inside 6 hours:
+**Strategic**, inside 16 hours, is everything in Advanced, plus preparation for one further forum, the renewal dossier at the −90-day mark, a short adoption note, and a named specialist once one is employed. A quarterly visit is a separate on-site line. A second entity is a second service line, bought explicitly.
 
-- A monthly intelligence review, about 45 minutes, preparation included.
-- Data-quality and file-readiness review, from the product’s own checks, not a re-key of the file.
-- Forecast-movement review.
-- Identification of the exceptions that deserve a person.
-- A one-page monthly summary.
-- Standard coordination of the service itself.
-
-Response: acknowledged in one business day, a substantive reply inside the reserve in two business days.
-
-### Advanced
-
-**This draft names Advanced as the preferred starting package for an enterprise customer.**
-
-That is a change from the managed-intelligence paper, which put Essential on the order as the default and left Advanced for a heavier planning argument. Both cannot be the default. The capacity consequence is in section 8. **Founder approval decides which sentence survives.**
-
-Includes, inside 12 hours:
-
-- Everything in Essential.
-- A structured monthly executive intelligence review. This is the same monthly room, held to a written agenda, not a second meeting.
-- Forecast performance analysis: bias, repeated misses, and where the extract is too thin to support a claim.
-- Review of up to two decisions framed from the evidence. Framed means the evidence, the choice, and the consequence of waiting are written down. It does not mean Braltiq makes the decision.
-- A short written note after the review.
-- The quarterly value review with the economic buyer, spread across the year inside the cap.
-
-Response inside the cap: one business day.
-
-### Strategic
-
-For an account with more than one executive forum, or a converted design partner that wants a named person and a renewal dossier. Sixteen hours is about two working days a month. The order says that in numbers.
-
-Includes, inside 16 hours:
-
-- Everything in Advanced.
-- Preparation for one further forum.
-- The renewal dossier at the −90-day mark already described in the customer-success calendar.
-- A short note on adoption and on whether a further entity is earned.
-- A named specialist, once one is employed. Not a rotating inbox, and not a dedicated team.
-
-A quarterly visit is not included. A second entity is not included.
-
-### Customer responsibilities, every package
-
-The file arrives on the weekly rhythm. The sponsor attends the reviews they bought. They decide. They correct a number that is wrong. They do not direct the person’s week.
-
-### What every package excludes
-
-Managed Intelligence does not include the platform. The platform does not include Managed Intelligence. Neither includes custom development, integrations, ERP work, data cleansing, operational management, running S&OP, travel, or unlimited model use.
+The customer sends the file on the weekly rhythm, attends the reviews they bought, decides, and corrects a number that is wrong. They do not direct the person’s week.
 
 ---
 
 ## 5. Pilot and design partner
 
-One component, two treatments. Both are fixed-term. Neither is a subscription and neither is Managed Intelligence.
+One component, two treatments. Both are 30 days, one manufacturing forecasting use case, and a maximum of 15 delivery hours. Neither is a subscription and neither is Managed Intelligence.
 
 | | Design partner | Paid pilot |
 |--|----------------|------------|
-| Who | The first three accounts, and no more, unless the cap is raised in writing | Every pilot after those three |
+| Who | The first three approved accounts | Every pilot after those three |
 | Fee | AUD $0 | AUD $15,000 |
-| Term | 30 days | 30 days |
-| Delivery cap | 15 founder hours | 15 founder hours |
-| What they receive | The forecasting pilot described in the industrial paper: one file, one snapshot, one review. Not the inactive modules. | The same pilot |
-| What the fee becomes | Nothing. The consideration is the time, the file, and the right to discuss a case study. | A credit against the first-year **platform** invoice if they sign within 30 days of the review. It is not a discount that survives renewal, and it is not credited against Managed Intelligence. |
-| If the success criteria fail | Stop | Stop. The fee is not refunded as a matter of this draft. Counsel writes the actual clause. |
+| What they receive | One file, one snapshot, one review. Not the inactive modules. | The same pilot |
+| If they sign within 30 days of the review | No credit, because there was no fee | The full fee is credited against the first-year **initial-entity platform** invoice |
+| What the credit does not touch | — | Managed Intelligence, activation, and any additional entity |
+| If they do not sign | Stop | Stop. The fee is kept in this draft. Counsel writes the clause. |
 
-The success criteria stay the ones already written: a usable file in ten days, the sponsor in the brief on at least four days in the thirty, one decision framed, an honest gap, and a yes or no on whether they would start the next cycle here. A pilot does not promise a forecast-accuracy improvement.
+The credit is a year-1 invoice adjustment. It does not reduce net contracted ARR, and it does not survive renewal.
 
-A design partner is not given Essential or Advanced for free after day 30. That would turn the bridge into the delivery model.
+`Assumptions!pilot_fee` is still the earlier AUD $12,000 hypothesis. No forecast formula reads it. The order uses AUD $15,000. The old cell was left in place so it would not be overwritten without a trace.
 
----
+### Fully loaded pilot cost
 
-## 6. Onboarding and activation
+| Direct cost | Amount | Basis |
+|---|---:|---|
+| Founder time | AUD $3,750 | 15 hours × AUD $250 |
+| Infrastructure | AUD $64 | One month of the current single-customer stack |
+| Model usage | under AUD $1 | One month of the unmetered base hypothesis |
+| **Fully loaded cost** | **AUD $3,814** | |
+| Cash cost | AUD $64 | Founder time is not cash |
 
-Standard activation is the twelve hours already used in the industrial cost model: template, one mapping, a first snapshot, and the handover of the weekly upload. It is not an implementation project.
+A paid pilot’s fully loaded margin is about **74.6%**. Its cash margin is about 99.6%. The cash figure is not the commercial margin.
 
-**Recommendation.** On the standard order the fee is **zero**, the cap is **12 hours**, and the line is still printed: “Activation — included, 12 hours, no travel.” The internal cost at the founder rate is **AUD $3,000**. That cost is inside the year-1 margin in `OfferArchitecture`. It is not absorbed invisibly.
+Forecasting analysis in the product makes no model call. The model line is the base hypothesis, not a meter reading. If the company is already hosting other customers, the incremental infrastructure is smaller than a whole stack. The labour dominates either way.
 
-Hours past 12 are not included. They are the same prepaid block as service overage, AUD $450 an hour, or the activation stops. We do not open a cleansing or integration project under this line.
+### Converted and not converted
 
-A separate activation fee is a founder choice, not the default. Charging cost (AUD $3,000) makes the component’s own margin zero. Charging enough for a 65% margin on founder time would be about AUD $8,600, which is an implementation price and fights the fifth objective. The zero-fee, capped, visible line is the one that matches the philosophy. The cost is modelled. The customer can see the line.
+The paid fee is not extra profit when the customer converts. They pay the fee, then the same amount comes off the first-year initial-entity platform invoice. Year-1 platform-related cash equals the contracted platform amount. The economic cost of having run the pilot, compared with starting on the subscription directly, is the AUD $3,814 delivery cost.
 
----
+| Case | Revenue | ARR | Fully loaded result |
+|---|---:|---:|---|
+| Design partner, stops | $0 | $0 | Cost AUD $3,814 |
+| Design partner, converts to the platform | The platform contract. No pilot fee. | Platform ARR only | Direct platform economics, minus the AUD $3,814 pilot cost |
+| Paid pilot, stops | AUD $15,000 pilot fee | $0 | About AUD $11,186 loaded profit. Not ARR. |
+| Paid pilot, converts to the platform | Platform contract. The fee is credited, so it is not a second sale. | Platform ARR, unchanged by the credit | Same as a converting design partner: the fee nets off, and the delivery cost remains |
+| Paid pilot, converts with Essential | Platform contract plus Essential at full price | Platform ARR plus Essential ARR | The credit does not reduce the service |
+| Paid pilot, converts with a second entity and Essential | Initial entity, second entity, and Essential | All three, with the pilot outside ARR | The credit reduces only the initial-entity platform invoice. The second entity’s AUD $33,000 contracted amount is untouched |
 
-## 7. Enterprise expansion
-
-Expansion that can be sold now:
-
-| Move | Which line | Rule |
-|------|------------|------|
-| Another operating entity | Platform, AUD $3,000 / month, 11 months charged on the annual invoice | Own file, own 8 users, own 2,000 completions. No service hours. |
-| The enterprise contractual set on a two-entity order | Platform floor, lifting $12,500 to $15,000 | Only when section 3 says the floor binds. |
-| Essential to Advanced, or Advanced to Strategic | Managed Intelligence | A new service line. Not a platform uplift. |
-| A second entity that also wants the service | A second Managed Intelligence line | Bought explicitly. The first package does not stretch. |
-
-Expansion that waits until a product exists, and is not written into this order as a commitment: inventory, capacity, dealer allocation, live ERP, and other industries. The commercial roadmap may discuss them. The contract for this architecture does not.
-
-Price steps at renewal, if approved later, are separate for platform and service. The service model uses a 4% working hypothesis from the second year. The platform forecast does not yet apply an uplift. Do not quote a platform increase until it is in the order.
-
----
-
-## 8. Margin of a whole order
-
-SaaS margin and service margin stay separate. The company view adds them. It does not blend them into one product.
-
-Platform direct cost in this architecture sheet is the reclassified figure from the unit model: about **AUD $96 a month per entity** for infrastructure, the small-model allowance, and the thin support hour, at a 25-customer allocation. It does not also include a success manager. If an account buys Managed Intelligence, those human hours are the service cost and are not charged again as platform time.
-
-Activation at 12 founder hours is AUD $3,000, once.
-
-| Order | Year-1 cash, before any pilot | Loaded margin if the founder delivers the service | Loaded margin if a specialist’s book is full |
-|------|---:|---:|---:|
-| Platform only | $104,500 | about **96%** | about **96%** |
-| Platform + Essential | $140,500 | about **84%** | about **89%** |
-| Platform + Advanced | $182,500 | about **78%** | about **86%** |
-| Platform + Strategic | $248,500 | about **79%** | about **87%** |
-| Two entities + Advanced, no floor | $215,500 | about **81%** | about **88%** |
-| Two entities + Advanced, floor binds | $243,000 | about **83%** | about **89%** |
-| Three entities, platform only | $170,500 | about **96%** | about **96%** |
-
-The SaaS line itself stays well above 80–85% on every row, because the labour is not in it.
-
-The combined order does not. **Founder-delivered Advanced on a single entity is about 78%. Founder-delivered Strategic is about 79%.** Both are under the combined band. Essential, founder-delivered, stays about 84%. A specialist at a full book clears the band on every recommended package.
-
-That is why the earlier service paper defaulted the order form to Essential while the founder is the only person delivering, and why this draft’s preference for Advanced has a condition attached:
-
-- Advanced can be the preferred package **offered** to an enterprise buyer.
-- The founder can carry **two** Advanced accounts inside the 24-hour monthly bridge, and should expect the year-1 combined margin on a single-entity Advanced order to sit under 80%.
-- The third Advanced account waits until a specialist is justified. The hire rule is unchanged: about **78 hours** of ready demand, which is roughly **seven** Advanced accounts, not two.
-- Do not hire a specialist to make Advanced feel like the standard start. At five Advanced accounts the salary is real and the book is not full. The service paper already shows that pattern near a 10% margin when the hire is forced early.
-
-`ServiceForecast36` still uses the thinner attach rates from 1 November. Adopting Advanced as the default attach is a yellow-cell change on `ServiceAssumptions`, done after this decision, not before.
-
-Paying a platform success manager **and** a service specialist for the same account is still the double count that pulls the combined customer to the edge of 80%. This architecture does not do that.
+Activation is added once on conversion and is not inside the pilot cost. The 15 pilot hours and the 12 activation hours are different caps. If a real pilot has already done the activation work, the activation hours on that order are set to zero. They are not both counted for the same work, and activation is not also sitting inside the monthly platform cost.
 
 ---
 
-## 9. What is still unresolved
+## 6. Activation
 
-| Item | Working position in this draft | What approval must say |
-|------|--------------------------------|------------------------|
-| AUD $9,500 and AUD $3,000 | Use them as the rate card | Yes, or replace the yellow cells and re-read `OfferArchitecture` |
-| 11 months charged on a 12-month platform term | Applies to every platform line, including the floor | Confirm, or charge 12 |
-| AUD $15,000 floor | Only the two-entity enterprise contractual case, among the configurations above | Confirm the trigger. A different trigger changes who pays $15,000 |
-| Advanced as the preferred start | Offer it. Do not staff it as the founder’s default beyond two accounts | Or keep Essential as the default line and offer Advanced only when the planning argument is heavier |
-| Activation at a zero fee, 12-hour cap | Included, costed, visible | Or set `arch_onboarding_fee` and accept the component margin that results |
-| GST | Excluded from every figure here | Finance confirms registration and the invoice treatment |
-| Design-partner cap of three, paid pilot AUD $15,000, credit to platform only | Unchanged from the industrial paper | Confirm before the next Hitachi or equivalent meeting |
-| Service prices and caps | Unchanged from the service paper | Confirm, including that $2,500 and $5,000 are off the card |
-| Entitlements: 8 users, 2,000 completions, one support hour per account | The definition of the platform fee | Confirm before an order is sent. Billing does not enforce them yet |
-| Renewal increases | Not quoted | A later decision. Service model has a 4% hypothesis only |
+Standard activation is included.
 
-The website prices, the USD seat plans, and the in-code catalogues still disagree with this rate card. This draft does not retire them. Quoting from them for an industrial order would break the architecture.
+- Maximum 12 hours.
+- No travel.
+- No custom integration.
+- No bespoke data remediation.
+- No consulting outside that cap.
+
+The customer line is “Activation — included, 12 hours, no travel.” The fee is zero. The internal direct cost is **AUD $3,000**, which is 12 × AUD $250.
+
+That cost is recognised once in the year-1 customer margin. The monthly platform cost on `PlatformCost` does not contain it. The year-1 formulas add it one time. The order sheet counts that inclusion and the count is one.
+
+Hours past 12 are the same prepaid block as service overage, AUD $450 an hour, or the activation stops. This line is not a cleansing or integration project.
+
+Charging the AUD $3,000 cost would make the component’s own margin zero. Charging enough for a 65% margin on founder time would be an implementation price and fights the fifth objective. The zero-fee line is the one that matches the philosophy. The cost is still in the margin.
 
 ---
 
-## 10. Decisions required before an order uses this paper
+## 7. Platform direct cost
 
-1. Adopt the five-line order, with a zero-price line still printed, and reject blended SKUs.
-2. Confirm the platform rate card, the 11-month platform concession, and the floor rule in section 3. In particular, confirm that a single-entity customer is never moved from $9,500 to $15,000 by the floor.
-3. Choose the starting service line. Advanced may be what we recommend in the room. Essential is what the founder can deliver inside an 80% combined year-1 margin. Those are different choices.
-4. Confirm activation as included, capped at 12 hours, costed at the founder rate, and not an implementation fee.
-5. Confirm GST treatment, the pilot credit rule, and that additional entities do not inherit Managed Intelligence hours.
+The figure near **AUD $96 a month** is real and narrow. At a 25-logo allocation it is:
+
+| Line | Monthly amount | In the $96? |
+|---|---:|---|
+| Shared infrastructure, allocated | about $5.40 | Yes |
+| Model usage, base hypothesis | about $0.36 | Yes |
+| Card fees | $0 at the default annual invoice | Yes, at zero |
+| Paid support, one hour at $90 | $90 | Yes |
+| Storage as its own meter | not billed | No separate line |
+| Data processing as its own vendor | not contracted | No separate line |
+| Monitoring | $0. No Datadog or Sentry contract | Excluded |
+| Platform customer success | about $1,200 at 25 logos, because two salaries are spread across 25 | Removed from the $96 |
+| Founder platform time, four hours | $1,000 | Not in the $96 |
+| A second support charge on top of those four hours | — | Not added. That hour sits inside the four. |
+| Activation | $3,000 once | Not in the monthly cost |
+| Managed Intelligence labour | on the service line | Not in the platform cost |
+
+A margin that uses only the $96 is about **99%** of the $9,500 list. That is not the validated commercial margin.
+
+### The two costs this draft quotes
+
+**Variable cost per operating entity.** About **AUD $0.36** of model usage, plus card fees, plus zero incremental infrastructure while the compute step stays put. Card fees are zero while the industrial motion invoices annually. Storage, processing, and monitoring do not yet have their own variable bills.
+
+**Fully loaded cost.** It depends on who is actually delivering.
+
+| Delivery | What is in the monthly cost | Amount | Gross margin |
+|---|---|---:|---|
+| Founder-led, one entity | Whole current stack, model usage, four founder hours. Support is not charged again. | about **$1,064** | **88.8%** of list. **87.8%** of the collected rate. |
+| Same, year 1, activation once | Those months plus $3,000 | — | **84.9%** of the AUD $104,500 contract |
+| Platform-only book at 25 logos, CSM employed | Allocated stack, model, support hour, and the awkward two-salary CSM allocation | about **$1,296** | **86.4%** of list. **85.1%** of the collected rate. |
+| Same CSM at a full 15-account load | Allocated stack, model, support, one fifteenth of a salary | about **$1,096** | **88.5%** of list |
+
+The SaaS line clears 80–85% on these fully loaded figures. The 99% figure does not get quoted beside them.
+
+A second entity adds another model allowance. It does not add another stack, another four founder hours, or another support hour, while the account stays on one hosted tenant. A second Supabase project, if engineering requires one before a second entity can be sold, is not in this cost.
+
+The service-led platform cost — the $96, with founder platform hours stopped and no CSM beside a specialist — is used only in the specialist column of the customer margin, and only with that staffing condition written next to it.
+
+---
+
+## 8. Customer margin
+
+SaaS margin and service margin stay separate. The combined figure is the customer, not a blended product.
+
+One initial entity. No pilot. Activation included once in the year-1 figure. Founder-led means the founder carries the four platform hours and the service hours.
+
+| Order | Year-1 contracted revenue | Founder-led year-1 margin | Specialist full book, founder platform hours stopped | 2 November partial-cost margin, kept for comparison |
+|---|---:|---:|---:|---:|
+| Platform only | $104,500 | **84.9%** | 96% on the partial platform cost. Not the quoted platform margin. | 96.0% |
+| Platform + Essential | $140,500 | **76.0%** | **89.4%** | 84.2% |
+| Platform + Advanced | $182,500 | **71.6%** | **86.0%** | 78.0% |
+| Platform + Strategic | $248,500 | **74.3%** | **86.9%** | 79.0% |
+
+The 2 November paper said founder-delivered Essential stayed about 84%. That used the $96 platform cost. With founder platform time included, year-1 Essential is **76.0%**. Advanced is **71.6%**. Strategic is **74.3%**. None of those combined year-1 results sit inside 80% while the founder delivers both lines.
+
+Monthly list margin, before activation, is higher: 88.8% platform only, 79.5% with Essential, 74.6% with Advanced, and 76.4% with Strategic, all founder-led.
+
+If a specialist delivers the service and the founder’s four platform hours are still loaded, year-1 combined margin is **81.2%** for Essential, **79.6%** for Advanced, and **82.2%** for Strategic. Founder time has not been dropped. Advanced is under 80%.
+
+Two entities plus Essential, founder-led, standard terms: year-1 revenue AUD $173,500, margin **80.5%**. The same order with the floor bound: revenue AUD $201,000, margin **83.2%**. The premium is platform revenue on the same delivery cost. Three entities, platform only, founder-led: contracted AUD $170,500, margin **90.7%**, because the founder hours and the stack are per account, not per entity. The platform rate card on that three-entity order is AUD $15,500 a month, invoiced at AUD $15,500, contracted at AUD $170,500.
+
+The specialist column clears the combined band only when three things are true together: the book is full, founder platform delivery has stopped, and a CSM is not also paid for that account. `MarginMix` still shows the double count. This draft does not recommend it.
+
+`CustomerMargins` holds the formulas. The partial-cost column is still there so the 2 November result can be read beside the reconciled one.
+
+---
+
+## 9. Revenue reporting
+
+Book these. Do not collapse them.
+
+| Measure | One entity, platform only | What it is |
+|---|---:|---|
+| Platform list value | **AUD $114,000** | $9,500 × 12. Not ARR. |
+| Net contracted platform ARR | **AUD $104,500** | $9,500 × 11. This is the platform ARR. |
+| Managed Intelligence ARR | The package × 12 | Twelve months paid. Zero when the service is declined. |
+| Total net contracted ARR | Platform ARR + service ARR | Pilot and activation are outside it. |
+| Annual invoiced revenue, year 1 | The platform invoice after any pilot credit, plus service, plus any activation fee, plus any pilot fee | A credit lowers this and does not lower ARR. |
+| Cash collected | The invoices, while card share stays at zero | Card share is a separate test on `Assumptions`. |
+| Pilot revenue | The fee, or zero | Never ARR. On conversion it is offset by the credit. |
+| Activation cost | AUD $3,000 | Internal. The customer fee is zero. |
+| Expansion ARR | Additional entities × $3,000 × 11 | Already inside platform ARR. Shown on its own so it is not lost. One extra entity is **AUD $33,000**. |
+
+`Forecast36` was not rewritten. Its first-entity MRR uses the collected rate, so ending MRR × 12 matches net contracted platform ARR for those logos. From month 13 it adds a second entity at the full $3,000 a month, not at eleven twelfths. Annualising that expansion line overstates expansion ARR by one conceded month per additional entity. The order sheets use × 11 for every platform line, including expansion and the floor premium.
+
+---
+
+## 10. GST and renewal
+
+Prices in this paper and in the order sheets are exclusive of GST. GST is added where it applies. Finance still has to confirm registration and the customer’s place of supply.
+
+The 4% annual step on the service, from month 13 in `ServiceForecast36`, is an unapproved assumption. It is subject to final contract wording and to legal and accounting review. It is not a renewal term in force. The platform forecast has no uplift. A platform increase is not quoted until it is written on an order.
+
+---
+
+## 11. Hiring and founder capacity
+
+The hire test remains **78 hours a month of demand that is contracted and ready to start**. That threshold is a working assumption. It is the point an Essential-priced book covers one specialist salary at about a 65% service margin before any leftover founder oversight.
+
+These are different numbers:
+
+| | What it is | What it does not do |
+|---|---|---|
+| Founder delivery capacity | 24 hours a month on the service, until a specialist exists | It is not a hiring signal |
+| Contracted service hours | Caps the customer has signed | Hours still in contracting are not ready |
+| Ready demand | Contracted hours that can start | This is the only hire test |
+| Available specialist capacity | About 91 delivery hours a month once a person is employed, at the utilisation assumption | It does not exist before the hire |
+| Forecast pipeline | A view of future demand | It never triggers a hire |
+| Verbal commitments | A conversation | They never trigger a hire |
+| Actual utilisation | Delivered hours over the employed specialist’s capacity | It is not the 65% planning assumption, and a thin month is not a reason to hire the next person |
+
+`ServiceForecast36` still sets founder delivery hours to zero in the month a specialist is hired. That sheet is the historical scenario and was not overwritten. It is not the operating rule.
+
+The operating rule prices a residual founder oversight cost after the hire. The yellow assumption is **8 hours a month**, AUD $2,000 at the founder rate. It is not a timesheet. Founder salary already sits in company overhead and is not added a third time.
+
+At 13 Essential accounts (78 hours) the loaded service margin including that residual is about **60%**, under the 65% floor. The salary-only test is still about 65%. The book that clears 65% after the residual is about **89 Essential hours**, roughly 15 accounts. The 78-hour rule stays the cash coverage test. The thicker book is what the loaded test requires, and it is on `CapacityTransition`.
+
+Advanced is not used as the book that justifies the first hire. It becomes the preferred offer after the specialist is funded, not the reason to fund the specialist early.
+
+---
+
+## 12. Decision register
+
+### Approved strategic direction
+
+Adopted for this draft. Not a licence to publish a price.
+
+- Five separate commercial lines. A zero-price line is still printed.
+- While the founder delivers, Essential is the default Managed Intelligence offer.
+- Advanced is the preferred enterprise offer only once specialist capacity is funded and available. Strategic is reserved.
+- A standard single-entity customer stays at the initial platform rate.
+- A routine security questionnaire does not create a platform premium.
+- The floor can bind only on a multi-entity order with material governance, and only when the rate card is below the floor.
+- Managed Intelligence does not change the platform price. A further entity does not inherit service hours.
+- Activation is included, capped, and costed once internally.
+- The pilot is 30 days, one forecasting use case, 15 hours, three approved design partners at no fee, then a paid pilot whose fee credits only the first-year initial-entity platform invoice, and only on a signature within 30 days of the review.
+- Prices are exclusive of GST. GST is added where it applies.
+- Hiring uses ready contracted hours. Founder time is still costed after a specialist is hired.
+- ARR is net contracted platform revenue plus Managed Intelligence. List value at twelve times the monthly rate is not booked. Pilot and activation are not ARR.
+
+### Proposed commercial terms
+
+Not approved prices: AUD $9,500, AUD $3,000, the 11-month concession, the AUD $15,000 floor, Essential AUD $3,000 / 6 hours, Advanced AUD $6,500 / 12 hours, Strategic AUD $12,000 / 16 hours, paid pilot AUD $15,000, activation cost AUD $3,000 at AUD $250 an hour, and the 78-hour hire test.
+
+### Unresolved
+
+- GST registration and place of supply.
+- The 4% service step, which needs contract wording and legal and accounting review. No platform uplift is proposed.
+- The clause if a paid pilot stops. This draft keeps the fee.
+- Second-tenant isolation, and the cost of a second project if one is required.
+- Entitlement enforcement in billing.
+- Which of the older price documents, if any, is retired. This draft does not retire them.
+- The residual founder hours after a hire. Eight is a working input.
+
+### Assumptions requiring validation
+
+- The $96 partial cost, the unmetered token hypothesis, and the infrastructure steps.
+- Monitoring, storage, and data-processing bills that do not yet exist.
+- Treating the support hour as part of the four founder hours rather than a second charge.
+- The 24-hour founder bridge, the 78-hour salary test, and the residual that pulls the loaded service margin under 65% at that point.
+- `ServiceForecast36` attach rates, which match founder-led Essential and were not changed.
+- Workers compensation at 1%, other on-cost at 2%, payroll tax left off, and the 30 October 2026 exchange rate.
+- No observed cohort for wins, churn, hours, or tokens.
+
+---
+
+## 13. What founder approval still has to say
+
+The direction in section 12 can stand while every dollar amount remains proposed. Approval of a price is a separate act. Until that act:
+
+1. Confirm or replace the platform rate card, the 11-month concession, and the floor amounts. The trigger itself is the direction above.
+2. Confirm or replace the three service prices and caps. The choice of Essential as the founder-led default is the direction above.
+3. Confirm the paid pilot at AUD $15,000 and the credit rule, including that a stop does not refund the fee unless counsel changes the clause.
+4. Confirm activation at a zero customer fee and an internal cost of AUD $3,000, counted once.
+5. Confirm that GST is added where it applies, and that no renewal percentage is quoted until the contract wording exists.
+
+Quoting the website, the USD seat grid, or the in-code catalogues for an industrial order would break this architecture. Those prices were not reconciled into this rate card, and they were not deleted.

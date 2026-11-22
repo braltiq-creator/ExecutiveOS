@@ -6,6 +6,7 @@ import type { UdgCanonicalRecord } from "@/data-gateway";
 import {
   REGION_RESOLVED_HONESTY,
   projectManufacturingEvidenceNetwork,
+  projectManufacturingExecutiveBriefing,
   projectManufacturingOperationsMap,
 } from "@/experience/immersion";
 
@@ -93,5 +94,15 @@ describe("Phase 2 manufacturing immersion projections", () => {
     expect(network.nodes.length).toBeGreaterThan(3);
     expect(network.links.length).toBeGreaterThan(0);
     expect(network.nodes.every((n) => n.provenance === "derived")).toBe(true);
+  });
+
+  it("projects executive briefing immersion from manufacturing analysis", () => {
+    const analysis = analyseManufacturingSnapshot(loadDemoRecords());
+    const briefing = projectManufacturingExecutiveBriefing(analysis);
+    expect(briefing.leadJudgement.length).toBeGreaterThan(10);
+    expect(briefing.map.domain).toBe("manufacturing");
+    expect(briefing.network.nodes.length).toBeGreaterThan(0);
+    expect(briefing.demonstrationData).toBe(true);
+    expect(briefing.priorityDecision?.question).toBeTruthy();
   });
 });

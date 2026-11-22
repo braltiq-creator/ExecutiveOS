@@ -7,8 +7,10 @@ import type { UdgCanonicalRecord } from "@/data-gateway";
 import {
   ManufacturingOperationsMapLazy,
   KnowledgeNetworkExplorerLazy,
+  ExecutiveBriefingImmersion,
   projectManufacturingEvidenceNetwork,
   projectManufacturingOperationsMap,
+  projectManufacturingExecutiveBriefing,
   type IntelligenceMapLayerId,
   type MapViewPresetId,
 } from "@/experience/immersion";
@@ -22,15 +24,21 @@ const VIEW_IDS = new Set<MapViewPresetId>([
   "north_america",
 ]);
 
+type Tab = "map" | "network" | "briefing";
+
 export function Phase2PreviewClient() {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab");
   const selectParam = searchParams.get("select");
   const viewParam = searchParams.get("view");
   const layersParam = searchParams.get("layers");
-  const [tab, setTab] = useState<"map" | "network">(
-    tabParam === "network" ? "network" : "map",
-  );
+  const initialTab: Tab =
+    tabParam === "network"
+      ? "network"
+      : tabParam === "briefing"
+        ? "briefing"
+        : "map";
+  const [tab, setTab] = useState<Tab>(initialTab);
 
   const initialView: MapViewPresetId | undefined =
     viewParam && VIEW_IDS.has(viewParam as MapViewPresetId)
@@ -62,6 +70,10 @@ export function Phase2PreviewClient() {
     () => projectManufacturingEvidenceNetwork(analysis),
     [analysis],
   );
+  const briefingModel = useMemo(
+    () => projectManufacturingExecutiveBriefing(analysis),
+    [analysis],
+  );
 
   return (
     <div
@@ -70,7 +82,7 @@ export function Phase2PreviewClient() {
     >
       <header className="mx-auto mb-5 max-w-[1440px]">
         <p className="text-[0.7rem] uppercase tracking-[0.12em] text-[#6a9fd8]">
-          Phase 2 preview · development only · Stage 1 global map
+          Phase 2 preview · development only
         </p>
         <h1 className="mt-1 text-xl font-semibold tracking-tight md:text-2xl">
           Immersion instruments — manufacturing fixture
@@ -84,29 +96,27 @@ export function Phase2PreviewClient() {
           OpenFreeMap vector basemap (commercial-allowed, no API key). Not mock
           Northline. Not a production deploy surface.
         </p>
-        <div className="mt-4 flex gap-2">
-          <button
-            type="button"
-            className={`rounded border px-3 py-1.5 text-sm ${
-              tab === "map"
-                ? "border-[#6a9fd8] text-[#e8eaef]"
-                : "border-white/10 text-[#8b93a7]"
-            }`}
-            onClick={() => setTab("map")}
-          >
-            Global intelligence map
-          </button>
-          <button
-            type="button"
-            className={`rounded border px-3 py-1.5 text-sm ${
-              tab === "network"
-                ? "border-[#6a9fd8] text-[#e8eaef]"
-                : "border-white/10 text-[#8b93a7]"
-            }`}
-            onClick={() => setTab("network")}
-          >
-            Knowledge network
-          </button>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {(
+            [
+              ["map", "Global intelligence map"],
+              ["briefing", "Executive briefing"],
+              ["network", "Knowledge network"],
+            ] as const
+          ).map(([id, label]) => (
+            <button
+              key={id}
+              type="button"
+              className={`rounded border px-3 py-1.5 text-sm ${
+                tab === id
+                  ? "border-[#6a9fd8] text-[#e8eaef]"
+                  : "border-white/10 text-[#8b93a7]"
+              }`}
+              onClick={() => setTab(id)}
+            >
+              {label}
+            </button>
+          ))}
         </div>
       </header>
 
@@ -118,12 +128,16 @@ export function Phase2PreviewClient() {
             initialView={initialView}
             forceLayers={forceLayers}
           />
-        ) : (
+        ) : null}
+        {tab === "briefing" ? (
+          <ExecutiveBriefingImmersion model={briefingModel} />
+        ) : null}
+        {tab === "network" ? (
           <KnowledgeNetworkExplorerLazy
             model={networkModel}
             initialSelectedId={selectParam}
           />
-        )}
+        ) : null}
       </main>
     </div>
   );

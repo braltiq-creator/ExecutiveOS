@@ -451,7 +451,7 @@ export function CommandCentreExperience({ model }: Props) {
 
   const operationsMapInstrument =
     isManufacturing && model.operationsMap ? (
-      <ManufacturingOperationsMapLazy model={model.operationsMap} compact />
+      <ManufacturingOperationsMapLazy model={model.operationsMap} />
     ) : null;
 
   const evidenceTabs = isManufacturing

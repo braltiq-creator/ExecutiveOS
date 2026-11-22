@@ -11,10 +11,10 @@
 |-------|--------|
 | 2.1 Immersion primitives + provenance badges | Done |
 | 2.2 Manufacturing MapLibre operations map | Superseded by Stage 1 Global Intelligence Map |
-| **Stage 1 — Global Intelligence Map** | **In review** — OpenFreeMap vector basemap + graphite retheme + layers |
+| **Stage 1 — Global Intelligence Map** | **Approved + polished** — OpenFreeMap + graphite command presence |
 | 2.3 Knowledge force-graph (Explore default) | Done — manufacturing evidence network; org KG FE-001 follow-on |
-| Stage 2 — Executive Briefing | Not started — waiting on Stage 1 approval |
-| Stage 3 — Decision Intelligence | Not started |
+| **Stage 2 — Executive Briefing** | **In review** — immersive attention field + map + knowledge + timeline |
+| Stage 3 — Decision Intelligence | Not started — waiting on Stage 2 approval |
 | Stage 4 — Integration | Not started |
 
 ### Stage 1 basemap decision

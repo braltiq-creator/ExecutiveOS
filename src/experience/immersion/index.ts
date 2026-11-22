@@ -35,3 +35,8 @@ export {
   centroidForRegion,
   resolveAuRegionCode,
 } from "@/experience/immersion/geo/au-regions";
+export { ExecutiveBriefingImmersion } from "@/experience/immersion/briefing/ExecutiveBriefingImmersion";
+export {
+  projectManufacturingExecutiveBriefing,
+  type ExecutiveBriefingImmersionModel,
+} from "@/experience/immersion/briefing/projectManufacturingBriefing";

@@ -16,12 +16,12 @@ type AccountMenuProps = {
 export function AccountMenu({ className }: AccountMenuProps) {
   const session = useSession();
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("light");
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stored = window.localStorage.getItem("eos-theme");
-    const next = stored === "dark" ? "dark" : "light";
+    const next = stored === "light" ? "light" : "dark";
     setTheme(next);
     document.documentElement.setAttribute("data-theme", next);
   }, []);

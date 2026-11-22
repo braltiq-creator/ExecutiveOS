@@ -588,8 +588,8 @@ export function CommandCentreExperience({ model }: Props) {
             <div className="cc-hero-narrative">
               <ExecutiveHero
                 compact
-                kicker={model.experienceKicker ?? "Command Centre"}
-                eyebrow="Executive Brief"
+                kicker={model.experienceKicker ?? "Executive Intelligence"}
+                eyebrow="What matters now"
                 question="What requires executive judgement today?"
                 judgement={model.leadJudgement}
                 metrics={heroMetrics}

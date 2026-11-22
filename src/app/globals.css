@@ -13,28 +13,37 @@
 :root {
   color-scheme: dark;
 
-  /* ——— Signature colour language ——— */
-  --eos-blue: #5b8fce;
-  --eos-blue-soft: rgba(91, 143, 206, 0.16);
-  --eos-blue-glow: rgba(91, 143, 206, 0.22);
+  /* ——— Signature colour language — Executive Intelligence OS ——— */
+  /* Executive Blue — trust, navigation, primary actions */
+  --eos-blue: #6a9fd8;
+  --eos-blue-soft: rgba(106, 159, 216, 0.14);
+  --eos-blue-glow: rgba(106, 159, 216, 0.18);
+  /* Intelligence Teal — AI activity, verified insight */
+  --eos-teal: #3d9e8f;
+  --eos-teal-soft: rgba(61, 158, 143, 0.14);
+  /* Status */
   --eos-emerald: #3fa87a;
   --eos-emerald-soft: rgba(63, 168, 122, 0.14);
   --eos-amber: #c9a06c;
   --eos-amber-soft: rgba(201, 160, 108, 0.14);
   --eos-crimson: #c45c5c;
   --eos-crimson-soft: rgba(196, 92, 92, 0.14);
+  /* Strategic Purple — scenarios, strategy, planning */
   --eos-strategy: #8b7bb8;
-  --eos-strategy-soft: rgba(139, 123, 184, 0.16);
+  --eos-strategy-soft: rgba(139, 123, 184, 0.14);
+  /* Executive Gold — exceptional strategic moments (sparse) */
+  --eos-gold: #c4a35a;
+  --eos-gold-soft: rgba(196, 163, 90, 0.12);
 
-  /* Neutrals — depth without decoration */
-  --eos-institutional: #141824;
-  --eos-canvas: #0b0d12;
-  --eos-surface: rgba(22, 26, 36, 0.72);
-  --eos-surface-solid: #161a24;
-  --eos-surface-raised: rgba(30, 36, 50, 0.78);
-  --eos-surface-inset: rgba(8, 10, 14, 0.55);
+  /* Neutrals — deep graphite / midnight charcoal */
+  --eos-institutional: #10141c;
+  --eos-canvas: #0a0c10;
+  --eos-surface: rgba(18, 21, 28, 0.78);
+  --eos-surface-solid: #12151c;
+  --eos-surface-raised: #1a1f2a;
+  --eos-surface-inset: rgba(6, 8, 12, 0.65);
   --eos-border: rgba(255, 255, 255, 0.07);
-  --eos-border-strong: rgba(255, 255, 255, 0.14);
+  --eos-border-strong: rgba(255, 255, 255, 0.13);
   --eos-text: #eceef2;
   --eos-text-secondary: #9aa3b5;
   --eos-text-muted: #6b7385;
@@ -48,6 +57,10 @@
   --eos-warning-surface: var(--eos-amber-soft);
   --eos-critical: var(--eos-crimson);
   --eos-critical-surface: var(--eos-crimson-soft);
+  --eos-intelligence: var(--eos-teal);
+  --eos-intelligence-surface: var(--eos-teal-soft);
+  --eos-opportunity: var(--eos-gold);
+  --eos-opportunity-surface: var(--eos-gold-soft);
 
   --eos-briefing: #fff1e5;
   --eos-briefing-text: #231f20;
@@ -57,7 +70,7 @@
   --eos-primary: var(--eos-blue);
   --eos-primary-fg: #f4f7fb;
   --eos-ring: var(--eos-blue);
-  --eos-overlay: rgba(5, 7, 12, 0.62);
+  --eos-overlay: rgba(5, 7, 12, 0.68);
 
   --eos-health-track: rgba(255, 255, 255, 0.08);
   --eos-health-fill: var(--eos-emerald);
@@ -73,22 +86,22 @@
   --eos-space-10: 2.5rem;
   --eos-space-12: 3rem;
 
-  /* Radius — soft, not bubbly */
-  --eos-radius-sm: 0.5rem;
-  --eos-radius-md: 0.625rem;
-  --eos-radius-lg: 0.875rem;
-  --eos-radius-xl: 1.125rem;
+  /* Radius — precise, not bubbly */
+  --eos-radius-sm: 0.375rem;
+  --eos-radius-md: 0.5rem;
+  --eos-radius-lg: 0.75rem;
+  --eos-radius-xl: 0.875rem;
 
-  /* Elevation — soft depth, no heavy cards */
-  --eos-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.28),
+  /* Elevation — layered graphite depth */
+  --eos-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.32),
     0 0 0 1px rgba(255, 255, 255, 0.04);
-  --eos-shadow-2: 0 8px 28px rgba(0, 0, 0, 0.35),
+  --eos-shadow-2: 0 8px 28px rgba(0, 0, 0, 0.4),
     0 0 0 1px rgba(255, 255, 255, 0.05);
-  --eos-shadow-3: 0 18px 48px rgba(0, 0, 0, 0.42),
+  --eos-shadow-3: 0 18px 48px rgba(0, 0, 0, 0.48),
     0 0 0 1px rgba(255, 255, 255, 0.06);
-  --eos-glass: blur(18px) saturate(1.15);
-  --eos-glass-bg: rgba(18, 22, 32, 0.55);
-  --eos-glass-border: rgba(255, 255, 255, 0.08);
+  --eos-glass: blur(18px) saturate(1.1);
+  --eos-glass-bg: rgba(14, 16, 22, 0.72);
+  --eos-glass-border: rgba(255, 255, 255, 0.07);
 
   /* Motion — alive, never decorative */
   --eos-duration-fast: 140ms;
@@ -263,44 +276,40 @@ body {
 .eos-ambient::before {
   background:
     radial-gradient(
-      46% 38% at 16% 10%,
-      rgba(91, 143, 206, 0.34),
-      transparent 64%
+      42% 34% at 12% 8%,
+      rgba(106, 159, 216, 0.16),
+      transparent 68%
     ),
     radial-gradient(
-      36% 32% at 90% 6%,
-      rgba(63, 168, 122, 0.13),
-      transparent 58%
-    ),
-    radial-gradient(
-      40% 34% at 70% 92%,
-      rgba(196, 92, 92, 0.09),
-      transparent 56%
+      32% 28% at 88% 4%,
+      rgba(61, 158, 143, 0.08),
+      transparent 62%
     ),
     linear-gradient(
       165deg,
-      rgba(255, 255, 255, 0.03) 0%,
-      transparent 34%,
+      rgba(255, 255, 255, 0.02) 0%,
+      transparent 40%,
       transparent 100%
     );
-  animation: eos-living-canvas 48s var(--eos-ease-soft) infinite alternate;
+  animation: eos-living-canvas 56s var(--eos-ease-soft) infinite alternate;
   will-change: transform, opacity;
+  opacity: 0.85;
 }
 
 .eos-ambient::after {
   background:
     radial-gradient(
-      32% 28% at 58% 26%,
-      rgba(91, 143, 206, 0.14),
-      transparent 72%
+      28% 24% at 62% 30%,
+      rgba(106, 159, 216, 0.07),
+      transparent 74%
     ),
     radial-gradient(
-      24% 22% at 28% 72%,
-      rgba(201, 160, 108, 0.06),
-      transparent 70%
+      22% 20% at 24% 78%,
+      rgba(196, 163, 90, 0.04),
+      transparent 72%
     );
-  animation: eos-living-canvas-drift 64s var(--eos-ease-soft) infinite alternate;
-  opacity: 0.9;
+  animation: eos-living-canvas-drift 72s var(--eos-ease-soft) infinite alternate;
+  opacity: 0.7;
   will-change: transform;
   mix-blend-mode: screen;
 }
@@ -343,23 +352,23 @@ body {
   mix-blend-mode: normal;
 }
 
-/* Glass surfaces */
+/* Glass surfaces — graphite OS chrome */
 .eos-glass {
-  background: rgba(16, 20, 30, 0.62);
-  backdrop-filter: blur(22px) saturate(1.2);
-  -webkit-backdrop-filter: blur(22px) saturate(1.2);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(12, 14, 20, 0.78);
+  backdrop-filter: blur(20px) saturate(1.08);
+  -webkit-backdrop-filter: blur(20px) saturate(1.08);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
     var(--eos-shadow-1);
 }
 
 .eos-glass-soft {
-  background: rgba(14, 17, 26, 0.48);
-  backdrop-filter: blur(16px) saturate(1.12);
-  -webkit-backdrop-filter: blur(16px) saturate(1.12);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  background: rgba(10, 12, 16, 0.62);
+  backdrop-filter: blur(14px) saturate(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(1.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 [data-theme="light"] .eos-glass {

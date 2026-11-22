@@ -11,9 +11,11 @@ import { ExperienceEmptyState } from "@/experience/design-system/EmptyState";
 export function ReportsFoundation() {
   return (
     <ExperiencePage width="brief" className="space-y-8 pb-16">
-      <header className="space-y-3 pt-2">
+      <header className="space-y-3 border-b border-[var(--exs-divider,var(--eos-border))] pb-5 pt-2">
         <ExperienceBadge tone="neutral">Reports</ExperienceBadge>
-        <h1 className="ex-display">Leadership narrative</h1>
+        <h1 className="font-display text-[length:clamp(1.35rem,2.2vw,1.75rem)] font-semibold tracking-[-0.03em] text-[var(--ex-text)]">
+          Leadership narrative
+        </h1>
         <p className="ex-body max-w-xl">
           Outward board and ELT narratives composed from Intent, Outcomes,
           Decisions, and Actions — not a second portfolio.

@@ -26,8 +26,8 @@ export function BrandMark({
           <span className="block font-display text-[length:1.05rem] font-semibold tracking-[-0.03em] text-[var(--exs-text,var(--eos-color-text))]">
             ExecutiveOS
           </span>
-          <span className="mt-0.5 block text-[length:0.65rem] font-medium tracking-[0.01em] text-[var(--exs-text-muted,var(--eos-color-text-muted))]">
-            Confidence Through Clarity
+          <span className="mt-0.5 block text-[length:0.62rem] font-medium tracking-[0.04em] text-[var(--exs-text-muted,var(--eos-color-text-muted))]">
+            Executive Intelligence
           </span>
         </span>
       </>
@@ -49,7 +49,7 @@ export function BrandMark({
         density === "full" ? "min-h-12 px-1.5 py-1" : "gap-2",
         className,
       )}
-      aria-label="ExecutiveOS — Confidence Through Clarity"
+      aria-label="ExecutiveOS — Executive Intelligence"
     >
       {inner}
     </Link>

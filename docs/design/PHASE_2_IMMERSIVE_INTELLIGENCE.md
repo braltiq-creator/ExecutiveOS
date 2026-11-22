@@ -1,6 +1,6 @@
 # ExecutiveOS Phase 2 — Immersive Executive Intelligence Experience
 
-**Status:** Stage 4 Integration in review  
+**Status:** Stages 1–4 complete for verified scope · Stage 5 proposal awaiting approval  
 
 **Branch:** `cursor/phase-2-immersive-intelligence-b8a3`  
 **Constraint:** Presentation-layer immersion only. No backend contract, forecasting calculation, auth/RLS, or fabricated operational data without explicit approval.  
@@ -16,7 +16,8 @@
 | 2.3 Knowledge force-graph (Explore default) | Done — manufacturing evidence network; org KG FE-001 follow-on |
 | **Stage 2 — Executive Briefing** | **Approved with refinements** — denser priority panel, clearer forecast, inspectable timeline/knowledge |
 | **Stage 3 — Decision Intelligence** | **Approved** — hero · 3 confidence instruments · judgement analysis · evidence inspect · scenarios · derived next step · executive record workflow |
-| **Stage 4 — Integration** | **Verified (remediation)** — persistence honesty · Issues fix · lifecycle/evidence contracts · isolation tests |
+| **Stage 4 — Integration** | **Complete (verified scope)** — connected loop · lifecycle · evidence · isolation contracts · persistence honesty. **Outstanding:** production durable Supabase E2E on activated org. Preview remains `UI CACHE ONLY — NOT DURABLE SOT`. No further Stage 4 cosmetic work. |
+| **Stage 5 — Real Customer Intelligence** | **Proposal** — Hitachi Construction Machinery Australia · see `docs/design/STAGE_5_HITACHI_CUSTOMER_INTELLIGENCE.md` — await approval before implementation |
 
 **Stage 4 persistence note:** `recordExecutiveDecision` writes selection + rationale artefacts onto the existing Decision Engine object (`executiveRecording` in `pilot_decisions.payload` jsonb). Preview uses the portfolio store UI cache for refresh survival; production org snapshots continue through `persistPilotPortfolioAction`. No second persistence system. No new migrations.
 

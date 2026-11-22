@@ -26,6 +26,8 @@ export {
 } from "@/experience/immersion/map/layers";
 export {
   MAP_VIEW_PRESETS,
+  PRIMARY_MAP_VIEW_IDS,
+  AU_REGIONAL_VIEW_IDS,
   OPENFREEMAP_DARK_STYLE_URL,
   BASEMAP_PROVIDER_NOTE,
 } from "@/experience/immersion/map/basemap";
@@ -40,3 +42,8 @@ export {
   projectManufacturingExecutiveBriefing,
   type ExecutiveBriefingImmersionModel,
 } from "@/experience/immersion/briefing/projectManufacturingBriefing";
+export { DecisionIntelligenceImmersion } from "@/experience/immersion/decision/DecisionIntelligenceImmersion";
+export {
+  projectManufacturingDecisionIntelligence,
+  type DecisionIntelligenceImmersionModel,
+} from "@/experience/immersion/decision/projectManufacturingDecisionIntelligence";

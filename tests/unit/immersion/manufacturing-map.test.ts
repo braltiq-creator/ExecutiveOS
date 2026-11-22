@@ -5,6 +5,7 @@ import { analyseManufacturingSnapshot } from "@/executive-snapshot-studio/intell
 import type { UdgCanonicalRecord } from "@/data-gateway";
 import {
   REGION_RESOLVED_HONESTY,
+  projectManufacturingDecisionIntelligence,
   projectManufacturingEvidenceNetwork,
   projectManufacturingExecutiveBriefing,
   projectManufacturingOperationsMap,
@@ -104,5 +105,30 @@ describe("Phase 2 manufacturing immersion projections", () => {
     expect(briefing.network.nodes.length).toBeGreaterThan(0);
     expect(briefing.demonstrationData).toBe(true);
     expect(briefing.priorityDecision?.question).toBeTruthy();
+  });
+
+  it("projects decision intelligence immersion without fabricating measured outcomes", () => {
+    const analysis = analyseManufacturingSnapshot(loadDemoRecords());
+    const decision = projectManufacturingDecisionIntelligence(analysis);
+    expect(decision.decisionQuestion.length).toBeGreaterThan(10);
+    expect(decision.whyItMatters.length).toBeGreaterThan(10);
+    expect(decision.evidence.length).toBeGreaterThan(0);
+    expect(decision.options.length).toBeGreaterThan(0);
+    expect(decision.options.every((o) => o.isRecommendation === false)).toBe(
+      true,
+    );
+    expect(decision.scenarios).toHaveLength(3);
+    expect(
+      decision.scenarios.every((s) =>
+        /modelled|illustrative|option framing/i.test(s.honesty),
+      ),
+    ).toBe(true);
+    expect(decision.confidence.decisionConfidenceLabel.toLowerCase()).toContain(
+      "not yet established",
+    );
+    expect(decision.map.domain).toBe("manufacturing");
+    expect(decision.network.nodes.length).toBeGreaterThan(0);
+    expect(decision.demonstrationData).toBe(true);
+    expect(decision.nextAction.length).toBeGreaterThan(5);
   });
 });

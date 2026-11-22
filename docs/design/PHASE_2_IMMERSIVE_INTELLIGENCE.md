@@ -1,6 +1,6 @@
 # ExecutiveOS Phase 2 — Immersive Executive Intelligence Experience
 
-**Status:** Stage 1 Global Intelligence Map in review — Briefing / Decisions not started  
+**Status:** Stage 3 Decision Intelligence in review — Stage 4 Integration not started  
 **Branch:** `cursor/phase-2-immersive-intelligence-b8a3`  
 **Constraint:** Presentation-layer immersion only. No backend contract, forecasting calculation, auth/RLS, or fabricated operational data without explicit approval.  
 **Approved:** MapLibre + react-map-gl · region-resolved honesty · Manufacturing + Knowledge first · Explore network default  
@@ -13,9 +13,9 @@
 | 2.2 Manufacturing MapLibre operations map | Superseded by Stage 1 Global Intelligence Map |
 | **Stage 1 — Global Intelligence Map** | **Approved + polished** — OpenFreeMap + graphite command presence |
 | 2.3 Knowledge force-graph (Explore default) | Done — manufacturing evidence network; org KG FE-001 follow-on |
-| **Stage 2 — Executive Briefing** | **In review** — immersive attention field + map + knowledge + timeline |
-| Stage 3 — Decision Intelligence | Not started — waiting on Stage 2 approval |
-| Stage 4 — Integration | Not started |
+| **Stage 2 — Executive Briefing** | **Approved with refinements** — denser priority panel, clearer forecast, inspectable timeline/knowledge |
+| **Stage 3 — Decision Intelligence** | **In review** — attention · evidence · options · consequences · action + map/network |
+| Stage 4 — Integration | Not started — waiting on Stage 3 approval |
 
 ### Stage 1 basemap decision
 

@@ -8,9 +8,11 @@ import {
   ManufacturingOperationsMapLazy,
   KnowledgeNetworkExplorerLazy,
   ExecutiveBriefingImmersion,
+  DecisionIntelligenceImmersion,
   projectManufacturingEvidenceNetwork,
   projectManufacturingOperationsMap,
   projectManufacturingExecutiveBriefing,
+  projectManufacturingDecisionIntelligence,
   type IntelligenceMapLayerId,
   type MapViewPresetId,
 } from "@/experience/immersion";
@@ -22,9 +24,14 @@ const VIEW_IDS = new Set<MapViewPresetId>([
   "asia_pacific",
   "europe",
   "north_america",
+  "au_nsw",
+  "au_qld",
+  "au_vic",
+  "au_sa",
+  "au_wa",
 ]);
 
-type Tab = "map" | "network" | "briefing";
+type Tab = "map" | "network" | "briefing" | "decisions";
 
 export function Phase2PreviewClient() {
   const searchParams = useSearchParams();
@@ -37,7 +44,9 @@ export function Phase2PreviewClient() {
       ? "network"
       : tabParam === "briefing"
         ? "briefing"
-        : "map";
+        : tabParam === "decisions"
+          ? "decisions"
+          : "map";
   const [tab, setTab] = useState<Tab>(initialTab);
 
   const initialView: MapViewPresetId | undefined =
@@ -74,6 +83,10 @@ export function Phase2PreviewClient() {
     () => projectManufacturingExecutiveBriefing(analysis),
     [analysis],
   );
+  const decisionModel = useMemo(
+    () => projectManufacturingDecisionIntelligence(analysis),
+    [analysis],
+  );
 
   return (
     <div
@@ -101,6 +114,7 @@ export function Phase2PreviewClient() {
             [
               ["map", "Global intelligence map"],
               ["briefing", "Executive briefing"],
+              ["decisions", "Decision intelligence"],
               ["network", "Knowledge network"],
             ] as const
           ).map(([id, label]) => (
@@ -131,6 +145,9 @@ export function Phase2PreviewClient() {
         ) : null}
         {tab === "briefing" ? (
           <ExecutiveBriefingImmersion model={briefingModel} />
+        ) : null}
+        {tab === "decisions" ? (
+          <DecisionIntelligenceImmersion model={decisionModel} />
         ) : null}
         {tab === "network" ? (
           <KnowledgeNetworkExplorerLazy

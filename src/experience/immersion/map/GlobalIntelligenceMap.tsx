@@ -14,10 +14,12 @@ import { cn } from "@/lib/utils/cn";
 import { IntelligenceProvenanceBadge } from "@/experience/immersion/IntelligenceProvenanceBadge";
 import { applyGraphiteBasemap } from "@/experience/immersion/map/applyGraphiteBasemap";
 import {
+  AU_REGIONAL_VIEW_IDS,
   BASEMAP_PROVIDER_NOTE,
   MAP_VIEW_PRESETS,
   MARKER_FOCUS_ZOOM,
   OPENFREEMAP_DARK_STYLE_URL,
+  PRIMARY_MAP_VIEW_IDS,
   type MapViewPresetId,
 } from "@/experience/immersion/map/basemap";
 import {
@@ -300,17 +302,19 @@ export function GlobalIntelligenceMap({
           aria-hidden
         />
 
-        {/* Region navigation — floating */}
-        <div className="pointer-events-none absolute left-1/2 top-3 z-10 flex -translate-x-1/2 flex-wrap justify-center gap-1.5 px-2">
+        {/* Theatre + AU regional navigation — World → country → state → facility */}
+        <div className="pointer-events-none absolute left-1/2 top-3 z-10 flex -translate-x-1/2 flex-col items-center gap-1.5 px-2">
           <div className="pointer-events-auto flex flex-wrap justify-center gap-1 rounded-full border border-[color-mix(in_srgb,white_12%,transparent)] bg-[color-mix(in_srgb,#0a101c_82%,transparent)] p-1 shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-md">
-            {(Object.keys(MAP_VIEW_PRESETS) as MapViewPresetId[]).map((id) => (
+            {PRIMARY_MAP_VIEW_IDS.map((id) => (
               <button
                 key={id}
                 type="button"
                 data-map-view={id}
                 className={cn(
                   "rounded-full px-2.5 py-1 text-[0.68rem] uppercase tracking-[0.07em] transition-colors",
-                  viewId === id
+                  viewId === id ||
+                    (id === "australia" &&
+                      AU_REGIONAL_VIEW_IDS.includes(viewId))
                     ? "bg-[color-mix(in_srgb,#6a9fd8_22%,transparent)] text-[#e8eaef]"
                     : "text-[#8b93a7] hover:text-[#e8eaef]",
                 )}
@@ -323,6 +327,32 @@ export function GlobalIntelligenceMap({
               </button>
             ))}
           </div>
+          {viewId === "australia" || AU_REGIONAL_VIEW_IDS.includes(viewId) ? (
+            <div className="pointer-events-auto flex flex-wrap justify-center gap-1 rounded-full border border-[color-mix(in_srgb,white_10%,transparent)] bg-[color-mix(in_srgb,#0a101c_78%,transparent)] p-1 backdrop-blur-md">
+              <span className="px-1.5 py-1 text-[0.58rem] uppercase tracking-[0.08em] text-[#6d768a]">
+                Region
+              </span>
+              {AU_REGIONAL_VIEW_IDS.map((id) => (
+                <button
+                  key={id}
+                  type="button"
+                  data-map-view={id}
+                  className={cn(
+                    "rounded-full px-2 py-1 text-[0.65rem] uppercase tracking-[0.06em] transition-colors",
+                    viewId === id
+                      ? "bg-[color-mix(in_srgb,#c4a35a_22%,transparent)] text-[#e8eaef]"
+                      : "text-[#8b93a7] hover:text-[#e8eaef]",
+                  )}
+                  onClick={() => {
+                    setSelectedId(null);
+                    setViewId(id);
+                  }}
+                >
+                  {MAP_VIEW_PRESETS[id].label}
+                </button>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         {/* Layer dock — compact, expandable */}

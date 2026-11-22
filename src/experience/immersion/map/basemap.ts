@@ -103,7 +103,12 @@ export type MapViewPresetId =
   | "australia"
   | "asia_pacific"
   | "europe"
-  | "north_america";
+  | "north_america"
+  | "au_nsw"
+  | "au_qld"
+  | "au_vic"
+  | "au_sa"
+  | "au_wa";
 
 export type MapViewPreset = {
   id: MapViewPresetId;
@@ -113,9 +118,11 @@ export type MapViewPreset = {
   zoom: number;
   /** Optional pitch for subtle command depth (degrees). */
   pitch?: number;
+  /** When true, shown in the AU regional drill strip rather than the primary nav. */
+  regional?: boolean;
 };
 
-/** Balanced framing — continents readable, premium transitions. */
+/** Primary theatre frames — continents readable, premium transitions. */
 export const MAP_VIEW_PRESETS: Record<MapViewPresetId, MapViewPreset> = {
   world: {
     id: "world",
@@ -157,7 +164,61 @@ export const MAP_VIEW_PRESETS: Record<MapViewPresetId, MapViewPreset> = {
     zoom: 2.95,
     pitch: 8,
   },
+  // AU state / region drills — World → Australia → state → facility marker.
+  au_nsw: {
+    id: "au_nsw",
+    label: "NSW",
+    longitude: 147.0,
+    latitude: -32.15,
+    zoom: 5.35,
+    pitch: 16,
+    regional: true,
+  },
+  au_qld: {
+    id: "au_qld",
+    label: "QLD",
+    longitude: 144.5,
+    latitude: -22.5,
+    zoom: 5.0,
+    pitch: 16,
+    regional: true,
+  },
+  au_vic: {
+    id: "au_vic",
+    label: "VIC",
+    longitude: 144.9,
+    latitude: -36.9,
+    zoom: 5.6,
+    pitch: 16,
+    regional: true,
+  },
+  au_sa: {
+    id: "au_sa",
+    label: "SA",
+    longitude: 135.5,
+    latitude: -30.0,
+    zoom: 5.1,
+    pitch: 16,
+    regional: true,
+  },
+  au_wa: {
+    id: "au_wa",
+    label: "WA",
+    longitude: 122.0,
+    latitude: -25.5,
+    zoom: 4.85,
+    pitch: 16,
+    regional: true,
+  },
 };
 
-/** Zoom level when drilling into a selected marker. */
-export const MARKER_FOCUS_ZOOM = 5.4;
+export const PRIMARY_MAP_VIEW_IDS = (
+  Object.keys(MAP_VIEW_PRESETS) as MapViewPresetId[]
+).filter((id) => !MAP_VIEW_PRESETS[id].regional);
+
+export const AU_REGIONAL_VIEW_IDS = (
+  Object.keys(MAP_VIEW_PRESETS) as MapViewPresetId[]
+).filter((id) => MAP_VIEW_PRESETS[id].regional);
+
+/** Zoom level when drilling into a selected facility / dealer marker. */
+export const MARKER_FOCUS_ZOOM = 6.2;

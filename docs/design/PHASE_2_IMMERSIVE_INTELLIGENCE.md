@@ -17,7 +17,7 @@
 | **Stage 2 — Executive Briefing** | **Approved with refinements** — denser priority panel, clearer forecast, inspectable timeline/knowledge |
 | **Stage 3 — Decision Intelligence** | **Approved** — hero · 3 confidence instruments · judgement analysis · evidence inspect · scenarios · derived next step · executive record workflow |
 | **Stage 4 — Integration** | **Complete (verified scope)** — connected loop · lifecycle · evidence · isolation contracts · persistence honesty. **Outstanding:** production durable Supabase E2E on activated org. Preview remains `UI CACHE ONLY — NOT DURABLE SOT`. No further Stage 4 cosmetic work. |
-| **Stage 5 — Real Customer Intelligence** | **Proposal** — Hitachi Construction Machinery Australia · see `docs/design/STAGE_5_HITACHI_CUSTOMER_INTELLIGENCE.md` — await approval before implementation |
+| **Stage 5 — Real Customer Intelligence** | **Approved** (5a→5b→5c). **5a authorised** — durable staging E2E · currently **BLOCKED** on staging secrets · see `STAGE_5A_DURABLE_PERSISTENCE_ACCEPTANCE.md`. 5b/5c not started. |
 
 **Stage 4 persistence note:** `recordExecutiveDecision` writes selection + rationale artefacts onto the existing Decision Engine object (`executiveRecording` in `pilot_decisions.payload` jsonb). Preview uses the portfolio store UI cache for refresh survival; production org snapshots continue through `persistPilotPortfolioAction`. No second persistence system. No new migrations.
 

@@ -1,9 +1,9 @@
 # Stage 5 — Real Customer Intelligence Foundation
 
-**Status:** Architecture & implementation proposal — **awaiting approval before implementation**  
+**Status:** Architecture **approved** (5a → 5b → 5c). **Stage 5a authorised**; 5b/5c gated on 5a acceptance.  
 **Design partner (initial):** Hitachi Construction Machinery Australia  
 **Branch / PR:** `cursor/phase-2-immersive-intelligence-b8a3` · PR #7  
-**Constraint:** Do not invent customer data. Do not treat demonstration fixtures as live customer intelligence. Do not weaken the production truth boundary.
+**Constraint:** Do not invent customer data. Do not treat demonstration fixtures as live customer intelligence. Do not weaken the production truth boundary. Staging only for first customer workflow.
 
 ---
 
@@ -273,12 +273,13 @@ Hitachi-facing copy should follow design-partner language (Manufacturing · Fore
 
 ## 8. Implementation stages and acceptance tests
 
-### Stage 5a — Foundation gate (build first — see §10)
+### Stage 5a — Foundation gate (authorised — in progress)
 
-1. Provision Hitachi (or staging) organisation + executive user.  
-2. Close **production durable persistence E2E** on that org (record → refresh → logout/login → second browser).  
-3. Confirm RLS isolation against a second org.  
-**Exit:** Durable SoT proven; Stage 4 outstanding item closed.
+1. Dedicated **staging** organisation + real Supabase auth (`MOCK=false`).  
+2. Durable persistence E2E: write → refresh (UI cache cleared) → logout/login → second browser.  
+3. Confirm RLS isolation against a second staging org (User B).  
+**Exit:** Durable SoT proven; Stage 4 outstanding item closed.  
+**Live status:** See `docs/design/STAGE_5A_DURABLE_PERSISTENCE_ACCEPTANCE.md` — currently **BLOCKED** on staging secrets / org users in the Cloud Agent environment. Harness: `scripts/stage5a-durable-persistence-e2e.mjs`.
 
 ### Stage 5b — Real export land
 

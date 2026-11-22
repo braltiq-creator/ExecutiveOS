@@ -157,6 +157,7 @@ describe("Phase 66 Command Centre recomposition", () => {
       tabularText: readFileSync(SF, "utf8"),
       organisationId: "org-phase66-commercial",
       organisationName: "Commercial Partner",
+      profileId: "commercial",
       filename: "salesforce-opportunity-export.csv",
     });
     expect(raw.analysis).toBeTruthy();
@@ -170,13 +171,13 @@ describe("Phase 66 Command Centre recomposition", () => {
       organisationName: "Commercial Partner",
       profileId: "commercial",
       profileLabel: "Commercial Salesforce Intelligence",
-      sourceKind: "salesforce_export",
+      sourceKind: "csv",
       filename: "salesforce-opportunity-export.csv",
       recordCount: raw.snapshot!.meta.recordCount,
       confidenceOverall: raw.snapshot!.meta.confidence.overall,
       readiness: readinessFrom(raw.snapshot!.meta.confidence.overall),
       portfolio,
-      commercialAnalysis: raw.analysis,
+      analysis: raw.analysis,
       commercialBrief: raw.brief,
       councilSeats: ["CEO", "CFO", "COO", "CRO", "CSO"],
       advisorNames: [],
@@ -195,7 +196,9 @@ describe("Phase 66 Command Centre recomposition", () => {
     expect(html).not.toContain('data-evidence-tab="demand"');
     expect(html).not.toContain('data-capacity-inventory="true"');
     expect(html).not.toContain('data-forecast-confidence="true"');
-    expect(html).not.toMatch(/Region × Model|Plant 1|Model H demand/i);
+    // Commercial heat preview may share the Region × Model chrome label;
+    // manufacturing-specific plant/model copy must stay absent.
+    expect(html).not.toMatch(/Plant 1|Model H demand/i);
     expect(html).not.toContain("Helix");
     expect(html).not.toContain("Northline");
   });

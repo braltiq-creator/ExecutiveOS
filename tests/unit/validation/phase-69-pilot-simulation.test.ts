@@ -261,7 +261,7 @@ describe("Phase 69 Pilot Simulation & Executive Value Validation", () => {
         datasetShape: "flat_commercial",
       }),
       portfolio,
-      commercialAnalysis: raw.analysis,
+      analysis: raw.analysis,
       commercialBrief: raw.brief,
       councilSeats: ["CEO", "CFO", "COO", "CRO", "CSO"],
       advisorNames: [],

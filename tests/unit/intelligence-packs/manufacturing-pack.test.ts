@@ -112,19 +112,20 @@ describe("Manufacturing Executive Intelligence Pack (Phase 52)", () => {
     );
   });
 
-  it("provides mock Dynamics provider interface ready for live connector", () => {
+  it("provides mock Dynamics provider interface ready for live connector", async () => {
     const provider = createMockDynamicsManufacturingProvider({
       datasetId: "mfg-sim-scarcity",
     });
     expect(provider.system).toBe("microsoft_dynamics");
     expect(provider.mode).toBe("mock");
-    const snapshot = provider.getSnapshot();
+    const snapshot = await provider.getSnapshot();
     expect(snapshot.orderBank.weeksOfCover).toBeGreaterThan(
       snapshot.orderBank.capacityEnvelopeWeeks,
     );
-    const events = provider.toBusinessEvents(snapshot);
+    const events = await provider.toBusinessEvents(snapshot);
     expect(events.length).toBeGreaterThan(0);
-    expect(provider.health().status).toBe("connected");
+    const health = await provider.health();
+    expect(health.status).toBe("connected");
   });
 
   it("passes pack validation including simulation smoke", () => {

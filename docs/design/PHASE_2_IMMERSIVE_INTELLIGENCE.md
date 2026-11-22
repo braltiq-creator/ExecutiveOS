@@ -59,6 +59,38 @@ Dark graphite OS tokens, shell chrome, Command Centre restyle, restrained accent
 | Chart/map/graph tech | Zero chart/map/graph npm deps — custom SVG/CSS only |
 | Motion beyond CSS reveal | CSS tokens + `Reveal`; no choreographed spatial transitions |
 
+### 1.5 Deep-audit corroboration (integrity constraints)
+
+Codebase audits of Mission Control, Manufacturing, Knowledge, and Decisions add binding constraints for Phase 2 implementation:
+
+**Unused instruments already on the Command Centre model (prefer wiring before inventing):**
+
+- `CommandCentreExperienceModel.timeline` / `relationships` are populated for commercial paths but **not rendered** — `ExecutiveTimeline` and `RelationshipGraph` exist in EXDS.
+- Manufacturing has design-system `CapacityBar` / `ForecastRange` exported but **not mounted** on the live capacity/inventory boards (text rows only).
+- Manufacturing Evidence Graph has server actions + `compareManufacturingEvidenceGraphs`; **no product UI** consumes them yet.
+
+**Three parallel graph stacks — do not silently blend:**
+
+| Stack | Location | Persistence | Safe for immersive UI? |
+|-------|----------|-------------|------------------------|
+| Org Knowledge Graph | `src/lib/knowledge` | Supabase | Yes, when org-scoped data exists (explorer unmounted) |
+| Manufacturing Evidence Graph | `src/manufacturing-evidence-graph` | Supabase / memory | Yes — USER_PROVIDED only; co-occurrence projection |
+| Executive Knowledge Graph (EKG) | `src/knowledge-graph` | In-memory; default **mock Northline** | **No as default** — mock provider unless explicitly swapped |
+
+**Fabrication / demo bleed to refuse in immersive surfaces:**
+
+- Default portfolio may be `MOCK_OUTCOME_PORTFOLIO` / Northline-shaped until a real snapshot is active — immersive Knowledge/Decisions must refuse demo entities when snapshot mode is unavailable (same integrity posture as Command Centre `assertNoDemoBusinessContext`).
+- Knowledge Workspace “Connected Graph” cards and contribution % are **presentation glue**, not EKG/manufacturing edges — Phase 2 network must bind real node/edge records only.
+- Knowledge “AI Analysis” evidence bucket is **pulse-derived copy**, not an OpenAI call — must not receive an AI-assisted badge.
+- Decision Impact Simulator health deltas are **heuristic** (`confidence`-scaled), not causal measurement — Impact Field must label them as modelled / estimated, never as observed outcomes.
+- Detail decision copy may still contain Helix/demo outcome id strings — exclude from immersive evidence field.
+- Council seat opinions on decisions are **templated lenses**, not LLM — manufacturing path already refuses fabrication; keep that honesty.
+
+**AI that is actually live (separate from Command Centre derivation):**
+
+- OpenAI: Chief of Staff (`/assistant`) and multi-agent advisors (`src/lib/agents`) when keyed.
+- Domain Advisors catalogues and Intelligence Center insights are rule/signal derived — label Evidence-derived.
+
 ---
 
 ## 2. Recommended visual architecture
@@ -139,11 +171,11 @@ Prototypes live in `docs/design/prototypes/phase-2/` (static HTML, labelled **PR
 
 ### 4.1 Executive Briefing — `/today`
 
-**First viewport:** full-bleed intelligence stage — radial / layered **Organisation Attention Field** (priority decisions as nodes sized by impact, risks/opportunities as satellites), lead judgement as overlay, signal rail with evidence badges, sparse timeline ribbon at bottom.
+**First viewport:** full-bleed intelligence stage — radial / layered **Organisation Attention Field** (priority decisions as nodes sized by impact, risks/opportunities as satellites), lead judgement as overlay, signal rail with evidence badges, sparse timeline ribbon at bottom (prefer mounting already-built `model.timeline` / `ExecutiveTimeline` over inventing a parallel timeline source).
 
-**Below fold:** performance delta strip (from existing metrics), overnight/intelligence stream, decision CTA — not competing card grids in the hero.
+**Below fold:** performance delta strip (from existing metrics), overnight/intelligence stream, decision CTA — not competing card grids in the hero. Promote overnight/stream out of buried `<details>` where evidence-backed.
 
-**Data binding:** `CommandCentreExperienceModel` judgements, metrics, overnight, decision paper — no new invented KPIs.
+**Data binding:** `CommandCentreExperienceModel` judgements, metrics, overnight, decision paper — no new invented KPIs. Snapshot-unavailable path stays first-run / unavailable — never silent demo cockpit.
 
 ### 4.2 Manufacturing Intelligence
 
@@ -161,11 +193,13 @@ Prototypes live in `docs/design/prototypes/phase-2/` (static HTML, labelled **PR
 
 **Secondary:** keep Q&A answer path as complementary mode (“Ask” vs “Explore network”).
 
+**Hard rules:** never mount the default mock Northline EKG into the immersive explorer; never present Knowledge Workspace relationship cards as if they were graph edges; empty org graph → honest empty state, not demo substitution.
+
 ### 4.4 Decision Intelligence — `/decisions`
 
-**Primary:** **Decision Impact Field** — selected decision at centre; evidence nodes, risk/opportunity relations, financial/operational impact deltas as directed links (from existing simulator + portfolio data).
+**Primary:** **Decision Impact Field** — selected decision at centre; evidence nodes, risk/opportunity relations, financial/operational impact deltas as directed links (from existing simulator + portfolio data). Prefer manufacturing decision-paper evidence and portfolio dependencies when present; do not invent causal edges.
 
-**Scenario comparison:** side-by-side before/after instruments (existing simulator fields) with visual delta bars — only when simulator data exists.
+**Scenario comparison:** side-by-side before/after instruments (existing simulator fields) with visual delta bars — only when simulator data exists. Label simulator deltas as **modelled estimate** (heuristic confidence scaling), not measured results. Reality Lab / offline simulation remains out of Decision UI unless separately approved for wiring.
 
 **Status / execution:** reuse execution linkage already on manufacturing decision paper.
 
@@ -205,8 +239,8 @@ Prototypes live in `docs/design/prototypes/phase-2/` (static HTML, labelled **PR
 | MapLibre manufacturing stage | L | Geo honesty vs looking “fake precise”; tile/style ops |
 | Knowledge force graph | L | Performance at large node counts; SSR boundaries |
 | Briefing attention field | M | Must remain judgement-first, not dashboard |
-| Decision impact field | M | Binding only to real simulator/portfolio fields |
-| AI labelling | S | Mislabeling deterministic insights as AI |
+| Decision impact field | M | Binding only to real simulator/portfolio fields; avoid presenting heuristic deltas as measured |
+| AI labelling | S | Mislabeling pulse/heuristic copy or templated council as AI |
 | Perf / a11y / mobile schematic fallbacks | M | WebGL cost on low-end devices |
 
 ---
@@ -236,6 +270,9 @@ Prototypes live in `docs/design/prototypes/phase-2/` (static HTML, labelled **PR
 - [ ] Demo disclosure preserved when `demonstrationData`  
 - [ ] No fabricated live indicators  
 - [ ] Region-resolved geo labelled when coordinates absent  
+- [ ] No mock Northline EKG / `MOCK_OUTCOME_PORTFOLIO` bleed into immersive stages  
+- [ ] Knowledge network edges = durable graph records only (not presentation cards)  
+- [ ] Simulator / pulse / council lenses labelled as modelled or evidence-derived — never as live AI unless the OpenAI path ran  
 
 ---
 

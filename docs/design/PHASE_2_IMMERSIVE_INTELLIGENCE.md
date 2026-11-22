@@ -1,9 +1,19 @@
 # ExecutiveOS Phase 2 — Immersive Executive Intelligence Experience
 
-**Status:** Design & architecture audit complete — visual prototypes ready for review  
+**Status:** Implementation in progress — Manufacturing map + Knowledge network (Explore default) delivered for review  
 **Branch:** `cursor/phase-2-immersive-intelligence-b8a3`  
 **Constraint:** Presentation-layer immersion only. No backend contract, forecasting calculation, auth/RLS, or fabricated operational data without explicit approval.  
-**Gate:** Do not implement production screens until each prototype is reviewed.
+**Approved:** MapLibre + react-map-gl · region-resolved honesty · Manufacturing + Knowledge first · Explore network default  
+
+### Implementation progress
+
+| Stage | Status |
+|-------|--------|
+| 2.1 Immersion primitives + provenance badges | Done |
+| 2.2 Manufacturing MapLibre operations map | Done — review screenshots |
+| 2.3 Knowledge force-graph (Explore default) | Done — manufacturing evidence network; org KG FE-001 follow-on |
+| 2.4 Executive Briefing attention field | Not started |
+| 2.5 Decision impact field | Not started |
 
 ---
 

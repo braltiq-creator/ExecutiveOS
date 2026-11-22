@@ -3,6 +3,23 @@
   Dark graphite environment; light theme inherits via EXDS tokens.
 */
 
+/* MapLibre popup — match graphite OS (library injects .maplibregl-popup) */
+[data-manufacturing-operations-map] .maplibregl-popup-content {
+  background: color-mix(in srgb, #0a0c10 92%, transparent);
+  border: 1px solid color-mix(in srgb, white 12%, transparent);
+  border-radius: 8px;
+  box-shadow: none;
+  color: var(--eos-color-text, #e8eaef);
+  padding: 0.65rem 0.75rem;
+}
+[data-manufacturing-operations-map] .maplibregl-popup-tip {
+  border-top-color: color-mix(in srgb, #0a0c10 92%, transparent);
+}
+[data-manufacturing-operations-map] .maplibregl-popup-close-button {
+  color: var(--eos-color-text-muted, #8b93a7);
+  font-size: 1.1rem;
+}
+
 [data-command-centre-experience] {
   --exds-card-bg: var(--exds-surface-cool);
   --exds-card-border: var(--exds-electric-border);

@@ -1,12 +1,16 @@
 "use client";
 
-import { useMemo, Suspense } from "react";
+import { useMemo, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useDecisionsOptional } from "@/components/providers/DecisionProvider";
 import { useExperienceData } from "@/experience/executive-brief/useExperienceData";
 import { useEntryFocus } from "@/experience/exs";
 import { EXECUTIVE_ICONS } from "@/experience/icons";
 import { listLoopImpacts } from "@/experience/executive-loop";
+import {
+  KnowledgeNetworkExplorerLazy,
+  projectManufacturingEvidenceNetwork,
+} from "@/experience/immersion";
 import {
   buildIntelligenceScore,
   IntelligenceDiagnostics,
@@ -25,6 +29,10 @@ import {
 } from "@/experience/knowledge-workspace/derive";
 import { KnowledgeHeader } from "@/experience/knowledge-workspace/KnowledgeHeader";
 import {
+  KnowledgeModeSwitch,
+  type KnowledgeMode,
+} from "@/experience/knowledge-workspace/KnowledgeModeSwitch";
+import {
   ConfidencePanel,
   EvidenceStack,
   ExecutiveAnswer,
@@ -34,6 +42,7 @@ import {
   RelatedLinks,
   SourceExplorer,
 } from "@/experience/knowledge-workspace/KnowledgeSections";
+import { getActiveExecutiveSnapshot } from "@/executive-snapshot-studio/launch";
 
 function KnowledgeWorkspaceInner() {
   const { snapshot, strategicOutcomes, mode } = useExperienceData();
@@ -126,11 +135,20 @@ function KnowledgeWorkspaceReady({
 
   const entryActive = useEntryFocus(view.focusSection);
   const showDiagnostics = view.entry === "intelligence";
+  const [mode, setMode] = useState<KnowledgeMode>("explore");
+
+  const manufacturingNetwork = useMemo(() => {
+    const active = getActiveExecutiveSnapshot();
+    const analysis = active?.manufacturingAnalysis;
+    if (!analysis) return null;
+    return projectManufacturingEvidenceNetwork(analysis);
+  }, [snapshot]);
 
   return (
     <div
       className="mx-auto flex w-full max-w-[1200px] flex-col gap-6 pb-16"
       data-knowledge-workspace="true"
+      data-knowledge-mode={mode}
       data-exs="1.0"
       data-outcomes="1.0"
       data-council="1.0"
@@ -138,75 +156,103 @@ function KnowledgeWorkspaceReady({
     >
       <KnowledgeHeader entryLabel={knowledgeEntryLabel(view.entry)} />
 
-      {outcomesView.focus ? (
-        <OutcomeContextStrip context={outcomesView.focus} />
-      ) : null}
+      <KnowledgeModeSwitch mode={mode} onChange={setMode} />
 
-      <CouncilBriefStrip
-        brief={council.brief}
-        decisionTitle={council.decisionTitle}
-        outcomeName={council.outcomeName}
-      />
+      {mode === "explore" ? (
+        manufacturingNetwork ? (
+          <KnowledgeNetworkExplorerLazy model={manufacturingNetwork} />
+        ) : (
+          <section
+            className="exs-card space-y-3 p-[var(--exs-space-5)]"
+            data-knowledge-network="unavailable"
+          >
+            <p className="exs-label">Explore network</p>
+            <p className="exs-body">
+              No manufacturing evidence network is active in this session. Open
+              a manufacturing Executive Snapshot to explore derived
+              region–factory–dealer–model relationships, or use Ask for the
+              Q&amp;A evidence path. Org-persisted knowledge graph explorer
+              remains available when membership graph data exists (FE-001
+              follow-on wiring).
+            </p>
+            <p className="exs-caption text-[var(--eos-color-text-muted)]">
+              Mock Northline EKG is never mounted here.
+            </p>
+          </section>
+        )
+      ) : (
+        <>
+          {outcomesView.focus ? (
+            <OutcomeContextStrip context={outcomesView.focus} />
+          ) : null}
 
-      <ExecutiveQuestion
-        question={view.question}
-        focused={entryActive && view.focusSection === "executive-question"}
-      />
+          <CouncilBriefStrip
+            brief={council.brief}
+            decisionTitle={council.decisionTitle}
+            outcomeName={council.outcomeName}
+          />
 
-      <ExecutiveAnswer
-        answer={view.answer}
-        focused={entryActive && view.focusSection === "executive-answer"}
-      />
+          <ExecutiveQuestion
+            question={view.question}
+            focused={entryActive && view.focusSection === "executive-question"}
+          />
 
-      {showDiagnostics ? (
-        <IntelligenceDiagnostics
-          score={intelligenceScore}
-          focused={
-            entryActive && view.focusSection === "intelligence-diagnostics"
-          }
-        />
-      ) : null}
+          <ExecutiveAnswer
+            answer={view.answer}
+            focused={entryActive && view.focusSection === "executive-answer"}
+          />
 
-      <ConfidencePanel
-        confidence={view.confidence}
-        focused={entryActive && view.focusSection === "confidence"}
-      />
+          {showDiagnostics ? (
+            <IntelligenceDiagnostics
+              score={intelligenceScore}
+              focused={
+                entryActive && view.focusSection === "intelligence-diagnostics"
+              }
+            />
+          ) : null}
 
-      <EvidenceStack
-        items={view.evidence}
-        focused={entryActive && view.focusSection === "evidence-stack"}
-      />
+          <ConfidencePanel
+            confidence={view.confidence}
+            focused={entryActive && view.focusSection === "confidence"}
+          />
 
-      <KnowledgeRelationships items={view.relationships} />
+          <EvidenceStack
+            items={view.evidence}
+            focused={entryActive && view.focusSection === "evidence-stack"}
+          />
 
-      <RelatedLinks
-        id="related-strategy"
-        label="Related Strategy"
-        icon={EXECUTIVE_ICONS.strategy}
-        items={view.relatedStrategy}
-        openLabel="Open Strategy →"
-        focused={entryActive && view.focusSection === "related-strategy"}
-      />
+          <KnowledgeRelationships items={view.relationships} />
 
-      <RelatedLinks
-        id="related-decisions"
-        label="Related Decisions"
-        icon={EXECUTIVE_ICONS.decisions}
-        items={view.relatedDecisions}
-        openLabel="Open Decisions →"
-      />
+          <RelatedLinks
+            id="related-strategy"
+            label="Related Strategy"
+            icon={EXECUTIVE_ICONS.strategy}
+            items={view.relatedStrategy}
+            openLabel="Open Strategy →"
+            focused={entryActive && view.focusSection === "related-strategy"}
+          />
 
-      <RelatedLinks
-        id="related-activity"
-        label="Related Activity"
-        icon={EXECUTIVE_ICONS.activity}
-        items={view.relatedActivity}
-        openLabel="Open →"
-        focused={entryActive && view.focusSection === "related-activity"}
-      />
+          <RelatedLinks
+            id="related-decisions"
+            label="Related Decisions"
+            icon={EXECUTIVE_ICONS.decisions}
+            items={view.relatedDecisions}
+            openLabel="Open Decisions →"
+          />
 
-      <SourceExplorer items={view.sources} />
-      <KnowledgeTimeline items={view.timeline} />
+          <RelatedLinks
+            id="related-activity"
+            label="Related Activity"
+            icon={EXECUTIVE_ICONS.activity}
+            items={view.relatedActivity}
+            openLabel="Open →"
+            focused={entryActive && view.focusSection === "related-activity"}
+          />
+
+          <SourceExplorer items={view.sources} />
+          <KnowledgeTimeline items={view.timeline} />
+        </>
+      )}
     </div>
   );
 }

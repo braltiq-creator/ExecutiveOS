@@ -97,6 +97,18 @@ export type ManufacturingExecutiveValue = {
   capacityUtilisation: number | null;
 };
 
+/**
+ * Co-occurrence of factory/dealer with region on the same evidence row.
+ * Presentation aid for region-resolved map placement — not lat/lng evidence.
+ */
+export type ManufacturingLocationBinding = {
+  entity: string;
+  kind: "factory" | "dealer";
+  /** Most frequent co-occurring region label on the same rows. */
+  region: string;
+  coOccurrenceCount: number;
+};
+
 export type ManufacturingAnalysis = {
   module: "manufacturing_forecasting";
   /** True when source marks demonstration (e.g. Forecast Version contains DEMO). */
@@ -118,6 +130,11 @@ export type ManufacturingAnalysis = {
   missingInformation: string[];
   unsupportedConclusions: string[];
   executiveValue: ManufacturingExecutiveValue;
+  /**
+   * Region co-occurrence for factories/dealers from the same UDG rows.
+   * Enables region-resolved map markers — coordinates remain absent.
+   */
+  locationBindings: ManufacturingLocationBinding[];
   asOf: string;
 };
 
@@ -220,6 +237,9 @@ export function analyseManufacturingSnapshot(
       missingInformation.push(`${cov.field} coverage thin (${cov.rate}%)`);
     }
   }
+  missingInformation.push(
+    "Factory/dealer geographic coordinates not in evidence — map uses region-resolved placement only",
+  );
 
   const periods = uniqueSorted(records.map((r) => str(r.fields.period) || str(r.fields.asOfDate)));
   const regions = uniqueSorted(records.map((r) => str(r.fields.region)));
@@ -511,6 +531,8 @@ export function analyseManufacturingSnapshot(
     .filter((v): v is number => v != null)
     .sort((a, b) => b - a)[0];
 
+  const locationBindings = buildLocationBindings(records);
+
   return {
     module: "manufacturing_forecasting",
     demonstrationData,
@@ -527,6 +549,7 @@ export function analyseManufacturingSnapshot(
     confidenceSlices,
     capacity,
     inventory,
+    locationBindings,
     insights,
     missingInformation,
     unsupportedConclusions,
@@ -539,6 +562,52 @@ export function analyseManufacturingSnapshot(
     },
     asOf,
   };
+}
+
+/**
+ * Dominant region co-occurrence per factory/dealer from the same evidence rows.
+ * Does not invent coordinates — presentation only for region-resolved maps.
+ */
+function buildLocationBindings(
+  records: UdgCanonicalRecord[],
+): ManufacturingLocationBinding[] {
+  const counts = new Map<string, Map<string, number>>();
+
+  for (const record of records) {
+    const region = str(record.fields.region);
+    if (!region) continue;
+    for (const kind of ["factory", "dealer"] as const) {
+      const entity = str(record.fields[kind]);
+      if (!entity) continue;
+      const key = `${kind}::${entity}`;
+      const byRegion = counts.get(key) ?? new Map<string, number>();
+      byRegion.set(region, (byRegion.get(region) ?? 0) + 1);
+      counts.set(key, byRegion);
+    }
+  }
+
+  const bindings: ManufacturingLocationBinding[] = [];
+  for (const [key, byRegion] of counts) {
+    const [kind, ...entityParts] = key.split("::");
+    const entity = entityParts.join("::");
+    let bestRegion = "";
+    let bestCount = 0;
+    for (const [region, count] of byRegion) {
+      if (count > bestCount) {
+        bestRegion = region;
+        bestCount = count;
+      }
+    }
+    if (!bestRegion || bestCount <= 0) continue;
+    bindings.push({
+      entity,
+      kind: kind as "factory" | "dealer",
+      region: bestRegion,
+      coOccurrenceCount: bestCount,
+    });
+  }
+
+  return bindings.sort((a, b) => a.entity.localeCompare(b.entity));
 }
 
 function clamp(n: number): number {

@@ -146,6 +146,11 @@ export type CommandCentreExperienceModel = {
       variancePct: number | null;
     }>;
   } | null;
+  /**
+   * Phase 2 — interactive geographic operations map (manufacturing only).
+   * Region-resolved placement; coordinates not in UDG evidence.
+   */
+  operationsMap?: import("@/experience/immersion").ManufacturingOperationsMapModel | null;
   confidenceBoard?: Array<{
     id: string;
     scope: string;

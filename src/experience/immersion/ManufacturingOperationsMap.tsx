@@ -26,6 +26,8 @@ if (typeof window !== "undefined") {
 const GRAPHITE_STYLE = {
   version: 8 as const,
   name: "executiveos-graphite",
+  // Public glyph set so state labels can render without a full basemap tile stack.
+  glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
   sources: {},
   layers: [
     {
@@ -175,8 +177,24 @@ export function ManufacturingOperationsMap({
               id="au-states-outline"
               type="line"
               paint={{
-                "line-color": "rgba(232, 234, 239, 0.28)",
-                "line-width": 1.1,
+                "line-color": "rgba(232, 234, 239, 0.38)",
+                "line-width": 1.25,
+              }}
+            />
+            <Layer
+              id="au-states-label"
+              type="symbol"
+              layout={{
+                "text-field": ["get", "regionCode"],
+                "text-size": 11,
+                "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+                "text-allow-overlap": false,
+                "text-ignore-placement": false,
+              }}
+              paint={{
+                "text-color": "rgba(232, 234, 239, 0.55)",
+                "text-halo-color": "rgba(10, 12, 16, 0.85)",
+                "text-halo-width": 1.2,
               }}
             />
           </Source>

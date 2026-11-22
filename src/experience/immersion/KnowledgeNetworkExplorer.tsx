@@ -90,6 +90,8 @@ const RELATION_LEGEND = [
 type Props = {
   model: ImmersionNetworkModel;
   className?: string;
+  /** Optional controlled selection for review screenshots. */
+  initialSelectedId?: string | null;
 };
 
 type GraphNode = NodeObject & ImmersionNetworkNode;
@@ -105,12 +107,16 @@ function nodeRadius(node: GraphNode): number {
   return Math.max(5, Math.sqrt(node.val ?? 4) * 3.8);
 }
 
-export function KnowledgeNetworkExplorer({ model, className }: Props) {
+export function KnowledgeNetworkExplorer({
+  model,
+  className,
+  initialSelectedId = null,
+}: Props) {
   const graphRef = useRef<ForceGraphMethods<GraphNode, GraphLink> | undefined>(
     undefined,
   );
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(initialSelectedId);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [size, setSize] = useState({ w: 900, h: 620 });
 
@@ -121,24 +127,30 @@ export function KnowledgeNetworkExplorer({ model, className }: Props) {
       list.push(n);
       byGroup.set(n.group, list);
     }
-    // Concentric seed so the canvas is used before force settling.
+    // Elliptical concentric seed — fill the wide canvas, not a tight cluster.
+    const rxStep = Math.max(95, size.w * 0.11);
+    const ryStep = Math.max(70, size.h * 0.11);
     const nodes = model.nodes.map((n) => {
       const style = GROUP_STYLE[n.group] ?? GROUP_STYLE.default;
       const peers = byGroup.get(n.group) ?? [n];
       const idx = peers.findIndex((p) => p.id === n.id);
-      const ring = 40 + style.rank * 95;
-      const angle = (idx / Math.max(peers.length, 1)) * Math.PI * 2 - Math.PI / 2;
+      const rx = 36 + style.rank * rxStep;
+      const ry = 28 + style.rank * ryStep;
+      const stagger = peers.length > 1 ? (idx / peers.length) * Math.PI * 2 : 0;
+      const angle = stagger - Math.PI / 2 + style.rank * 0.22;
       return {
         ...n,
-        x: Math.cos(angle) * ring,
-        y: Math.sin(angle) * ring,
+        x: Math.cos(angle) * rx,
+        y: Math.sin(angle) * ry,
+        fx: style.rank === 0 ? 0 : undefined,
+        fy: style.rank === 0 ? 0 : undefined,
       };
     });
     return {
       nodes,
       links: model.links.map((l) => ({ ...l })),
     };
-  }, [model.nodes, model.links]);
+  }, [model.nodes, model.links, size.w, size.h]);
 
   const neighborIds = useMemo(() => {
     const focus = selectedId ?? hoveredId;
@@ -179,20 +191,28 @@ export function KnowledgeNetworkExplorer({ model, className }: Props) {
   useEffect(() => {
     const fg = graphRef.current;
     if (!fg) return;
+    const span = Math.min(size.w, size.h);
     const charge = fg.d3Force("charge") as unknown as {
       strength?: (n: number) => unknown;
     } | undefined;
-    charge?.strength?.(-560);
+    charge?.strength?.(-Math.max(420, span * 0.85));
     const link = fg.d3Force("link") as unknown as {
       distance?: (n: number | ((l: unknown) => number)) => unknown;
       strength?: (n: number) => unknown;
     } | undefined;
-    link?.distance?.(120);
-    link?.strength?.(0.45);
+    link?.distance?.((l: unknown) => {
+      const linkObj = l as GraphLink;
+      const s = linkObj.source as GraphNode;
+      const t = linkObj.target as GraphNode;
+      const sr = GROUP_STYLE[s?.group ?? ""]?.rank ?? 3;
+      const tr = GROUP_STYLE[t?.group ?? ""]?.rank ?? 3;
+      return 70 + Math.abs(sr - tr) * Math.max(48, span * 0.08);
+    });
+    link?.strength?.(0.28);
     const center = fg.d3Force("center") as unknown as {
       strength?: (n: number) => unknown;
     } | undefined;
-    center?.strength?.(0.04);
+    center?.strength?.(0.02);
   }, [data, size.w, size.h]);
 
   const paintNode = useCallback(
@@ -279,7 +299,7 @@ export function KnowledgeNetworkExplorer({ model, className }: Props) {
     (link: GraphLink, ctx: CanvasRenderingContext2D, globalScale: number) => {
       const s = link.source as GraphNode;
       const t = link.target as GraphNode;
-      if (s?.x == null || t?.x == null) return;
+      if (s?.x == null || t?.x == null || s.y == null || t.y == null) return;
       const sId = String(s.id);
       const tId = String(t.id);
       const focusActive = Boolean(selectedId || hoveredId);
@@ -290,16 +310,25 @@ export function KnowledgeNetworkExplorer({ model, className }: Props) {
         selectedId != null &&
         (sId === selectedId || tId === selectedId);
 
+      const mx = (s.x + t.x) / 2;
+      const my = (s.y + t.y) / 2;
+      const dx = t.x - s.x;
+      const dy = t.y - s.y;
+      const len = Math.hypot(dx, dy) || 1;
+      const curvature = Math.min(28, len * 0.12);
+      const cx = mx - (dy / len) * curvature;
+      const cy = my + (dx / len) * curvature;
+
       ctx.save();
       ctx.beginPath();
-      ctx.moveTo(s.x, s.y!);
-      ctx.lineTo(t.x, t.y!);
+      ctx.moveTo(s.x, s.y);
+      ctx.quadraticCurveTo(cx, cy, t.x, t.y);
       ctx.strokeStyle = hot
-        ? "rgba(106,159,216,0.85)"
+        ? "rgba(106,159,216,0.9)"
         : connected
-          ? "rgba(106,159,216,0.32)"
-          : "rgba(106,159,216,0.06)";
-      ctx.lineWidth = (hot ? 1.8 : 1) / globalScale;
+          ? "rgba(106,159,216,0.38)"
+          : "rgba(106,159,216,0.07)";
+      ctx.lineWidth = (hot ? 2.1 : 1.15) / globalScale;
       ctx.stroke();
       ctx.restore();
     },
@@ -398,14 +427,22 @@ export function KnowledgeNetworkExplorer({ model, className }: Props) {
               setSelectedId(null);
               setHoveredId(null);
             }}
-            cooldownTicks={140}
-            warmupTicks={60}
+            cooldownTicks={120}
+            warmupTicks={40}
+            d3VelocityDecay={0.35}
             enableNodeDrag
             onEngineStop={() => {
-              graphRef.current?.zoomToFit(600, 96);
-              window.setTimeout(() => {
-                graphRef.current?.zoomToFit(400, 88);
-              }, 180);
+              const fg = graphRef.current;
+              if (!fg) return;
+              // Expand settled positions so the network claims the canvas width.
+              for (const raw of data.nodes) {
+                const n = raw as GraphNode;
+                if (n.fx != null) continue;
+                if (typeof n.x === "number") n.x *= 1.35;
+                if (typeof n.y === "number") n.y *= 1.15;
+              }
+              fg.zoomToFit(420, 32);
+              window.setTimeout(() => fg.zoomToFit(280, 28), 160);
             }}
           />
 

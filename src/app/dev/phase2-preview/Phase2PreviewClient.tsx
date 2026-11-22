@@ -87,7 +87,10 @@ export function Phase2PreviewClient() {
             initialSelectedId={selectParam}
           />
         ) : (
-          <KnowledgeNetworkExplorerLazy model={networkModel} />
+          <KnowledgeNetworkExplorerLazy
+            model={networkModel}
+            initialSelectedId={selectParam}
+          />
         )}
       </main>
     </div>

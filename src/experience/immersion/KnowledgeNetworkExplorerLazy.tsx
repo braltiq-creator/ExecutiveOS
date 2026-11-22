@@ -26,6 +26,7 @@ const KnowledgeNetworkExplorer = dynamic(
 type Props = {
   model: ImmersionNetworkModel;
   className?: string;
+  initialSelectedId?: string | null;
 };
 
 export function KnowledgeNetworkExplorerLazy(props: Props) {

@@ -412,9 +412,9 @@ export function projectManufacturingDecisionIntelligence(
   const urgencyTone: "attention" | "watching" | "intelligence" =
     capacityPressure ? "attention" : "watching";
 
-  const businessImpact =
-    paper.executiveJudgementRequired ||
-    "Allocation posture affects demand continuity and plant load — financial contribution is not yet quantified in evidence.";
+  const businessImpact = capacityPressure
+    ? `Allocation posture affects continuity of ${leadModel ?? "strategic"} demand while ${hotFactory!.factory} is under evidenced overload (${hotFactory!.loadPct}%). Financial contribution of that demand is not yet quantified in evidence.`
+    : `Allocation posture affects demand continuity and plant load. ${paper.costOfDelay} Executive value remains: ${paper.executiveValueStatus}.`;
 
   const recommendedNextStep: RecommendedNextStep = {
     kind: "derived_next_step",

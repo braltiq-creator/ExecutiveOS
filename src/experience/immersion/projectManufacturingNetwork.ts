@@ -10,27 +10,48 @@ import type { ImmersionNetworkModel } from "@/experience/immersion/types";
 export function projectManufacturingEvidenceNetwork(
   analysis: ManufacturingAnalysis,
 ): ImmersionNetworkModel {
-  const nodes = new Map<
-    string,
-    ImmersionNetworkModel["nodes"][number]
-  >();
+  const nodes = new Map<string, ImmersionNetworkModel["nodes"][number]>();
   const links: ImmersionNetworkModel["links"] = [];
   const linkKeys = new Set<string>();
+  const disclosure = analysis.demonstrationData
+    ? "Demonstration fixture — not live customer intelligence"
+    : null;
 
-  function ensureNode(
-    id: string,
-    label: string,
-    group: string,
-    val = 4,
-  ) {
-    if (nodes.has(id)) return;
-    nodes.set(id, {
-      id,
-      label,
-      group,
+  function ensureNode(input: {
+    id: string;
+    label: string;
+    group: string;
+    val?: number;
+    summary?: string;
+    significance?: string;
+    evidenceSources?: string[];
+  }) {
+    const existing = nodes.get(input.id);
+    if (existing) {
+      if (input.summary && !existing.summary?.includes(input.summary)) {
+        existing.summary = input.summary;
+      }
+      if (input.significance) existing.significance = input.significance;
+      if (input.evidenceSources?.length) {
+        existing.evidenceSources = [
+          ...new Set([
+            ...(existing.evidenceSources ?? []),
+            ...input.evidenceSources,
+          ]),
+        ];
+      }
+      return;
+    }
+    nodes.set(input.id, {
+      id: input.id,
+      label: input.label,
+      group: input.group,
       provenance: "derived",
-      summary: `${group} from manufacturing evidence analysis`,
-      val,
+      summary: input.summary ?? `${input.group} derived from manufacturing evidence`,
+      val: input.val ?? 4,
+      significance: input.significance ?? null,
+      evidenceSources: input.evidenceSources ?? [],
+      disclosure,
     });
   }
 
@@ -38,6 +59,7 @@ export function projectManufacturingEvidenceNetwork(
     source: string,
     target: string,
     label: string,
+    basis: string,
   ) {
     const key = `${source}|${target}|${label}`;
     const rev = `${target}|${source}|${label}`;
@@ -48,51 +70,144 @@ export function projectManufacturingEvidenceNetwork(
       target,
       label,
       provenance: "derived",
+      basis,
     });
   }
 
-  ensureNode("org", "Organisation", "Organisation", 10);
+  ensureNode({
+    id: "org",
+    label: "Organisation",
+    group: "Organisation",
+    val: 14,
+    summary: "Tenant hub for this manufacturing evidence projection",
+    significance:
+      "Anchors all region, factory, dealer and model entities present in the active snapshot",
+    evidenceSources: [
+      `Snapshot record count: ${analysis.recordCount}`,
+      analysis.demonstrationData
+        ? "Forecast version marks demonstration data"
+        : "Manufacturing forecast snapshot",
+    ],
+  });
 
   for (const region of analysis.regions) {
     if (!region) continue;
-    const id = `region:${region}`;
-    ensureNode(id, region, "Region", 6);
-    link("org", id, "CONTAINS");
+    const cells = analysis.heatMap.filter((c) => c.region === region);
+    const peak = cells
+      .map((c) => c.variancePct)
+      .filter((v): v is number => v != null)
+      .sort((a, b) => Math.abs(b) - Math.abs(a))[0];
+    ensureNode({
+      id: `region:${region}`,
+      label: region,
+      group: "Region",
+      val: 8,
+      summary: `Geographic demand aggregation · ${cells.length} region×model cells`,
+      significance:
+        peak == null
+          ? "Region present in evidence; variance not established"
+          : `Peak region×model variance ${peak > 0 ? "+" : ""}${peak}%`,
+      evidenceSources: [
+        "UDG field: region",
+        "Derived heatMap aggregation (6-period window)",
+      ],
+    });
+    link(
+      "org",
+      `region:${region}`,
+      "CONTAINS",
+      "Region label appears on manufacturing evidence rows for this organisation",
+    );
   }
 
   for (const cell of analysis.heatMap) {
     if (!cell.region || !cell.model) continue;
     const regionId = `region:${cell.region}`;
     const modelId = `model:${cell.model}`;
-    ensureNode(regionId, cell.region, "Region", 6);
-    ensureNode(modelId, cell.model, "MachineModel", 5);
-    link(regionId, modelId, "DEMANDS");
+    ensureNode({
+      id: modelId,
+      label: cell.model,
+      group: "MachineModel",
+      val: 5,
+      summary: "Product model with region demand co-occurrence",
+      significance:
+        cell.variancePct == null
+          ? "Model demand present; variance not established"
+          : `${cell.region} variance ${cell.variancePct > 0 ? "+" : ""}${cell.variancePct}%`,
+      evidenceSources: [
+        "UDG fields: region + model (same rows)",
+        "Derived heatMap cell",
+      ],
+    });
+    link(
+      regionId,
+      modelId,
+      "DEMANDS",
+      "Region and model co-occur on the same evidence rows in the heat aggregation",
+    );
   }
+
+  const capacityByFactory = new Map(
+    analysis.capacity.map((c) => [c.factory, c]),
+  );
 
   for (const binding of analysis.locationBindings ?? []) {
     const regionId = `region:${binding.region}`;
     const entityId = `${binding.kind}:${binding.entity}`;
-    ensureNode(regionId, binding.region, "Region", 6);
-    ensureNode(
-      entityId,
-      binding.entity,
-      binding.kind === "factory" ? "Factory" : "Dealer",
-      binding.kind === "factory" ? 7 : 4,
-    );
+    const cap = capacityByFactory.get(binding.entity);
+    ensureNode({
+      id: entityId,
+      label: binding.entity,
+      group: binding.kind === "factory" ? "Factory" : "Dealer",
+      val: binding.kind === "factory" ? 9 : 4.5,
+      summary:
+        binding.kind === "factory"
+          ? cap?.loadPct != null
+            ? `Factory · demonstrated load ${cap.loadPct}%`
+            : "Factory from evidence co-occurrence"
+          : `Dealer · ${binding.coOccurrenceCount} co-occurring rows with ${binding.region}`,
+      significance:
+        binding.kind === "factory"
+          ? cap?.loadPct != null
+            ? `Capacity signal tone ${cap.tone}; slots ${cap.availableSlots ?? "not established"}`
+            : "Factory present without quantified load"
+          : `Primary region co-occurrence ${binding.region}`,
+      evidenceSources: [
+        `UDG fields: ${binding.kind} + region (same rows)`,
+        `${binding.coOccurrenceCount} co-occurring evidence rows`,
+        ...(cap
+          ? ["Derived capacity aggregation (latest period)"]
+          : []),
+      ],
+    });
     link(
       entityId,
       regionId,
       binding.kind === "dealer" ? "LOCATED_IN" : "PLANNED_AT",
+      `${binding.kind} and region co-occur on the same evidence rows (${binding.coOccurrenceCount} rows)`,
     );
-    link("org", entityId, "CONTAINS");
+    link(
+      "org",
+      entityId,
+      "CONTAINS",
+      `${binding.kind} appears in the organisation manufacturing evidence set`,
+    );
   }
 
   for (const cap of analysis.capacity) {
     const id = `factory:${cap.factory}`;
-    ensureNode(id, cap.factory, "Factory", 7);
-    if (cap.loadPct != null) {
-      nodes.get(id)!.summary = `Load ${cap.loadPct}% · derived capacity signal`;
-    }
+    ensureNode({
+      id,
+      label: cap.factory,
+      group: "Factory",
+      val: 9,
+      summary:
+        cap.loadPct != null
+          ? `Load ${cap.loadPct}% · demand ${cap.demonstratedDemand}`
+          : "Factory capacity signal",
+      significance: `Tone ${cap.tone}`,
+      evidenceSources: ["Derived capacity aggregation"],
+    });
   }
 
   if (nodes.size <= 1) {
@@ -103,6 +218,7 @@ export function projectManufacturingEvidenceNetwork(
       sourceLabel: analysis.demonstrationData
         ? "Demonstration manufacturing forecast"
         : "Manufacturing forecast snapshot",
+      demonstrationData: analysis.demonstrationData,
       emptyReason:
         "Insufficient manufacturing dimensions to project an evidence network.",
     };
@@ -112,8 +228,9 @@ export function projectManufacturingEvidenceNetwork(
     title: "Manufacturing evidence network",
     nodes: [...nodes.values()],
     links,
+    demonstrationData: analysis.demonstrationData,
     sourceLabel: analysis.demonstrationData
-      ? "Demonstration manufacturing forecast · derived co-occurrence only"
+      ? "Demonstration fixture · derived co-occurrence only — not live customer intelligence"
       : "Manufacturing forecast snapshot · derived co-occurrence only",
   };
 }

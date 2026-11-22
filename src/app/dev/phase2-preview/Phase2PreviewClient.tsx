@@ -1,29 +1,24 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { analyseManufacturingSnapshot } from "@/executive-snapshot-studio/intelligence/manufacturing-analysis";
 import type { UdgCanonicalRecord } from "@/data-gateway";
 import {
   ManufacturingOperationsMapLazy,
-  projectManufacturingOperationsMap,
-} from "@/experience/immersion";
-import {
   KnowledgeNetworkExplorerLazy,
   projectManufacturingEvidenceNetwork,
+  projectManufacturingOperationsMap,
 } from "@/experience/immersion";
-
-/**
- * Loads demo manufacturing CSV via fetch from /fixtures path is not public —
- * embed a minimal parse of the known fixture through dynamic import of raw text
- * is awkward in client. Instead: call a tiny API route... or parse inline.
- *
- * Client preview fetches the fixture from the repo public copy if present;
- * otherwise uses a server-built snapshot injected as JSON from a sibling module.
- */
 import { DEMO_MANUFACTURING_RECORDS } from "./demo-records";
 
 export function Phase2PreviewClient() {
-  const [tab, setTab] = useState<"map" | "network">("map");
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const selectParam = searchParams.get("select");
+  const [tab, setTab] = useState<"map" | "network">(
+    tabParam === "network" ? "network" : "map",
+  );
 
   const analysis = useMemo(
     () =>
@@ -43,20 +38,21 @@ export function Phase2PreviewClient() {
 
   return (
     <div
-      className="min-h-screen bg-[#0a0c10] px-4 py-6 text-[#e8eaef]"
+      className="min-h-screen bg-[#0a0c10] px-4 py-6 text-[#e8eaef] md:px-8"
       data-phase2-preview="true"
     >
-      <header className="mx-auto mb-6 max-w-[1200px]">
+      <header className="mx-auto mb-6 max-w-[1280px]">
         <p className="text-[0.7rem] uppercase tracking-[0.12em] text-[#6a9fd8]">
           Phase 2 preview · development only
         </p>
-        <h1 className="mt-1 text-xl font-semibold tracking-tight">
+        <h1 className="mt-1 text-xl font-semibold tracking-tight md:text-2xl">
           Immersion instruments — manufacturing fixture
         </h1>
-        <p className="mt-2 max-w-2xl text-sm text-[#8b93a7]">
-          Real `analyseManufacturingSnapshot` on the demo forecast CSV shape.
-          Demonstration disclosure active. Not mock Northline. Not production
-          deploy surface.
+        <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#8b93a7]">
+          Real <code>analyseManufacturingSnapshot</code> on the demo forecast CSV
+          shape. <strong className="font-medium text-[#e0b4a4]">Demonstration
+          fixture — not live customer intelligence.</strong> Not mock Northline.
+          Not a production deploy surface.
         </p>
         <div className="mt-4 flex gap-2">
           <button
@@ -84,9 +80,12 @@ export function Phase2PreviewClient() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-[1200px]">
+      <main className="mx-auto max-w-[1280px]">
         {tab === "map" ? (
-          <ManufacturingOperationsMapLazy model={mapModel} />
+          <ManufacturingOperationsMapLazy
+            model={mapModel}
+            initialSelectedId={selectParam}
+          />
         ) : (
           <KnowledgeNetworkExplorerLazy model={networkModel} />
         )}

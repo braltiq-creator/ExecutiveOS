@@ -64,7 +64,14 @@ export type ImmersionNetworkNode = {
   group: string;
   provenance: IntelligenceProvenance;
   summary?: string | null;
+  /** Relative visual weight / hierarchy (Organisation highest). */
   val?: number;
+  /** Why this entity matters in the current evidence set. */
+  significance?: string | null;
+  /** Evidence source rows / fields that justify presence. */
+  evidenceSources?: string[];
+  /** Demonstration / incomplete disclosure when applicable. */
+  disclosure?: string | null;
 };
 
 export type ImmersionNetworkLink = {
@@ -72,6 +79,8 @@ export type ImmersionNetworkLink = {
   target: string;
   label: string;
   provenance: IntelligenceProvenance;
+  /** Short explanation of why the edge exists. */
+  basis?: string;
 };
 
 export type ImmersionNetworkModel = {
@@ -80,4 +89,5 @@ export type ImmersionNetworkModel = {
   links: ImmersionNetworkLink[];
   sourceLabel: string;
   emptyReason?: string;
+  demonstrationData?: boolean;
 };

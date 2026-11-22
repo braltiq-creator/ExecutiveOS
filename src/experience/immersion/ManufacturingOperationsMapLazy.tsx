@@ -27,6 +27,7 @@ type Props = {
   model: ManufacturingOperationsMapModel;
   className?: string;
   compact?: boolean;
+  initialSelectedId?: string | null;
 };
 
 export function ManufacturingOperationsMapLazy(props: Props) {

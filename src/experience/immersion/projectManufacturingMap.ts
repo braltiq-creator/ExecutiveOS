@@ -113,6 +113,9 @@ export function projectManufacturingOperationsMap(
   const capacityByFactory = new Map(
     analysis.capacity.map((c) => [c.factory, c]),
   );
+  const inventoryAttention = analysis.inventory.filter(
+    (i) => i.tone === "attention",
+  ).length;
 
   for (const binding of analysis.locationBindings ?? []) {
     const centroid = centroidForRegion(binding.region);
@@ -160,11 +163,29 @@ export function projectManufacturingOperationsMap(
                 value:
                   cap.capacity == null ? "Not established" : String(cap.capacity),
               },
+              {
+                label: "Available slots",
+                value:
+                  cap.availableSlots == null
+                    ? "Not established"
+                    : String(cap.availableSlots),
+              },
+              {
+                label: "Inventory attention",
+                value:
+                  inventoryAttention > 0
+                    ? `${inventoryAttention} variants (dataset)`
+                    : "None flagged",
+              },
             ]
           : [
               {
                 label: "Evidence rows",
                 value: String(binding.coOccurrenceCount),
+              },
+              {
+                label: "Primary region",
+                value: binding.region,
               },
             ],
     });

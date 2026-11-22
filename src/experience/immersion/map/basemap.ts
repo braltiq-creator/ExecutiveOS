@@ -22,63 +22,80 @@ export const BASEMAP_ATTRIBUTION =
 export const BASEMAP_PROVIDER_NOTE =
   "OpenFreeMap vector basemap · commercial-allowed · no API key · OSM attribution required";
 
-/** Graphite / midnight intelligence palette applied after style load. */
+/**
+ * Graphite / midnight intelligence palette.
+ * Higher land–ocean contrast and luminous border accents — no rainbow choropleth.
+ */
 export const GRAPHITE_BASEMAP_PAINT: Array<{
   id: string;
   property: string;
   value: unknown;
 }> = [
-  { id: "background", property: "background-color", value: "#07090e" },
-  { id: "water", property: "fill-color", value: "#0b1220" },
-  { id: "waterway", property: "line-color", value: "#152033" },
-  { id: "water_name", property: "text-color", value: "#3d4f6a" },
-  { id: "water_name", property: "text-halo-color", value: "#07090e" },
-  { id: "landcover_ice_shelf", property: "fill-color", value: "#121722" },
-  { id: "landcover_glacier", property: "fill-color", value: "#141a26" },
-  { id: "landuse_residential", property: "fill-color", value: "#121722" },
-  { id: "landcover_wood", property: "fill-color", value: "#10161f" },
-  { id: "landuse_park", property: "fill-color", value: "#10161f" },
-  { id: "building", property: "fill-color", value: "#161d2a" },
-  { id: "building", property: "fill-outline-color", value: "#1c2433" },
-  { id: "highway_path", property: "line-color", value: "#1a2230" },
-  { id: "highway_minor", property: "line-color", value: "#1c2535" },
-  { id: "highway_major_casing", property: "line-color", value: "#1e2838" },
-  { id: "highway_major_inner", property: "line-color", value: "#243044" },
-  { id: "highway_major_subtle", property: "line-color", value: "#1e2838" },
-  { id: "highway_motorway_casing", property: "line-color", value: "#243044" },
-  { id: "highway_motorway_inner", property: "line-color", value: "#2c3a52" },
-  { id: "highway_motorway_subtle", property: "line-color", value: "#243044" },
-  { id: "railway", property: "line-color", value: "#1a2230" },
-  { id: "railway_minor", property: "line-color", value: "#1a2230" },
-  { id: "railway_transit", property: "line-color", value: "#1a2230" },
+  // Land shows through as background — lighter graphite for clear continents.
+  { id: "background", property: "background-color", value: "#1c263a" },
+  // Near-black midnight ocean for strong continental silhouette.
+  { id: "water", property: "fill-color", value: "#04070f" },
+  { id: "waterway", property: "line-color", value: "#1e2f4a" },
+  { id: "water_name", property: "text-color", value: "#557299" },
+  { id: "water_name", property: "text-halo-color", value: "#04070f" },
+  { id: "landcover_ice_shelf", property: "fill-color", value: "#222c42" },
+  { id: "landcover_glacier", property: "fill-color", value: "#243048" },
+  { id: "landuse_residential", property: "fill-color", value: "#1e2a40" },
+  { id: "landuse_residential", property: "fill-opacity", value: 0.65 },
+  { id: "landcover_wood", property: "fill-color", value: "#1a2740" },
+  { id: "landcover_wood", property: "fill-opacity", value: 0.4 },
+  { id: "landuse_park", property: "fill-color", value: "#1a2740" },
+  { id: "building", property: "fill-color", value: "#1e283c" },
+  { id: "building", property: "fill-outline-color", value: "#2a3650" },
+  { id: "highway_path", property: "line-color", value: "#243048" },
+  { id: "highway_minor", property: "line-color", value: "#2a3650" },
+  { id: "highway_major_casing", property: "line-color", value: "#31405c" },
+  { id: "highway_major_inner", property: "line-color", value: "#3a4c6a" },
+  { id: "highway_major_subtle", property: "line-color", value: "#31405c" },
+  { id: "highway_motorway_casing", property: "line-color", value: "#3a4c6a" },
+  { id: "highway_motorway_inner", property: "line-color", value: "#4a6088" },
+  { id: "highway_motorway_subtle", property: "line-color", value: "#3a4c6a" },
+  { id: "railway", property: "line-color", value: "#243048" },
+  { id: "railway_minor", property: "line-color", value: "#243048" },
+  { id: "railway_transit", property: "line-color", value: "#243048" },
+  // State / country borders — luminous cyan-silver, not decorative neon.
   {
     id: "boundary_state",
     property: "line-color",
-    value: "rgba(106, 159, 216, 0.28)",
+    value: "rgba(130, 180, 230, 0.55)",
   },
-  { id: "boundary_state", property: "line-opacity", value: 0.85 },
+  { id: "boundary_state", property: "line-opacity", value: 1 },
+  { id: "boundary_state", property: "line-width", value: 1.15 },
   {
     id: "boundary_country_z0-4",
     property: "line-color",
-    value: "rgba(154, 176, 210, 0.45)",
+    value: "rgba(170, 200, 235, 0.72)",
   },
+  { id: "boundary_country_z0-4", property: "line-width", value: 1.35 },
+  { id: "boundary_country_z0-4", property: "line-opacity", value: 1 },
   {
     id: "boundary_country_z5-",
     property: "line-color",
-    value: "rgba(154, 176, 210, 0.55)",
+    value: "rgba(180, 210, 240, 0.8)",
   },
-  { id: "place_country_major", property: "text-color", value: "#9ab0d2" },
-  { id: "place_country_minor", property: "text-color", value: "#7f93b3" },
-  { id: "place_country_other", property: "text-color", value: "#6d809e" },
-  { id: "place_state", property: "text-color", value: "#6a9fd8" },
-  { id: "place_city", property: "text-color", value: "#8b93a7" },
-  { id: "place_city_large", property: "text-color", value: "#9aa3b8" },
-  { id: "place_town", property: "text-color", value: "#6d768a" },
-  { id: "place_village", property: "text-color", value: "#5a6578" },
-  { id: "place_suburb", property: "text-color", value: "#5a6578" },
-  { id: "place_other", property: "text-color", value: "#5a6578" },
-  { id: "highway_name_other", property: "text-color", value: "#4a5568" },
-  { id: "highway_name_motorway", property: "text-color", value: "#5a6a82" },
+  { id: "boundary_country_z5-", property: "line-width", value: 1.5 },
+  { id: "boundary_country_z5-", property: "line-opacity", value: 1 },
+  { id: "place_country_major", property: "text-color", value: "#c5d6ef" },
+  { id: "place_country_major", property: "text-halo-color", value: "#0a101c" },
+  { id: "place_country_major", property: "text-halo-width", value: 1.4 },
+  { id: "place_country_minor", property: "text-color", value: "#9eb4d4" },
+  { id: "place_country_other", property: "text-color", value: "#8799b8" },
+  { id: "place_state", property: "text-color", value: "#8eb8e8" },
+  { id: "place_state", property: "text-halo-color", value: "#0a101c" },
+  { id: "place_state", property: "text-halo-width", value: 1.2 },
+  { id: "place_city", property: "text-color", value: "#a8b4c8" },
+  { id: "place_city_large", property: "text-color", value: "#b8c4d8" },
+  { id: "place_town", property: "text-color", value: "#7a869c" },
+  { id: "place_village", property: "text-color", value: "#667288" },
+  { id: "place_suburb", property: "text-color", value: "#667288" },
+  { id: "place_other", property: "text-color", value: "#667288" },
+  { id: "highway_name_other", property: "text-color", value: "#556278" },
+  { id: "highway_name_motorway", property: "text-color", value: "#6a7a94" },
 ];
 
 export type MapViewPresetId =
@@ -94,42 +111,53 @@ export type MapViewPreset = {
   longitude: number;
   latitude: number;
   zoom: number;
+  /** Optional pitch for subtle command depth (degrees). */
+  pitch?: number;
 };
 
+/** Balanced framing — continents readable, premium transitions. */
 export const MAP_VIEW_PRESETS: Record<MapViewPresetId, MapViewPreset> = {
   world: {
     id: "world",
     label: "World",
-    longitude: 20,
-    latitude: 12,
-    zoom: 1.35,
+    longitude: 15,
+    latitude: 10,
+    zoom: 1.55,
+    pitch: 0,
   },
   australia: {
     id: "australia",
     label: "Australia",
-    longitude: 134.2,
-    latitude: -26.8,
-    zoom: 3.55,
+    longitude: 134.5,
+    latitude: -26.2,
+    zoom: 3.75,
+    pitch: 12,
   },
   asia_pacific: {
     id: "asia_pacific",
     label: "Asia-Pacific",
-    longitude: 125,
-    latitude: -5,
-    zoom: 2.4,
+    longitude: 130,
+    latitude: 2,
+    zoom: 2.55,
+    pitch: 8,
   },
   europe: {
     id: "europe",
     label: "Europe",
-    longitude: 10,
+    longitude: 12,
     latitude: 50,
-    zoom: 3.2,
+    zoom: 3.35,
+    pitch: 10,
   },
   north_america: {
     id: "north_america",
     label: "North America",
-    longitude: -100,
-    latitude: 40,
-    zoom: 2.8,
+    longitude: -98,
+    latitude: 42,
+    zoom: 2.95,
+    pitch: 8,
   },
 };
+
+/** Zoom level when drilling into a selected marker. */
+export const MARKER_FOCUS_ZOOM = 5.4;

@@ -233,16 +233,19 @@ function poly(
   };
 }
 
-/** Slight jitter so multiple markers in one region remain selectable. */
+/**
+ * Spread markers around a regional centroid so they remain selectable
+ * without implying precise facility coordinates.
+ */
 export function offsetAroundCentroid(
   centroid: AuRegionCentroid,
   index: number,
   kind: "factory" | "dealer",
 ): { longitude: number; latitude: number } {
-  const ring = kind === "factory" ? 0.55 : 0.95;
-  const angle = (index * 2.4) % (Math.PI * 2);
+  const ring = kind === "factory" ? 1.15 : 1.85;
+  const angle = (index * 2.15 + (kind === "dealer" ? 0.55 : 0)) % (Math.PI * 2);
   return {
     longitude: centroid.longitude + Math.cos(angle) * ring,
-    latitude: centroid.latitude + Math.sin(angle) * ring * 0.7,
+    latitude: centroid.latitude + Math.sin(angle) * ring * 0.72,
   };
 }

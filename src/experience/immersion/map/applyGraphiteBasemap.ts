@@ -16,21 +16,19 @@ export function applyGraphiteBasemap(map: MapLibreMapInstance): void {
     }
   }
 
-  // Soften Natural Earth shaded relief if present (low-zoom land texture).
-  if (map.getLayer("ne2_shaded") || map.getSource("ne2_shaded")) {
-    try {
-      // Some styles expose the raster as a layer with id matching source usage.
-      const style = map.getStyle();
-      for (const layer of style?.layers ?? []) {
-        if (layer.type === "raster" && layer.source === "ne2_shaded") {
-          map.setPaintProperty(layer.id, "raster-opacity", 0.18);
-          map.setPaintProperty(layer.id, "raster-saturation", -0.85);
-          map.setPaintProperty(layer.id, "raster-brightness-min", 0.05);
-          map.setPaintProperty(layer.id, "raster-brightness-max", 0.45);
-        }
+  // Natural Earth shaded relief — keep a whisper of land texture for depth.
+  try {
+    const style = map.getStyle();
+    for (const layer of style?.layers ?? []) {
+      if (layer.type === "raster" && layer.source === "ne2_shaded") {
+        map.setPaintProperty(layer.id, "raster-opacity", 0.38);
+        map.setPaintProperty(layer.id, "raster-saturation", -0.95);
+        map.setPaintProperty(layer.id, "raster-contrast", 0.28);
+        map.setPaintProperty(layer.id, "raster-brightness-min", 0.12);
+        map.setPaintProperty(layer.id, "raster-brightness-max", 0.62);
       }
-    } catch {
-      // optional
     }
+  } catch {
+    // optional
   }
 }

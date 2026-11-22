@@ -68,7 +68,7 @@ export function Phase2PreviewClient() {
       className="min-h-screen bg-[#07090e] px-4 py-6 text-[#e8eaef] md:px-8"
       data-phase2-preview="true"
     >
-      <header className="mx-auto mb-6 max-w-[1280px]">
+      <header className="mx-auto mb-5 max-w-[1440px]">
         <p className="text-[0.7rem] uppercase tracking-[0.12em] text-[#6a9fd8]">
           Phase 2 preview · development only · Stage 1 global map
         </p>
@@ -110,7 +110,7 @@ export function Phase2PreviewClient() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-[1280px]">
+      <main className="mx-auto max-w-[1440px]">
         {tab === "map" ? (
           <ManufacturingOperationsMapLazy
             model={mapModel}

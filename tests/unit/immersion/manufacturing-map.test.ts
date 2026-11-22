@@ -112,7 +112,15 @@ describe("Phase 2 manufacturing immersion projections", () => {
     const decision = projectManufacturingDecisionIntelligence(analysis);
     expect(decision.decisionQuestion.length).toBeGreaterThan(10);
     expect(decision.whyItMatters.length).toBeGreaterThan(10);
+    expect(decision.whyNow).not.toEqual(decision.whyItMatters);
+    expect(decision.businessImpact.length).toBeGreaterThan(10);
+    expect(decision.urgency.length).toBeGreaterThan(10);
     expect(decision.evidence.length).toBeGreaterThan(0);
+    expect(
+      decision.evidence.every(
+        (e) => e.freshnessLabel.length > 0 && e.provenance === "derived",
+      ),
+    ).toBe(true);
     expect(decision.options.length).toBeGreaterThan(0);
     expect(decision.options.every((o) => o.isRecommendation === false)).toBe(
       true,
@@ -123,12 +131,37 @@ describe("Phase 2 manufacturing immersion projections", () => {
         /modelled|illustrative|option framing/i.test(s.honesty),
       ),
     ).toBe(true);
+    expect(decision.confidence.decision.status).toBe("unestablished");
+    expect(decision.confidence.decision.score).toBeNull();
     expect(decision.confidence.decisionConfidenceLabel.toLowerCase()).toContain(
       "not yet established",
     );
+    expect(decision.confidence.dataset.score).not.toBeNull();
+    expect(decision.confidence.judgement.score).not.toBeNull();
+    expect(decision.judgementAnalysis.limitingFactors.length).toBeGreaterThan(0);
+    expect(decision.recommendedNextStep.kind).toBe("derived_next_step");
     expect(decision.map.domain).toBe("manufacturing");
     expect(decision.network.nodes.length).toBeGreaterThan(0);
     expect(decision.demonstrationData).toBe(true);
     expect(decision.nextAction.length).toBeGreaterThan(5);
+  });
+
+  it("establishes decision confidence only from recording artefacts — never inherits dataset/judgement", async () => {
+    const { deriveRecordedDecisionConfidence } = await import(
+      "@/experience/immersion/decision/projectManufacturingDecisionIntelligence"
+    );
+    const recorded = deriveRecordedDecisionConfidence({
+      rationale:
+        "Protect Model H demand given evidenced QLD/NSW acceleration and Plant 2 load pressure.",
+      acceptedAssumptions: ["Demand trajectory continues unless new evidence arrives."],
+      acceptedRisks: ["May create pressure elsewhere under constrained plant load"],
+      owner: "Executive",
+      followUps: ["Brief operations on allocation change"],
+      evidenceIds: ["ev-1"],
+    });
+    expect(recorded.established).toBe(true);
+    expect(recorded.label.toLowerCase()).toContain("executive");
+    expect(recorded.explanation.toLowerCase()).toContain("not copied");
+    expect(recorded.recordingCompletenessLabel).toMatch(/6\/6/);
   });
 });

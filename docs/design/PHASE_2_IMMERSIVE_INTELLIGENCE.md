@@ -14,8 +14,10 @@
 | **Stage 1 — Global Intelligence Map** | **Approved + polished** — OpenFreeMap + graphite command presence |
 | 2.3 Knowledge force-graph (Explore default) | Done — manufacturing evidence network; org KG FE-001 follow-on |
 | **Stage 2 — Executive Briefing** | **Approved with refinements** — denser priority panel, clearer forecast, inspectable timeline/knowledge |
-| **Stage 3 — Decision Intelligence** | **In review** — attention · evidence · options · consequences · action + map/network |
+| **Stage 3 — Decision Intelligence** | **In review (expanded)** — hero · 3 confidence instruments · judgement analysis · evidence inspect · scenarios · derived next step · executive record workflow · map/network |
 | Stage 4 — Integration | Not started — waiting on Stage 3 approval |
+
+**Stage 3 recording note:** Preview records decisions in-session (lineage + decision confidence from recording artefacts only). Durable persistence remains the existing Decision Workspace / `pilot_decisions` path — no new migrations in Stage 3. |
 
 ### Stage 1 basemap decision
 

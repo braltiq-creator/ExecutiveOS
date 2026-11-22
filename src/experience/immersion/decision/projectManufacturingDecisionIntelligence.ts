@@ -226,7 +226,9 @@ export function projectManufacturingDecisionIntelligence(
       ? "Demonstration manufacturing forecast"
       : "Manufacturing forecast snapshot",
     decisionQuestion: paper.decisionQuestion,
-    whyItMatters: paper.executiveJudgementRequired,
+    // Lead judgement = what moved; paper.whyNow = stakes of acting (same field as
+    // executiveJudgementRequired on the decision paper — keep them distinct here).
+    whyItMatters: paper.leadJudgement,
     whyNow: paper.whyNow,
     leadJudgement: paper.leadJudgement,
     readinessLabel: readinessLabel(paper.readiness),

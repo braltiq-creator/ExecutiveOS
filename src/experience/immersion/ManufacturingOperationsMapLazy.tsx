@@ -1,6 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import type { MapViewPresetId } from "@/experience/immersion/map/basemap";
+import type { IntelligenceMapLayerId } from "@/experience/immersion/map/layers";
 import type { ManufacturingOperationsMapModel } from "@/experience/immersion/types";
 
 const ManufacturingOperationsMap = dynamic(
@@ -16,7 +18,7 @@ const ManufacturingOperationsMap = dynamic(
         data-manufacturing-operations-map="loading"
       >
         <p className="eos-type-caption text-[var(--eos-color-text-muted)]">
-          Loading operations map…
+          Loading global intelligence map…
         </p>
       </div>
     ),
@@ -28,6 +30,8 @@ type Props = {
   className?: string;
   compact?: boolean;
   initialSelectedId?: string | null;
+  initialView?: MapViewPresetId;
+  forceLayers?: Partial<Record<IntelligenceMapLayerId, boolean>>;
 };
 
 export function ManufacturingOperationsMapLazy(props: Props) {

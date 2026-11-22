@@ -1,6 +1,6 @@
 # ExecutiveOS Phase 2 — Immersive Executive Intelligence Experience
 
-**Status:** Implementation in progress — Manufacturing map + Knowledge network (Explore default) delivered for review  
+**Status:** Stage 1 Global Intelligence Map in review — Briefing / Decisions not started  
 **Branch:** `cursor/phase-2-immersive-intelligence-b8a3`  
 **Constraint:** Presentation-layer immersion only. No backend contract, forecasting calculation, auth/RLS, or fabricated operational data without explicit approval.  
 **Approved:** MapLibre + react-map-gl · region-resolved honesty · Manufacturing + Knowledge first · Explore network default  
@@ -10,10 +10,22 @@
 | Stage | Status |
 |-------|--------|
 | 2.1 Immersion primitives + provenance badges | Done |
-| 2.2 Manufacturing MapLibre operations map | Done — review screenshots |
+| 2.2 Manufacturing MapLibre operations map | Superseded by Stage 1 Global Intelligence Map |
+| **Stage 1 — Global Intelligence Map** | **In review** — OpenFreeMap vector basemap + graphite retheme + layers |
 | 2.3 Knowledge force-graph (Explore default) | Done — manufacturing evidence network; org KG FE-001 follow-on |
-| 2.4 Executive Briefing attention field | Not started |
-| 2.5 Decision impact field | Not started |
+| Stage 2 — Executive Briefing | Not started — waiting on Stage 1 approval |
+| Stage 3 — Decision Intelligence | Not started |
+| Stage 4 — Integration | Not started |
+
+### Stage 1 basemap decision
+
+| Option | Verdict |
+|--------|---------|
+| OpenFreeMap (`tiles.openfreemap.org`) | **Selected** — commercial use allowed, no API key, OSM attribution via MapLibre control |
+| Protomaps hosted API | Deferred — requires API key + commercial sponsorship |
+| Self-hosted PMTiles | Documented future path for SLA; not required for Stage 1 |
+
+Geographic honesty: VERIFIED (coordinates in evidence) vs REGION-RESOLVED (approximate regional indicator) vs DEMONSTRATION. Fixture has no lat/lng — all operational markers are region-resolved.
 
 ---
 

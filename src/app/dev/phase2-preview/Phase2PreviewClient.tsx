@@ -9,16 +9,43 @@ import {
   KnowledgeNetworkExplorerLazy,
   projectManufacturingEvidenceNetwork,
   projectManufacturingOperationsMap,
+  type IntelligenceMapLayerId,
+  type MapViewPresetId,
 } from "@/experience/immersion";
 import { DEMO_MANUFACTURING_RECORDS } from "./demo-records";
+
+const VIEW_IDS = new Set<MapViewPresetId>([
+  "world",
+  "australia",
+  "asia_pacific",
+  "europe",
+  "north_america",
+]);
 
 export function Phase2PreviewClient() {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab");
   const selectParam = searchParams.get("select");
+  const viewParam = searchParams.get("view");
+  const layersParam = searchParams.get("layers");
   const [tab, setTab] = useState<"map" | "network">(
     tabParam === "network" ? "network" : "map",
   );
+
+  const initialView: MapViewPresetId | undefined =
+    viewParam && VIEW_IDS.has(viewParam as MapViewPresetId)
+      ? (viewParam as MapViewPresetId)
+      : undefined;
+
+  const forceLayers = useMemo(() => {
+    if (!layersParam) return undefined;
+    const force: Partial<Record<IntelligenceMapLayerId, boolean>> = {};
+    for (const raw of layersParam.split(",")) {
+      const id = raw.trim() as IntelligenceMapLayerId;
+      if (id) force[id] = true;
+    }
+    return Object.keys(force).length > 0 ? force : undefined;
+  }, [layersParam]);
 
   const analysis = useMemo(
     () =>
@@ -38,21 +65,24 @@ export function Phase2PreviewClient() {
 
   return (
     <div
-      className="min-h-screen bg-[#0a0c10] px-4 py-6 text-[#e8eaef] md:px-8"
+      className="min-h-screen bg-[#07090e] px-4 py-6 text-[#e8eaef] md:px-8"
       data-phase2-preview="true"
     >
       <header className="mx-auto mb-6 max-w-[1280px]">
         <p className="text-[0.7rem] uppercase tracking-[0.12em] text-[#6a9fd8]">
-          Phase 2 preview · development only
+          Phase 2 preview · development only · Stage 1 global map
         </p>
         <h1 className="mt-1 text-xl font-semibold tracking-tight md:text-2xl">
           Immersion instruments — manufacturing fixture
         </h1>
         <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#8b93a7]">
           Real <code>analyseManufacturingSnapshot</code> on the demo forecast CSV
-          shape. <strong className="font-medium text-[#e0b4a4]">Demonstration
-          fixture — not live customer intelligence.</strong> Not mock Northline.
-          Not a production deploy surface.
+          shape.{" "}
+          <strong className="font-medium text-[#e0b4a4]">
+            Demonstration fixture — not live customer intelligence.
+          </strong>{" "}
+          OpenFreeMap vector basemap (commercial-allowed, no API key). Not mock
+          Northline. Not a production deploy surface.
         </p>
         <div className="mt-4 flex gap-2">
           <button
@@ -64,7 +94,7 @@ export function Phase2PreviewClient() {
             }`}
             onClick={() => setTab("map")}
           >
-            Manufacturing map
+            Global intelligence map
           </button>
           <button
             type="button"
@@ -85,6 +115,8 @@ export function Phase2PreviewClient() {
           <ManufacturingOperationsMapLazy
             model={mapModel}
             initialSelectedId={selectParam}
+            initialView={initialView}
+            forceLayers={forceLayers}
           />
         ) : (
           <KnowledgeNetworkExplorerLazy

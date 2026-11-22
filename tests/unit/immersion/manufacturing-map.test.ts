@@ -69,12 +69,22 @@ describe("Phase 2 manufacturing immersion projections", () => {
 
     const map = projectManufacturingOperationsMap(analysis);
     expect(map.honestyLabel).toBe(REGION_RESOLVED_HONESTY);
+    expect(map.domain).toBe("manufacturing");
+    expect(map.defaultView).toBe("australia");
     expect(map.regions.length).toBeGreaterThan(0);
+    expect(map.demandPoints.length).toBeGreaterThan(0);
     expect(map.markers.some((m) => m.kind === "factory")).toBe(true);
     expect(map.markers.every((m) => m.geoResolution === "region_resolved")).toBe(
       true,
     );
     expect(map.markers.every((m) => m.provenance === "derived")).toBe(true);
+    expect(
+      map.markers
+        .filter((m) => m.kind === "factory" || m.kind === "dealer")
+        .every((m) =>
+          (m.locationConfidenceLabel ?? "").toLowerCase().includes("approximate"),
+        ),
+    ).toBe(true);
   });
 
   it("projects evidence network without inventing cross-row joins beyond co-occurrence", () => {

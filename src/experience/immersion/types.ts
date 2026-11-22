@@ -3,18 +3,30 @@
  * Provenance badges must reflect actual evidence paths — never decorative.
  */
 
+import type { IntelligenceMapLayerId } from "@/experience/immersion/map/layers";
+import type { MapViewPresetId } from "@/experience/immersion/map/basemap";
+
 export type IntelligenceProvenance =
   | "verified"
   | "derived"
   | "ai_generated"
   | "insufficient";
 
+/**
+ * Geographic placement confidence — never present region-resolved as a precise site.
+ */
 export type GeoResolution =
   | "coordinates_in_evidence"
   | "region_resolved"
   | "unplaced";
 
-export type ImmersionMapMarkerKind = "region" | "factory" | "dealer";
+export type ImmersionMapMarkerKind =
+  | "region"
+  | "factory"
+  | "dealer"
+  | "facility"
+  | "site"
+  | "alert";
 
 export type ImmersionMapMarker = {
   id: string;
@@ -29,24 +41,48 @@ export type ImmersionMapMarker = {
   tone?: "attention" | "watching" | "improving" | "intelligence" | "historical";
   detail?: string;
   metrics?: Array<{ label: string; value: string }>;
+  /** Which intelligence layers surface this marker. */
+  layers?: IntelligenceMapLayerId[];
+  /** Heat / capacity weight for layer visuals (0–100). */
+  intensity?: number;
+  /** Explicit copy for location confidence in the detail panel. */
+  locationConfidenceLabel?: string;
+  evidenceSources?: string[];
+  dataPeriod?: string | null;
 };
 
 export type ImmersionRegionIntensity = {
   regionCode: string;
-  /** Absolute variance intensity for choropleth (0–100). */
+  /** Absolute variance intensity for demand heatmap weight (0–100). */
   intensity: number;
   variancePct: number | null;
   forecast: number;
   actual: number;
   provenance: IntelligenceProvenance;
   label: string;
+  longitude?: number;
+  latitude?: number;
 };
 
-export type ManufacturingOperationsMapModel = {
+export type GlobalDemandPoint = {
+  id: string;
+  longitude: number;
+  latitude: number;
+  /** Heatmap weight 0–1. */
+  weight: number;
+  label: string;
+  provenance: IntelligenceProvenance;
+  geoResolution: GeoResolution;
+};
+
+export type GlobalIntelligenceMapModel = {
   title: string;
   question: string;
+  /** Domain tag — manufacturing | mining | utilities | … (presentation only). */
+  domain: string;
   regions: ImmersionRegionIntensity[];
   markers: ImmersionMapMarker[];
+  demandPoints: GlobalDemandPoint[];
   unplaced: Array<{
     id: string;
     kind: ImmersionMapMarkerKind;
@@ -56,7 +92,12 @@ export type ManufacturingOperationsMapModel = {
   honestyLabel: string;
   demonstrationData: boolean;
   sourceLabel: string;
+  defaultView: MapViewPresetId;
+  basemapNote: string;
 };
+
+/** @deprecated Prefer GlobalIntelligenceMapModel — kept for projection compatibility. */
+export type ManufacturingOperationsMapModel = GlobalIntelligenceMapModel;
 
 export type ImmersionNetworkNode = {
   id: string;

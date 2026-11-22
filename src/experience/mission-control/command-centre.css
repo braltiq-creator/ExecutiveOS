@@ -4,18 +4,21 @@
 */
 
 /* MapLibre popup — match graphite OS (library injects .maplibregl-popup) */
-[data-manufacturing-operations-map] .maplibregl-popup-content {
-  background: color-mix(in srgb, #0a0c10 92%, transparent);
+[data-manufacturing-operations-map] .maplibregl-popup-content,
+[data-global-intelligence-map] .maplibregl-popup-content {
+  background: color-mix(in srgb, #07090e 94%, transparent);
   border: 1px solid color-mix(in srgb, white 12%, transparent);
   border-radius: 8px;
-  box-shadow: none;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
   color: var(--eos-color-text, #e8eaef);
   padding: 0.65rem 0.75rem;
 }
-[data-manufacturing-operations-map] .maplibregl-popup-tip {
-  border-top-color: color-mix(in srgb, #0a0c10 92%, transparent);
+[data-manufacturing-operations-map] .maplibregl-popup-tip,
+[data-global-intelligence-map] .maplibregl-popup-tip {
+  border-top-color: color-mix(in srgb, #07090e 94%, transparent);
 }
-[data-manufacturing-operations-map] .maplibregl-popup-close-button {
+[data-manufacturing-operations-map] .maplibregl-popup-close-button,
+[data-global-intelligence-map] .maplibregl-popup-close-button {
   color: var(--eos-color-text-muted, #8b93a7);
   font-size: 1.1rem;
 }

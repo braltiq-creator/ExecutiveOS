@@ -1,9 +1,11 @@
 /**
- * Presentation projection: ManufacturingAnalysis → interactive operations map model.
+ * Presentation projection: ManufacturingAnalysis → Global Intelligence Map model.
  * No invented coordinates; region centroids are presentation reference data only.
+ * Region-resolved markers are approximate regional indicators — never precise sites.
  */
 
 import type { ManufacturingAnalysis } from "@/executive-snapshot-studio/intelligence/manufacturing-analysis";
+import { BASEMAP_PROVIDER_NOTE } from "@/experience/immersion/map/basemap";
 import {
   REGION_RESOLVED_HONESTY,
   centroidForRegion,
@@ -11,6 +13,7 @@ import {
   resolveAuRegionCode,
 } from "@/experience/immersion/geo/au-regions";
 import type {
+  GlobalDemandPoint,
   ImmersionMapMarker,
   ImmersionRegionIntensity,
   ManufacturingOperationsMapModel,
@@ -49,6 +52,7 @@ export function projectManufacturingOperationsMap(
         v.forecast > 0
           ? Math.round(((v.actual - v.forecast) / v.forecast) * 1000) / 10
           : v.signed;
+      const centroid = centroidForRegion(regionCode);
       return {
         regionCode,
         intensity: Math.round((v.absVar / maxAbs) * 100),
@@ -60,9 +64,23 @@ export function projectManufacturingOperationsMap(
           variancePct == null
             ? `${regionCode} · insufficient variance`
             : `${regionCode} · ${variancePct > 0 ? "+" : ""}${variancePct}%`,
+        longitude: centroid?.longitude,
+        latitude: centroid?.latitude,
       };
     },
   );
+
+  const demandPoints: GlobalDemandPoint[] = regions
+    .filter((r) => r.longitude != null && r.latitude != null)
+    .map((r) => ({
+      id: `demand-${r.regionCode}`,
+      longitude: r.longitude!,
+      latitude: r.latitude!,
+      weight: Math.max(0.15, r.intensity / 100),
+      label: r.label,
+      provenance: "derived",
+      geoResolution: "region_resolved",
+    }));
 
   const markers: ImmersionMapMarker[] = [];
   const unplaced: ManufacturingOperationsMapModel["unplaced"] = [];
@@ -95,7 +113,17 @@ export function projectManufacturingOperationsMap(
           : region.intensity >= 40
             ? "watching"
             : "intelligence",
+      intensity: region.intensity,
+      layers: ["demand", "forecast"],
       detail: region.label,
+      locationConfidenceLabel:
+        "Regional demand indicator at AU state centroid — not a facility location.",
+      evidenceSources: [
+        "Manufacturing forecast × actual heat cells by region",
+        analysis.demonstrationData
+          ? "Demonstration forecast fixture"
+          : "Manufacturing forecast snapshot",
+      ],
       metrics: [
         { label: "Forecast", value: String(Math.round(region.forecast)) },
         { label: "Actual", value: String(Math.round(region.actual)) },
@@ -132,9 +160,11 @@ export function projectManufacturingOperationsMap(
     const idxMap = binding.kind === "factory" ? factoryIndex : dealerIndex;
     const idx = idxMap.get(binding.region) ?? 0;
     idxMap.set(binding.region, idx + 1);
+    // Offset keeps markers selectable — still region-resolved, never precise coords.
     const pos = offsetAroundCentroid(centroid, idx, binding.kind);
 
     const cap = capacityByFactory.get(binding.entity);
+    const isFactory = binding.kind === "factory";
     markers.push({
       id: `${binding.kind}-${binding.entity}`,
       kind: binding.kind,
@@ -145,53 +175,68 @@ export function projectManufacturingOperationsMap(
       provenance: "derived",
       regionCode: resolveAuRegionCode(binding.region) ?? binding.region,
       tone: cap?.tone ?? "intelligence",
-      detail: `${binding.kind} · ${binding.region} (${binding.coOccurrenceCount} co-occurring rows)`,
-      metrics:
-        binding.kind === "factory" && cap
-          ? [
-              {
-                label: "Load",
-                value:
-                  cap.loadPct == null ? "Not established" : `${cap.loadPct}%`,
-              },
-              {
-                label: "Demand",
-                value: String(cap.demonstratedDemand),
-              },
-              {
-                label: "Capacity",
-                value:
-                  cap.capacity == null ? "Not established" : String(cap.capacity),
-              },
-              {
-                label: "Available slots",
-                value:
-                  cap.availableSlots == null
-                    ? "Not established"
-                    : String(cap.availableSlots),
-              },
-              {
-                label: "Inventory attention",
-                value:
-                  inventoryAttention > 0
-                    ? `${inventoryAttention} variants (dataset)`
-                    : "None flagged",
-              },
-            ]
-          : [
-              {
-                label: "Evidence rows",
-                value: String(binding.coOccurrenceCount),
-              },
-              {
-                label: "Primary region",
-                value: binding.region,
-              },
-            ],
+      intensity: cap?.loadPct != null ? Math.min(100, cap.loadPct) : 40,
+      layers: isFactory
+        ? ([
+            "facilities",
+            "capacity",
+            ...(cap?.tone === "attention" ? ["risks", "inventory"] : []),
+          ] as ImmersionMapMarker["layers"])
+        : (["distribution"] as ImmersionMapMarker["layers"]),
+      detail: `${binding.kind} · co-occurs with ${binding.region} (${binding.coOccurrenceCount} evidence rows)`,
+      locationConfidenceLabel:
+        "Approximate regional indicator only — coordinates are not in evidence. This is not a precise factory or dealer location.",
+      evidenceSources: [
+        `Region co-occurrence on manufacturing evidence rows (${binding.coOccurrenceCount})`,
+        isFactory && cap
+          ? "Factory capacity / demand / slots from snapshot aggregation"
+          : "Dealer label co-occurrence with region",
+      ],
+      dataPeriod: null,
+      metrics: isFactory && cap
+        ? [
+            {
+              label: "Load",
+              value:
+                cap.loadPct == null ? "Not established" : `${cap.loadPct}%`,
+            },
+            {
+              label: "Demand",
+              value: String(cap.demonstratedDemand),
+            },
+            {
+              label: "Capacity",
+              value:
+                cap.capacity == null ? "Not established" : String(cap.capacity),
+            },
+            {
+              label: "Available slots",
+              value:
+                cap.availableSlots == null
+                  ? "Not established"
+                  : String(cap.availableSlots),
+            },
+            {
+              label: "Inventory attention",
+              value:
+                inventoryAttention > 0
+                  ? `${inventoryAttention} variants (dataset)`
+                  : "None flagged",
+            },
+          ]
+        : [
+            {
+              label: "Evidence rows",
+              value: String(binding.coOccurrenceCount),
+            },
+            {
+              label: "Primary region",
+              value: binding.region,
+            },
+          ],
     });
   }
 
-  // Factories/dealers listed in analysis but without region co-occurrence
   for (const factory of analysis.factories) {
     if (!factory) continue;
     if (markers.some((m) => m.id === `factory-${factory}`)) continue;
@@ -218,13 +263,17 @@ export function projectManufacturingOperationsMap(
   return {
     title: "Manufacturing operations",
     question: "Where is demand and capacity concentrating?",
+    domain: "manufacturing",
     regions,
     markers,
+    demandPoints,
     unplaced,
     honestyLabel: REGION_RESOLVED_HONESTY,
     demonstrationData: analysis.demonstrationData,
     sourceLabel: analysis.demonstrationData
       ? "Demonstration manufacturing forecast"
       : "Manufacturing forecast snapshot",
+    defaultView: "australia",
+    basemapNote: BASEMAP_PROVIDER_NOTE,
   };
 }

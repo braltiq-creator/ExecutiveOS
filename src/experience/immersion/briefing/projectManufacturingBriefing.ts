@@ -11,6 +11,8 @@ import {
 } from "@/experience/mission-control/manufacturing-evidence-hierarchy";
 import { projectManufacturingOperationsMap } from "@/experience/immersion/projectManufacturingMap";
 import { projectManufacturingEvidenceNetwork } from "@/experience/immersion/projectManufacturingNetwork";
+import { lifecycleLabelFromDecision } from "@/experience/immersion/phase2/phase2PreviewPortfolio";
+import type { Decision } from "@/lib/decisions/engine-types";
 import type {
   GlobalIntelligenceMapModel,
   ImmersionNetworkModel,
@@ -56,6 +58,9 @@ export type ExecutiveBriefingImmersionModel = {
     href: string;
     confidenceLabel: string;
     readiness: string;
+    /** True when an executive recording exists on the live Decision. */
+    recorded: boolean;
+    selectedOptionLabel: string | null;
   } | null;
   signals: BriefingSignal[];
   forecast: Array<{
@@ -72,11 +77,24 @@ export type ExecutiveBriefingImmersionModel = {
 
 export function projectManufacturingExecutiveBriefing(
   analysis: ManufacturingAnalysis,
+  options?: {
+    liveDecision?: Decision | null;
+    /** Override priority decision href (e.g. preview tab deep-link). */
+    decisionHref?: string;
+  },
 ): ExecutiveBriefingImmersionModel {
   const brief = undefined;
   const leadJudgement = resolveManufacturingLeadJudgement(analysis, brief);
   const whyItMatters = whyItMattersFromManufacturing(analysis, brief);
   const decisionPaper = buildManufacturingDecisionPaper(analysis, brief);
+  const live = options?.liveDecision ?? null;
+  const recorded = Boolean(live?.executiveRecording);
+  const statusLabel = live
+    ? lifecycleLabelFromDecision(live)
+    : decisionPaper.readiness;
+  const confidenceLabel = recorded
+    ? live!.executiveRecording!.decisionConfidence.label
+    : decisionPaper.confidence.decisionConfidenceLabel;
 
   const metrics: BriefingMetric[] = [];
   const topDemand = analysis.insights.find((i) => i.category === "demand_movement");
@@ -214,10 +232,15 @@ export function projectManufacturingExecutiveBriefing(
     metrics,
     priorityDecision: {
       question: decisionPaper.decisionQuestion,
-      statusLabel: decisionPaper.readiness,
-      href: decisionPaper.href,
-      confidenceLabel: decisionPaper.confidence.decisionConfidenceLabel,
+      statusLabel,
+      href: options?.decisionHref ?? decisionPaper.href,
+      confidenceLabel,
       readiness: decisionPaper.readiness,
+      recorded,
+      selectedOptionLabel:
+        live?.selectedAlternativeLabel ??
+        live?.executiveRecording?.rationale.slice(0, 80) ??
+        null,
     },
     signals,
     forecast: analysis.nationalSeries.slice(-8).map((p) => ({

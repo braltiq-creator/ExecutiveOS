@@ -18,13 +18,19 @@ const TONE: Record<string, string> = {
 type Props = {
   model: ExecutiveBriefingImmersionModel;
   className?: string;
+  /** When set, priority decision CTAs call this instead of navigating away. */
+  onOpenDecision?: () => void;
 };
 
 /**
  * Stage 2 — immersive Executive Briefing attention environment.
  * Presentation composition over existing evidence projectors — no fabricated KPIs.
  */
-export function ExecutiveBriefingImmersion({ model, className }: Props) {
+export function ExecutiveBriefingImmersion({
+  model,
+  className,
+  onOpenDecision,
+}: Props) {
   const [timelineFocus, setTimelineFocus] = useState<string | null>(
     model.timeline[0]?.id ?? null,
   );
@@ -75,12 +81,24 @@ export function ExecutiveBriefingImmersion({ model, className }: Props) {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               {model.priorityDecision ? (
-                <Link
-                  href={model.priorityDecision.href}
-                  className="inline-flex items-center rounded-md border border-[#c4a35a]/70 px-4 py-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a] transition-colors hover:bg-[#c4a35a]/10"
-                >
-                  Open decision →
-                </Link>
+                onOpenDecision ? (
+                  <button
+                    type="button"
+                    onClick={onOpenDecision}
+                    className="inline-flex items-center rounded-md border border-[#c4a35a]/70 px-4 py-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a] transition-colors hover:bg-[#c4a35a]/10"
+                  >
+                    {model.priorityDecision.recorded
+                      ? "Review recorded decision →"
+                      : "Open Decision Intelligence →"}
+                  </button>
+                ) : (
+                  <Link
+                    href={model.priorityDecision.href}
+                    className="inline-flex items-center rounded-md border border-[#c4a35a]/70 px-4 py-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a] transition-colors hover:bg-[#c4a35a]/10"
+                  >
+                    Open decision →
+                  </Link>
+                )
               ) : null}
               <a
                 href="#briefing-map"
@@ -140,7 +158,14 @@ export function ExecutiveBriefingImmersion({ model, className }: Props) {
             </p>
             {model.priorityDecision ? (
               <div className="flex flex-wrap gap-1.5 text-[0.62rem] uppercase tracking-[0.06em]">
-                <span className="rounded border border-[#c4a35a]/40 px-1.5 py-0.5 text-[#c4a35a]">
+                <span
+                  className={cn(
+                    "rounded border px-1.5 py-0.5",
+                    model.priorityDecision.recorded
+                      ? "border-[#5ec8d8]/45 text-[#5ec8d8]"
+                      : "border-[#c4a35a]/40 text-[#c4a35a]",
+                  )}
+                >
                   {model.priorityDecision.statusLabel}
                 </span>
                 <IntelligenceProvenanceBadge provenance="derived" />
@@ -155,7 +180,13 @@ export function ExecutiveBriefingImmersion({ model, className }: Props) {
               <p className="mt-1 text-[0.72rem] text-[#8b93a7]">
                 {model.priorityDecision.confidenceLabel}
               </p>
-              {model.recommendations.length > 0 ? (
+              {model.priorityDecision.selectedOptionLabel ? (
+                <p className="mt-2 text-[0.8rem] text-[#c5cad6]">
+                  Selected: {model.priorityDecision.selectedOptionLabel}
+                </p>
+              ) : null}
+              {model.recommendations.length > 0 &&
+              !model.priorityDecision.recorded ? (
                 <ul className="mt-3 grid gap-1.5 sm:grid-cols-1">
                   {model.recommendations.slice(0, 4).map((r) => (
                     <li
@@ -167,12 +198,24 @@ export function ExecutiveBriefingImmersion({ model, className }: Props) {
                   ))}
                 </ul>
               ) : null}
-              <Link
-                href={model.priorityDecision.href}
-                className="mt-3 inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a]"
-              >
-                Continue to Decision Intelligence →
-              </Link>
+              {onOpenDecision ? (
+                <button
+                  type="button"
+                  onClick={onOpenDecision}
+                  className="mt-3 inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a]"
+                >
+                  {model.priorityDecision.recorded
+                    ? "Open recorded Decision Intelligence →"
+                    : "Continue to Decision Intelligence →"}
+                </button>
+              ) : (
+                <Link
+                  href={model.priorityDecision.href}
+                  className="mt-3 inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a]"
+                >
+                  Continue to Decision Intelligence →
+                </Link>
+              )}
             </>
           ) : (
             <p className="mt-2 text-sm text-[#8b93a7]">

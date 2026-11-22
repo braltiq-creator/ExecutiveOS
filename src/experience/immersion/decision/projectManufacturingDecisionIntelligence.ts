@@ -512,38 +512,5 @@ export function projectManufacturingDecisionIntelligence(
   };
 }
 
-/**
- * Session-local decision recording completeness — never inherits dataset/judgement %.
- * Used only after an executive explicitly records a decision in the immersion UI.
- */
-export function deriveRecordedDecisionConfidence(input: {
-  rationale: string;
-  acceptedAssumptions: string[];
-  acceptedRisks: string[];
-  owner: string;
-  followUps: string[];
-  evidenceIds: string[];
-}): {
-  established: true;
-  label: string;
-  explanation: string;
-  recordingCompletenessLabel: string;
-} {
-  const checks = [
-    input.rationale.trim().length >= 24,
-    input.acceptedAssumptions.length > 0,
-    input.acceptedRisks.length > 0,
-    input.owner.trim().length > 0,
-    input.followUps.some((f) => f.trim().length > 0),
-    input.evidenceIds.length > 0,
-  ];
-  const met = checks.filter(Boolean).length;
-  const total = checks.length;
-  return {
-    established: true,
-    label: "Decision confidence established by executive record",
-    explanation:
-      "Established from the recorded rationale, evidence considered, accepted assumptions/risks, owner and follow-ups — not copied from dataset or judgement confidence.",
-    recordingCompletenessLabel: `Recording artefacts ${met}/${total} complete`,
-  };
-}
+/** @deprecated Prefer deriveDecisionConfidenceFromRecording from decision-execution-linkage. */
+export { deriveDecisionConfidenceFromRecording as deriveRecordedDecisionConfidence } from "@/lib/decisions/decision-execution-linkage";

@@ -1,24 +1,35 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils/cn";
 import { IntelligenceProvenanceBadge } from "@/experience/immersion/IntelligenceProvenanceBadge";
 import { KnowledgeNetworkExplorerLazy } from "@/experience/immersion/KnowledgeNetworkExplorerLazy";
 import { ManufacturingOperationsMapLazy } from "@/experience/immersion/ManufacturingOperationsMapLazy";
-import {
-  deriveRecordedDecisionConfidence,
-  type DecisionEvidenceCard,
-  type DecisionIntelligenceImmersionModel,
-  type DecisionOptionCard,
+import { lifecycleLabelFromDecision } from "@/experience/immersion/phase2/phase2PreviewPortfolio";
+import type {
+  DecisionEvidenceCard,
+  DecisionIntelligenceImmersionModel,
+  DecisionOptionCard,
 } from "@/experience/immersion/decision/projectManufacturingDecisionIntelligence";
+import type { Decision } from "@/lib/decisions/engine-types";
+import {
+  commandCentreStatusFromDecision,
+  commandCentreStatusLabel,
+  decisionHasLinkedAction,
+} from "@/lib/decisions/decision-execution-linkage";
+import { usePortfolioStore } from "@/store/portfolio-store";
 
 type Props = {
   model: DecisionIntelligenceImmersionModel;
   className?: string;
+  /** Live Decision Engine object from the portfolio (durable SoT). */
+  liveDecision?: Decision | null;
+  /** Preview briefing deep-link after record. */
+  briefingHref?: string;
 };
 
-type RecordedDecision = {
+type RecordedDecisionView = {
   optionId: string;
   optionLabel: string;
   rationale: string;
@@ -28,19 +39,36 @@ type RecordedDecision = {
   followUps: string[];
   recordedAt: string;
   evidenceSnapshotIds: string[];
-  decisionConfidence: ReturnType<typeof deriveRecordedDecisionConfidence>;
+  decisionConfidence: NonNullable<
+    Decision["executiveRecording"]
+  >["decisionConfidence"];
   history: Array<{ at: string; actor: string; note: string }>;
+  lifecycleLabel: string;
+  executionLabel: string;
 };
 
 /**
- * Stage 3 — Decision Intelligence immersion.
- * Attention → evidence → uncertainty → options → derived next step → executive record.
+ * Stage 3/4 — Decision Intelligence immersion.
+ * Attention → evidence → uncertainty → options → derived next step → durable executive record.
  * Decision confidence stays unestablished until an executive records a decision.
  */
-export function DecisionIntelligenceImmersion({ model, className }: Props) {
+export function DecisionIntelligenceImmersion({
+  model,
+  className,
+  liveDecision = null,
+  briefingHref = "/dev/phase2-preview?tab=briefing",
+}: Props) {
   const formId = useId();
+  const recordExecutiveDecision = usePortfolioStore(
+    (s) => s.recordExecutiveDecision,
+  );
+  const createAction = usePortfolioStore(
+    (s) => s.createActionFromSelectedDecision,
+  );
+  const portfolio = usePortfolioStore((s) => s.portfolio);
+
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(
-    model.options[0]?.id ?? null,
+    liveDecision?.selectedAlternativeId ?? model.options[0]?.id ?? null,
   );
   const [inspectedEvidenceId, setInspectedEvidenceId] = useState<string | null>(
     model.evidence.find((e) => e.role === "primary")?.id ??
@@ -48,20 +76,63 @@ export function DecisionIntelligenceImmersion({ model, className }: Props) {
       null,
   );
   const [judgementOpen, setJudgementOpen] = useState(true);
-  const [rationale, setRationale] = useState("");
-  const [owner, setOwner] = useState("Executive");
-  const [followUp, setFollowUp] = useState("");
-  const [acceptedAssumptionIds, setAcceptedAssumptionIds] = useState<string[]>(
-    [],
+  const [rationale, setRationale] = useState(
+    liveDecision?.executiveRecording?.rationale ?? "",
   );
-  const [acceptedRiskIds, setAcceptedRiskIds] = useState<string[]>([]);
-  const [recorded, setRecorded] = useState<RecordedDecision | null>(null);
+  const [owner, setOwner] = useState(
+    liveDecision?.executiveRecording?.recordedBy ??
+      liveDecision?.owner ??
+      "Executive",
+  );
+  const [followUp, setFollowUp] = useState(
+    liveDecision?.executiveRecording?.followUps[0] ?? "",
+  );
+  const [acceptedAssumptionIds, setAcceptedAssumptionIds] = useState<string[]>(
+    liveDecision?.executiveRecording?.acceptedAssumptions ?? [],
+  );
+  const [acceptedRiskIds, setAcceptedRiskIds] = useState<string[]>(
+    liveDecision?.executiveRecording?.acceptedRisks ?? [],
+  );
   const [recordError, setRecordError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
 
   const selected =
     model.options.find((o) => o.id === selectedOptionId) ?? null;
   const inspected =
     model.evidence.find((e) => e.id === inspectedEvidenceId) ?? null;
+
+  const recorded: RecordedDecisionView | null = useMemo(() => {
+    const er = liveDecision?.executiveRecording;
+    if (!er || !liveDecision) return null;
+    return {
+      optionId: liveDecision.selectedAlternativeId ?? "",
+      optionLabel:
+        liveDecision.selectedAlternativeLabel ??
+        model.options.find((o) => o.id === liveDecision.selectedAlternativeId)
+          ?.label ??
+        "Selected option",
+      rationale: er.rationale,
+      acceptedAssumptions: er.acceptedAssumptions,
+      acceptedRisks: er.acceptedRisks,
+      owner: er.recordedBy,
+      followUps: er.followUps,
+      recordedAt: er.recordedAt,
+      evidenceSnapshotIds: er.evidenceIds,
+      decisionConfidence: er.decisionConfidence,
+      history: liveDecision.history.map((h) => ({
+        at: h.at,
+        actor: h.actor,
+        note: h.note,
+      })),
+      lifecycleLabel: lifecycleLabelFromDecision(liveDecision),
+      executionLabel: commandCentreStatusLabel(
+        commandCentreStatusFromDecision(
+          liveDecision,
+          decisionHasLinkedAction(portfolio, liveDecision.id),
+        ),
+      ),
+    };
+  }, [liveDecision, model.options, portfolio]);
 
   const decisionConfidence = recorded
     ? {
@@ -74,6 +145,7 @@ export function DecisionIntelligenceImmersion({ model, className }: Props) {
           recorded.decisionConfidence.recordingCompletenessLabel,
           `Option: ${recorded.optionLabel}`,
           `Owner: ${recorded.owner}`,
+          `Lifecycle: ${recorded.lifecycleLabel}`,
           `Recorded ${new Date(recorded.recordedAt).toLocaleString()}`,
         ],
       }
@@ -83,8 +155,14 @@ export function DecisionIntelligenceImmersion({ model, className }: Props) {
     return list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
   }
 
-  function onRecordDecision() {
+  async function onRecordDecision() {
     setRecordError(null);
+    if (!model.decisionId) {
+      setRecordError(
+        "No manufacturing decision id is available on this snapshot.",
+      );
+      return;
+    }
     if (!selected) {
       setRecordError("Select an option before recording the decision.");
       return;
@@ -99,7 +177,7 @@ export function DecisionIntelligenceImmersion({ model, className }: Props) {
       setRecordError("Record the decision owner.");
       return;
     }
-    const at = new Date().toISOString();
+
     const evidenceIds = [
       ...selected.supportingEvidenceIds,
       ...model.evidence.filter((e) => e.role === "primary").map((e) => e.id),
@@ -114,34 +192,39 @@ export function DecisionIntelligenceImmersion({ model, className }: Props) {
         ? acceptedRiskIds
         : selected.downsides.slice(0, 1);
 
-    const decisionConfidence = deriveRecordedDecisionConfidence({
-      rationale,
-      acceptedAssumptions: assumptions,
-      acceptedRisks: risks,
-      owner,
-      followUps: followUp.trim() ? [followUp.trim()] : [],
-      evidenceIds: uniqueEvidence,
-    });
-
-    setRecorded({
-      optionId: selected.id,
-      optionLabel: selected.label,
-      rationale: rationale.trim(),
-      acceptedAssumptions: assumptions,
-      acceptedRisks: risks,
-      owner: owner.trim(),
-      followUps: followUp.trim() ? [followUp.trim()] : [],
-      recordedAt: at,
-      evidenceSnapshotIds: uniqueEvidence,
-      decisionConfidence,
-      history: [
-        {
-          at,
-          actor: owner.trim(),
-          note: `Executive recorded selection “${selected.shortLabel}”. Not an automatic AI approval.`,
-        },
-      ],
-    });
+    setBusy(true);
+    try {
+      await recordExecutiveDecision({
+        decisionId: model.decisionId,
+        alternativeId: selected.id,
+        actor: owner.trim(),
+        owner: owner.trim(),
+        rationale: rationale.trim(),
+        acceptedAssumptions: assumptions,
+        acceptedRisks: risks,
+        followUps: followUp.trim() ? [followUp.trim()] : [],
+        evidenceIds: uniqueEvidence,
+      });
+      // Follow-up action uses existing Phase 61 path — no fabricated owners/dates.
+      if (followUp.trim()) {
+        try {
+          await createAction({
+            decisionId: model.decisionId,
+            actor: owner.trim(),
+          });
+        } catch {
+          /* Action may already exist; recording remains the durable commit. */
+        }
+      }
+    } catch (e) {
+      setRecordError(
+        e instanceof Error
+          ? e.message
+          : "Decision was not saved to the durable Decision Engine path.",
+      );
+    } finally {
+      setBusy(false);
+    }
   }
 
   return (
@@ -560,13 +643,17 @@ export function DecisionIntelligenceImmersion({ model, className }: Props) {
           Commit selection, rationale and ownership
         </h3>
         <p className="mt-1 text-[0.75rem] text-[#8b93a7]">
-          Session recording in this preview preserves lineage locally. Durable
-          production persistence continues through the existing Decision
-          Workspace / pilot path — no new database structures introduced here.
+          Records through the existing Decision Engine → portfolio store →
+          pilot_decisions path (UI cache + durable when an organisation snapshot
+          is active). No second persistence system. No new migrations.
         </p>
 
         {recorded ? (
-          <RecordedDecisionState recorded={recorded} actionHref={model.actionHref} />
+          <RecordedDecisionState
+            recorded={recorded}
+            actionHref={model.actionHref}
+            briefingHref={briefingHref}
+          />
         ) : (
           <div className="mt-4 space-y-4">
             <div>
@@ -683,10 +770,11 @@ export function DecisionIntelligenceImmersion({ model, className }: Props) {
             <button
               type="button"
               data-decision-record-commit="true"
-              onClick={onRecordDecision}
-              className="inline-flex rounded-md border border-[#c4a35a]/80 bg-[color-mix(in_srgb,#c4a35a_12%,transparent)] px-5 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a] transition-colors hover:bg-[color-mix(in_srgb,#c4a35a_20%,transparent)]"
+              disabled={busy}
+              onClick={() => void onRecordDecision()}
+              className="inline-flex rounded-md border border-[#c4a35a]/80 bg-[color-mix(in_srgb,#c4a35a_12%,transparent)] px-5 py-2.5 text-[0.75rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a] transition-colors hover:bg-[color-mix(in_srgb,#c4a35a_20%,transparent)] disabled:opacity-50"
             >
-              Record executive decision
+              {busy ? "Recording…" : "Record executive decision"}
             </button>
           </div>
         )}
@@ -694,6 +782,31 @@ export function DecisionIntelligenceImmersion({ model, className }: Props) {
 
       {/* Connected geography + knowledge */}
       <section id="decision-map" data-decision-section="map">
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+          <p className="text-[0.62rem] uppercase tracking-[0.1em] text-[#6a9fd8]">
+            Geographic intelligence · region-resolved honesty retained
+          </p>
+          <div className="flex flex-wrap gap-2 text-[0.68rem]">
+            <a
+              href="/dev/phase2-preview?tab=map&view=australia"
+              className="rounded border border-white/15 px-2 py-1 text-[#c5cad6]"
+            >
+              Australia
+            </a>
+            <a
+              href="/dev/phase2-preview?tab=map&view=au_nsw"
+              className="rounded border border-white/15 px-2 py-1 text-[#c5cad6]"
+            >
+              NSW
+            </a>
+            <a
+              href="/dev/phase2-preview?tab=map&view=au_qld"
+              className="rounded border border-white/15 px-2 py-1 text-[#c5cad6]"
+            >
+              QLD
+            </a>
+          </div>
+        </div>
         <ManufacturingOperationsMapLazy
           model={model.map}
           initialView="australia"
@@ -984,15 +1097,17 @@ function OptionDetailPanel({ option }: { option: DecisionOptionCard }) {
 function RecordedDecisionState({
   recorded,
   actionHref,
+  briefingHref,
 }: {
-  recorded: RecordedDecision;
+  recorded: RecordedDecisionView;
   actionHref: string;
+  briefingHref: string;
 }) {
   return (
     <div className="mt-4 space-y-4" data-decision-recorded-state="true">
       <div className="rounded-xl border border-[#c4a35a]/40 bg-[color-mix(in_srgb,#c4a35a_10%,transparent)] p-4">
         <p className="text-[0.62rem] uppercase tracking-[0.08em] text-[#c4a35a]">
-          Executive decision recorded
+          Executive decision recorded · durable Decision Engine path
         </p>
         <p className="mt-2 text-[1rem] font-semibold leading-snug">
           {recorded.optionLabel}
@@ -1008,6 +1123,14 @@ function RecordedDecisionState({
             <dd className="text-[#e8eaef]">
               {new Date(recorded.recordedAt).toLocaleString()}
             </dd>
+          </div>
+          <div>
+            <dt className="text-[#8b93a7]">Lifecycle</dt>
+            <dd className="text-[#e8eaef]">{recorded.lifecycleLabel}</dd>
+          </div>
+          <div>
+            <dt className="text-[#8b93a7]">Execution status</dt>
+            <dd className="text-[#e8eaef]">{recorded.executionLabel}</dd>
           </div>
           <div>
             <dt className="text-[#8b93a7]">Decision confidence</dt>
@@ -1082,12 +1205,32 @@ function RecordedDecisionState({
         </p>
       </div>
 
-      <Link
-        href={actionHref}
-        className="inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a]"
-      >
-        Open Decision Workspace for durable follow-through →
-      </Link>
+      <div className="flex flex-wrap gap-4">
+        <Link
+          href={briefingHref}
+          className="inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#6a9fd8]"
+        >
+          Return to Executive Briefing →
+        </Link>
+        <Link
+          href={actionHref}
+          className="inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#c4a35a]"
+        >
+          Open Decision Workspace →
+        </Link>
+        <a
+          href="#decision-knowledge"
+          className="inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#5ec8d8]"
+        >
+          Inspect knowledge evidence →
+        </a>
+        <a
+          href="#decision-map"
+          className="inline-flex text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#5ec8d8]"
+        >
+          Open map intelligence →
+        </a>
+      </div>
     </div>
   );
 }

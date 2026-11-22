@@ -9,9 +9,12 @@ import {
 import {
   assignActionAccountability,
   createActionFromSelectedDecision,
+  recordExecutiveDecision,
   selectDecisionOption,
   type CreateActionFromDecisionInput,
   type CreateActionFromDecisionResult,
+  type RecordExecutiveDecisionInput,
+  type RecordExecutiveDecisionResult,
   type SelectDecisionOptionInput,
   type SelectDecisionOptionResult,
 } from "@/lib/decisions/decision-execution-linkage";
@@ -48,6 +51,16 @@ type PortfolioStore = {
       snapshotId?: string | null;
     },
   ) => Promise<SelectDecisionOptionResult>;
+  /**
+   * Stage 4 — durable executive record (selection + rationale artefacts).
+   * Uses the same portfolio → pilot_decisions path as selectDecisionOption.
+   */
+  recordExecutiveDecision: (
+    input: Omit<RecordExecutiveDecisionInput, "snapshotId"> & {
+      snapshotId?: string | null;
+    },
+  ) => Promise<RecordExecutiveDecisionResult>;
+  lastRecording: RecordExecutiveDecisionResult | null;
   /** Phase 61 — action only after selection. */
   createActionFromSelectedDecision: (
     input: CreateActionFromDecisionInput,
@@ -108,6 +121,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
   activeSnapshotId: null,
   lastConsequence: null,
   lastSelection: null,
+  lastRecording: null,
   lastActionFromDecision: null,
   lastPersistError: null,
 
@@ -122,6 +136,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
         activeSnapshotId: active.snapshotId,
         lastConsequence: null,
         lastSelection: null,
+        lastRecording: null,
         lastActionFromDecision: null,
         lastPersistError: null,
       });
@@ -159,6 +174,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
         activeSnapshotId: null,
         lastConsequence: null,
         lastSelection: null,
+        lastRecording: null,
         lastActionFromDecision: null,
         lastPersistError: null,
       });
@@ -170,6 +186,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
       hydrated: true,
       activeSnapshotId: null,
       lastSelection: null,
+      lastRecording: null,
       lastActionFromDecision: null,
       lastPersistError: null,
     });
@@ -187,6 +204,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
       activeSnapshotId: meta?.snapshotId ?? get().activeSnapshotId,
       lastConsequence: null,
       lastSelection: null,
+      lastRecording: null,
       lastActionFromDecision: null,
       lastPersistError: null,
     });
@@ -198,6 +216,7 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
       portfolio: structuredClone(MOCK_OUTCOME_PORTFOLIO),
       lastConsequence: null,
       lastSelection: null,
+      lastRecording: null,
       lastActionFromDecision: null,
       hydrated: true,
       activeSnapshotId: null,
@@ -258,6 +277,36 @@ export const usePortfolioStore = create<PortfolioStore>((set, get) => ({
     set({
       portfolio: result.portfolio,
       lastSelection: result,
+      hydrated: true,
+      lastPersistError: null,
+    });
+    return result;
+  },
+
+  async recordExecutiveDecision(input) {
+    const snapshotId =
+      input.snapshotId !== undefined
+        ? input.snapshotId
+        : get().activeSnapshotId;
+    const result = recordExecutiveDecision(get().portfolio, {
+      ...input,
+      snapshotId,
+    });
+    try {
+      await persistDurablePortfolio(result.portfolio, snapshotId ?? null);
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : "Unable to persist to Production. Your change was not saved.";
+      set({ lastPersistError: message });
+      throw error;
+    }
+    mockPortfolioRepository.save(result.portfolio);
+    set({
+      portfolio: result.portfolio,
+      lastSelection: result,
+      lastRecording: result,
       hydrated: true,
       lastPersistError: null,
     });

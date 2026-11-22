@@ -1,6 +1,7 @@
 # ExecutiveOS Phase 2 — Immersive Executive Intelligence Experience
 
-**Status:** Stage 3 Decision Intelligence in review — Stage 4 Integration not started  
+**Status:** Stage 4 Integration in review  
+
 **Branch:** `cursor/phase-2-immersive-intelligence-b8a3`  
 **Constraint:** Presentation-layer immersion only. No backend contract, forecasting calculation, auth/RLS, or fabricated operational data without explicit approval.  
 **Approved:** MapLibre + react-map-gl · region-resolved honesty · Manufacturing + Knowledge first · Explore network default  
@@ -14,10 +15,10 @@
 | **Stage 1 — Global Intelligence Map** | **Approved + polished** — OpenFreeMap + graphite command presence |
 | 2.3 Knowledge force-graph (Explore default) | Done — manufacturing evidence network; org KG FE-001 follow-on |
 | **Stage 2 — Executive Briefing** | **Approved with refinements** — denser priority panel, clearer forecast, inspectable timeline/knowledge |
-| **Stage 3 — Decision Intelligence** | **In review (expanded)** — hero · 3 confidence instruments · judgement analysis · evidence inspect · scenarios · derived next step · executive record workflow · map/network |
-| Stage 4 — Integration | Not started — waiting on Stage 3 approval |
+| **Stage 3 — Decision Intelligence** | **Approved** — hero · 3 confidence instruments · judgement analysis · evidence inspect · scenarios · derived next step · executive record workflow |
+| **Stage 4 — Integration** | **In review** — durable Decision Engine recording · Briefing ↔ Decisions ↔ Knowledge ↔ Map · lifecycle status round-trip |
 
-**Stage 3 recording note:** Preview records decisions in-session (lineage + decision confidence from recording artefacts only). Durable persistence remains the existing Decision Workspace / `pilot_decisions` path — no new migrations in Stage 3. |
+**Stage 4 persistence note:** `recordExecutiveDecision` writes selection + rationale artefacts onto the existing Decision Engine object (`executiveRecording` in `pilot_decisions.payload` jsonb). Preview uses the portfolio store UI cache for refresh survival; production org snapshots continue through `persistPilotPortfolioAction`. No second persistence system. No new migrations. |
 
 ### Stage 1 basemap decision
 

@@ -55,6 +55,11 @@ export {
   frameActionFromSelectedOption,
   markOptionsIdentified,
 } from "@/lib/decisions/decision-execution-linkage";
+export {
+  resolveDecisionPersistenceStatus,
+  type DecisionPersistenceMode,
+  type DecisionPersistenceStatus,
+} from "@/lib/decisions/decision-persistence-mode";
 export type {
   SelectDecisionOptionInput,
   SelectDecisionOptionResult,

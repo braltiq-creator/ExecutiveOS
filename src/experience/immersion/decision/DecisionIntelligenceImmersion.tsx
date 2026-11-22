@@ -18,6 +18,10 @@ import {
   commandCentreStatusLabel,
   decisionHasLinkedAction,
 } from "@/lib/decisions/decision-execution-linkage";
+import {
+  resolveDecisionPersistenceStatus,
+  type DecisionPersistenceStatus,
+} from "@/lib/decisions/decision-persistence-mode";
 import { usePortfolioStore } from "@/store/portfolio-store";
 
 type Props = {
@@ -66,6 +70,9 @@ export function DecisionIntelligenceImmersion({
     (s) => s.createActionFromSelectedDecision,
   );
   const portfolio = usePortfolioStore((s) => s.portfolio);
+  const activeSnapshotId = usePortfolioStore((s) => s.activeSnapshotId);
+  const lastPersistStatus = usePortfolioStore((s) => s.lastPersistStatus);
+  const lastPersistError = usePortfolioStore((s) => s.lastPersistError);
 
   const [selectedOptionId, setSelectedOptionId] = useState<string | null>(
     liveDecision?.selectedAlternativeId ?? model.options[0]?.id ?? null,
@@ -150,6 +157,13 @@ export function DecisionIntelligenceImmersion({
         ],
       }
     : model.confidence.decision;
+
+  const persistenceStatus: DecisionPersistenceStatus = useMemo(
+    () =>
+      lastPersistStatus ??
+      resolveDecisionPersistenceStatus(activeSnapshotId),
+    [lastPersistStatus, activeSnapshotId],
+  );
 
   function toggleId(list: string[], id: string): string[] {
     return list.includes(id) ? list.filter((x) => x !== id) : [...list, id];
@@ -644,13 +658,18 @@ export function DecisionIntelligenceImmersion({
         </h3>
         <p className="mt-1 text-[0.75rem] text-[#8b93a7]">
           Records through the existing Decision Engine → portfolio store →
-          pilot_decisions path (UI cache + durable when an organisation snapshot
-          is active). No second persistence system. No new migrations.
+          pilot_decisions path. No second persistence system. No new migrations.
         </p>
+
+        <PersistenceModeBanner
+          status={persistenceStatus}
+          persistError={lastPersistError}
+        />
 
         {recorded ? (
           <RecordedDecisionState
             recorded={recorded}
+            persistenceStatus={persistenceStatus}
             actionHref={model.actionHref}
             briefingHref={briefingHref}
           />
@@ -1094,20 +1113,66 @@ function OptionDetailPanel({ option }: { option: DecisionOptionCard }) {
   );
 }
 
+function PersistenceModeBanner({
+  status,
+  persistError,
+}: {
+  status: DecisionPersistenceStatus;
+  persistError: string | null;
+}) {
+  const durable = status.mode === "durable_eligible";
+  return (
+    <div
+      className={cn(
+        "mt-3 rounded-lg border px-3 py-2.5 text-[0.72rem] leading-relaxed",
+        durable
+          ? "border-[color-mix(in_srgb,#5ec8d8_35%,transparent)] bg-[color-mix(in_srgb,#5ec8d8_8%,transparent)] text-[#b8dce4]"
+          : "border-[color-mix(in_srgb,#c4a35a_40%,transparent)] bg-[color-mix(in_srgb,#c4a35a_8%,transparent)] text-[#e0d0a8]",
+      )}
+      data-persistence-mode={status.mode}
+      data-will-attempt-server-write={status.willAttemptServerWrite ? "true" : "false"}
+      role="status"
+    >
+      <p className="font-medium uppercase tracking-[0.08em]">
+        {durable
+          ? "Durable persistence eligible"
+          : "UI cache only — not durable SoT"}
+      </p>
+      <p className="mt-1 opacity-90">{status.reason}</p>
+      {status.organisationId ? (
+        <p className="mt-1 opacity-80">
+          Organisation: {status.organisationId}
+          {status.snapshotId ? ` · Snapshot: ${status.snapshotId}` : ""}
+        </p>
+      ) : null}
+      {persistError ? (
+        <p className="mt-1 text-[#e0a090]" data-persist-error="true">
+          Persist error: {persistError}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 function RecordedDecisionState({
   recorded,
+  persistenceStatus,
   actionHref,
   briefingHref,
 }: {
   recorded: RecordedDecisionView;
+  persistenceStatus: DecisionPersistenceStatus;
   actionHref: string;
   briefingHref: string;
 }) {
+  const durable = persistenceStatus.mode === "durable_eligible";
   return (
     <div className="mt-4 space-y-4" data-decision-recorded-state="true">
       <div className="rounded-xl border border-[#c4a35a]/40 bg-[color-mix(in_srgb,#c4a35a_10%,transparent)] p-4">
         <p className="text-[0.62rem] uppercase tracking-[0.08em] text-[#c4a35a]">
-          Executive decision recorded · durable Decision Engine path
+          {durable
+            ? "Executive decision recorded · durable pilot_decisions path"
+            : "Executive decision recorded · UI cache (activate org snapshot for Supabase)"}
         </p>
         <p className="mt-2 text-[1rem] font-semibold leading-snug">
           {recorded.optionLabel}
@@ -1189,8 +1254,11 @@ function RecordedDecisionState({
           Decision history
         </p>
         <ol className="mt-2 space-y-2">
-          {recorded.history.map((h) => (
-            <li key={h.at} className="text-[0.75rem] text-[#c5cad6]">
+          {recorded.history.map((h, index) => (
+            <li
+              key={`${h.at}-${h.actor}-${index}`}
+              className="text-[0.75rem] text-[#c5cad6]"
+            >
               <span className="text-[#8b93a7]">
                 {new Date(h.at).toLocaleString()} · {h.actor}
               </span>

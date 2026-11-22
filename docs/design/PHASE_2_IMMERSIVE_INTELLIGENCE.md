@@ -16,9 +16,38 @@
 | 2.3 Knowledge force-graph (Explore default) | Done — manufacturing evidence network; org KG FE-001 follow-on |
 | **Stage 2 — Executive Briefing** | **Approved with refinements** — denser priority panel, clearer forecast, inspectable timeline/knowledge |
 | **Stage 3 — Decision Intelligence** | **Approved** — hero · 3 confidence instruments · judgement analysis · evidence inspect · scenarios · derived next step · executive record workflow |
-| **Stage 4 — Integration** | **In review** — durable Decision Engine recording · Briefing ↔ Decisions ↔ Knowledge ↔ Map · lifecycle status round-trip |
+| **Stage 4 — Integration** | **Verified (remediation)** — persistence honesty · Issues fix · lifecycle/evidence contracts · isolation tests |
 
-**Stage 4 persistence note:** `recordExecutiveDecision` writes selection + rationale artefacts onto the existing Decision Engine object (`executiveRecording` in `pilot_decisions.payload` jsonb). Preview uses the portfolio store UI cache for refresh survival; production org snapshots continue through `persistPilotPortfolioAction`. No second persistence system. No new migrations. |
+**Stage 4 persistence note:** `recordExecutiveDecision` writes selection + rationale artefacts onto the existing Decision Engine object (`executiveRecording` in `pilot_decisions.payload` jsonb). Preview uses the portfolio store UI cache for refresh survival; production org snapshots continue through `persistPilotPortfolioAction`. No second persistence system. No new migrations.
+
+### Stage 4 final verification — persistence architecture
+
+```
+DecisionIntelligenceImmersion
+  → usePortfolioStore.recordExecutiveDecision()
+    → recordExecutiveDecision()  (Decision Engine pure fn)
+      → Decision.executiveRecording + evidenceAtDecision + history
+    → persistDurablePortfolio()
+      → resolveDecisionPersistenceStatus(activeSnapshotId)
+         ├─ ui_cache_only  → skip server write; mockPortfolioRepository (localStorage UI cache)
+         └─ durable_eligible (activeSnapshotId + getActiveExecutiveSnapshot().organisationId)
+              → persistPilotPortfolioAction({ organisationId, originSnapshotId, portfolio })
+                → requireStudioActor(organisationId)   // server auth
+                → store.savePortfolio()
+                  → pilot_outcome_portfolios.upsert
+                  → pilot_decisions.upsert (payload jsonb = Decision incl. executiveRecording)
+                  → pilot_actions.upsert
+```
+
+| Condition | Where decision lives | Survives refresh? | Survives logout / other browser? |
+|-----------|----------------------|-------------------|----------------------------------|
+| Phase 2 preview / no activated org snapshot | Zustand + `mockPortfolioRepository` localStorage | Yes (same browser profile) | **No** — not durable SoT |
+| Activated Executive Snapshot with `organisationId` | Supabase `pilot_decisions.payload` (+ portfolio row) via RLS | Yes | Yes (same org membership) |
+| Other organisation | Blocked by `requireStudioActor` + RLS `is_active_organization_member` | N/A | Cannot read/write |
+
+**Honesty UI:** Decision Intelligence shows `data-persistence-mode` banner (`durable_eligible` vs `ui_cache_only`). localStorage is never treated as proof of durable persistence.
+
+**MapLibre “2 Issues”:** OpenFreeMap dark style referenced missing sprite `circle-11` (and similar). Remediation: `ensureBasemapStyleImages` registers empty fallbacks + `styleimagemissing` handler before paint — development-tool diagnostics, not app logic errors. |
 
 ### Stage 1 basemap decision
 

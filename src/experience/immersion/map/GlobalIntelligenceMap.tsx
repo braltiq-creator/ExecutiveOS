@@ -12,7 +12,10 @@ import type { MapRef } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { cn } from "@/lib/utils/cn";
 import { IntelligenceProvenanceBadge } from "@/experience/immersion/IntelligenceProvenanceBadge";
-import { applyGraphiteBasemap } from "@/experience/immersion/map/applyGraphiteBasemap";
+import {
+  applyGraphiteBasemap,
+  ensureBasemapStyleImages,
+} from "@/experience/immersion/map/applyGraphiteBasemap";
 import {
   AU_REGIONAL_VIEW_IDS,
   BASEMAP_PROVIDER_NOTE,
@@ -84,6 +87,15 @@ export function GlobalIntelligenceMap({
   const selected = model.markers.find((m) => m.id === selectedId) ?? null;
   const view = MAP_VIEW_PRESETS[viewId];
   const activeLayerCount = Object.values(layers).filter(Boolean).length;
+
+  // Register sprite fallbacks as soon as the MapLibre instance exists —
+  // styleimagemissing can fire before onLoad while OpenFreeMap place icons resolve.
+  useEffect(() => {
+    if (!mapRef) return;
+    const map = mapRef.getMap();
+    if (!map) return;
+    ensureBasemapStyleImages(map);
+  }, [mapRef]);
 
   useEffect(() => {
     if (!mapRef || !styleReady) return;

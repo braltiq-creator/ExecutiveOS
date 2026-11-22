@@ -1,8 +1,52 @@
-import type { Map as MapLibreMapInstance } from "maplibre-gl";
+import type { Map as MapLibreMapInstance, StyleImageInterface } from "maplibre-gl";
 import { GRAPHITE_BASEMAP_PAINT } from "@/experience/immersion/map/basemap";
+
+/** Tiny empty sprite — prevents OpenFreeMap place layers from console-erroring when a named icon is briefly unavailable. */
+function emptyStyleImage(size = 11): StyleImageInterface {
+  const data = new Uint8Array(size * size * 4);
+  return {
+    width: size,
+    height: size,
+    data,
+  };
+}
+
+const STYLE_IMAGE_FALLBACK_FLAG = "__eosBasemapImageFallback";
+
+/**
+ * OpenFreeMap dark style references `circle-11` on place layers.
+ * Register a missing-image fallback so MapLibre does not emit console errors
+ * that Next.js DevTools counts as "Issues".
+ */
+export function ensureBasemapStyleImages(map: MapLibreMapInstance): void {
+  const ensure = (id: string) => {
+    if (map.hasImage(id)) return;
+    try {
+      map.addImage(id, emptyStyleImage(11), { pixelRatio: 1 });
+    } catch {
+      // already added or style not ready
+    }
+  };
+
+  ensure("circle-11");
+
+  const flagged = map as MapLibreMapInstance & {
+    [STYLE_IMAGE_FALLBACK_FLAG]?: boolean;
+  };
+  if (flagged[STYLE_IMAGE_FALLBACK_FLAG]) return;
+  flagged[STYLE_IMAGE_FALLBACK_FLAG] = true;
+
+  map.on("styleimagemissing", (e) => {
+    if (typeof e?.id === "string" && e.id.length > 0) {
+      ensure(e.id);
+    }
+  });
+}
 
 /** Retheme OpenFreeMap dark → ExecutiveOS graphite / midnight intelligence basemap. */
 export function applyGraphiteBasemap(map: MapLibreMapInstance): void {
+  ensureBasemapStyleImages(map);
+
   for (const paint of GRAPHITE_BASEMAP_PAINT) {
     if (!map.getLayer(paint.id)) continue;
     try {

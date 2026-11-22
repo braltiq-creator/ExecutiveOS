@@ -55,28 +55,31 @@ Customer data
 | **Weekly / recurring upload** | Logical Data Source identity; schema fingerprint; mapping reuse; evidence identity per upload | `src/verified-evidence/data-sources/` |
 | **Manufacturing analysis** | Demand vs forecast, heat, capacity, inventory, insights, missing information, confidence slices | `src/executive-snapshot-studio/intelligence/manufacturing-analysis.ts` |
 | **Decision paper + portfolio bridge** | Options, evidence, decision objects on OutcomePortfolio | `manufacturing-decision-frame.ts` · `manufacturing-portfolio-bridge.ts` |
-| **Manufacturing Evidence Graph** | Snapshot-scoped facts/entities/relationships; deterministic ids include `organisationId` + `snapshotId` | `src/manufacturing-evidence-graph/` |
+| **Manufacturing Evidence Graph** | Snapshot-scoped facts/entities/relationships; deterministic ids include `organisationId` + `snapshotId`; USER_PROVIDED provenance only; SQL immutability triggers | `src/manufacturing-evidence-graph/` · `015_manufacturing_evidence_graph.sql` |
 | **Command Centre / Briefing / Decisions immersion** | Phase 2 Stages 1–4 surfaces (presentation) | `src/experience/immersion/` · `/today` manufacturing path |
 | **Decision Engine + pilot persistence** | `recordExecutiveDecision` → portfolio → `pilot_decisions.payload`; actions via Phase 61 linkage | `decision-execution-linkage.ts` · `pilot-persistence/` |
-| **Org isolation** | `requireStudioActor` + RLS `is_active_organization_member` on pilot tables | `011_pilot_operating_loop.sql` · `PILOT_ACCESS_READINESS.md` |
+| **Org isolation** | `requireStudioActor` + RLS `is_active_organization_member` on pilot tables | `011_pilot_operating_loop.sql` · `013`/`014`/`015` evidence migrations · `PILOT_ACCESS_READINESS.md` |
 | **Design partner model** | Pilot provisioning, environment labels, manufacturing_forecasting focus module | `docs/design-partner/PILOT_*.md` |
 
 ### 1.2 Supported formats & upload mechanisms (today)
 
 | Mechanism | Status | Notes |
 |-----------|--------|-------|
-| CSV tabular | Ready | Preferred v1 customer path |
-| Excel tabular text | Ready | Binary `.xlsx` deferred — export CSV for v1 UI (`docs/data-gateway/README.md`) |
-| Manual records | Ready | Low volume |
-| Weekly recurring upload | Ready | Same logical Data Source; new immutable snapshot |
+| CSV / TSV / TXT | Ready | `udg-csv` — preferred clear path for partner exports |
+| Excel `.xls` / `.xlsx` | Ready | `udg-excel` — SheetJS + magic-byte detection (`uploads/parse-workbook.ts`); not a deferred connector |
+| Manual / pre-parsed rows | Ready | `udg-manual` — low volume |
+| Weekly recurring upload | Ready | Same logical Data Source (`organization_data_sources`); new immutable snapshot |
+| Scheduled / webhook / streaming | Contract only | `ingestion/modes.ts` — not implemented |
 | Dynamics / SAP / REST | Placeholder contracts only | Explicitly **out of pilot scope** (`PILOT_MODEL.md`) |
 
 ### 1.3 Evidence & snapshot boundaries
 
-- UDG snapshots are **immutable and replayable**.
-- Manufacturing Evidence Graph ids hash `organisationId` + `snapshotId` + grain — a later weekly upload **cannot** overwrite prior snapshot graph ids (`manufacturing-evidence-graph/identity.ts`).
-- Verified Evidence weekly upload pins `dataSourceId` and refuses mismatched identity reuse.
-- Executive Snapshot activation binds org + portfolio for Command Centre; pilot persistence writes are org-scoped.
+- UDG snapshots are **immutable and replayable** by contract (`immutable: true`, content hash).
+- **Durability split (important):** UDG v1 snapshot/mapping/lineage process stores are **in-memory**; after activation, authoritative SoT is `pilot_executive_snapshots` (+ portfolio/decisions/actions) and verified-evidence / MEG tables under RLS — not the UDG in-memory cache (`docs/data-gateway/ARCHITECTURE.md`, `pilot-persistence/`).
+- Manufacturing Evidence Graph ids hash `organisationId` + `snapshotId` + grain — a later weekly upload **cannot** overwrite prior snapshot graph ids (`manufacturing-evidence-graph/identity.ts`). Relationships are **same-row co-occurrence only** (no invented cross-row joins).
+- MEG backend + compare actions exist; **no executive product UI currently consumes MEG as a primary surface** — Phase 2 Knowledge/map project from analysis/evidence hierarchy, not MEG tables. Stage 5 must not treat MEG UI as a prerequisite for the first customer workflow.
+- Verified Evidence weekly upload pins `dataSourceId` and refuses mismatched identity reuse; `SYNTHETIC` provenance rejected for organisation evidence.
+- Executive Snapshot activation binds org + portfolio for Command Centre; pilot persistence writes are org-scoped via `requireStudioActor`.
 
 ### 1.4 Manufacturing intelligence outputs (existing)
 
@@ -98,10 +101,13 @@ From `analyseManufacturingSnapshot` / Command Centre projection (evidence-derive
 | Phase 2 preview uses **demonstration fixture** only | Must never be labelled live Hitachi intelligence |
 | Production durable decision E2E **outstanding** | Recorded decisions in preview ≠ Supabase SoT |
 | No Hitachi-specific field mapping pack yet | First real export may need alias table + validation messages — not a new engine |
-| Lat/lng rarely present | Map remains region-resolved with honesty labels |
+| Lat/lng rarely present | Map remains region-resolved with honesty labels (`au-regions` co-occurrence) |
 | Outcome review UX is thinner than Briefing/Decision immersion | Follow-through exists in Decision Engine / actions; Stage 5 should wire clarity, not invent a new dashboard |
+| MEG not wired into executive UI | Backend ready; first workflow must not depend on new MEG screens |
+| UDG process stores are in-memory | Customer trust depends on activation → pilot_* durable path (Stage 5a) |
 | Live ERP connectors absent | Correct for pilot — export-first is the product thesis |
 | Working capital / cash instruments often “not quantified” | Honesty: leave unestablished unless customer data supports them |
+| Retention / full RBAC claims | Remain honest per `SECURITY_POSTURE.md` — do not overclaim |
 
 ### 1.6 Prior Hitachi materials (demo language only)
 
@@ -193,7 +199,7 @@ From `analyseManufacturingSnapshot` / Command Centre projection (evidence-derive
 
 **Volume guidance:** Prefer ≥1 complete planning horizon (e.g. several months) across ≥2 regions and ≥1 factory so capacity vs demand tension is *evidenced*, not staged.
 
-**Format:** CSV (UTF-8) with stable headers; Excel via CSV export for v1.
+**Format:** CSV (UTF-8) with stable headers, or `.xlsx` via the existing Excel connector. Prefer one consistent export cadence (weekly).
 
 ---
 
@@ -327,7 +333,9 @@ Prefer extending existing Vitest + one authenticated Playwright/manual smoke; av
 | Confirmation of region/factory/dealer grain in export | Joint | Meaningful workflow |
 | Legal / NDA for confidential data handling | Joint | Before storing real exports |
 | Optional: second period export for comparison | Hitachi | 5c compare story |
-| **Not required for Stage 5:** Dynamics/SAP connector, lat/lng, new SQL migrations (unless blocker found) | — | — |
+| Migrations through pilot + evidence + MEG (`011`, `013`–`015`) applied on target env | Braltiq | Durable evidence / graph |
+| `PILOT_ACCESS_READINESS` AMBER ops checklist (mock off, env keys) | Braltiq | Invite / pilot gate |
+| **Not required for Stage 5 first slice:** Dynamics/SAP connector, lat/lng UDG fields, MEG product UI, new SQL migrations (unless blocker found) | — | — |
 
 ---
 
@@ -349,6 +357,7 @@ Prefer extending existing Vitest + one authenticated Playwright/manual smoke; av
 - No inventing Hitachi operational rows  
 - No labelling demo fixture as Hitachi live intelligence  
 - No filler dashboards  
+- No MEG product UI as a Stage 5a/5b gate (backend may materialise; executive surfaces reuse existing analysis/immersion)  
 - No merge / production deploy until Stage 5 proposal + 5a/5b acceptance are approved  
 
 ---

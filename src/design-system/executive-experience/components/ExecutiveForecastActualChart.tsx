@@ -59,7 +59,7 @@ export function ExecutiveForecastActualChart({
         </ul>
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(2.5rem,1fr))] items-end gap-2 border-b border-[rgba(47,122,229,0.2)] pb-2">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(2.5rem,1fr))] items-end gap-2 border-b border-[color-mix(in_srgb,var(--exds-electric)_28%,transparent)] pb-2">
         {series.map((p) => {
           const fH = Math.max(4, (p.forecast / max) * 100);
           const aH = Math.max(4, (p.actual / max) * 100);

@@ -198,6 +198,23 @@ export function EvidenceStack({
   );
 }
 
+function relationshipAccent(kind: string): string {
+  const key = kind.toLowerCase();
+  if (key.includes("evidence") || key.includes("source")) {
+    return "var(--exs-intelligence)";
+  }
+  if (key.includes("decision") || key.includes("judgement")) {
+    return "var(--exds-decision, var(--exs-attention))";
+  }
+  if (key.includes("strateg") || key.includes("outcome")) {
+    return "var(--exs-strategy)";
+  }
+  if (key.includes("infer") || key.includes("derived")) {
+    return "var(--exs-opportunity)";
+  }
+  return "var(--exs-nav)";
+}
+
 export function KnowledgeRelationships({
   items,
 }: {
@@ -211,21 +228,43 @@ export function KnowledgeRelationships({
         className="scroll-mt-6"
       >
         <ExsSectionHeader
-          label="Knowledge Relationships"
+          label="Connected Graph"
           icon={EXECUTIVE_ICONS.priorities}
         />
-        <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <li key={item.id}>
-              <a href={item.href} className="exs-card block h-full">
-                <p className="exs-label">{item.kind}</p>
-                <p className="exs-title mt-1 text-[length:0.9rem]">
-                  {item.label}
-                </p>
-              </a>
-            </li>
-          ))}
-        </ul>
+        {items.length === 0 ? (
+          <article className="exs-card">
+            <p className="exs-body">
+              No relationships available for this question yet.
+            </p>
+          </article>
+        ) : (
+          <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={item.href}
+                  className="exs-card relative block h-full overflow-hidden pl-4"
+                  data-relationship-kind={item.kind}
+                >
+                  <span
+                    className="absolute inset-y-0 left-0 w-0.5"
+                    style={{ background: relationshipAccent(item.kind) }}
+                    aria-hidden="true"
+                  />
+                  <p
+                    className="exs-label"
+                    style={{ color: relationshipAccent(item.kind) }}
+                  >
+                    {item.kind}
+                  </p>
+                  <p className="exs-title mt-1 text-[length:0.9rem]">
+                    {item.label}
+                  </p>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
     </Reveal>
   );

@@ -23,9 +23,11 @@ export default async function DataSourcesPage() {
   return (
     <AppFrame title="Data & Sources" density="snapshot">
       <ExperiencePage width="brief" className="pb-16">
-        <header className="space-y-3 pt-2">
+        <header className="space-y-3 border-b border-[var(--exs-divider,var(--eos-border))] pb-5 pt-2">
           <ExperienceBadge tone="accent">Data & Sources</ExperienceBadge>
-          <h1 className="ex-display">Data & Sources</h1>
+          <h1 className="font-display text-[length:clamp(1.35rem,2.2vw,1.75rem)] font-semibold tracking-[-0.03em] text-[var(--ex-text)]">
+            Data & Sources
+          </h1>
           <p className="ex-body max-w-xl">
             Keep ExecutiveOS current with the latest business data.
           </p>

@@ -1,33 +1,40 @@
 /*
-  Executive Experience System (EXS) v1.0
-  Premium enterprise tokens — Today is the reference implementation.
+  Executive Experience System (EXS) v1.1
+  Dark graphite is the primary executive OS environment.
+  Light remains an opt-in institutional mode.
 */
 
-[data-theme="light"] {
-  /* Surfaces */
-  --exs-canvas: #f6f7f9;
-  --exs-surface: #ffffff;
-  --exs-surface-hover: #fcfcfd;
-  --exs-border: rgba(26, 31, 46, 0.07);
-  --exs-border-strong: rgba(26, 31, 46, 0.12);
-  --exs-divider: rgba(26, 31, 46, 0.06);
+:root {
+  /* Surfaces — layered graphite */
+  --exs-canvas: #0a0c10;
+  --exs-surface: #12151c;
+  --exs-surface-hover: #161a24;
+  --exs-border: rgba(255, 255, 255, 0.07);
+  --exs-border-strong: rgba(255, 255, 255, 0.13);
+  --exs-divider: rgba(255, 255, 255, 0.06);
 
   /* Type */
-  --exs-text: #1a1f2e;
-  --exs-text-secondary: #4a5568;
-  --exs-text-muted: #8b95a8;
+  --exs-text: #eceef2;
+  --exs-text-secondary: #9aa3b5;
+  --exs-text-muted: #6b7385;
 
   /* Semantic — meaning only */
-  --exs-positive: #2f8f68;
-  --exs-negative: #b84545;
-  --exs-attention: #c08a3e;
-  --exs-nav: #3b6ea5;
-  --exs-neutral: #8b95a8;
+  --exs-positive: #3fa87a;
+  --exs-negative: #c45c5c;
+  --exs-attention: #c9a06c;
+  --exs-nav: #6a9fd8;
+  --exs-intelligence: #3d9e8f;
+  --exs-strategy: #8b7bb8;
+  --exs-opportunity: #c4a35a;
+  --exs-neutral: #6b7385;
 
   /* Elevation */
-  --exs-shadow-1: 0 1px 2px rgba(26, 31, 46, 0.03);
-  --exs-shadow-2: 0 6px 18px rgba(26, 31, 46, 0.05);
-  --exs-shadow-3: 0 12px 32px rgba(26, 31, 46, 0.07);
+  --exs-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.32),
+    0 0 0 1px rgba(255, 255, 255, 0.04);
+  --exs-shadow-2: 0 8px 24px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  --exs-shadow-3: 0 16px 40px rgba(0, 0, 0, 0.48),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
   --exs-radius: 0.75rem;
   --exs-radius-sm: 0.5rem;
 
@@ -38,15 +45,15 @@
   --exs-space-4: 1rem;
   --exs-space-5: 1.25rem;
   --exs-space-6: 1.5rem;
-  --exs-card-pad: 0.85rem;
-  --exs-gap: 0.65rem;
+  --exs-card-pad: 0.9rem;
+  --exs-gap: 0.7rem;
 
   /* Type scale */
   --exs-label-size: 0.7rem;
   --exs-body-size: 0.875rem;
   --exs-title-size: 0.95rem;
-  --exs-value-size: 1.25rem;
-  --exs-display-size: 1.35rem;
+  --exs-value-size: 1.35rem;
+  --exs-display-size: 1.45rem;
 
   /* Motion */
   --exs-ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -79,6 +86,67 @@
   --eos-emerald: var(--exs-positive);
   --eos-amber: var(--exs-attention);
   --eos-crimson: var(--exs-negative);
+  --eos-teal: var(--exs-intelligence);
+  --eos-strategy: var(--exs-strategy);
+  --eos-gold: var(--exs-opportunity);
+}
+
+[data-theme="light"] {
+  /* Surfaces */
+  --exs-canvas: #f6f7f9;
+  --exs-surface: #ffffff;
+  --exs-surface-hover: #fcfcfd;
+  --exs-border: rgba(26, 31, 46, 0.07);
+  --exs-border-strong: rgba(26, 31, 46, 0.12);
+  --exs-divider: rgba(26, 31, 46, 0.06);
+
+  /* Type */
+  --exs-text: #1a1f2e;
+  --exs-text-secondary: #4a5568;
+  --exs-text-muted: #8b95a8;
+
+  /* Semantic — meaning only */
+  --exs-positive: #2f8f68;
+  --exs-negative: #b84545;
+  --exs-attention: #c08a3e;
+  --exs-nav: #3b6ea5;
+  --exs-intelligence: #2a8a7c;
+  --exs-strategy: #6b5b95;
+  --exs-opportunity: #a8893a;
+  --exs-neutral: #8b95a8;
+
+  /* Elevation */
+  --exs-shadow-1: 0 1px 2px rgba(26, 31, 46, 0.03);
+  --exs-shadow-2: 0 6px 18px rgba(26, 31, 46, 0.05);
+  --exs-shadow-3: 0 12px 32px rgba(26, 31, 46, 0.07);
+
+  /* Bridge */
+  --ex-canvas: var(--exs-canvas);
+  --ex-surface: var(--exs-surface);
+  --ex-text: var(--exs-text);
+  --ex-text-secondary: var(--exs-text-secondary);
+  --ex-text-muted: var(--exs-text-muted);
+  --ex-accent: var(--exs-nav);
+  --ex-success: var(--exs-positive);
+  --ex-attention: var(--exs-attention);
+  --ex-critical: var(--exs-negative);
+
+  --eos-canvas: var(--exs-canvas);
+  --eos-surface-solid: var(--exs-surface);
+  --eos-surface: var(--exs-surface);
+  --eos-border: var(--exs-border);
+  --eos-border-strong: var(--exs-border-strong);
+  --eos-color-divider: var(--exs-divider);
+  --eos-shadow-1: var(--exs-shadow-1);
+  --eos-shadow-2: var(--exs-shadow-2);
+  --eos-shadow-3: var(--exs-shadow-3);
+  --eos-blue: var(--exs-nav);
+  --eos-emerald: var(--exs-positive);
+  --eos-amber: var(--exs-attention);
+  --eos-crimson: var(--exs-negative);
+  --eos-teal: var(--exs-intelligence);
+  --eos-strategy: var(--exs-strategy);
+  --eos-gold: var(--exs-opportunity);
 }
 
 /* EXS primitives */
@@ -142,7 +210,8 @@
 
 .exs-card:focus-visible {
   outline: none;
-  box-shadow: var(--exs-shadow-2), 0 0 0 2px color-mix(in srgb, var(--exs-nav) 35%, transparent);
+  box-shadow: var(--exs-shadow-2),
+    0 0 0 2px color-mix(in srgb, var(--exs-nav) 35%, transparent);
 }
 
 .exs-open {
@@ -182,8 +251,8 @@
 /* Page dive — continuity, not theatre */
 @keyframes exs-focus-in {
   from {
-    opacity: 0.9;
-    transform: scale(0.994);
+    opacity: 0.92;
+    transform: scale(0.996);
   }
   to {
     opacity: 1;
@@ -256,4 +325,30 @@
 
 .mc-feed-loop {
   background: color-mix(in srgb, var(--exs-positive) 6%, var(--exs-surface));
+}
+
+/* Cognitive switch — brief arrival pulse on intelligence indicators */
+@keyframes exs-intel-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.exs-intel-indicator {
+  color: var(--exs-intelligence);
+}
+
+.exs-intel-indicator[data-live="true"] {
+  animation: exs-intel-breathe 2.8s var(--exs-ease) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .exs-intel-indicator[data-live="true"] {
+    animation: none !important;
+    opacity: 1;
+  }
 }

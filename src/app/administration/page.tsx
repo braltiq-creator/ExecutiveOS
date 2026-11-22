@@ -26,9 +26,11 @@ export default async function AdministrationPage() {
   return (
     <AppFrame title="Administration" density="snapshot">
       <ExperiencePage width="brief" className="pb-16">
-        <header className="space-y-3 pt-2">
+        <header className="space-y-3 border-b border-[var(--exs-divider,var(--eos-border))] pb-5 pt-2">
           <ExperienceBadge tone="accent">Organisation Portal</ExperienceBadge>
-          <h1 className="ex-display">Manage your organisation</h1>
+          <h1 className="font-display text-[length:clamp(1.35rem,2.2vw,1.75rem)] font-semibold tracking-[-0.03em] text-[var(--ex-text)]">
+            Manage your organisation
+          </h1>
           <p className="ex-body max-w-xl">
             Subscription, executives, connected systems, and security — a
             customer portal that feels like ExecutiveOS, not an admin console.

@@ -19,16 +19,17 @@
   --eos-color-momentum-negative: var(--eos-crimson);
   --eos-color-attention-watch: var(--eos-amber);
   --eos-color-attention-critical: var(--eos-crimson);
-  --eos-color-ai: var(--eos-blue);
+  --eos-color-ai: var(--eos-teal, var(--eos-blue));
   --eos-color-navigation: var(--eos-blue);
   --eos-color-focus: var(--eos-blue);
   --eos-color-strategy: var(--eos-strategy);
   --eos-color-strategy-soft: var(--eos-strategy-soft);
+  --eos-color-opportunity: var(--eos-gold, var(--eos-amber));
   --eos-color-ring: var(--eos-ring);
   --eos-color-momentum-positive-soft: var(--eos-emerald-soft);
   --eos-color-attention-watch-soft: var(--eos-amber-soft);
   --eos-color-attention-critical-soft: var(--eos-crimson-soft);
-  --eos-color-ai-soft: var(--eos-blue-soft);
+  --eos-color-ai-soft: var(--eos-teal-soft, var(--eos-blue-soft));
   --eos-color-surface-inset: var(--eos-surface-inset);
 
   /* ——— Spacing scale (XS → 3XL) ——— */

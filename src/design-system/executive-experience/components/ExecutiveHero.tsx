@@ -33,7 +33,7 @@ type ExecutiveHeroProps = {
  * Editorial Command Centre opening — narrative, not a KPI card.
  */
 export function ExecutiveHero({
-  kicker = "Command Centre",
+  kicker = "Executive Intelligence",
   eyebrow = "Executive Brief",
   question,
   judgement,

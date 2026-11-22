@@ -1,15 +1,16 @@
 /*
-  Phase 58A–D / 66–68 — Command Centre composition.
-  Phase 68: Signature Experience — denser Brief + technical visuals.
+  Command Centre composition — Executive Intelligence OS.
+  Dark graphite environment; light theme inherits via EXDS tokens.
 */
 
 [data-command-centre-experience] {
-  --exds-card-bg: #ffffff;
-  --exds-card-border: rgba(47, 122, 229, 0.16);
+  --exds-card-bg: var(--exds-surface-cool);
+  --exds-card-border: var(--exds-electric-border);
   --exds-heat-cell-min-h: 4.25rem;
   --cc-section-gap: clamp(0.85rem, 1.5vw, 1.25rem);
   --cc-gutter: clamp(0.75rem, 1.25vw, 1.25rem);
   --cc-rail-gap: clamp(0.85rem, 1.5vw, 1.25rem);
+  --cc-border: color-mix(in srgb, var(--exds-electric) 22%, transparent);
 
   display: flex;
   flex-direction: column;
@@ -22,8 +23,9 @@
   overflow-y: auto;
   overscroll-behavior: contain;
   padding-bottom: var(--eos-space-2xl, 2.5rem);
-  background: var(--exds-canvas-cool, #eef2f7);
+  background: var(--exds-canvas-cool);
   border-radius: calc(var(--exds-card-radius, 12px) + 2px);
+  border: 1px solid color-mix(in srgb, var(--exds-electric) 12%, transparent);
   padding-inline: clamp(0.65rem, 1.25vw, 1.1rem);
   padding-top: clamp(0.4rem, 1vw, 0.85rem);
 }
@@ -82,7 +84,7 @@
 [data-command-centre-experience] .cc-dp-slim {
   margin-bottom: 0.5rem;
   padding-bottom: 0.35rem;
-  border-bottom: 1px solid rgba(47, 122, 229, 0.14);
+  border-bottom: 1px solid var(--cc-border);
 }
 
 [data-command-centre-experience] .cc-dp-slim [data-design-partner-status="true"] {
@@ -91,16 +93,18 @@
 
 [data-command-centre-experience] .cc-hero-narrative {
   min-width: 0;
-  padding: 0.85rem 1rem;
-  background: var(--exds-surface-cool, #f7f9fc);
-  border: 1px solid var(--exds-electric-border, rgba(61, 139, 253, 0.28));
+  padding: 1rem 1.15rem;
+  background: var(--exds-navy-elevated);
+  border: 1px solid var(--exds-electric-border);
   border-radius: calc(var(--exds-card-radius) + 2px);
+  box-shadow: var(--eos-shadow-1);
 }
 
 [data-command-centre-experience] .cc-brief-decision {
   margin-top: 0.75rem;
   padding-top: 0.75rem;
-  border-top: 1px solid color-mix(in srgb, var(--exds-decision, #e87722) 35%, transparent);
+  border-top: 1px solid
+    color-mix(in srgb, var(--exds-decision, #e87722) 35%, transparent);
 }
 
 [data-command-centre-experience] .cc-layer-investigate {
@@ -109,21 +113,21 @@
 
 [data-command-centre-experience] .cc-continuity-compact {
   padding: 0.55rem 0.85rem;
-  background: var(--exds-surface-cool, #f7f9fc);
-  border: 1px solid rgba(47, 122, 229, 0.14);
+  background: var(--exds-surface-cool);
+  border: 1px solid var(--cc-border);
   border-radius: calc(var(--exds-card-radius));
 }
 
 [data-command-centre-experience] .cc-layer-operate {
   padding: 0.85rem 1rem;
-  background: var(--exds-surface-cool, #f7f9fc);
-  border: 1px solid rgba(47, 122, 229, 0.16);
+  background: var(--exds-surface-cool);
+  border: 1px solid var(--cc-border);
   border-radius: calc(var(--exds-card-radius) + 2px);
 }
 
 [data-command-centre-experience] .cc-operate-decision {
   padding-bottom: 0.65rem;
-  border-bottom: 1px solid rgba(47, 122, 229, 0.12);
+  border-bottom: 1px solid var(--cc-border);
 }
 
 [data-command-centre-experience] .cc-accountability-compact {
@@ -133,7 +137,7 @@
 [data-command-centre-experience] .cc-supporting-details {
   padding: 0.5rem 0.75rem;
   background: transparent;
-  border: 1px solid rgba(47, 122, 229, 0.12);
+  border: 1px solid var(--cc-border);
   border-radius: calc(var(--exds-card-radius));
 }
 
@@ -147,8 +151,8 @@
 
 [data-command-centre-experience] [data-evidence-lab="true"] {
   padding: 0.85rem 1rem;
-  background: var(--exds-surface-cool, #f7f9fc);
-  border: 1px solid var(--exds-electric-border, rgba(61, 139, 253, 0.28));
+  background: var(--exds-surface-cool);
+  border: 1px solid var(--exds-electric-border);
   border-radius: calc(var(--exds-card-radius) + 2px);
 }
 
@@ -158,9 +162,9 @@
 
 [data-command-centre-experience] .cc-heat-preview {
   padding: 0.65rem 0.75rem;
-  border: 1px solid rgba(47, 122, 229, 0.18);
+  border: 1px solid var(--cc-border);
   border-radius: calc(var(--exds-card-radius));
-  background: #fff;
+  background: var(--exds-evidence-surface-bg);
 }
 
 [data-command-centre-experience] .cc-heat-preview [data-exds-heatmap="true"] {
@@ -190,13 +194,13 @@
 
 [data-command-centre-experience] .cc-stream-surface {
   min-width: 0;
-  border-left: 2px solid var(--exds-electric, var(--exds-intelligence));
+  border-left: 2px solid var(--exds-intelligence, var(--exds-electric));
   padding-left: var(--eos-space-lg);
 }
 
 [data-command-centre-experience] .cc-stream-item {
   padding-block: 0.55rem;
-  border-bottom: 1px solid rgba(47, 122, 229, 0.12);
+  border-bottom: 1px solid var(--cc-border);
 }
 
 [data-command-centre-experience] .cc-stream-item:last-child {
@@ -216,8 +220,8 @@
 }
 
 [data-command-centre-experience] [data-exds-evidence-surface="true"] {
-  border-color: var(--exds-electric-border, rgba(61, 139, 253, 0.35));
-  background: var(--exds-surface-cool, #f7f9fc);
+  border-color: var(--exds-electric-border);
+  background: var(--exds-surface-cool);
   box-shadow: none;
 }
 
@@ -227,6 +231,17 @@
 
 [data-command-centre-experience] [data-heat-quiet="true"] {
   pointer-events: auto;
+}
+
+/* Layer labels — OS briefing rhythm */
+[data-command-centre-experience] .cc-layer-label {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--exs-text-muted, var(--eos-text-muted));
+  margin-bottom: 0.35rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

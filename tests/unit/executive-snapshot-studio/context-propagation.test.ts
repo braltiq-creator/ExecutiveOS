@@ -214,7 +214,9 @@ describe("Phase 57D Executive Snapshot context propagation", () => {
   });
 
   it("Command Centre title avoids Good morning Alex for commercial snapshots", () => {
-    const ctx = makeContext("studio_a", "snap_a", "Commercial A");
+    const ctx = activateExecutiveSnapshotContext(
+      makeContext("studio_a", "snap_a", "Commercial A"),
+    );
     expect(snapshotCommandCentreTitle(ctx)).toBe("Commercial Executive Brief");
     expect(snapshotCommandCentreTitle(ctx)).not.toMatch(/Alex|Helix|Good morning/i);
   });

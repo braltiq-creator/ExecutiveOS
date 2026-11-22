@@ -59,6 +59,8 @@ describe("Organisation Portal (Phase 54)", () => {
       organisationId: result.job.organisationId ?? undefined,
       accountId: result.job.accountId,
       tenantId: result.job.tenantId ?? undefined,
+      // Evaluate trial against the same clock used for provisioning.
+      asOf: "2026-08-08T15:30:00+10:00",
     });
 
     expect(snapshot.organisation.name).toBe("Portal Industries");

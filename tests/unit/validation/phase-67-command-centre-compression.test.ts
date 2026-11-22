@@ -126,6 +126,7 @@ describe("Phase 67 Command Centre compression", () => {
       tabularText: readFileSync(SF, "utf8"),
       organisationId: "org-phase67-commercial",
       organisationName: "Commercial Partner",
+      profileId: "commercial",
       filename: "salesforce-opportunity-export.csv",
     });
     const portfolio = portfolioFromCommercialAnalysis(raw.analysis!);
@@ -136,7 +137,7 @@ describe("Phase 67 Command Centre compression", () => {
       organisationName: "Commercial Partner",
       profileId: "commercial",
       profileLabel: "Commercial Salesforce Intelligence",
-      sourceKind: "salesforce_export",
+      sourceKind: "csv",
       filename: "salesforce-opportunity-export.csv",
       recordCount: raw.snapshot!.meta.recordCount,
       confidenceOverall: raw.snapshot!.meta.confidence.overall,
@@ -160,7 +161,7 @@ describe("Phase 67 Command Centre compression", () => {
         datasetShape: "flat_commercial",
       }),
       portfolio,
-      commercialAnalysis: raw.analysis,
+      analysis: raw.analysis,
       commercialBrief: raw.brief,
       councilSeats: ["CEO", "CFO", "COO", "CRO", "CSO"],
       advisorNames: [],

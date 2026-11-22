@@ -141,6 +141,7 @@ describe("Phase 68 Signature Experience", () => {
       tabularText: readFileSync(SF, "utf8"),
       organisationId: "org-phase68-com",
       organisationName: "Commercial Partner",
+      profileId: "commercial",
       filename: "salesforce-opportunity-export.csv",
     });
     const portfolio = portfolioFromCommercialAnalysis(raw.analysis!);
@@ -151,7 +152,7 @@ describe("Phase 68 Signature Experience", () => {
       organisationName: "Commercial Partner",
       profileId: "commercial",
       profileLabel: "Commercial Salesforce Intelligence",
-      sourceKind: "salesforce_export",
+      sourceKind: "csv",
       filename: "salesforce-opportunity-export.csv",
       recordCount: raw.snapshot!.meta.recordCount,
       confidenceOverall: raw.snapshot!.meta.confidence.overall,
@@ -175,7 +176,7 @@ describe("Phase 68 Signature Experience", () => {
         datasetShape: "flat_commercial",
       }),
       portfolio,
-      commercialAnalysis: raw.analysis,
+      analysis: raw.analysis,
       commercialBrief: raw.brief,
       councilSeats: ["CEO", "CFO", "COO", "CRO", "CSO"],
       advisorNames: [],

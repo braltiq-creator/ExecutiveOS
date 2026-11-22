@@ -113,7 +113,10 @@ describe("Phase 35B — Production session & organisation context", () => {
     vi.spyOn(authActions, "getAuthenticatedUser").mockResolvedValue({
       id: "user-prod",
       email: "owner@braltiq.com",
+      app_metadata: {},
       user_metadata: { full_name: "David Beckett" },
+      aud: "authenticated",
+      created_at: "2026-01-01T00:00:00.000Z",
     } as Awaited<ReturnType<typeof authActions.getAuthenticatedUser>>);
     vi.spyOn(orgQueries, "fetchActiveMembership").mockResolvedValue(
       membershipFixture(BRALTIQ_ORG_ID),

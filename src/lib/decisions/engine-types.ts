@@ -120,6 +120,33 @@ export type Decision = {
   /** Evidence frozen at selection / bind time. */
   evidenceAtDecision?: DecisionEvidence[];
   decisionRecordedAt?: string | null;
+  /**
+   * Stage 4 — executive recording artefacts (stored in pilot_decisions.payload jsonb).
+   * Decision confidence is established only from these artefacts — never inherits
+   * dataset or judgement confidence. No schema migration required.
+   */
+  executiveRecording?: ExecutiveDecisionRecording | null;
+};
+
+/**
+ * Artefacts captured when an executive explicitly records a decision.
+ * Lives on Decision payload (jsonb) — not a parallel persistence system.
+ */
+export type ExecutiveDecisionRecording = {
+  rationale: string;
+  acceptedAssumptions: string[];
+  acceptedRisks: string[];
+  followUps: string[];
+  evidenceIds: string[];
+  recordedAt: string;
+  recordedBy: string;
+  /** Completeness of recording artefacts — not dataset/judgement inheritance. */
+  decisionConfidence: {
+    established: true;
+    label: string;
+    explanation: string;
+    recordingCompletenessLabel: string;
+  };
 };
 
 export type DecisionQueueItem = Decision & {

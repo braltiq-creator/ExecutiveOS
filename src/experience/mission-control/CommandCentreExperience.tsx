@@ -24,6 +24,7 @@ import {
   DesignPartnerStatusStrip,
   SinceYouLastLooked,
 } from "@/experience/design-partner";
+import { ManufacturingOperationsMapLazy } from "@/experience/immersion";
 import { EvidenceLab } from "@/experience/mission-control/EvidenceLab";
 import {
   EvidenceInstrumentDisclosure,
@@ -448,18 +449,34 @@ export function CommandCentreExperience({ model }: Props) {
       </ExecutiveEvidenceSurface>
     ) : null;
 
+  const operationsMapInstrument =
+    isManufacturing && model.operationsMap ? (
+      <ManufacturingOperationsMapLazy model={model.operationsMap} />
+    ) : null;
+
   const evidenceTabs = isManufacturing
     ? [
+        ...(operationsMapInstrument
+          ? [
+              {
+                id: "operations-map",
+                index: "01",
+                label: "Operations map",
+                question: "Where is demand and capacity concentrating?",
+                content: operationsMapInstrument,
+              },
+            ]
+          : []),
         {
           id: "demand",
-          index: "01",
+          index: operationsMapInstrument ? "02" : "01",
           label: "Demand",
           question: "Where is demand diverging?",
           content: demandInstrument,
         },
         {
           id: "forecast",
-          index: "02",
+          index: operationsMapInstrument ? "03" : "02",
           label: "Forecast",
           question: "Is demand tracking the forecast?",
           content: forecastInstrument,
@@ -468,7 +485,7 @@ export function CommandCentreExperience({ model }: Props) {
           ? [
               {
                 id: "confidence",
-                index: "03",
+                index: operationsMapInstrument ? "04" : "03",
                 label: "Confidence",
                 question: "Where is the forecast trustworthy?",
                 content: confidenceInstrument,
@@ -479,7 +496,7 @@ export function CommandCentreExperience({ model }: Props) {
           ? [
               {
                 id: "capacity",
-                index: "04",
+                index: operationsMapInstrument ? "05" : "04",
                 label: "Capacity",
                 question: "Where is capacity or inventory at risk?",
                 content: capacityInstrument,
@@ -656,6 +673,16 @@ export function CommandCentreExperience({ model }: Props) {
                   }
                   initialVisible={3}
                 />
+              </div>
+            ) : null}
+
+            {operationsMapInstrument ? (
+              <div
+                className="mb-5"
+                data-cc-level="operations-map"
+                data-phase2-manufacturing-map="true"
+              >
+                {operationsMapInstrument}
               </div>
             ) : null}
 

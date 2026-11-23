@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototype — Knowledge Network</title>
+  <link rel="stylesheet" href="./prototype.css" />
+  <style>
+    .network {
+      position: absolute;
+      inset: 0;
+    }
+    .edge {
+      position: absolute;
+      height: 1px;
+      background: color-mix(in srgb, var(--blue) 28%, transparent);
+      transform-origin: 0 50%;
+      z-index: 1;
+    }
+    .node {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      min-width: 4.5rem;
+      padding: 0.45rem 0.55rem;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: color-mix(in srgb, var(--bg-panel) 88%, transparent);
+      font-size: 0.72rem;
+      text-align: center;
+      line-height: 1.25;
+    }
+    .node small {
+      display: block;
+      color: var(--muted);
+      font-size: 0.62rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.15rem;
+    }
+    .node.org { border-color: color-mix(in srgb, var(--blue) 55%, transparent); }
+    .node.factory { border-color: color-mix(in srgb, var(--gold) 55%, transparent); }
+    .node.region { border-color: color-mix(in srgb, var(--teal) 55%, transparent); }
+    .node.risk { border-color: color-mix(in srgb, var(--attention) 55%, transparent); }
+    .node.decision { border-color: color-mix(in srgb, var(--purple) 55%, transparent); }
+    .node.selected {
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--blue) 60%, transparent);
+      background: color-mix(in srgb, var(--blue) 16%, var(--bg));
+    }
+    .prov {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      bottom: 1rem;
+      width: 17rem;
+      z-index: 4;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      backdrop-filter: blur(10px);
+      padding: 1rem;
+      overflow: auto;
+    }
+    .prov h3 {
+      margin: 0 0 0.35rem;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+    .prov dl {
+      margin: 0.85rem 0 0;
+      display: grid;
+      gap: 0.55rem;
+    }
+    .prov dt {
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .prov dd {
+      margin: 0.15rem 0 0;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+    .mode-toggle {
+      position: absolute;
+      left: 1.25rem;
+      top: 1.25rem;
+      z-index: 4;
+      display: flex;
+      gap: 0.35rem;
+    }
+    .mode-toggle span {
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      border: 1px solid var(--line);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .mode-toggle span.on {
+      color: var(--text);
+      border-color: color-mix(in srgb, var(--blue) 50%, transparent);
+      background: color-mix(in srgb, var(--blue) 14%, transparent);
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail" aria-hidden="true">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot active"></div>
+      <div class="dot"></div>
+    </aside>
+    <div class="stage">
+      <div class="topbar">
+        <div>
+          <h1>Knowledge</h1>
+          <div class="product">Connected intelligence network</div>
+        </div>
+        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end">
+          <span class="badge sample">Prototype · sample layout</span>
+          <span class="badge evidence">Manufacturing Evidence Graph entities</span>
+        </div>
+      </div>
+
+      <section class="plane" aria-label="Knowledge network stage">
+        <div class="mode-toggle">
+          <span class="on">Explore network</span>
+          <span>Ask</span>
+        </div>
+
+        <div class="network" aria-hidden="true">
+          <!-- schematic edges -->
+          <div class="edge" style="left:42%;top:48%;width:14%;transform:rotate(-18deg)"></div>
+          <div class="edge" style="left:42%;top:52%;width:16%;transform:rotate(22deg)"></div>
+          <div class="edge" style="left:28%;top:42%;width:14%;transform:rotate(-8deg)"></div>
+          <div class="edge" style="left:30%;top:58%;width:12%;transform:rotate(12deg)"></div>
+          <div class="edge" style="left:48%;top:36%;width:12%;transform:rotate(40deg)"></div>
+          <div class="edge" style="left:50%;top:60%;width:11%;transform:rotate(-35deg)"></div>
+
+          <div class="node org selected" style="left:42%;top:48%"><small>Organisation</small>Tenant org</div>
+          <div class="node region" style="left:28%;top:38%"><small>Region</small>QLD</div>
+          <div class="node region" style="left:26%;top:62%"><small>Region</small>NSW</div>
+          <div class="node factory" style="left:56%;top:36%"><small>Factory</small>Plant 2</div>
+          <div class="node factory" style="left:58%;top:62%"><small>Factory</small>Plant 1</div>
+          <div class="node" style="left:18%;top:48%;border-color:color-mix(in srgb,var(--teal) 40%,transparent)"><small>Dealer</small>Northside Motors</div>
+          <div class="node" style="left:48%;top:22%"><small>Model</small>Model H</div>
+          <div class="node risk" style="left:66%;top:48%"><small>Risk</small>Capacity load</div>
+          <div class="node decision" style="left:72%;top:68%"><small>Decision</small>Reallocate slots</div>
+        </div>
+
+        <aside class="prov" aria-label="Provenance panel">
+          <span class="badge evidence">Selected node</span>
+          <h3>Organisation</h3>
+          <p style="margin:0;color:var(--muted);font-size:0.82rem;line-height:1.45">
+            Hub for manufacturing evidence projection. Relationships only where fields
+            co-occur on the same fact — no fabricated joins.
+          </p>
+          <dl>
+            <div>
+              <dt>Entity type</dt>
+              <dd>Organisation (Manufacturing Evidence Graph)</dd>
+            </div>
+            <div>
+              <dt>Connected</dt>
+              <dd>Regions · Factories · Dealers · Models · Measures</dd>
+            </div>
+            <div>
+              <dt>Provenance</dt>
+              <dd>UDG canonical records → projectManufacturingEvidenceGraph</dd>
+            </div>
+            <div>
+              <dt>Not established</dt>
+              <dd>Street-level locations · live sensor feeds</dd>
+            </div>
+          </dl>
+          <div class="cta-row" style="margin-top:1rem">
+            <span class="btn">Expand neighbours</span>
+            <span class="btn ghost">Open evidence</span>
+          </div>
+        </aside>
+      </section>
+
+      <p class="honesty">
+        <span class="badge sample">SAMPLE LAYOUT</span>
+        Implements FE-001 · react-force-graph-2d · dark theme · Ask mode retained as secondary
+      </p>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototype — Executive Briefing</title>
+  <link rel="stylesheet" href="./prototype.css" />
+  <style>
+    .field-node {
+      position: absolute;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--blue) 40%, transparent);
+      background: color-mix(in srgb, var(--blue) 12%, transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.72rem;
+      line-height: 1.2;
+      color: var(--text);
+      transform: translate(-50%, -50%);
+    }
+    .field-node.risk {
+      border-color: color-mix(in srgb, var(--attention) 50%, transparent);
+      background: color-mix(in srgb, var(--attention) 14%, transparent);
+    }
+    .field-node.opp {
+      border-color: color-mix(in srgb, var(--teal) 50%, transparent);
+      background: color-mix(in srgb, var(--teal) 14%, transparent);
+    }
+    .field-node.core {
+      width: 9.5rem;
+      height: 9.5rem;
+      font-size: 0.8rem;
+      border-width: 1.5px;
+      background: color-mix(in srgb, var(--blue) 18%, var(--bg));
+    }
+    .orbit {
+      position: absolute;
+      border: 1px dashed color-mix(in srgb, white 10%, transparent);
+      border-radius: 50%;
+      left: 50%;
+      top: 52%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .link-line {
+      position: absolute;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--purple) 45%, transparent), transparent);
+      transform-origin: left center;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail" aria-hidden="true">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </aside>
+    <div class="stage">
+      <div class="topbar">
+        <div>
+          <h1>Today · Executive Briefing</h1>
+          <div class="product">ExecutiveOS · Intelligence Command Centre</div>
+        </div>
+        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end">
+          <span class="badge sample">Prototype · sample layout</span>
+          <span class="badge evidence">Evidence-derived instruments</span>
+        </div>
+      </div>
+
+      <section class="plane" aria-label="Organisation Attention Field">
+        <div class="orbit" style="width:220px;height:220px"></div>
+        <div class="orbit" style="width:360px;height:360px"></div>
+        <div class="orbit" style="width:520px;height:520px"></div>
+
+        <div class="field-node core" style="left:48%;top:52%">Priority decision<br/>Capacity reallocation</div>
+        <div class="field-node risk" style="left:68%;top:34%;width:7rem;height:7rem">Risk<br/>QLD variance</div>
+        <div class="field-node opp" style="left:30%;top:36%;width:6.5rem;height:6.5rem">Opportunity<br/>VIC pull-forward</div>
+        <div class="field-node" style="left:72%;top:62%;width:5.8rem;height:5.8rem">Signal<br/>Inventory days</div>
+        <div class="field-node risk" style="left:28%;top:68%;width:5.5rem;height:5.5rem">Watch<br/>Plant 2 load</div>
+        <div class="field-node" style="left:55%;top:78%;width:5rem;height:5rem">Outcome<br/>Working capital</div>
+
+        <div class="overlay-judgement">
+          <div class="eyebrow">Lead judgement</div>
+          <h2>Regional demand divergence requires allocation before next production lock.</h2>
+          <p>
+            Organisation attention concentrates on QLD overshoot versus forecast and
+            Plant 2 load. Supporting evidence from manufacturing analysis — not a live AI feed.
+          </p>
+          <div class="cta-row">
+            <span class="btn">Open decision →</span>
+            <span class="btn ghost">Inspect evidence</span>
+          </div>
+        </div>
+
+        <aside class="signal-rail" aria-label="Intelligence signals">
+          <article class="signal">
+            <span class="badge evidence">Evidence-derived</span>
+            <strong>Demand movement · QLD</strong>
+            <span class="meta">From heatMap / insights · sample layout</span>
+          </article>
+          <article class="signal">
+            <span class="badge evidence">Evidence-derived</span>
+            <strong>Forecast confidence · national</strong>
+            <span class="meta">confidenceSlices — no invented score</span>
+          </article>
+          <article class="signal">
+            <span class="badge warn">Insufficient evidence</span>
+            <strong>Live plant telemetry</strong>
+            <span class="meta">Not in UDG contract · not shown as live</span>
+          </article>
+          <article class="signal">
+            <span class="badge ai">AI-assisted only if invoked</span>
+            <strong>Narrative polish</strong>
+            <span class="meta">Hidden unless OpenAI path actually ran</span>
+          </article>
+        </aside>
+
+        <div class="timeline" aria-label="Executive intelligence timeline">
+          <div class="tick"><span>T−6</span><em>Upload</em></div>
+          <div class="tick"><span>T−5</span><em>Validated</em></div>
+          <div class="tick active"><span>Now</span><em>Judgement</em></div>
+          <div class="tick"><span>Next</span><em>Decide</em></div>
+          <div class="tick"><span>+1</span><em>Execute</em></div>
+          <div class="tick"><span>+2</span><em>Review</em></div>
+        </div>
+      </section>
+
+      <p class="honesty">
+        <span class="badge sample">SAMPLE LAYOUT</span>
+        Binds to CommandCentreExperienceModel · no new KPI invention · missing data stays explicit
+      </p>
+    </div>
+  </div>
+</body>
+</html>

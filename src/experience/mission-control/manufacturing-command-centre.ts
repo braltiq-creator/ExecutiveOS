@@ -14,6 +14,7 @@ import type { ActiveExecutiveSnapshotContext } from "@/executive-snapshot-studio
 import type { ManufacturingAnalysis } from "@/executive-snapshot-studio/intelligence/manufacturing-analysis";
 import { MANUFACTURING_VARIANCE_WINDOW_PERIODS } from "@/executive-snapshot-studio/intelligence/manufacturing-analysis";
 import type { ManufacturingExecutiveBrief } from "@/executive-snapshot-studio/intelligence/manufacturing-brief";
+import { projectManufacturingOperationsMap } from "@/experience/immersion";
 import {
   assertNoDemoBusinessContext,
   buildSnapshotIntelligenceStream,
@@ -382,6 +383,7 @@ export function buildManufacturingCommandCentreExperience(
     metrics,
     heatMap: heatMapFromManufacturing(analysis),
     ageing: null,
+    operationsMap: projectManufacturingOperationsMap(analysis),
     forecastVsActual: {
       question: "Is demand tracking the forecast?",
       points: analysis.nationalSeries.slice(-8).map((p) => ({

@@ -8,6 +8,7 @@
 import type {
   Decision,
   DecisionEvidence,
+  ExecutiveDecisionRecording,
   ExecutiveSelectionState,
 } from "@/lib/decisions/engine-types";
 import type {
@@ -30,6 +31,20 @@ export type SelectDecisionOptionResult = {
   selectionState: ExecutiveSelectionState;
   selectedLabel: string;
   recordedAt: string;
+};
+
+export type RecordExecutiveDecisionInput = SelectDecisionOptionInput & {
+  rationale: string;
+  acceptedAssumptions: string[];
+  acceptedRisks: string[];
+  followUps?: string[];
+  /** Explicit evidence IDs considered — frozen into recording artefacts. */
+  evidenceIds?: string[];
+  owner?: string;
+};
+
+export type RecordExecutiveDecisionResult = SelectDecisionOptionResult & {
+  recording: ExecutiveDecisionRecording;
 };
 
 export type CreateActionFromDecisionInput = {
@@ -225,6 +240,140 @@ export function selectDecisionOption(
     selectionState,
     selectedLabel: alternative.label,
     recordedAt: at,
+  };
+}
+
+/**
+ * Completeness of executive recording artefacts.
+ * Never copies dataset or judgement confidence percentages.
+ */
+export function deriveDecisionConfidenceFromRecording(input: {
+  rationale: string;
+  acceptedAssumptions: string[];
+  acceptedRisks: string[];
+  owner: string;
+  followUps: string[];
+  evidenceIds: string[];
+}): ExecutiveDecisionRecording["decisionConfidence"] {
+  const checks = [
+    input.rationale.trim().length >= 24,
+    input.acceptedAssumptions.length > 0,
+    input.acceptedRisks.length > 0,
+    input.owner.trim().length > 0,
+    input.followUps.some((f) => f.trim().length > 0),
+    input.evidenceIds.length > 0,
+  ];
+  const met = checks.filter(Boolean).length;
+  return {
+    established: true,
+    label: "Decision confidence established by executive record",
+    explanation:
+      "Established from the recorded rationale, evidence considered, accepted assumptions/risks, owner and follow-ups — not copied from dataset or judgement confidence.",
+    recordingCompletenessLabel: `Recording artefacts ${met}/${checks.length} complete`,
+  };
+}
+
+/**
+ * Stage 4 — durable executive decision record on the existing Decision Engine path.
+ * Selects an option, freezes evidence, and attaches recording artefacts to Decision
+ * (stored in pilot_decisions.payload jsonb). Does not auto-approve or invent outcomes.
+ */
+export function recordExecutiveDecision(
+  portfolio: OutcomePortfolio,
+  input: RecordExecutiveDecisionInput,
+): RecordExecutiveDecisionResult {
+  const rationale = input.rationale.trim();
+  if (rationale.length < 24) {
+    throw new Error(
+      "Record a rationale before committing the executive decision.",
+    );
+  }
+  const owner = (input.owner ?? input.actor).trim();
+  if (!owner) {
+    throw new Error("Record the decision owner.");
+  }
+
+  const selected = selectDecisionOption(portfolio, input);
+  const decision = selected.decision;
+  const evidenceIds =
+    input.evidenceIds && input.evidenceIds.length > 0
+      ? [...new Set(input.evidenceIds)]
+      : (decision.evidenceAtDecision ?? decision.evidence).map((e) => e.id);
+  const followUps = (input.followUps ?? [])
+    .map((f) => f.trim())
+    .filter(Boolean);
+  const assumptions = input.acceptedAssumptions.map((a) => a.trim()).filter(Boolean);
+  const risks = input.acceptedRisks.map((r) => r.trim()).filter(Boolean);
+
+  const decisionConfidence = deriveDecisionConfidenceFromRecording({
+    rationale,
+    acceptedAssumptions: assumptions,
+    acceptedRisks: risks,
+    owner,
+    followUps,
+    evidenceIds,
+  });
+
+  const recording: ExecutiveDecisionRecording = {
+    rationale,
+    acceptedAssumptions: assumptions,
+    acceptedRisks: risks,
+    followUps,
+    evidenceIds,
+    recordedAt: selected.recordedAt,
+    recordedBy: owner,
+    decisionConfidence,
+  };
+
+  const next = structuredClone(selected.portfolio);
+  const index = next.decisions.findIndex((d) => d.id === input.decisionId);
+  if (index < 0) {
+    throw new Error(`Unknown decision: ${input.decisionId}`);
+  }
+
+  const current = next.decisions[index]!;
+  const updated: Decision = {
+    ...current,
+    owner,
+    why: rationale,
+    recommendationSummary: `Executive recorded: ${selected.selectedLabel}`,
+    whatShouldHappenNext:
+      followUps[0] ??
+      current.whatShouldHappenNext ??
+      "Follow-through action may now be created. Approval remains a separate act.",
+    executiveRecording: recording,
+    history: [
+      ...current.history,
+      {
+        id: `hist-record-${current.id}-${selected.recordedAt}`,
+        at: selected.recordedAt,
+        status: current.status,
+        note: `EXECUTIVE_RECORDED → ${selected.selectedLabel}. Rationale captured. Decision confidence established from recording artefacts only.`,
+        actor: owner,
+      },
+    ],
+    timeline: [
+      ...current.timeline,
+      {
+        id: `time-record-${current.id}-${selected.recordedAt}`,
+        at: selected.recordedAt,
+        title: "Executive decision recorded",
+        detail: `Owner ${owner} recorded “${selected.selectedLabel}” with rationale. Not an automatic AI approval.`,
+        kind: "approval",
+      },
+    ],
+  };
+
+  next.decisions[index] = updated;
+  next.refreshedAt = selected.recordedAt;
+
+  return {
+    portfolio: next,
+    decision: updated,
+    selectionState: selected.selectionState,
+    selectedLabel: selected.selectedLabel,
+    recordedAt: selected.recordedAt,
+    recording,
   };
 }
 

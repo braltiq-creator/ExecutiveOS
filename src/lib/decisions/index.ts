@@ -21,6 +21,7 @@ export type {
   DecisionQueueItem,
   EngineDecisionStatus,
   ApprovalWorkflowStep,
+  ExecutiveDecisionRecording,
 } from "@/lib/decisions/engine-types";
 export type {
   DecisionReadinessClass,
@@ -43,6 +44,8 @@ export {
 } from "@/lib/decisions/derive";
 export {
   selectDecisionOption,
+  recordExecutiveDecision,
+  deriveDecisionConfidenceFromRecording,
   createActionFromSelectedDecision,
   assignActionAccountability,
   deriveExecutiveSelectionState,
@@ -52,9 +55,16 @@ export {
   frameActionFromSelectedOption,
   markOptionsIdentified,
 } from "@/lib/decisions/decision-execution-linkage";
+export {
+  resolveDecisionPersistenceStatus,
+  type DecisionPersistenceMode,
+  type DecisionPersistenceStatus,
+} from "@/lib/decisions/decision-persistence-mode";
 export type {
   SelectDecisionOptionInput,
   SelectDecisionOptionResult,
+  RecordExecutiveDecisionInput,
+  RecordExecutiveDecisionResult,
   CreateActionFromDecisionInput,
   CreateActionFromDecisionResult,
   CommandCentreExecutionStatus,

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prototype — Manufacturing Map</title>
+  <link rel="stylesheet" href="./prototype.css" />
+  <style>
+    .map-stage {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 62% 58%, rgba(61, 158, 143, 0.16), transparent 28%),
+        radial-gradient(circle at 48% 42%, rgba(196, 120, 90, 0.18), transparent 22%),
+        radial-gradient(circle at 35% 55%, rgba(106, 159, 216, 0.12), transparent 20%),
+        linear-gradient(160deg, #0d121a, #10141c 40%, #0a0c10);
+    }
+    .au-silhouette {
+      position: absolute;
+      left: 50%;
+      top: 54%;
+      width: min(52vw, 520px);
+      height: min(48vw, 420px);
+      transform: translate(-55%, -52%);
+      opacity: 0.95;
+    }
+    .region {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(0.2px);
+      opacity: 0.55;
+    }
+    .marker {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+    .marker .pin {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--bg);
+      background: var(--gold);
+      box-shadow: 0 0 0 1px color-mix(in srgb, var(--gold) 50%, transparent);
+    }
+    .marker.factory .pin { background: var(--blue); box-shadow: 0 0 0 1px color-mix(in srgb, var(--blue) 50%, transparent); }
+    .marker .label {
+      position: absolute;
+      left: 14px;
+      top: -6px;
+      white-space: nowrap;
+      font-size: 0.7rem;
+      color: var(--text);
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.15rem 0.4rem;
+    }
+    .arc {
+      position: absolute;
+      border: 1px dashed color-mix(in srgb, var(--teal) 35%, transparent);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .instruments {
+      position: absolute;
+      left: 1rem;
+      bottom: 1rem;
+      right: 16.5rem;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 0.55rem;
+    }
+    .inst {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: color-mix(in srgb, var(--bg) 72%, transparent);
+      backdrop-filter: blur(8px);
+      padding: 0.65rem 0.75rem;
+      min-height: 5.5rem;
+    }
+    .inst h3 {
+      margin: 0;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 0.25rem;
+      height: 2.6rem;
+      margin-top: 0.55rem;
+    }
+    .bars i {
+      display: block;
+      width: 8px;
+      border-radius: 2px 2px 0 0;
+      background: var(--teal);
+    }
+    .bars i.f { background: color-mix(in srgb, var(--teal) 45%, white); opacity: 0.55; }
+    .cap-row {
+      margin-top: 0.45rem;
+      font-size: 0.78rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .meter {
+      margin-top: 0.35rem;
+      height: 4px;
+      background: var(--line);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .meter span {
+      display: block;
+      height: 100%;
+      background: var(--attention);
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="rail" aria-hidden="true">
+      <div class="dot active"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </aside>
+    <div class="stage">
+      <div class="topbar">
+        <div>
+          <h1>Manufacturing Intelligence</h1>
+          <div class="product">Geographic operations · demand · capacity</div>
+        </div>
+        <div style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end">
+          <span class="badge sample">Prototype · sample layout</span>
+          <span class="badge warn">Region-resolved positions</span>
+        </div>
+      </div>
+
+      <section class="plane" aria-label="Manufacturing map stage">
+        <div class="map-stage">
+          <!-- Schematic AU region blobs — production uses MapLibre choropleth -->
+          <div class="region" style="left:58%;top:48%;width:110px;height:90px;background:rgba(196,120,90,0.35)"></div>
+          <div class="region" style="left:48%;top:62%;width:90px;height:70px;background:rgba(61,158,143,0.28)"></div>
+          <div class="region" style="left:42%;top:55%;width:70px;height:60px;background:rgba(106,159,216,0.25)"></div>
+          <div class="region" style="left:28%;top:52%;width:80px;height:55px;background:rgba(139,123,184,0.22)"></div>
+          <div class="region" style="left:22%;top:48%;width:55px;height:45px;background:rgba(61,158,143,0.2)"></div>
+
+          <svg class="au-silhouette" viewBox="0 0 200 160" aria-hidden="true">
+            <path fill="none" stroke="rgba(232,234,239,0.18)" stroke-width="1.2"
+              d="M55 70 C70 40 110 28 145 48 C165 60 175 78 168 100 C155 130 110 145 75 130 C50 118 42 95 55 70 Z" />
+            <text x="128" y="70" fill="#e8eaef" font-size="7" opacity="0.7">QLD</text>
+            <text x="105" y="105" fill="#e8eaef" font-size="7" opacity="0.7">NSW</text>
+            <text x="88" y="118" fill="#e8eaef" font-size="7" opacity="0.7">VIC</text>
+            <text x="70" y="100" fill="#e8eaef" font-size="7" opacity="0.7">SA</text>
+            <text x="48" y="88" fill="#e8eaef" font-size="7" opacity="0.7">WA</text>
+          </svg>
+
+          <div class="arc" style="left:40%;top:45%;width:28%;height:22%"></div>
+          <div class="arc" style="left:50%;top:40%;width:22%;height:30%"></div>
+
+          <div class="marker factory" style="left:62%;top:46%"><div class="pin"></div><div class="label">Plant 2 · QLD</div></div>
+          <div class="marker factory" style="left:52%;top:60%"><div class="pin"></div><div class="label">Plant 1 · NSW</div></div>
+          <div class="marker factory" style="left:46%;top:68%"><div class="pin"></div><div class="label">Plant 3 · VIC</div></div>
+          <div class="marker" style="left:66%;top:40%"><div class="pin"></div><div class="label">Northside Motors</div></div>
+          <div class="marker" style="left:38%;top:58%"><div class="pin"></div><div class="label">West Coast Machinery</div></div>
+        </div>
+
+        <div class="overlay-judgement">
+          <div class="eyebrow">Industrial intelligence</div>
+          <h2>QLD demand heat and Plant 2 load dominate the operating picture.</h2>
+          <p>
+            Choropleth from existing region×model variance. Markers are region-resolved —
+            precise lat/lng are not in the manufacturing UDG contract.
+          </p>
+          <div class="cta-row">
+            <span class="btn">Drill QLD →</span>
+            <span class="btn ghost">Open Evidence Lab</span>
+          </div>
+        </div>
+
+        <aside class="signal-rail">
+          <article class="signal">
+            <span class="badge evidence">heatMap</span>
+            <strong>Region demand intensity</strong>
+            <span class="meta">NSW · QLD · SA · VIC · WA</span>
+          </article>
+          <article class="signal">
+            <span class="badge evidence">capacity[]</span>
+            <strong>Plant load vs demonstrated demand</strong>
+            <span class="meta">Existing CapacitySignal</span>
+          </article>
+          <article class="signal">
+            <span class="badge warn">No lat/lng in evidence</span>
+            <strong>Honesty required on map</strong>
+            <span class="meta">AU state centroids only</span>
+          </article>
+        </aside>
+
+        <div class="instruments">
+          <div class="inst">
+            <h3>Forecast vs actual</h3>
+            <div class="bars" aria-hidden="true">
+              <i class="f" style="height:55%"></i><i style="height:62%"></i>
+              <i class="f" style="height:60%"></i><i style="height:58%"></i>
+              <i class="f" style="height:70%"></i><i style="height:82%"></i>
+              <i class="f" style="height:68%"></i><i style="height:74%"></i>
+              <i class="f" style="height:72%"></i><i style="height:88%"></i>
+            </div>
+          </div>
+          <div class="inst">
+            <h3>Capacity</h3>
+            <div class="cap-row"><span>Plant 2</span><span>High load</span></div>
+            <div class="meter"><span style="width:86%"></span></div>
+            <div class="cap-row"><span>Plant 1</span><span>Watching</span></div>
+            <div class="meter"><span style="width:64%;background:var(--gold)"></span></div>
+          </div>
+          <div class="inst">
+            <h3>Inventory coverage</h3>
+            <div class="cap-row"><span>Attention variants</span><span>from inventory[]</span></div>
+            <p style="margin:0.45rem 0 0;font-size:0.78rem;color:var(--muted)">Days cover shown only when field present</p>
+          </div>
+        </div>
+      </section>
+
+      <p class="honesty">
+        <span class="badge sample">SAMPLE LAYOUT</span>
+        Proposed stack: MapLibre GL + react-map-gl · dark graphite style · no stock earth wallpaper
+      </p>
+    </div>
+  </div>
+</body>
+</html>

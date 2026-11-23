@@ -1,9 +1,10 @@
 # Stage 5a — Authenticated durable persistence (acceptance)
 
-**Status:** **BLOCKED — awaiting staging secrets / org provisioning**  
+**Status:** **BLOCKED — awaiting staging access** (harness approved at `9396fd6`)  
 **Authorised:** Yes (architecture + 5a → 5b → 5c approved)  
+**Ops handover:** `docs/design/STAGE_5A_STAGING_OPS_HANDOVER.md`  
 **Scope:** Staging only · real Supabase auth + RLS · activated organisation snapshot  
-**Out of scope:** Hitachi customer export (5b) · recurring upload loop (5c) · merge / production deploy · migrations without approval  
+**Out of scope:** Hitachi customer export (5b) · recurring upload loop (5c) · merge / production deploy · migrations without approval · further implementation unless a genuine defect is found
 
 ---
 
